@@ -1,0 +1,16 @@
+﻿<mui:ModernWindow
+    x:Class="Cop.Theia.Client.Wpf.AppView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+    Title="AppView"
+    Width="800"
+    Height="600">
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Basic">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Histogram" Source="/Basic/HistogramView.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+</mui:ModernWindow>
