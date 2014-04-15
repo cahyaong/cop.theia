@@ -106,33 +106,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Basic\ColorHistogramView.xaml">
+    <Page Include="Fundamental\ColorHistogramView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Basic\HistogramView.xaml">
+    <Page Include="Fundamental\HistogramView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Basic\ImageHistogramView.xaml">
+    <Page Include="Fundamental\ImageHistogramView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppViewModel.cs" />
-    <Compile Include="Basic\ColorHistogramView.xaml.cs">
+    <Compile Include="Fundamental\ColorHistogramView.xaml.cs">
       <DependentUpon>ColorHistogramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Basic\ColorHistogramViewModel.cs" />
-    <Compile Include="Basic\HistogramView.xaml.cs">
+    <Compile Include="Fundamental\ColorHistogramViewModel.cs" />
+    <Compile Include="Fundamental\HistogramView.xaml.cs">
       <DependentUpon>HistogramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Basic\HistogramViewModel.cs" />
-    <Compile Include="Basic\ImageHistogramView.xaml.cs">
+    <Compile Include="Fundamental\HistogramViewModel.cs" />
+    <Compile Include="Fundamental\ImageHistogramView.xaml.cs">
       <DependentUpon>ImageHistogramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Basic\ImageHistogramViewModel.cs" />
+    <Compile Include="Fundamental\ImageHistogramViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

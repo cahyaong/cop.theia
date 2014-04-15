@@ -13,7 +13,7 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Basic">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Histogram" Source="/Basic/HistogramView.xaml" />
+                <mui:Link DisplayName="Histogram" Source="/Fundamental/HistogramView.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>

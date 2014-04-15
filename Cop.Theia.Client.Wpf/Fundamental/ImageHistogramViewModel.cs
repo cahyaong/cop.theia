@@ -1,4 +1,4 @@
-﻿namespace Cop.Theia.Client.Wpf.Basic
+﻿namespace Cop.Theia.Client.Wpf.Fundamental
 {
     using ReactiveUI;
 
