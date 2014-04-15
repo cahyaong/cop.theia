@@ -9,8 +9,8 @@
                 <ResourceDictionary>
                     <local:AppBootstrapper x:Key="Bootstrapper" />
                 </ResourceDictionary>
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/modernui.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/modernui.dark.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
