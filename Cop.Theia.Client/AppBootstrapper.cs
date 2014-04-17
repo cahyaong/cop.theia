@@ -1,4 +1,4 @@
-﻿namespace Cop.Theia.Client.Wpf
+﻿namespace Cop.Theia.Client
 {
     using Caliburn.Micro;
 

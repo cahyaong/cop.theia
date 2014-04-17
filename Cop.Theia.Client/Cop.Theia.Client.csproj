@@ -7,8 +7,8 @@
     <ProjectGuid>{89857C8F-E254-4F96-8EE5-C0EB98609074}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cop.Theia.Client.Wpf</RootNamespace>
-    <AssemblyName>Cop.Theia.Client.Wpf</AssemblyName>
+    <RootNamespace>Cop.Theia.Client</RootNamespace>
+    <AssemblyName>Cop.Theia.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -82,6 +82,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Application\SettingsAppearanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AppView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,15 +102,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Application\SettingsAppearanceView.xaml.cs">
+      <DependentUpon>SettingsAppearanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Application\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppView.xaml.cs">
       <DependentUpon>AppView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Assets\ModernUiExtended.xaml">
+    <Page Include="Assets\Cop.Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\TextBlockExtended.xaml">
+    <Page Include="Assets\Cop.Style.TextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +147,7 @@
       <DependentUpon>ImageHistogramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fundamental\ImageHistogramViewModel.cs" />
+    <Compile Include="ImageLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

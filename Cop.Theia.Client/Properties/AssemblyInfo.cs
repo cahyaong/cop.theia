@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Cop.Theia.Client.Wpf")]
+[assembly: AssemblyTitle("Cop.Theia.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: ComVisible(false)]

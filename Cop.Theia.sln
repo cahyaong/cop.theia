@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Theia.Client.Wpf", "Cop.Theia.Client.Wpf\Cop.Theia.Client.Wpf.csproj", "{89857C8F-E254-4F96-8EE5-C0EB98609074}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Theia.Client", "Cop.Theia.Client\Cop.Theia.Client.csproj", "{89857C8F-E254-4F96-8EE5-C0EB98609074}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace Cop.Theia.Client.Wpf.Fundamental
+﻿namespace Cop.Theia.Client.Fundamental
 {
     public partial class ColorHistogramView
     {
