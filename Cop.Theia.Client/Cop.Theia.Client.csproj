@@ -47,6 +47,8 @@
       <HintPath>..\packages\reactiveui-core.5.2.0\lib\Portable-Net45+WinRT45+WP8\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Composition.Registration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core">
@@ -61,6 +63,7 @@
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\packages\Rx-PlatformServices.2.1.30214.0\lib\Net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -82,11 +85,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Application\SettingsAppearanceView.xaml">
+    <Page Include="Shell\SettingsAppearanceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Application\SettingsView.xaml">
+    <Page Include="Shell\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,10 +105,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Application\SettingsAppearanceView.xaml.cs">
+    <Compile Include="Shell\SettingsAppearanceView.xaml.cs">
       <DependentUpon>SettingsAppearanceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Application\SettingsView.xaml.cs">
+    <Compile Include="Shell\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppView.xaml.cs">
@@ -135,6 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppViewModel.cs" />
+    <Compile Include="CaliburnContentLoader.cs" />
+    <Compile Include="Extensions\MefExtensions.cs" />
     <Compile Include="Fundamental\ColorHistogramView.xaml.cs">
       <DependentUpon>ColorHistogramView.xaml</DependentUpon>
     </Compile>
@@ -147,7 +152,6 @@
       <DependentUpon>ImageHistogramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fundamental\ImageHistogramViewModel.cs" />
-    <Compile Include="ImageLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

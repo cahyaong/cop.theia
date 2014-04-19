@@ -1,6 +1,11 @@
 ﻿namespace Cop.Theia.Client.Fundamental
 {
-    internal class ColorHistogramViewModel
+    using System.ComponentModel.Composition;
+
+    using ReactiveUI;
+
+    [Export]
+    public class ColorHistogramViewModel : ReactiveObject
     {
     }
 }

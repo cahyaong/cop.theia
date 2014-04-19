@@ -9,10 +9,10 @@
     d:DesignWidth="1280"
     mc:Ignorable="d">
     <Grid Style="{StaticResource ContentRoot}">
-        <mui:ModernTab Layout="Tab" SelectedSource="/Fundamental/ImageHistogramView.xaml">
+        <mui:ModernTab Layout="Tab" SelectedSource="/Fundamental/ColorHistogramView.xaml">
             <mui:ModernTab.Links>
-                <mui:Link DisplayName="Image Histogram" Source="/Fundamental/ImageHistogramView.xaml" />
                 <mui:Link DisplayName="Color Histogram" Source="/Fundamental/ColorHistogramView.xaml" />
+                <mui:Link DisplayName="Image Histogram" Source="/Fundamental/ImageHistogramView.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>
