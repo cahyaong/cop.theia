@@ -1,7 +1,7 @@
 using System.Reflection;
 
 [assembly: AssemblyCompany("nGratis")]
-[assembly: AssemblyProduct("CommunityOfPractice")]
+[assembly: AssemblyProduct("CommunityOfPractice.Theia")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

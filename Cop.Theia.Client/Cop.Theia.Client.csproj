@@ -105,6 +105,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />
+    <Compile Include="FundamentalModule.cs" />
     <Compile Include="Shell\SettingsAppearanceView.xaml.cs">
       <DependentUpon>SettingsAppearanceView.xaml</DependentUpon>
     </Compile>
@@ -178,6 +180,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cop.Theia.Contract\Cop.Theia.Contract.csproj">
+      <Project>{e727ca53-5288-4e7e-828c-011803b0bedd}</Project>
+      <Name>Cop.Theia.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,9 @@
                     <local:AppBootstrapper x:Key="Bootstrapper" />
                     <local:CaliburnContentLoader x:Key="CaliburnContentLoader" />
                 </ResourceDictionary>
+                <ResourceDictionary>
+                    <local:ModulesToLinkGroupsConverter x:Key="ModulesToLinkGroupsConverter" />
+                </ResourceDictionary>
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
                 <ResourceDictionary Source="/Cop.Theia.Client;component/Assets/Cop.Style.xaml" />
