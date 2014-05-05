@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mui="http://firstfloorsoftware.com/ModernUI">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Cop.Theia.Client;component/Assets/Cop.Style.TextBlock.xaml" />
+        <ResourceDictionary Source="/Themes/Style.Cop.TextBlock.xaml" />
         <ResourceDictionary>
             <Style TargetType="mui:ModernWindow">
                 <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />

@@ -13,9 +13,7 @@
                 <ResourceDictionary>
                     <local:ModulesToLinkGroupsConverter x:Key="ModulesToLinkGroupsConverter" />
                 </ResourceDictionary>
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
-                <ResourceDictionary Source="/Cop.Theia.Client;component/Assets/Cop.Style.xaml" />
+                <ResourceDictionary Source="/Themes/Theme.Cop.Dark.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
