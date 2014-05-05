@@ -11,6 +11,7 @@
     Height="720"
     MinWidth="854"
     MinHeight="480"
+    ContentLoader="{StaticResource CaliburnContentLoader}"
     IsTitleVisible="True"
     MenuLinkGroups="{Binding Modules, Mode=OneWay, Converter={StaticResource ModulesToLinkGroupsConverter}}"
     d:DataContext="{d:DesignInstance local:AppViewModel, IsDesignTimeCreatable=True}"

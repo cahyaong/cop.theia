@@ -11,7 +11,7 @@
     {
         public FundamentalModule()
         {
-            this.Id = new Guid("E0DD329A-15C6-441E-A713-7DD827F3CD5B");
+            this.Id = new Guid("484BF7AD-9B9A-43E0-9BF0-C84C30AC7C38");
 
             // Use custom attribute to generate the topics and sub-topics.
 
