@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Topic
+    public class CopFeature
     {
-        public Topic(string name, IEnumerable<Subtopic> subtopics)
+        public CopFeature(string name, IEnumerable<CopPage> subtopics)
         {
             // TODO: Create a helper class to handle exception throwing.
 
@@ -16,11 +16,11 @@
             }
 
             this.Name = name;
-            this.Subtopics = subtopics ?? Enumerable.Empty<Subtopic>();
+            this.Pages = subtopics ?? Enumerable.Empty<CopPage>();
         }
 
         public string Name { get; private set; }
 
-        public IEnumerable<Subtopic> Subtopics { get; private set; }
+        public IEnumerable<CopPage> Pages { get; private set; }
     }
 }

@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class Subtopic
+    public class CopPage
     {
-        public Subtopic(string name, string source)
+        public CopPage(string name, string source)
         {
             if (string.IsNullOrEmpty(name))
             {

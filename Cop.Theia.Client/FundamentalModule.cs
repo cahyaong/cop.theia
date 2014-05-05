@@ -6,8 +6,8 @@
 
     using Cop.Theia.Contract;
 
-    [Export(typeof(IModule))]
-    internal class FundamentalModule : IModule
+    [Export(typeof(ICopModule))]
+    internal class FundamentalModule : ICopModule
     {
         public FundamentalModule()
         {
@@ -15,14 +15,14 @@
 
             // Use custom attribute to generate the topics and sub-topics.
 
-            var subtopic = new Subtopic("Histogram", @"Fundamental\HistogramView.xaml");
-            var topic = new Topic("Fundamental", new List<Subtopic> { subtopic });
+            var histogramPage = new CopPage("Histogram", @"Fundamental\HistogramView.xaml");
+            var fundamentalFeature = new CopFeature("Fundamental", new List<CopPage> { histogramPage });
 
-            this.Topics = new List<Topic> { topic };
+            this.Features = new List<CopFeature> { fundamentalFeature };
         }
 
         public Guid Id { get; private set; }
 
-        public IEnumerable<Topic> Topics { get; private set; }
+        public IEnumerable<CopFeature> Features { get; private set; }
     }
 }

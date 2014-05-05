@@ -10,12 +10,12 @@
 
     using FirstFloor.ModernUI.Presentation;
 
-    [ValueConversion(typeof(IEnumerable<IModule>), typeof(LinkGroupCollection))]
+    [ValueConversion(typeof(IEnumerable<ICopModule>), typeof(LinkGroupCollection))]
     internal class ModulesToLinkGroupsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var modules = value as IEnumerable<IModule>;
+            var modules = value as IEnumerable<ICopModule>;
 
             if (modules == null)
             {
@@ -25,8 +25,8 @@
             var linkGroups = new LinkGroupCollection();
 
             var aggregatedTopics = modules
-                .SelectMany(module => module.Topics)
-                .GroupBy(topic => topic.Name)
+                .SelectMany(module => module.Features)
+                .GroupBy(feature => feature.Name)
                 .SelectMany(group => group);
 
             foreach (var aggregatedTopic in aggregatedTopics)
@@ -34,8 +34,8 @@
                 var linkGroup = new LinkGroup() { DisplayName = aggregatedTopic.Name };
 
                 aggregatedTopic
-                    .Subtopics
-                    .Select(subtopic => new Link() { DisplayName = subtopic.Name, Source = subtopic.SourceUri })
+                    .Pages
+                    .Select(page => new Link() { DisplayName = page.Name, Source = page.SourceUri })
                     .ToList()
                     .ForEach(linkGroup.Links.Add);
 

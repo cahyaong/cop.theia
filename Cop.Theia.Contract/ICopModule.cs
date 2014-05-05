@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
 
-    public interface IModule
+    public interface ICopModule
     {
         Guid Id { get; }
 
-        IEnumerable<Topic> Topics { get; }
+        IEnumerable<CopFeature> Features { get; }
     }
 }
