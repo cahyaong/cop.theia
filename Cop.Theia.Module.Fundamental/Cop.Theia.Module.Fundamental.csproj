@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89857C8F-E254-4F96-8EE5-C0EB98609074}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{ADEB3029-BA9D-419D-AA88-5802FD7C7B59}</ProjectGuid>
+    <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cop.Theia.Client</RootNamespace>
-    <AssemblyName>Cop.Theia.Client</AssemblyName>
+    <RootNamespace>Cop.Theia.Module.Fundamental</RootNamespace>
+    <AssemblyName>Cop.Theia.Module.Fundamental</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -17,20 +17,18 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Cop.Theia.Binaries\Debug\</OutputPath>
+    <OutputPath>..\Cop.Theia.Binaries\Debug\Modules</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Cop.Theia.Binaries\Release\</OutputPath>
+    <OutputPath>..\Cop.Theia.Binaries\Release\Modules</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,14 +37,10 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Micro.ReactiveUI">
-      <HintPath>..\packages\Caliburn.Micro.ReactiveUI.1.2.2\lib\net45\Caliburn.Micro.ReactiveUI.dll</HintPath>
-    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
-    <Reference Include="ReactiveUI, Version=5.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ReactiveUI">
       <HintPath>..\packages\reactiveui-core.5.5.1\lib\Portable-Net45+WinRT45+WP8\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.Blend">
@@ -59,7 +53,6 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.Composition.Registration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\Rx-Core.2.1.30214.0\lib\Net45\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -75,8 +68,6 @@
     <Reference Include="System.Reactive.Windows.Threading">
       <HintPath>..\packages\Rx-XAML.2.1.30214.0\lib\Net45\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reflection.Context" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -93,47 +84,25 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="Shell\SettingsAppearanceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Shell\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AppView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="..\Cop.Theia.Common\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />
-    <Compile Include="CopModuleProvider.cs" />
-    <Compile Include="Shell\SettingsAppearanceView.xaml.cs">
-      <DependentUpon>SettingsAppearanceView.xaml</DependentUpon>
+    <Compile Include="FundamentalModule.cs" />
+    <Compile Include="Histogram\ColorHistogramView.xaml.cs">
+      <DependentUpon>ColorHistogramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shell\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
+    <Compile Include="Histogram\ColorHistogramViewModel.cs" />
+    <Compile Include="Histogram\HistogramView.xaml.cs">
+      <DependentUpon>HistogramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppView.xaml.cs">
-      <DependentUpon>AppView.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Histogram\HistogramViewModel.cs" />
+    <Compile Include="Histogram\ImageHistogramView.xaml.cs">
+      <DependentUpon>ImageHistogramView.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AppViewModel.cs" />
-    <Compile Include="CaliburnContentLoader.cs" />
-    <Compile Include="Extensions\MefExtensions.cs" />
+    <Compile Include="Histogram\ImageHistogramViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -141,7 +110,26 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Histogram\ColorHistogramView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Histogram\HistogramView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Histogram\ImageHistogramView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cop.Theia.Contract\Cop.Theia.Contract.csproj">
@@ -153,8 +141,8 @@
       <Name>Cop.Theia.Theme</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\Cop.Theia.Common\Cop.Theia.Module.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

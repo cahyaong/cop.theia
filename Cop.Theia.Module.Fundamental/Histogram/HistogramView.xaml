@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Cop.Theia.Client.Fundamental.HistogramView"
+    x:Class="Cop.Theia.Module.Fundamental.HistogramView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,11 +8,11 @@
     d:DesignHeight="720"
     d:DesignWidth="1280"
     mc:Ignorable="d">
-    <Grid Style="{StaticResource ContentRoot}">
-        <mui:ModernTab Layout="Tab" SelectedSource="/Fundamental/ColorHistogramView.xaml">
+    <Grid>
+        <mui:ModernTab Layout="Tab" SelectedSource="/Cop.Theia.Module.Fundamental;component/Histogram/ColorHistogramView.xaml">
             <mui:ModernTab.Links>
-                <mui:Link DisplayName="Color Histogram" Source="/Fundamental/ColorHistogramView.xaml" />
-                <mui:Link DisplayName="Image Histogram" Source="/Fundamental/ImageHistogramView.xaml" />
+                <mui:Link DisplayName="Color Histogram" Source="/Cop.Theia.Module.Fundamental;component/Histogram/ColorHistogramView.xaml" />
+                <mui:Link DisplayName="Image Histogram" Source="/Cop.Theia.Module.Fundamental;component/Histogram/ImageHistogramView.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

@@ -1,4 +1,4 @@
-﻿namespace Cop.Theia.Client.Fundamental
+﻿namespace Cop.Theia.Module.Fundamental
 {
     using System.ComponentModel.Composition;
 

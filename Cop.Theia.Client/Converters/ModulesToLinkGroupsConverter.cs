@@ -10,12 +10,12 @@
 
     using FirstFloor.ModernUI.Presentation;
 
-    [ValueConversion(typeof(IEnumerable<ICopModule>), typeof(LinkGroupCollection))]
+    [ValueConversion(typeof(IEnumerable<IModule>), typeof(LinkGroupCollection))]
     internal class ModulesToLinkGroupsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var modules = value as IEnumerable<ICopModule>;
+            var modules = value as IEnumerable<IModule>;
 
             if (modules == null)
             {

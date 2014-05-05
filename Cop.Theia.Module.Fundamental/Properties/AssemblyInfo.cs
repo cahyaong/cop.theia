@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Cop.Theia.Client")]
+[assembly: AssemblyTitle("Cop.Theia.Module.Fundamental")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

@@ -2,7 +2,8 @@
     x:Class="Cop.Theia.Client.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Cop.Theia.Client">
+    xmlns:local="clr-namespace:Cop.Theia.Client"
+    xmlns:mui="http://firstfloorsoftware.com/ModernUI">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,7 +14,18 @@
                 <ResourceDictionary>
                     <local:ModulesToLinkGroupsConverter x:Key="ModulesToLinkGroupsConverter" />
                 </ResourceDictionary>
-                <ResourceDictionary Source="/Themes/Theme.Cop.Dark.xaml" />
+                <ResourceDictionary>
+                    <Style TargetType="mui:ModernWindow">
+                        <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
+                    </Style>
+                    <Style TargetType="mui:ModernFrame">
+                        <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
+                    </Style>
+                    <Style TargetType="mui:ModernTab">
+                        <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary Source="/Cop.Theia.Theme;component/Theme.Cop.Dark.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

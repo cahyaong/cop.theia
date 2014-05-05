@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class CopPage
+    public class Page
     {
-        public CopPage(string name, string source)
+        public Page(string name, string source)
         {
             if (string.IsNullOrEmpty(name))
             {

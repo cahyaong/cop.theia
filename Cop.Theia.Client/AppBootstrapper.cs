@@ -9,21 +9,31 @@
 
     using Caliburn.Micro;
 
+    using Cop.Theia.Client;
+    using Cop.Theia.Contract;
+
     internal class AppBootstrapper : Bootstrapper<AppViewModel>
     {
+        private readonly Lazy<IModuleProvider> deferredModuleProvider = new Lazy<IModuleProvider>(() => new CopModuleProvider());
+
         private CompositionContainer mefContainer;
 
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
-            return new[] { Assembly.GetExecutingAssembly() };
+            return this
+                .deferredModuleProvider.Value
+                .FindModuleAssemblies();
         }
 
         protected override void Configure()
         {
-            var copCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
+            var catalogs = this
+                .deferredModuleProvider.Value
+                .FindModuleAssemblies()
+                .Select(assembly => new AssemblyCatalog(assembly));
 
             this.mefContainer = new CompositionContainer(
-                new AggregateCatalog(copCatalog),
+                new AggregateCatalog(catalogs),
                 CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe);
 
             var caliburnBatch = new CompositionBatch();

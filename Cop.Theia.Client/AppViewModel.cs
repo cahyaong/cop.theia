@@ -14,15 +14,15 @@
     {
         public AppViewModel()
         {
-            this.Modules = Enumerable.Empty<ICopModule>();
+            this.Modules = Enumerable.Empty<IModule>();
         }
 
         [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<ICopModule> modules)
+        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
         {
             this.Modules = modules;
         }
 
-        public IEnumerable<ICopModule> Modules { get; private set; }
+        public IEnumerable<IModule> Modules { get; private set; }
     }
 }

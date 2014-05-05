@@ -1,4 +1,4 @@
-﻿namespace Cop.Theia.Client.Fundamental
+﻿namespace Cop.Theia.Module.Fundamental
 {
     public partial class ImageHistogramView
     {
