@@ -13,7 +13,7 @@
         {
             this.Id = new Guid("484BF7AD-9B9A-43E0-9BF0-C84C30AC7C38");
 
-            // Use custom attribute to generate the topics and sub-topics.
+            // FIXME: Use custom attribute to generate features and their pages.
 
             var histogramPage = new Page("Histogram", @"/Cop.Theia.Module.Fundamental;component/Histogram/HistogramView.xaml");
             var fundamentalFeature = new Feature("Fundamental", new List<Page> { histogramPage });
