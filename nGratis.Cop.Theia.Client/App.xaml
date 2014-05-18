@@ -1,0 +1,32 @@
+﻿<Application
+  x:Class="nGratis.Cop.Theia.Client.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:client="clr-namespace:nGratis.Cop.Theia.Client"
+  xmlns:mui="http://firstfloorsoftware.com/ModernUI">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+          <client:AppBootstrapper x:Key="Bootstrapper" />
+          <client:CaliburnContentLoader x:Key="CaliburnContentLoader" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+          <client:ModulesToLinkGroupsConverter x:Key="ModulesToLinkGroupsConverter" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+          <Style TargetType="mui:ModernWindow">
+            <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
+          </Style>
+          <Style TargetType="mui:ModernFrame">
+            <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
+          </Style>
+          <Style TargetType="mui:ModernTab">
+            <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
+          </Style>
+        </ResourceDictionary>
+        <ResourceDictionary Source="/nGratis.Cop.Theia.Core.Theme;component/Theme.Cop.Dark.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

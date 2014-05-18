@@ -1,0 +1,25 @@
+﻿<UserControl
+  x:Class="nGratis.Cop.Theia.Module.Diagnostic.ModuleSummaryView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:diagnostic="clr-namespace:nGratis.Cop.Theia.Module.Diagnostic"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DataContext="{d:DesignInstance diagnostic:ModuleSummaryViewModel}"
+  d:DesignHeight="300"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
+  <DataGrid
+    Name="Assemblies"
+    AutoGenerateColumns="False"
+    IsReadOnly="True"
+    d:DataContext="{d:DesignInstance diagnostic:AssemblyViewModel}">
+    <DataGrid.Columns>
+      <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+      <DataGridTextColumn Binding="{Binding Version}" Header="Version" />
+      <DataGridTextColumn Binding="{Binding ModifiedTimestamp}" Header="Modified" />
+      <DataGridTextColumn Binding="{Binding FileName}" Header="Filename" />
+      <DataGridTextColumn Binding="{Binding Configuration}" Header="Configuration" />
+    </DataGrid.Columns>
+  </DataGrid>
+</UserControl>

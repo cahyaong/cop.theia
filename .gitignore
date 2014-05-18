@@ -4,7 +4,7 @@
 TestResults
 packages
 
-Cop.Theia.Binaries/
+nGratis.Cop.Theia.Binaries/
 
 *.suo
 *.user
