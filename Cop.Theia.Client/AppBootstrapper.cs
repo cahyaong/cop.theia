@@ -9,8 +9,8 @@
 
     using Caliburn.Micro;
 
-    using Cop.Theia.Client;
     using Cop.Theia.Contract;
+    using Cop.Theia.Core;
 
     internal class AppBootstrapper : Bootstrapper<AppViewModel>
     {
@@ -20,16 +20,19 @@
 
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
-            return this
-                .deferredModuleProvider.Value
-                .FindModuleAssemblies();
+            return Enumerable
+                .Empty<Assembly>()
+                .Prepend(Assembly.GetExecutingAssembly())
+                .Union(this.deferredModuleProvider.Value.FindModuleAssemblies());
         }
 
         protected override void Configure()
         {
-            var catalogs = this
-                .deferredModuleProvider.Value
-                .FindModuleAssemblies()
+            var catalogs = Enumerable
+                .Empty<Assembly>()
+                .Prepend(Assembly.GetExecutingAssembly())
+                .Union(this.deferredModuleProvider.Value.FindInternalAssemblies())
+                .Union(this.deferredModuleProvider.Value.FindModuleAssemblies())
                 .Select(assembly => new AssemblyCatalog(assembly));
 
             this.mefContainer = new CompositionContainer(

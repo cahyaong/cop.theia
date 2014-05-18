@@ -7,5 +7,7 @@ namespace Cop.Theia.Contract
     public interface IModuleProvider
     {
         IEnumerable<Assembly> FindModuleAssemblies();
+
+        IEnumerable<Assembly> FindInternalAssemblies();
     }
 }

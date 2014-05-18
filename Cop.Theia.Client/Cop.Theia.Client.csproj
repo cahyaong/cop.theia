@@ -91,6 +91,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WriteableBitmapEx.Wpf">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -148,9 +151,17 @@
       <Project>{e727ca53-5288-4e7e-828c-011803b0bedd}</Project>
       <Name>Cop.Theia.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cop.Theia.Theme\Cop.Theia.Theme.csproj">
+    <ProjectReference Include="..\Cop.Theia.Core.Theme\Cop.Theia.Core.Theme.csproj">
       <Project>{2b8de19c-be3d-4516-aecb-01fc709f8ed8}</Project>
-      <Name>Cop.Theia.Theme</Name>
+      <Name>Cop.Theia.Core.Theme</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cop.Theia.Core.Wpf\Cop.Theia.Core.Wpf.csproj">
+      <Project>{199487eb-64e4-4d48-9e9a-3afdddadf041}</Project>
+      <Name>Cop.Theia.Core.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cop.Theia.Core\Cop.Theia.Core.csproj">
+      <Project>{b90c4c38-a600-44bb-840e-2a7d4b46618a}</Project>
+      <Name>Cop.Theia.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

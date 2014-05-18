@@ -22,7 +22,7 @@
 
             if (vm == null)
             {
-                return null;
+                return content;
             }
 
             if (content is DependencyObject)

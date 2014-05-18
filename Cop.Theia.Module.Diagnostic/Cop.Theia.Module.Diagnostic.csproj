@@ -117,10 +117,6 @@
       <Project>{e727ca53-5288-4e7e-828c-011803b0bedd}</Project>
       <Name>Cop.Theia.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cop.Theia.Theme\Cop.Theia.Theme.csproj">
-      <Project>{2b8de19c-be3d-4516-aecb-01fc709f8ed8}</Project>
-      <Name>Cop.Theia.Theme</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

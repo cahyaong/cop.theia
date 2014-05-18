@@ -14,21 +14,33 @@
     {
         private readonly Lazy<IEnumerable<Assembly>> deferredModuleAssemblies = new Lazy<IEnumerable<Assembly>>(OnModuleAssembliesMaterializing);
 
+        private readonly Lazy<IEnumerable<Assembly>> deferredInternalAssemblies = new Lazy<IEnumerable<Assembly>>(OnInternalAssembliesMaterializing);
+
         public IEnumerable<Assembly> FindModuleAssemblies()
         {
             return this.deferredModuleAssemblies.Value;
         }
 
+        public IEnumerable<Assembly> FindInternalAssemblies()
+        {
+            return this.deferredInternalAssemblies.Value;
+        }
+
         private static IEnumerable<Assembly> OnModuleAssembliesMaterializing()
         {
-            var appAssembly = Assembly.GetExecutingAssembly();
-            var moduleFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Modules");
-            var assemblies = new List<Assembly> { appAssembly };
+            var assemblies = Directory
+                .GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Modules"), "Cop.Theia.Module.*.dll")
+                .Select(Assembly.LoadFile);
 
-            Directory
-                .GetFiles(moduleFolderPath, "Cop.Theia.Module.*.dll")
-                .ToList()
-                .ForEach(file => assemblies.Add(Assembly.LoadFile(file)));
+            return assemblies;
+        }
+
+        private static IEnumerable<Assembly> OnInternalAssembliesMaterializing()
+        {
+            var assemblies = Directory
+                .GetFiles(Directory.GetCurrentDirectory(), "Cop.Theia.*.dll")
+                .Where(file => !file.Contains("Module"))
+                .Select(Assembly.LoadFile);
 
             return assemblies;
         }
