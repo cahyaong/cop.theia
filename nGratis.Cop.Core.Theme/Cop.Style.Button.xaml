@@ -1,19 +1,18 @@
 ﻿<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:core="clr-namespace:nGratis.Cop.Core;assembly=nGratis.Cop.Core"
-  xmlns:wpf="clr-namespace:nGratis.Cop.Core.Wpf;assembly=nGratis.Cop.Core.Wpf">
+  xmlns:core="http://schemas.ngratis.com/2014/core">
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Button.xaml" />
   </ResourceDictionary.MergedDictionaries>
   <Style
-    x:Key="{x:Type wpf:FileDialogButton}"
+    x:Key="{x:Type core:FileDialogButton}"
     BasedOn="{StaticResource {x:Type Button}}"
-    TargetType="wpf:FileDialogButton" />
+    TargetType="core:FileDialogButton" />
   <Style
     x:Key="Cop.FileDialogButton.Normal"
-    BasedOn="{StaticResource {x:Type wpf:FileDialogButton}}"
-    TargetType="{x:Type wpf:FileDialogButton}">
+    BasedOn="{StaticResource {x:Type core:FileDialogButton}}"
+    TargetType="{x:Type core:FileDialogButton}">
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="FontFamily" Value="Segoe UI Semilight" />
