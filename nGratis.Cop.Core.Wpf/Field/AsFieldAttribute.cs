@@ -29,9 +29,11 @@ namespace nGratis.Cop.Core.Wpf
 {
     using System;
 
+    using JetBrains.Annotations;
+
     using nGratis.Cop.Core;
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false), MeansImplicitUse]
     public class AsFieldAttribute : Attribute
     {
         public AsFieldAttribute(string id, FieldMode mode, string label)

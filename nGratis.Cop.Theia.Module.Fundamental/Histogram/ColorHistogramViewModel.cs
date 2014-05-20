@@ -32,8 +32,6 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     using System.IO;
     using System.Windows.Media;
 
-    using global::Cop.Theia.Module.Fundamental.Annotations;
-
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Media;
     using nGratis.Cop.Core.Wpf;
@@ -56,7 +54,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
         }
 
         [AsField("ED9DED51-7A16-4348-9759-6FED24244CA4", FieldMode.Input, FieldType.File, "Image File Path:")]
-        private string ImageFilePath { get; [UsedImplicitly] set; }
+        private string ImageFilePath { get; set; }
 
         [AsField("EB0EBB79-6D0B-490F-9CB5-F00A61966A48", FieldMode.Output, FieldType.Image, "Raw Image:")]
         public ImageSource RawImage
