@@ -5,7 +5,7 @@
     using System.Windows;
     using System.Windows.Markup;
 
-    [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "nGratis.Cop.Theia.Core")]
+    [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "nGratis.Cop.Core")]
     public class SharedResourceDictionary : ResourceDictionary
     {
         private static readonly Dictionary<Uri, ResourceDictionary> SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
