@@ -4,9 +4,9 @@
   xmlns:core="clr-namespace:nGratis.Cop.Core;assembly=nGratis.Cop.Core"
   xmlns:wpf="clr-namespace:nGratis.Cop.Core.Wpf;assembly=nGratis.Cop.Core.Wpf">
   <ResourceDictionary.MergedDictionaries>
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.Button.xaml" />
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBlock.xaml" />
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBox.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.Button.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
   <wpf:FieldTemplateSelector x:Key="Cop.TemplateSelector.Field" />

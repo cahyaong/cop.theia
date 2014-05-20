@@ -4,8 +4,8 @@
   xmlns:core="clr-namespace:nGratis.Cop.Core;assembly=nGratis.Cop.Core">
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.Field.xaml" />
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBlock.xaml" />
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBox.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.Field.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

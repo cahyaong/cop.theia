@@ -11,7 +11,7 @@
   <UserControl.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBlock.xaml" />
+        <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </UserControl.Resources>
