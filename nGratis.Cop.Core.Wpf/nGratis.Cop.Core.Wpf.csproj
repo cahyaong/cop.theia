@@ -86,6 +86,7 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BasePageViewModel.cs" />
+    <Compile Include="Converters\ToLinkGroupsConverter.cs" />
     <Compile Include="Converters\ToTypeNameConverter.cs" />
     <Compile Include="Field\AsFieldAttribute.cs" />
     <Compile Include="Field\AsFieldCallbackAttribute.cs" />
@@ -106,6 +107,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj">
+      <Project>{e727ca53-5288-4e7e-828c-011803b0bedd}</Project>
+      <Name>nGratis.Cop.Core.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nGratis.Cop.Core\nGratis.Cop.Core.csproj">
       <Project>{b90c4c38-a600-44bb-840e-2a7d4b46618a}</Project>
       <Name>nGratis.Cop.Core</Name>

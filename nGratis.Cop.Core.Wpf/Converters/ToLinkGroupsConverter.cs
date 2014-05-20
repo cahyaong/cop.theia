@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="ModulesToLinkGroupsConverter.cs" company="nGratis">
+// <copyright file="ToLinkGroupsConverter.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,7 +25,7 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Collections.Generic;
@@ -38,7 +38,7 @@ namespace nGratis.Cop.Theia.Client
     using nGratis.Cop.Core.Contract;
 
     [ValueConversion(typeof(IEnumerable<IModule>), typeof(LinkGroupCollection))]
-    internal class ModulesToLinkGroupsConverter : IValueConverter
+    public class ToLinkGroupsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
