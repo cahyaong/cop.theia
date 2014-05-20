@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="MefExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,24 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core
 {
+    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System.ComponentModel.Composition.Hosting;
+    using System.ComponentModel.Composition.Primitives;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public static class MefExtensions
     {
-        public AppViewModel()
+        public static void AddExport<TKey>(this CompositionBatch compositionBatch, Func<object> createInstance)
         {
-            this.Modules = Enumerable.Empty<IModule>();
-        }
+            var typeName = typeof(TKey).FullName;
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
+            var export = new Export(
+                new ExportDefinition(typeName, new Dictionary<string, object> { { "ExportTypeIdentity", typeName } }),
+                createInstance);
 
-        public IEnumerable<IModule> Modules { get; private set; }
+            compositionBatch.AddExport(export);
+        }
     }
 }

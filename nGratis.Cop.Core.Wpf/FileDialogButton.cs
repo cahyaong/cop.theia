@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="FileDialogButton.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,48 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Controls;
 
-    using nGratis.Cop.Core.Contract;
+    using FirstFloor.ModernUI.Presentation;
 
-    using ReactiveUI;
+    using Microsoft.Win32;
 
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class FileDialogButton : Button
     {
-        public AppViewModel()
+        public static readonly DependencyProperty SelectedFilePathProperty = DependencyProperty.Register(
+            "SelectedFilePath", typeof(string), typeof(FileDialogButton), new PropertyMetadata(null));
+
+        public FileDialogButton()
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            this.Command = new RelayCommand(this.OnMouseClicked, _ => true);
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public string SelectedFilePath
         {
-            this.Modules = modules;
+            get { return (string)this.GetValue(FileDialogButton.SelectedFilePathProperty); }
+            set { this.SetValue(FileDialogButton.SelectedFilePathProperty, value); }
         }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        private void OnMouseClicked(object parameter)
+        {
+            var fileDialog = new OpenFileDialog
+                {
+                    InitialDirectory = File.Exists(this.SelectedFilePath)
+                        ? Path.GetDirectoryName(this.SelectedFilePath)
+                        : Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+                };
+
+            var isOkSelected = fileDialog.ShowDialog();
+
+            if (isOkSelected.HasValue && isOkSelected.Value)
+            {
+                this.SelectedFilePath = fileDialog.FileName;
+            }
+        }
     }
 }

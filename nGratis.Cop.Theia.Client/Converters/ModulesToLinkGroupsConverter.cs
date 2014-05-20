@@ -35,7 +35,7 @@ namespace nGratis.Cop.Theia.Client
 
     using FirstFloor.ModernUI.Presentation;
 
-    using nGratis.Cop.Theia.Contract;
+    using nGratis.Cop.Core.Contract;
 
     [ValueConversion(typeof(IEnumerable<IModule>), typeof(LinkGroupCollection))]
     internal class ModulesToLinkGroupsConverter : IValueConverter

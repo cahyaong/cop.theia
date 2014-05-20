@@ -146,24 +146,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\nGratis.Cop.Theia.Contract\nGratis.Cop.Theia.Contract.csproj">
+    <ProjectReference Include="..\nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj">
       <Project>{e727ca53-5288-4e7e-828c-011803b0bedd}</Project>
-      <Name>nGratis.Cop.Theia.Contract</Name>
+      <Name>nGratis.Cop.Core.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\nGratis.Cop.Theia.Core.Theme\nGratis.Cop.Theia.Core.Theme.csproj">
+    <ProjectReference Include="..\nGratis.Cop.Core.Theme\nGratis.Cop.Core.Theme.csproj">
       <Project>{2b8de19c-be3d-4516-aecb-01fc709f8ed8}</Project>
-      <Name>nGratis.Cop.Theia.Core.Theme</Name>
+      <Name>nGratis.Cop.Core.Theme</Name>
     </ProjectReference>
-    <ProjectReference Include="..\nGratis.Cop.Theia.Core.Wpf\nGratis.Cop.Theia.Core.Wpf.csproj">
+    <ProjectReference Include="..\nGratis.Cop.Core.Wpf\nGratis.Cop.Core.Wpf.csproj">
       <Project>{199487eb-64e4-4d48-9e9a-3afdddadf041}</Project>
-      <Name>nGratis.Cop.Theia.Core.Wpf</Name>
+      <Name>nGratis.Cop.Core.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\nGratis.Cop.Theia.Core\nGratis.Cop.Theia.Core.csproj">
+    <ProjectReference Include="..\nGratis.Cop.Core\nGratis.Cop.Core.csproj">
       <Project>{b90c4c38-a600-44bb-840e-2a7d4b46618a}</Project>
-      <Name>nGratis.Cop.Theia.Core</Name>
+      <Name>nGratis.Cop.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

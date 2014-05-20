@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="IImageProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,14 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Media
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public interface IImageProvider
     {
-        public AppViewModel()
-        {
-            this.Modules = Enumerable.Empty<IModule>();
-        }
+        IImage LoadImage(Uri sourceUri);
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
-
-        public IEnumerable<IModule> Modules { get; private set; }
+        void SaveImage(IImage image, Uri targetUri);
     }
 }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="ColorHistogramViewModel.cs" company="nGratis">
+// <copyright file="FileSystemImageProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,59 +25,33 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Fundamental
+namespace nGratis.Cop.Core.Media
 {
     using System;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Windows.Media;
-
-    using global::Cop.Theia.Module.Fundamental.Annotations;
 
     using nGratis.Cop.Core;
-    using nGratis.Cop.Core.Media;
-    using nGratis.Cop.Core.Wpf;
 
-    using ReactiveUI;
-
-    [Export]
-    public class ColorHistogramViewModel : BasePageViewModel
+    [Export(typeof(IImageProvider))]
+    public class FileSystemImageProvider : IImageProvider
     {
-        private readonly IImageProvider imageProvider;
-
-        private ImageSource rawImage;
-
-        [ImportingConstructor]
-        public ColorHistogramViewModel(IImageProvider imageProvider)
+        public IImage LoadImage(Uri sourceUri)
         {
-            Assumption.ThrowWhenNullArgument(() => imageProvider);
+            Assumption.ThrowWhenNullArgument(() => sourceUri);
 
-            this.imageProvider = imageProvider;
-        }
-
-        [AsField("ED9DED51-7A16-4348-9759-6FED24244CA4", FieldMode.Input, FieldType.File, "Image File Path:")]
-        private string ImageFilePath { get; [UsedImplicitly] set; }
-
-        [AsField("EB0EBB79-6D0B-490F-9CB5-F00A61966A48", FieldMode.Output, FieldType.Image, "Raw Image:")]
-        public ImageSource RawImage
-        {
-            get { return this.rawImage; }
-            private set { this.RaiseAndSetIfChanged(ref this.rawImage, value); }
-        }
-
-        [AsFieldCallback("ED9DED51-7A16-4348-9759-6FED24244CA4")]
-        private void OnImageFilePathChanged()
-        {
-            if (!File.Exists(this.ImageFilePath))
+            using (var fileStream = File.OpenRead(sourceUri.LocalPath))
             {
-                this.RawImage = null;
-                return;
-            }
+                var writeableImage = new WriteableImage();
+                writeableImage.ReadData(fileStream);
 
-            this.RawImage = this
-                .imageProvider
-                .LoadImage(new Uri(this.ImageFilePath))
-                .ToImageSource();
+                return writeableImage;
+            }
+        }
+
+        public void SaveImage(IImage image, Uri targetUri)
+        {
+            throw new NotImplementedException();
         }
     }
 }

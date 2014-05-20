@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="Field.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,29 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class Field : ContentControl
     {
-        public AppViewModel()
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
+            "Label", typeof(string), typeof(Field), new PropertyMetadata("[_UNDEFINED_]"));
+
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+            "Value", typeof(object), typeof(Field), new PropertyMetadata(string.Empty));
+
+        public string Label
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            get { return (string)this.GetValue(Field.LabelProperty); }
+            set { this.SetValue(Field.LabelProperty, value); }
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public string Value
         {
-            this.Modules = modules;
+            get { return (string)this.GetValue(Field.ValueProperty); }
+            set { this.SetValue(Field.ValueProperty, value); }
         }
-
-        public IEnumerable<IModule> Modules { get; private set; }
     }
 }

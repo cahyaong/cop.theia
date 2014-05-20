@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="FieldMode.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,12 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
-
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public enum FieldMode
     {
-        public AppViewModel()
-        {
-            this.Modules = Enumerable.Empty<IModule>();
-        }
-
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
-
-        public IEnumerable<IModule> Modules { get; private set; }
+        Unknown,
+        Input,
+        Output
     }
 }

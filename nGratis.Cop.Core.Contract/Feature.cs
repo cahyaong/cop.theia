@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="Feature.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,29 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Contract
 {
+    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
     using System.Linq;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class Feature
     {
-        public AppViewModel()
+        public Feature(string name, IEnumerable<Page> subtopics)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            // TODO: Create a helper class to handle exception throwing.
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException();
+            }
+
+            this.Name = name;
+            this.Pages = subtopics ?? Enumerable.Empty<Page>();
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
+        public string Name { get; private set; }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public IEnumerable<Page> Pages { get; private set; }
     }
 }

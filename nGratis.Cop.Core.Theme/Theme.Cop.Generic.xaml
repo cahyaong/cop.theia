@@ -1,0 +1,11 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:core="clr-namespace:nGratis.Cop.Core;assembly=nGratis.Cop.Core">
+  <ResourceDictionary.MergedDictionaries>
+    <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.Field.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBlock.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBox.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

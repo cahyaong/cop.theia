@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="FieldTemplateSelector.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,46 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Controls;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class FieldTemplateSelector : DataTemplateSelector
     {
-        public AppViewModel()
+        private const string DefaultKey = "Cop.Field.Default";
+
+        private readonly IDictionary<string, DataTemplate> templateLookup;
+
+        public FieldTemplateSelector()
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            this.templateLookup = new Dictionary<string, DataTemplate>();
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            this.Modules = modules;
-        }
+            var element = container as FrameworkElement;
+            var field = item as FieldViewModel;
 
-        public IEnumerable<IModule> Modules { get; private set; }
+            if (element == null || field == null)
+            {
+                return null;
+            }
+
+            var key = string.Format(CultureInfo.InvariantCulture, "Cop.{0}Field.{1}", field.Mode, field.Type);
+
+            if (this.templateLookup.ContainsKey(key))
+            {
+                return this.templateLookup[key];
+            }
+
+            var template = element.TryFindResource(key) as DataTemplate ?? element.TryFindResource(FieldTemplateSelector.DefaultKey) as DataTemplate;
+
+            this.templateLookup.Add(key, template);
+
+            return template;
+        }
     }
 }

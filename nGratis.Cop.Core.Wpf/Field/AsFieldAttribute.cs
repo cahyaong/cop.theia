@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="AsFieldAttribute.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,39 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
 
-    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core;
 
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class AsFieldAttribute : Attribute
     {
-        public AppViewModel()
+        public AsFieldAttribute(string id, FieldMode mode, string label)
+            : this(id, mode, FieldType.Text, label)
         {
-            this.Modules = Enumerable.Empty<IModule>();
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public AsFieldAttribute(string id, FieldMode mode, FieldType type, string label)
         {
-            this.Modules = modules;
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
+            Assumption.ThrowWhenInvalidArgument(mode == FieldMode.Unknown, () => label);
+            Assumption.ThrowWhenInvalidArgument(type == FieldType.Unknown, () => type);
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => label);
+
+            this.Id = id;
+            this.Mode = mode;
+            this.Type = type;
+            this.Label = label;
         }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public string Id { get; private set; }
+
+        public FieldMode Mode { get; private set; }
+
+        public FieldType Type { get; private set; }
+
+        public string Label { get; private set; }
     }
 }

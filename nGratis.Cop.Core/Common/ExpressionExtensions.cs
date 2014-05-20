@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="ExpressionExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,32 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public static class ExpressionExtensions
     {
-        public AppViewModel()
+        public static string FindPropertyName<TProperty>(this Expression<Func<TProperty>> expression)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            Assumption.ThrowWhenNullArgument(() => expression);
+
+            var bodyExpression = expression.Body as MemberExpression ?? (MemberExpression)((UnaryExpression)expression.Body).Operand;
+
+            return bodyExpression.Member.Name;
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public static PropertyInfo FindProperty<TOwner, TProperty>(this Expression<Func<TOwner, TProperty>> expression)
         {
-            this.Modules = modules;
-        }
+            Assumption.ThrowWhenNullArgument(() => expression);
 
-        public IEnumerable<IModule> Modules { get; private set; }
+            var bodyExpression = expression.Body as MemberExpression;
+
+            Assumption.ThrowWhenInvalidArgument(bodyExpression == null, () => expression);
+
+            return (PropertyInfo)bodyExpression.Member;
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="Page.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,30 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Contract
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class Page
     {
-        public AppViewModel()
+        public Page(string name, string source)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(source))
+            {
+                throw new ArgumentException();
+            }
+
+            this.Name = name;
+            this.SourceUri = new Uri(source, UriKind.Relative);
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
+        public string Name { get; private set; }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public Uri SourceUri { get; private set; }
     }
 }

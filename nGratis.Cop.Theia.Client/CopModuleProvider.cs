@@ -34,7 +34,7 @@ namespace nGratis.Cop.Theia.Client
     using System.Linq;
     using System.Reflection;
 
-    using nGratis.Cop.Theia.Contract;
+    using nGratis.Cop.Core.Contract;
 
     [Export(typeof(IModuleProvider))]
     internal class CopModuleProvider : IModuleProvider
@@ -65,7 +65,7 @@ namespace nGratis.Cop.Theia.Client
         private static IEnumerable<Assembly> OnInternalAssembliesMaterializing()
         {
             var assemblies = Directory
-                .GetFiles(Directory.GetCurrentDirectory(), "nGratis.Cop.Theia.*.dll")
+                .GetFiles(Directory.GetCurrentDirectory(), "nGratis.Cop.*.dll")
                 .Where(file => !file.Contains("Module"))
                 .Select(Assembly.LoadFile);
 

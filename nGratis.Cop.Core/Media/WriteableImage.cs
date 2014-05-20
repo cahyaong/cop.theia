@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="WriteableImage.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,46 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Media
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
+    using System.IO;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
-    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core;
 
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class WriteableImage : IImage
     {
-        public AppViewModel()
+        private WriteableBitmap writeableBitmap;
+
+        public void ReadData(Stream dataSteam)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            using (dataSteam)
+            {
+                dataSteam.Position = 0;
+
+                var bitmap = new BitmapImage();
+
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.StreamSource = dataSteam;
+                bitmap.EndInit();
+
+                this.writeableBitmap = new WriteableBitmap(bitmap);
+
+                Assumption.ThrowWhenUnexpectedNullValue(() => this.writeableBitmap);
+            }
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public Stream WriteData()
         {
-            this.Modules = modules;
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public ImageSource ToImageSource()
+        {
+            return this.writeableBitmap;
+        }
     }
 }

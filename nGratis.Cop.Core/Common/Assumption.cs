@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="ModuleSummaryViewModel.cs" company="nGratis">
+// <copyright file="Assumption.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,41 +25,46 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Diagnostic
+namespace nGratis.Cop.Core
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System.Linq.Expressions;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    public class ModuleSummaryViewModel : ReactiveObject
+    public static class Assumption
     {
-        private IEnumerable<AssemblyViewModel> assemblies;
-
-        [ImportingConstructor]
-        public ModuleSummaryViewModel(IModuleProvider moduleProvider)
+        public static void ThrowWhenInvalidArgument<T>(bool isInvalidCondition, Expression<Func<T>> argumentExpression, string reason = null)
         {
-            if (moduleProvider == null)
+            if (isInvalidCondition)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentException(reason, argumentExpression.FindPropertyName());
             }
-
-            this.Assemblies = moduleProvider
-                .FindModuleAssemblies()
-                .Where(assembly => assembly.FullName.Contains("nGratis.Cop.Theia.Module"))
-                .Select(assmebly => new AssemblyViewModel(assmebly))
-                .ToList();
         }
 
-        public IEnumerable<AssemblyViewModel> Assemblies
+        public static void ThrowWhenNullArgument<T>(Expression<Func<T>> argumentExpression, string reason = null)
+             where T : class
         {
-            get { return this.assemblies; }
-            set { this.RaiseAndSetIfChanged(ref this.assemblies, value); }
+            if (argumentExpression.Compile()() == null)
+            {
+                throw new ArgumentNullException(argumentExpression.FindPropertyName(), reason);
+            }
+        }
+
+        public static void ThrowWhenNullOrWhitespaceArgument(Expression<Func<string>> argumentExpression, string reason = null)
+        {
+            var argument = argumentExpression.Compile()();
+
+            if (string.IsNullOrEmpty(argument) || string.IsNullOrWhiteSpace(argument))
+            {
+                throw new ArgumentException(argumentExpression.FindPropertyName(), reason);
+            }
+        }
+
+        public static void ThrowWhenUnexpectedNullValue<T>(Expression<Func<T>> argumentExpression, string reason = null)
+        {
+            if (object.Equals(argumentExpression.Compile()(), null))
+            {
+                throw new InvalidOperationException(reason);
+            }
         }
     }
 }

@@ -1,0 +1,61 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:core="clr-namespace:nGratis.Cop.Core;assembly=nGratis.Cop.Core"
+  xmlns:wpf="clr-namespace:nGratis.Cop.Core.Wpf;assembly=nGratis.Cop.Core.Wpf">
+  <ResourceDictionary.MergedDictionaries>
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.Button.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBlock.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Style.Cop.TextBox.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <wpf:FieldTemplateSelector x:Key="Cop.TemplateSelector.Field" />
+
+  <DataTemplate x:Key="Cop.Field.Default" DataType="wpf:Field">
+    <TextBlock
+      FontStyle="Italic"
+      Style="{StaticResource Cop.TextBlock.Body}"
+      Text="___UNSUPPORTED___" />
+  </DataTemplate>
+
+  <DataTemplate x:Key="Cop.InputField.File" DataType="wpf:Field">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <TextBox
+        x:Name="PART_Value"
+        Grid.Column="0"
+        Margin="0,0,5,0"
+        Style="{StaticResource Cop.TextBox.Normal}"
+        Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+      <wpf:FileDialogButton
+        Grid.Column="1"
+        Content="Browse"
+        SelectedFilePath="{Binding Value, Mode=TwoWay}"
+        Style="{StaticResource Cop.FileDialogButton.Normal}" />
+    </Grid>
+  </DataTemplate>
+
+  <DataTemplate x:Key="Cop.OutputField.Image" DataType="wpf:Field">
+    <Image Source="{Binding Value, Mode=OneWay}" Stretch="UniformToFill" />
+  </DataTemplate>
+
+  <Style x:Key="{x:Type wpf:Field}" TargetType="wpf:Field">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="wpf:Field">
+          <StackPanel Orientation="Vertical">
+            <TextBlock
+              x:Name="PART_Label"
+              Margin="0,0,0,5"
+              Style="{StaticResource Cop.TextBlock.SmallSubheader}"
+              Text="{Binding Label, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource Cop.TemplateSelector.Field}" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

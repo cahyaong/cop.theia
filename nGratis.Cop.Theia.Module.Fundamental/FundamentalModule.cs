@@ -31,7 +31,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
 
-    using nGratis.Cop.Theia.Contract;
+    using nGratis.Cop.Core.Contract;
 
     [Export(typeof(IModule))]
     internal class FundamentalModule : IModule

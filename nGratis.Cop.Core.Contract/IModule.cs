@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="IModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,15 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Contract
 {
+    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
 
-    using nGratis.Cop.Core.Contract;
-
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public interface IModule
     {
-        public AppViewModel()
-        {
-            this.Modules = Enumerable.Empty<IModule>();
-        }
+        Guid Id { get; }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
-
-        public IEnumerable<IModule> Modules { get; private set; }
+        IEnumerable<Feature> Features { get; }
     }
 }

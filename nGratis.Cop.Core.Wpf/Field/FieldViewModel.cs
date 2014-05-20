@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="FieldViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,57 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System.Reflection;
 
-    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core;
 
     using ReactiveUI;
 
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public class FieldViewModel : ReactiveObject
     {
-        public AppViewModel()
+        public static readonly PropertyInfo ValueProperty = typeof(FieldViewModel).GetProperty("Value", BindingFlags.Instance | BindingFlags.Public);
+
+        private FieldMode mode;
+
+        private FieldType type;
+
+        private string label;
+
+        private object value;
+
+        internal FieldViewModel(AsFieldAttribute asFieldAttribute)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            Assumption.ThrowWhenNullArgument(() => asFieldAttribute);
+
+            this.Mode = asFieldAttribute.Mode;
+            this.Type = asFieldAttribute.Type;
+            this.Label = asFieldAttribute.Label;
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public FieldType Type
         {
-            this.Modules = modules;
+            get { return this.type; }
+            private set { this.RaiseAndSetIfChanged(ref this.type, value); }
         }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public string Label
+        {
+            get { return this.label; }
+            private set { this.RaiseAndSetIfChanged(ref this.label, value); }
+        }
+
+        public object Value
+        {
+            get { return this.value; }
+            set { this.RaiseAndSetIfChanged(ref this.value, value); }
+        }
+
+        public FieldMode Mode
+        {
+            get { return this.mode; }
+            private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
+        }
     }
 }

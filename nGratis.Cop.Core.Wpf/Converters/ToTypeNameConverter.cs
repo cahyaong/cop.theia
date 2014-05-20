@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="ToTypeNameConverter.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,27 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
 
-    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core;
 
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    [ValueConversion(typeof(object), typeof(string))]
+    public class ToTypeNameConverter : IValueConverter
     {
-        public AppViewModel()
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            Assumption.ThrowWhenInvalidArgument(targetType != typeof(string), () => targetType);
+
+            return value != null ? value.GetType().FullName : "<NULL>";
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            this.Modules = modules;
+            throw new NotSupportedException();
         }
-
-        public IEnumerable<IModule> Modules { get; private set; }
     }
 }

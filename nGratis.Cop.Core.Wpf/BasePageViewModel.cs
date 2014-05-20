@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// <copyright file="BasePageViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,32 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
-
-    using nGratis.Cop.Core.Contract;
-
     using ReactiveUI;
 
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    public abstract class BasePageViewModel : ReactiveObject
     {
-        public AppViewModel()
+        private FieldGroupViewModel inputFieldGroup;
+
+        private FieldGroupViewModel outputFieldGroup;
+
+        protected BasePageViewModel()
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            this.InputFieldGroup = new FieldGroupViewModel(this, FieldMode.Input);
+            this.OutputFieldGroup = new FieldGroupViewModel(this, FieldMode.Output);
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
+        public FieldGroupViewModel InputFieldGroup
         {
-            this.Modules = modules;
+            get { return this.inputFieldGroup; }
+            private set { this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value); }
         }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public FieldGroupViewModel OutputFieldGroup
+        {
+            get { return this.outputFieldGroup; }
+            private set { this.RaiseAndSetIfChanged(ref this.outputFieldGroup, value); }
+        }
     }
 }

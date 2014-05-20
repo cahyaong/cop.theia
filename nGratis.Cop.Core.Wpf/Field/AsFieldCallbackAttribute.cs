@@ -1,5 +1,5 @@
-﻿// --------------------------------------------------------------------------------
-// <copyright file="AppViewModel.cs" company="nGratis">
+// --------------------------------------------------------------------------------
+// <copyright file="AsFieldCallbackAttribute.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,31 +25,22 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
+    using System;
 
-    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core;
 
-    using ReactiveUI;
-
-    [Export]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    internal class AppViewModel : ReactiveObject
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+    public class AsFieldCallbackAttribute : Attribute
     {
-        public AppViewModel()
+        public AsFieldCallbackAttribute(string id)
         {
-            this.Modules = Enumerable.Empty<IModule>();
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
+
+            this.Id = id;
         }
 
-        [ImportingConstructor]
-        public AppViewModel([ImportMany] IEnumerable<IModule> modules)
-        {
-            this.Modules = modules;
-        }
-
-        public IEnumerable<IModule> Modules { get; private set; }
+        public string Id { get; private set; }
     }
 }
