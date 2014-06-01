@@ -66,5 +66,13 @@ namespace nGratis.Cop.Core
                 throw new InvalidOperationException(reason);
             }
         }
+
+        public static void ThrowWhenInvalidOperation(bool isInvalidCondition, string reason = null, Exception innerException = null)
+        {
+            if (isInvalidCondition)
+            {
+                throw new InvalidOperationException(reason, innerException);
+            }
+        }
     }
 }
