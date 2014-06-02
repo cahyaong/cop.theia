@@ -36,7 +36,7 @@ namespace nGratis.Cop.Core.Media
 
     public class WriteableImage : IImage
     {
-        private WriteableBitmap writeableBitmap;
+        private WriteableBitmap _writeableBitmap;
 
         public void ReadData(Stream dataSteam)
         {
@@ -51,9 +51,9 @@ namespace nGratis.Cop.Core.Media
                 bitmap.StreamSource = dataSteam;
                 bitmap.EndInit();
 
-                this.writeableBitmap = new WriteableBitmap(bitmap);
+                this._writeableBitmap = new WriteableBitmap(bitmap);
 
-                Assumption.ThrowWhenUnexpectedNullValue(() => this.writeableBitmap);
+                Assumption.ThrowWhenUnexpectedNullValue(() => this._writeableBitmap);
             }
         }
 
@@ -64,7 +64,7 @@ namespace nGratis.Cop.Core.Media
 
         public ImageSource ToImageSource()
         {
-            return this.writeableBitmap;
+            return this._writeableBitmap;
         }
     }
 }

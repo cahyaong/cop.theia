@@ -41,26 +41,26 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     [Export]
     public class ColorHistogramViewModel : BasePageViewModel
     {
-        private readonly IImageProvider imageProvider;
+        private readonly IImageProvider _imageProvider;
 
-        private ImageSource rawImage;
+        private ImageSource _rawImage;
 
         [ImportingConstructor]
         public ColorHistogramViewModel(IImageProvider imageProvider)
         {
             Assumption.ThrowWhenNullArgument(() => imageProvider);
 
-            this.imageProvider = imageProvider;
+            this._imageProvider = imageProvider;
         }
 
         [AsField("ED9DED51-7A16-4348-9759-6FED24244CA4", FieldMode.Input, FieldType.File, "Image File Path:")]
-        private string ImageFilePath { get; set; }
+        public string ImageFilePath { get; set; }
 
         [AsField("EB0EBB79-6D0B-490F-9CB5-F00A61966A48", FieldMode.Output, FieldType.Image, "Raw Image:")]
         public ImageSource RawImage
         {
-            get { return this.rawImage; }
-            private set { this.RaiseAndSetIfChanged(ref this.rawImage, value); }
+            get { return this._rawImage; }
+            private set { this.RaiseAndSetIfChanged(ref this._rawImage, value); }
         }
 
         [AsFieldCallback("ED9DED51-7A16-4348-9759-6FED24244CA4")]
@@ -73,7 +73,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
             }
 
             this.RawImage = this
-                .imageProvider
+                ._imageProvider
                 .LoadImage(new Uri(this.ImageFilePath))
                 .ToImageSource();
         }

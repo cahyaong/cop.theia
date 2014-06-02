@@ -39,7 +39,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
     [Export]
     public class ModuleSummaryViewModel : ReactiveObject
     {
-        private IEnumerable<AssemblyViewModel> assemblies;
+        private IEnumerable<AssemblyViewModel> _assemblies;
 
         [ImportingConstructor]
         public ModuleSummaryViewModel(IModuleProvider moduleProvider)
@@ -58,8 +58,8 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public IEnumerable<AssemblyViewModel> Assemblies
         {
-            get { return this.assemblies; }
-            set { this.RaiseAndSetIfChanged(ref this.assemblies, value); }
+            get { return this._assemblies; }
+            set { this.RaiseAndSetIfChanged(ref this._assemblies, value); }
         }
     }
 }

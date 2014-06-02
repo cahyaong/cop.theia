@@ -38,17 +38,17 @@ namespace nGratis.Cop.Core.Wpf
     {
         // FIXME: Need to make this class disposable!
 
-        private readonly INotifyPropertyChanged source;
+        private readonly INotifyPropertyChanged _source;
 
-        private readonly INotifyPropertyChanged target;
+        private readonly INotifyPropertyChanged _target;
 
-        private readonly PropertyInfo sourceProperty;
+        private readonly PropertyInfo _sourceProperty;
 
-        private readonly PropertyInfo targetProperty;
+        private readonly PropertyInfo _targetProperty;
 
-        private MethodInfo sourceCallbackMethod;
+        private MethodInfo _sourceCallbackMethod;
 
-        private MethodInfo targetCallbackMethod;
+        private MethodInfo _targetCallbackMethod;
 
         public ObjectBinder(INotifyPropertyChanged source, PropertyInfo sourceProperty, INotifyPropertyChanged target, PropertyInfo targetProperty)
         {
@@ -57,11 +57,11 @@ namespace nGratis.Cop.Core.Wpf
             Assumption.ThrowWhenNullArgument(() => target);
             Assumption.ThrowWhenNullArgument(() => targetProperty);
 
-            this.source = source;
-            this.target = target;
+            this._source = source;
+            this._target = target;
 
-            this.sourceProperty = sourceProperty;
-            this.targetProperty = targetProperty;
+            this._sourceProperty = sourceProperty;
+            this._targetProperty = targetProperty;
 
             WeakEventManager<INotifyPropertyChanged, PropertyChangedEventArgs>.AddHandler(source, "PropertyChanged", this.OnSourcePropertyChanged);
             WeakEventManager<INotifyPropertyChanged, PropertyChangedEventArgs>.AddHandler(target, "PropertyChanged", this.OnTargetPropertyChanged);
@@ -73,7 +73,7 @@ namespace nGratis.Cop.Core.Wpf
 
             var callbackAttribute = null as AsFieldCallbackAttribute;
 
-            this.sourceCallbackMethod = this.source
+            this._sourceCallbackMethod = this._source
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .SingleOrDefault(method => (callbackAttribute = method.GetCustomAttribute<AsFieldCallbackAttribute>()) != null && callbackAttribute.Id == id);
@@ -85,7 +85,7 @@ namespace nGratis.Cop.Core.Wpf
 
             var callbackAttribute = null as AsFieldCallbackAttribute;
 
-            this.targetCallbackMethod = this.source
+            this._targetCallbackMethod = this._source
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .SingleOrDefault(method => (callbackAttribute = method.GetCustomAttribute<AsFieldCallbackAttribute>()) != null && callbackAttribute.Id == id);
@@ -93,33 +93,33 @@ namespace nGratis.Cop.Core.Wpf
 
         private void OnTargetPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != this.targetProperty.Name)
+            if (args.PropertyName != this._targetProperty.Name)
             {
                 return;
             }
 
-            var value = this.targetProperty.GetValue(this.target);
-            this.sourceProperty.SetValue(this.source, value);
+            var value = this._targetProperty.GetValue(this._target);
+            this._sourceProperty.SetValue(this._source, value);
 
-            if (this.sourceCallbackMethod != null)
+            if (this._sourceCallbackMethod != null)
             {
-                this.sourceCallbackMethod.Invoke(this.source, new object[] { });
+                this._sourceCallbackMethod.Invoke(this._source, new object[] { });
             }
         }
 
         private void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != this.sourceProperty.Name)
+            if (args.PropertyName != this._sourceProperty.Name)
             {
                 return;
             }
 
-            var value = this.sourceProperty.GetValue(this.source);
-            this.targetProperty.SetValue(this.target, value);
+            var value = this._sourceProperty.GetValue(this._source);
+            this._targetProperty.SetValue(this._target, value);
 
-            if (this.targetCallbackMethod != null)
+            if (this._targetCallbackMethod != null)
             {
-                this.targetCallbackMethod.Invoke(this.target, new object[] { });
+                this._targetCallbackMethod.Invoke(this._target, new object[] { });
             }
         }
     }

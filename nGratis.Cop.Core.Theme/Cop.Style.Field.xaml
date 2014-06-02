@@ -37,6 +37,10 @@
     </Grid>
   </DataTemplate>
 
+  <DataTemplate x:Key="Cop.OutputField.ReadOnlyText" DataType="core:Field">
+    <TextBlock Style="{StaticResource Cop.TextBlock.Body}" Text="{Binding Value, Mode=OneWay}" />
+  </DataTemplate>
+
   <DataTemplate x:Key="Cop.OutputField.Image" DataType="core:Field">
     <Image Source="{Binding Value, Mode=OneWay}" Stretch="UniformToFill" />
   </DataTemplate>

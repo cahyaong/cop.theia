@@ -31,9 +31,9 @@ namespace nGratis.Cop.Core.Wpf
 
     public abstract class BasePageViewModel : ReactiveObject
     {
-        private FieldGroupViewModel inputFieldGroup;
+        private FieldGroupViewModel _inputFieldGroup;
 
-        private FieldGroupViewModel outputFieldGroup;
+        private FieldGroupViewModel _outputFieldGroup;
 
         protected BasePageViewModel()
         {
@@ -43,14 +43,14 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldGroupViewModel InputFieldGroup
         {
-            get { return this.inputFieldGroup; }
-            private set { this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value); }
+            get { return this._inputFieldGroup; }
+            private set { this.RaiseAndSetIfChanged(ref this._inputFieldGroup, value); }
         }
 
         public FieldGroupViewModel OutputFieldGroup
         {
-            get { return this.outputFieldGroup; }
-            private set { this.RaiseAndSetIfChanged(ref this.outputFieldGroup, value); }
+            get { return this._outputFieldGroup; }
+            private set { this.RaiseAndSetIfChanged(ref this._outputFieldGroup, value); }
         }
     }
 }
