@@ -88,6 +88,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\02_NerdWorkshop\11_nCognito_AcidBean_GIT\02_Source_Root\nCognito.BitterLye.Core.Wpf\nCognito.BitterLye.Core.Wpf.csproj">
+      <Project>{a74faf0a-74fb-408b-b0d3-fcc13bdcafac}</Project>
+      <Name>nCognito.BitterLye.Core.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nGratis.Cop.Core.Wpf\nGratis.Cop.Core.Wpf.csproj">
       <Project>{199487eb-64e4-4d48-9e9a-3afdddadf041}</Project>
       <Name>nGratis.Cop.Core.Wpf</Name>

@@ -88,6 +88,7 @@
     <Compile Include="BasePageViewModel.cs" />
     <Compile Include="Converters\ToLinkGroupsConverter.cs" />
     <Compile Include="Converters\ToTypeNameConverter.cs" />
+    <Compile Include="Converters\ToUpperCaseConverter.cs" />
     <Compile Include="Field\AsFieldAttribute.cs" />
     <Compile Include="Field\AsFieldCallbackAttribute.cs" />
     <Compile Include="Field\FieldGroupViewModel.cs" />
