@@ -50,16 +50,14 @@ namespace nGratis.Cop.Theia.Client
             return Enumerable
                 .Empty<Assembly>()
                 .Prepend(Assembly.GetExecutingAssembly())
+                .Union(this._deferredModuleProvider.Value.FindInternalAssemblies())
                 .Union(this._deferredModuleProvider.Value.FindModuleAssemblies());
         }
 
         protected override void Configure()
         {
-            var catalogs = Enumerable
-                .Empty<Assembly>()
-                .Prepend(Assembly.GetExecutingAssembly())
-                .Union(this._deferredModuleProvider.Value.FindInternalAssemblies())
-                .Union(this._deferredModuleProvider.Value.FindModuleAssemblies())
+            var catalogs = this
+                .SelectAssemblies()
                 .Select(assembly => new AssemblyCatalog(assembly));
 
             this._mefContainer = new CompositionContainer(
@@ -71,17 +69,17 @@ namespace nGratis.Cop.Theia.Client
             this._mefContainer.Compose(caliburnBatch);
         }
 
-        protected override object GetInstance(Type service, string key)
+        protected override object GetInstance(Type type, string key)
         {
-            var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(service) : key;
+            var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(type) : key;
             var exports = this._mefContainer.GetExportedValues<object>(contract);
 
             return exports.Single();
         }
 
-        protected override IEnumerable<object> GetAllInstances(Type service)
+        protected override IEnumerable<object> GetAllInstances(Type type)
         {
-            var contract = AttributedModelServices.GetContractName(service);
+            var contract = AttributedModelServices.GetContractName(type);
 
             return this._mefContainer.GetExportedValues<object>(contract);
         }
