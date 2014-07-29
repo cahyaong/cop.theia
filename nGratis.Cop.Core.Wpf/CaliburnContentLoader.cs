@@ -25,7 +25,7 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Windows;
@@ -34,7 +34,7 @@ namespace nGratis.Cop.Theia.Client
 
     using FirstFloor.ModernUI.Windows;
 
-    internal class CaliburnContentLoader : DefaultContentLoader
+    public class CaliburnContentLoader : DefaultContentLoader
     {
         protected override object LoadContent(Uri uri)
         {

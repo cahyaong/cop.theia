@@ -10,7 +10,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
           <client:AppBootstrapper x:Key="Bootstrapper" />
-          <client:CaliburnContentLoader x:Key="CaliburnContentLoader" />
+          <core:CaliburnContentLoader x:Key="CaliburnContentLoader" />
         </ResourceDictionary>
         <ResourceDictionary>
           <core:ToLinkGroupsConverter x:Key="ToLinkGroupsConverter" />
