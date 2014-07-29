@@ -104,6 +104,7 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <Compile Include="SharedResourceDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,11 +1,16 @@
-﻿namespace nGratis.Cop.Core
+﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// <copyright file="SharedResourceDictionary.cs" company="nCognito">
+//     Copyright (c) 2013 - 2014 nCognito. All rights reserved.
+// </copyright>
+// <author>Cahya Ong - cahya.ong@gmail.com</author>
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Collections.Generic;
     using System.Windows;
-    using System.Windows.Markup;
 
-    [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "nGratis.Cop.Core")]
     public class SharedResourceDictionary : ResourceDictionary
     {
         private static readonly Dictionary<Uri, ResourceDictionary> _SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
