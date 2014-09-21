@@ -38,7 +38,7 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Assumption.ThrowWhenInvalidArgument(targetType != typeof(string), () => targetType);
+            Assumption.ThrowWhenInvalidArgument(() => targetType != typeof(string), () => targetType);
 
             return value != null ? value.GetType().FullName : "<NULL>";
         }

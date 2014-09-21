@@ -27,7 +27,9 @@
 
 namespace nGratis.Cop.Core
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public static class EnumerableExtensions
     {
@@ -84,6 +86,39 @@ namespace nGratis.Cop.Core
             foreach (var leftItem in leftItems)
             {
                 yield return leftItem;
+            }
+        }
+
+        public static IEnumerable<TItem> Except<TItem>(this IEnumerable<TItem> leftItems, IEnumerable<TItem> rightItems, Func<TItem, TItem, bool> isEqual)
+        {
+            Assumption.ThrowWhenNullArgument(() => leftItems);
+            Assumption.ThrowWhenNullArgument(() => rightItems);
+            Assumption.ThrowWhenNullArgument(() => isEqual);
+
+            return leftItems.Except(rightItems, new DelegateEqualityComparer<TItem>(isEqual));
+        }
+
+        public static void ForEach<TItem>(this IEnumerable<TItem> items, Action<TItem> perform)
+        {
+            Assumption.ThrowWhenNullArgument(() => items);
+            Assumption.ThrowWhenNullArgument(() => perform);
+
+            foreach (var item in items)
+            {
+                perform(item);
+            }
+        }
+
+        public static void ForEach<TItem>(this IEnumerable<TItem> items, Action<TItem, int> apply)
+        {
+            Assumption.ThrowWhenNullArgument(() => items);
+            Assumption.ThrowWhenNullArgument(() => apply);
+
+            var index = 0;
+
+            foreach (var item in items)
+            {
+                apply(item, index++);
             }
         }
     }

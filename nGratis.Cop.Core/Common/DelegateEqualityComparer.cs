@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="AsFieldAttribute.cs" company="nGratis">
+// <copyright file="DelegateEqualityComparer.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,41 +25,30 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Wpf
+namespace nGratis.Cop.Core
 {
     using System;
+    using System.Collections.Generic;
 
-    using JetBrains.Annotations;
-
-    using nGratis.Cop.Core;
-
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false), MeansImplicitUse]
-    public class AsFieldAttribute : Attribute
+    internal class DelegateEqualityComparer<TItem> : IEqualityComparer<TItem>
     {
-        public AsFieldAttribute(string id, FieldMode mode, string label)
-            : this(id, mode, FieldType.Text, label)
+        private readonly Func<TItem, TItem, bool> _isEqual;
+
+        public DelegateEqualityComparer(Func<TItem, TItem, bool> isEqual)
         {
+            Assumption.ThrowWhenNullArgument(() => isEqual);
+
+            this._isEqual = isEqual;
         }
 
-        public AsFieldAttribute(string id, FieldMode mode, FieldType type, string label)
+        public bool Equals(TItem leftItem, TItem rightItem)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
-            Assumption.ThrowWhenInvalidArgument(() => mode == FieldMode.Unknown, () => label);
-            Assumption.ThrowWhenInvalidArgument(() => type == FieldType.Unknown, () => type);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => label);
-
-            this.Id = id;
-            this.Mode = mode;
-            this.Type = type;
-            this.Label = label;
+            return this._isEqual(leftItem, rightItem);
         }
 
-        public string Id { get; private set; }
-
-        public FieldMode Mode { get; private set; }
-
-        public FieldType Type { get; private set; }
-
-        public string Label { get; private set; }
+        public int GetHashCode(TItem item)
+        {
+            return 0;
+        }
     }
 }

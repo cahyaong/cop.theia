@@ -30,11 +30,13 @@ namespace nGratis.Cop.Core
     using System;
     using System.Linq.Expressions;
 
+    using JetBrains.Annotations;
+
     public static class Assumption
     {
-        public static void ThrowWhenInvalidArgument<T>(bool isInvalidCondition, Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenInvalidArgument<T>([InstantHandle] Func<bool> isInvalidCondition, Expression<Func<T>> argumentExpression, string reason = null)
         {
-            if (isInvalidCondition)
+            if (isInvalidCondition())
             {
                 throw new ArgumentException(reason, argumentExpression.FindPropertyName());
             }
@@ -61,15 +63,15 @@ namespace nGratis.Cop.Core
 
         public static void ThrowWhenUnexpectedNullValue<T>(Expression<Func<T>> argumentExpression, string reason = null)
         {
-            if (object.Equals(argumentExpression.Compile()(), null))
+            if (Equals(argumentExpression.Compile()(), null))
             {
                 throw new InvalidOperationException(reason);
             }
         }
 
-        public static void ThrowWhenInvalidOperation(bool isInvalidCondition, string reason = null, Exception innerException = null)
+        public static void ThrowWhenInvalidOperation([InstantHandle] Func<bool> isInvalidCondition, string reason = null, Exception innerException = null)
         {
-            if (isInvalidCondition)
+            if (isInvalidCondition())
             {
                 throw new InvalidOperationException(reason, innerException);
             }

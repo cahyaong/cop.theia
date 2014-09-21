@@ -1,6 +1,4 @@
-﻿using System;
-
-#pragma warning disable 1591
+﻿#pragma warning disable 1591
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedParameter.Local
@@ -13,6 +11,8 @@
 
 namespace JetBrains.Annotations
 {
+    using System;
+
     /// <summary>
     /// Indicates that the value of the marked element could be <c>null</c> sometimes,
     /// so the check for <c>null</c> is necessary before its usage
@@ -39,9 +39,9 @@ namespace JetBrains.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter |
-      AttributeTargets.Property | AttributeTargets.Delegate |
-      AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+        AttributeTargets.Method | AttributeTargets.Parameter |
+        AttributeTargets.Property | AttributeTargets.Delegate |
+        AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class NotNullAttribute : Attribute { }
 
     /// <summary>
@@ -57,8 +57,8 @@ namespace JetBrains.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Constructor | AttributeTargets.Method,
-      AllowMultiple = false, Inherited = true)]
+        AttributeTargets.Constructor | AttributeTargets.Method,
+        AllowMultiple = false, Inherited = true)]
     public sealed class StringFormatMethodAttribute : Attribute
     {
         /// <param name="formatParameterName">
@@ -241,8 +241,8 @@ namespace JetBrains.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Interface | AttributeTargets.Class |
-      AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
+        AttributeTargets.Interface | AttributeTargets.Class |
+        AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
     public sealed class CannotApplyEqualityOperatorAttribute : Attribute { }
 
     /// <summary>
@@ -629,8 +629,8 @@ namespace JetBrains.Annotations
     public sealed class AspMvcActionSelectorAttribute : Attribute { }
 
     [AttributeUsage(
-      AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Field, Inherited = true)]
+        AttributeTargets.Parameter | AttributeTargets.Property |
+        AttributeTargets.Field, Inherited = true)]
     public sealed class HtmlElementAttributesAttribute : Attribute
     {
         public HtmlElementAttributesAttribute()
@@ -647,8 +647,8 @@ namespace JetBrains.Annotations
     }
 
     [AttributeUsage(
-      AttributeTargets.Parameter | AttributeTargets.Field |
-      AttributeTargets.Property, Inherited = true)]
+        AttributeTargets.Parameter | AttributeTargets.Field |
+         AttributeTargets.Property, Inherited = true)]
     public sealed class HtmlAttributeValueAttribute : Attribute
     {
         public HtmlAttributeValueAttribute([NotNull] string name)

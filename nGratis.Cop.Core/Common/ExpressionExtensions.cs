@@ -48,9 +48,11 @@ namespace nGratis.Cop.Core
 
             var bodyExpression = expression.Body as MemberExpression;
 
-            Assumption.ThrowWhenInvalidArgument(bodyExpression == null, () => expression);
+            Assumption.ThrowWhenInvalidArgument(() => bodyExpression == null, () => expression);
 
+            // ReSharper disable PossibleNullReferenceException - Null assertion is performed above.
             return (PropertyInfo)bodyExpression.Member;
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

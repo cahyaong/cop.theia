@@ -48,11 +48,11 @@ namespace nGratis.Cop.Core.Wpf
         public FieldGroupViewModel(object instance, FieldMode mode)
         {
             Assumption.ThrowWhenNullArgument(() => instance);
-            Assumption.ThrowWhenInvalidArgument(mode == FieldMode.Unknown, () => mode);
+            Assumption.ThrowWhenInvalidArgument(() => mode == FieldMode.Unknown, () => mode);
 
             var notifyingInstance = instance as INotifyPropertyChanged;
 
-            Assumption.ThrowWhenInvalidArgument(notifyingInstance == null, () => instance);
+            Assumption.ThrowWhenInvalidArgument(() => notifyingInstance == null, () => instance);
 
             this._fieldBinders = new List<ObjectBinder>();
 
