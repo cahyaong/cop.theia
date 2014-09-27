@@ -42,7 +42,7 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenNullArgument<T>(Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenNullArgument<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
              where T : class
         {
             if (argumentExpression.Compile()() == null)
@@ -51,7 +51,7 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenNullOrWhitespaceArgument(Expression<Func<string>> argumentExpression, string reason = null)
+        public static void ThrowWhenNullOrWhitespaceArgument([InstantHandle] Expression<Func<string>> argumentExpression, string reason = null)
         {
             var argument = argumentExpression.Compile()();
 
@@ -61,7 +61,7 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenUnexpectedNullValue<T>(Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenUnexpectedNullValue<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
         {
             if (Equals(argumentExpression.Compile()(), null))
             {
