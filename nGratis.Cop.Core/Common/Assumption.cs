@@ -51,6 +51,14 @@ namespace nGratis.Cop.Core
             }
         }
 
+        public static void ThrowWhenDefaultArgument<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
+        {
+            if (argumentExpression.Compile()().Equals(default(T)))
+            {
+                throw new ArgumentException(argumentExpression.FindPropertyName(), reason);
+            }
+        }
+
         public static void ThrowWhenNullOrWhitespaceArgument([InstantHandle] Expression<Func<string>> argumentExpression, string reason = null)
         {
             var argument = argumentExpression.Compile()();
