@@ -34,7 +34,7 @@ namespace nGratis.Cop.Core
 
     public static class Assumption
     {
-        public static void ThrowWhenInvalidArgument<T>([InstantHandle] Func<bool> isInvalidCondition, Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenInvalidArgument<T>([InstantHandle] Func<bool> isInvalidCondition, [InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
         {
             if (isInvalidCondition())
             {
@@ -70,8 +70,9 @@ namespace nGratis.Cop.Core
         }
 
         public static void ThrowWhenUnexpectedNullValue<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
+            where T : class
         {
-            if (Equals(argumentExpression.Compile()(), null))
+            if (argumentExpression.Compile()() == null)
             {
                 throw new InvalidOperationException(reason);
             }
