@@ -25,7 +25,9 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+// ReSharper disable CheckNamespace - Namespace matches the one from the extended type for discoverability.
+namespace System.ComponentModel.Composition
+// ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;

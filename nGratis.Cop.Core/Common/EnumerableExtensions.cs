@@ -25,11 +25,14 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+// ReSharper disable CheckNamespace - Namespace matches the one from the extended type for discoverability.
+namespace System.Collections.Generic
+// ReSharper restore CheckNamespace
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+
+    using nGratis.Cop.Core;
 
     public static class EnumerableExtensions
     {

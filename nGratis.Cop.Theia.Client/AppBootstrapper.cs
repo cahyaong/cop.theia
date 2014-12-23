@@ -37,7 +37,6 @@ namespace nGratis.Cop.Theia.Client
 
     using Caliburn.Micro;
 
-    using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
 
     internal class AppBootstrapper : BootstrapperBase
