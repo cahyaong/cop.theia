@@ -42,7 +42,7 @@ namespace nGratis.Cop.Theia.Client
 
     internal class AppBootstrapper : BootstrapperBase
     {
-        private readonly Lazy<IModuleProvider> _deferredModuleProvider = new Lazy<IModuleProvider>(() => new CopModuleProvider());
+        private readonly IModuleProvider _moduleProvider = new CopModuleProvider();
 
         private CompositionContainer _mefContainer;
 
@@ -56,8 +56,8 @@ namespace nGratis.Cop.Theia.Client
             return Enumerable
                 .Empty<Assembly>()
                 .Prepend(Assembly.GetExecutingAssembly())
-                .Union(this._deferredModuleProvider.Value.FindInternalAssemblies())
-                .Union(this._deferredModuleProvider.Value.FindModuleAssemblies());
+                .Union(this._moduleProvider.FindInternalAssemblies())
+                .Union(this._moduleProvider.FindModuleAssemblies());
         }
 
         protected override void Configure()
