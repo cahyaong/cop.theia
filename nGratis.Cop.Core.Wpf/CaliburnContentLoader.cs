@@ -31,7 +31,6 @@ namespace nGratis.Cop.Core.Wpf
     using System.Windows;
 
     using Caliburn.Micro;
-
     using FirstFloor.ModernUI.Windows;
 
     public class CaliburnContentLoader : DefaultContentLoader
