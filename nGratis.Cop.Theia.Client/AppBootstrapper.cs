@@ -33,17 +33,23 @@ namespace nGratis.Cop.Theia.Client
     using System.ComponentModel.Composition.Hosting;
     using System.Linq;
     using System.Reflection;
+    using System.Windows;
 
     using Caliburn.Micro;
 
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
 
-    internal class AppBootstrapper : Bootstrapper<AppViewModel>
+    internal class AppBootstrapper : BootstrapperBase
     {
         private readonly Lazy<IModuleProvider> _deferredModuleProvider = new Lazy<IModuleProvider>(() => new CopModuleProvider());
 
         private CompositionContainer _mefContainer;
+
+        public AppBootstrapper()
+        {
+            this.Initialize();
+        }
 
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
@@ -87,6 +93,11 @@ namespace nGratis.Cop.Theia.Client
         protected override void BuildUp(object instance)
         {
             this._mefContainer.SatisfyImportsOnce(instance);
+        }
+
+        protected override void OnStartup(object sender, StartupEventArgs args)
+        {
+            this.DisplayRootViewFor<AppViewModel>();
         }
     }
 }
