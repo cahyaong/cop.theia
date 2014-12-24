@@ -101,9 +101,10 @@
     </Compile>
     <Compile Include="BasePageViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
-    <Compile Include="Converters\ToLinkGroupsConverter.cs" />
-    <Compile Include="Converters\ToTypeNameConverter.cs" />
-    <Compile Include="Converters\ToUpperCaseConverter.cs" />
+    <Compile Include="Converters\EnumerableToCountConverter.cs" />
+    <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />
+    <Compile Include="Converters\AnyToTypeNameConverter.cs" />
+    <Compile Include="Converters\AnyToUpperCaseConverter.cs" />
     <Compile Include="Field\AsFieldAttribute.cs" />
     <Compile Include="Field\AsFieldCallbackAttribute.cs" />
     <Compile Include="Field\FieldGroupViewModel.cs" />

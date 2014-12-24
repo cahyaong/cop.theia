@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------
-// <copyright file="ToUpperCaseConverter.cs" company="nGratis">
+// <copyright file="EnumerableToCountConverter.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -23,20 +23,25 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Wednesday, 24 December 2014 12:08:32 AM</creation_timestamp>
 // --------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
+    using System.Collections;
     using System.Globalization;
+    using System.Linq;
     using System.Windows.Data;
 
-    [ValueConversion(typeof(string), typeof(string))]
-    public class ToUpperCaseConverter : IValueConverter
+    [ValueConversion(typeof(IEnumerable), typeof(int))]
+    public class EnumerableToCountConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((string)value).ToUpper(culture);
+            var enumerable = value as IEnumerable;
+
+            return enumerable == null ? 0 : enumerable.Cast<object>().Count();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

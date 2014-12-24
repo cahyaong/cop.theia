@@ -13,7 +13,7 @@
           <core:CaliburnContentLoader x:Key="CaliburnContentLoader" />
         </ResourceDictionary>
         <ResourceDictionary>
-          <core:ToLinkGroupsConverter x:Key="ToLinkGroupsConverter" />
+          <core:ModulesToLinkGroupsConverter x:Key="ModulesToLinkGroupsConverter" />
         </ResourceDictionary>
         <ResourceDictionary>
           <Style TargetType="mui:ModernWindow">

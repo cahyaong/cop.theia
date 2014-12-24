@@ -13,7 +13,7 @@
   MinHeight="720"
   ContentLoader="{StaticResource CaliburnContentLoader}"
   IsTitleVisible="True"
-  MenuLinkGroups="{Binding Modules, Mode=OneWay, Converter={StaticResource ToLinkGroupsConverter}}"
+  MenuLinkGroups="{Binding Modules, Mode=OneWay, Converter={StaticResource ModulesToLinkGroupsConverter}}"
   d:DataContext="{d:DesignInstance client:AppViewModel, IsDesignTimeCreatable=True}"
   mc:Ignorable="d">
   <mui:ModernWindow.LogoData>
