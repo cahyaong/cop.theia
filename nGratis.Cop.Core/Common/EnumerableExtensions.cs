@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------
+﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
 // <copyright file="EnumerableExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// --------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable CheckNamespace - Namespace matches the one from the extended type for discoverability.
 namespace System.Collections.Generic
