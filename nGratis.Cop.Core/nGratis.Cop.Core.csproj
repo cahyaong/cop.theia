@@ -69,6 +69,7 @@
     <Compile Include="Media\IImage.cs" />
     <Compile Include="Media\IImageProvider.cs" />
     <Compile Include="Media\WriteableImage.cs" />
+    <Compile Include="NotifyingObject.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
