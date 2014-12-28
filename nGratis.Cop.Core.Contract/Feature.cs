@@ -34,19 +34,22 @@ namespace nGratis.Cop.Core.Contract
     public class Feature
     {
         public Feature(string name, IEnumerable<Page> subtopics)
+            : this(name, int.MinValue, subtopics)
         {
-            // TODO: Create a helper class to handle exception throwing.
+        }
 
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException();
-            }
+        public Feature(string name, int order, IEnumerable<Page> subtopics)
+        {
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
 
             this.Name = name;
+            this.Order = order;
             this.Pages = subtopics ?? Enumerable.Empty<Page>();
         }
 
         public string Name { get; private set; }
+
+        public int Order { get; private set; }
 
         public IEnumerable<Page> Pages { get; private set; }
     }

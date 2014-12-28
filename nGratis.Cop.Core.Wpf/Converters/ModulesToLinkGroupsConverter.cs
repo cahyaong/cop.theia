@@ -48,18 +48,20 @@ namespace nGratis.Cop.Core.Wpf
 
             var linkGroups = new LinkGroupCollection();
 
-            var aggregatedTopics = modules
+            // TODO: Need a proper grouping of multiple features based their name.
+
+            var orderedFeatures = modules
                 .SelectMany(module => module.Features)
-                .GroupBy(feature => feature.Name)
-                .SelectMany(group => group);
+                .OrderBy(feature => feature.Order)
+                .ThenBy(feature => feature.Name);
 
-            foreach (var aggregatedTopic in aggregatedTopics)
+            foreach (var orderedFeature in orderedFeatures)
             {
-                var linkGroup = new LinkGroup() { DisplayName = aggregatedTopic.Name };
+                var linkGroup = new LinkGroup { DisplayName = orderedFeature.Name };
 
-                aggregatedTopic
+                orderedFeature
                     .Pages
-                    .Select(page => new Link() { DisplayName = page.Name, Source = page.SourceUri })
+                    .Select(page => new Link { DisplayName = page.Name, Source = page.SourceUri })
                     .ToList()
                     .ForEach(linkGroup.Links.Add);
 

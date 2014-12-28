@@ -44,7 +44,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
             this.Features = new List<Feature>
                 {
-                    new Feature("Diagnostic", new List<Page> { moduleSummaryPage })
+                    new Feature("Diagnostic", int.MaxValue, new List<Page> { moduleSummaryPage })
                 };
         }
 

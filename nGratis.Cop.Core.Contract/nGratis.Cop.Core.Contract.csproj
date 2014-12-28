@@ -52,6 +52,11 @@
     <Compile Include="Page.cs" />
     <Compile Include="Feature.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\nGratis.Cop.Core\nGratis.Cop.Core.csproj">
+      <Project>{B90C4C38-A600-44BB-840E-2A7D4B46618A}</Project>
+      <Name>nGratis.Cop.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
