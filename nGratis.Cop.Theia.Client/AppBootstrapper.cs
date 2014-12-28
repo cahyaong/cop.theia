@@ -41,9 +41,9 @@ namespace nGratis.Cop.Theia.Client
 
     internal class AppBootstrapper : BootstrapperBase
     {
-        private readonly IModuleProvider _moduleProvider = new CopModuleProvider();
+        private readonly IModuleProvider moduleProvider = new CopModuleProvider();
 
-        private CompositionContainer _mefContainer;
+        private CompositionContainer mefContainer;
 
         public AppBootstrapper()
         {
@@ -55,8 +55,8 @@ namespace nGratis.Cop.Theia.Client
             return Enumerable
                 .Empty<Assembly>()
                 .Prepend(Assembly.GetExecutingAssembly())
-                .Union(this._moduleProvider.FindInternalAssemblies())
-                .Union(this._moduleProvider.FindModuleAssemblies());
+                .Union(this.moduleProvider.FindInternalAssemblies())
+                .Union(this.moduleProvider.FindModuleAssemblies());
         }
 
         protected override void Configure()
@@ -65,19 +65,19 @@ namespace nGratis.Cop.Theia.Client
                 .SelectAssemblies()
                 .Select(assembly => new AssemblyCatalog(assembly));
 
-            this._mefContainer = new CompositionContainer(
+            this.mefContainer = new CompositionContainer(
                 new AggregateCatalog(catalogs),
                 CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe);
 
             var caliburnBatch = new CompositionBatch();
             caliburnBatch.AddExport<IWindowManager>(() => new WindowManager());
-            this._mefContainer.Compose(caliburnBatch);
+            this.mefContainer.Compose(caliburnBatch);
         }
 
         protected override object GetInstance(Type type, string key)
         {
             var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(type) : key;
-            var exports = this._mefContainer.GetExportedValues<object>(contract);
+            var exports = this.mefContainer.GetExportedValues<object>(contract);
 
             return exports.Single();
         }
@@ -86,12 +86,12 @@ namespace nGratis.Cop.Theia.Client
         {
             var contract = AttributedModelServices.GetContractName(type);
 
-            return this._mefContainer.GetExportedValues<object>(contract);
+            return this.mefContainer.GetExportedValues<object>(contract);
         }
 
         protected override void BuildUp(object instance)
         {
-            this._mefContainer.SatisfyImportsOnce(instance);
+            this.mefContainer.SatisfyImportsOnce(instance);
         }
 
         protected override void OnStartup(object sender, StartupEventArgs args)

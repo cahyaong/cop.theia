@@ -39,18 +39,18 @@ namespace nGratis.Cop.Theia.Client
     [Export(typeof(IModuleProvider))]
     internal class CopModuleProvider : IModuleProvider
     {
-        private readonly Lazy<IEnumerable<Assembly>> _deferredModuleAssemblies = new Lazy<IEnumerable<Assembly>>(OnModuleAssembliesMaterializing);
+        private readonly Lazy<IEnumerable<Assembly>> deferredModuleAssemblies = new Lazy<IEnumerable<Assembly>>(OnModuleAssembliesMaterializing);
 
-        private readonly Lazy<IEnumerable<Assembly>> _deferredInternalAssemblies = new Lazy<IEnumerable<Assembly>>(OnInternalAssembliesMaterializing);
+        private readonly Lazy<IEnumerable<Assembly>> deferredInternalAssemblies = new Lazy<IEnumerable<Assembly>>(OnInternalAssembliesMaterializing);
 
         public IEnumerable<Assembly> FindModuleAssemblies()
         {
-            return this._deferredModuleAssemblies.Value;
+            return this.deferredModuleAssemblies.Value;
         }
 
         public IEnumerable<Assembly> FindInternalAssemblies()
         {
-            return this._deferredInternalAssemblies.Value;
+            return this.deferredInternalAssemblies.Value;
         }
 
         private static IEnumerable<Assembly> OnModuleAssembliesMaterializing()

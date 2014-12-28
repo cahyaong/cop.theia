@@ -34,13 +34,13 @@ namespace nGratis.Cop.Core.Wpf
 
     public class FieldTemplateSelector : DataTemplateSelector
     {
-        private const string _DefaultKey = "Cop.Field.Default";
+        private const string DefaultKey = "Cop.Field.Default";
 
-        private readonly IDictionary<string, DataTemplate> _templateLookup;
+        private readonly IDictionary<string, DataTemplate> templateLookup;
 
         public FieldTemplateSelector()
         {
-            this._templateLookup = new Dictionary<string, DataTemplate>();
+            this.templateLookup = new Dictionary<string, DataTemplate>();
         }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -55,14 +55,14 @@ namespace nGratis.Cop.Core.Wpf
 
             var key = string.Format(CultureInfo.InvariantCulture, "Cop.{0}Field.{1}", field.Mode, field.Type);
 
-            if (this._templateLookup.ContainsKey(key))
+            if (this.templateLookup.ContainsKey(key))
             {
-                return this._templateLookup[key];
+                return this.templateLookup[key];
             }
 
-            var template = element.TryFindResource(key) as DataTemplate ?? element.TryFindResource(FieldTemplateSelector._DefaultKey) as DataTemplate;
+            var template = element.TryFindResource(key) as DataTemplate ?? element.TryFindResource(FieldTemplateSelector.DefaultKey) as DataTemplate;
 
-            this._templateLookup.Add(key, template);
+            this.templateLookup.Add(key, template);
 
             return template;
         }

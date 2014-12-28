@@ -13,29 +13,29 @@ namespace nGratis.Cop.Core.Wpf
 
     public class SharedResourceDictionary : ResourceDictionary
     {
-        private static readonly Dictionary<Uri, ResourceDictionary> _SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
+        private static readonly Dictionary<Uri, ResourceDictionary> SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
 
-        private Uri _sourceUri;
+        private Uri sourceUri;
 
         public new Uri Source
         {
             get
             {
-                return this._sourceUri;
+                return this.sourceUri;
             }
 
             set
             {
-                this._sourceUri = value;
+                this.sourceUri = value;
 
-                if (!_SharedDictionaries.ContainsKey(value))
+                if (!SharedDictionaries.ContainsKey(value))
                 {
                     base.Source = value;
-                    SharedResourceDictionary._SharedDictionaries.Add(value, this);
+                    SharedResourceDictionary.SharedDictionaries.Add(value, this);
                 }
                 else
                 {
-                    this.MergedDictionaries.Add(SharedResourceDictionary._SharedDictionaries[value]);
+                    this.MergedDictionaries.Add(SharedResourceDictionary.SharedDictionaries[value]);
                 }
             }
         }

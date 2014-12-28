@@ -32,6 +32,8 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
     using System.ComponentModel.Composition;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     using nGratis.Cop.Core.Contract;
 
     using ReactiveUI;
@@ -39,7 +41,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
     [Export]
     public class ModuleSummaryViewModel : ReactiveObject
     {
-        private IEnumerable<AssemblyViewModel> _assemblies;
+        private IEnumerable<AssemblyViewModel> assemblies;
 
         [ImportingConstructor]
         public ModuleSummaryViewModel(IModuleProvider moduleProvider)
@@ -56,10 +58,11 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
                 .ToList();
         }
 
+        [UsedImplicitly]
         public IEnumerable<AssemblyViewModel> Assemblies
         {
-            get { return this._assemblies; }
-            set { this.RaiseAndSetIfChanged(ref this._assemblies, value); }
+            get { return this.assemblies; }
+            set { this.RaiseAndSetIfChanged(ref this.assemblies, value); }
         }
     }
 }

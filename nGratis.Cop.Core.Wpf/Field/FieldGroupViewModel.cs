@@ -39,11 +39,11 @@ namespace nGratis.Cop.Core.Wpf
 
     public class FieldGroupViewModel : ReactiveObject
     {
-        private readonly List<ObjectBinder> _fieldBinders;
+        private readonly List<ObjectBinder> fieldBinders;
 
-        private FieldMode _mode;
+        private FieldMode mode;
 
-        private ICollection<FieldViewModel> _fields;
+        private ICollection<FieldViewModel> fields;
 
         public FieldGroupViewModel(object instance, FieldMode mode)
         {
@@ -54,7 +54,7 @@ namespace nGratis.Cop.Core.Wpf
 
             Assumption.ThrowWhenInvalidArgument(() => notifyingInstance == null, () => instance);
 
-            this._fieldBinders = new List<ObjectBinder>();
+            this.fieldBinders = new List<ObjectBinder>();
 
             this.Mode = mode;
             this.Fields = new ObservableCollection<FieldViewModel>();
@@ -72,20 +72,20 @@ namespace nGratis.Cop.Core.Wpf
 
                         var binder = new ObjectBinder(notifyingInstance, tuple.Property, field, FieldViewModel.ValueProperty);
                         binder.BindSourceCallback(tuple.FieldAttribute.Id);
-                        this._fieldBinders.Add(binder);
+                        this.fieldBinders.Add(binder);
                     });
         }
 
         public FieldMode Mode
         {
-            get { return this._mode; }
-            private set { this.RaiseAndSetIfChanged(ref this._mode, value); }
+            get { return this.mode; }
+            private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
         }
 
         public ICollection<FieldViewModel> Fields
         {
-            get { return this._fields; }
-            private set { this.RaiseAndSetIfChanged(ref this._fields, value); }
+            get { return this.fields; }
+            private set { this.RaiseAndSetIfChanged(ref this.fields, value); }
         }
     }
 }

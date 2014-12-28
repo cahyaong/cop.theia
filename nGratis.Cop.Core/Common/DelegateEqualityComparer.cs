@@ -32,18 +32,18 @@ namespace nGratis.Cop.Core
 
     internal class DelegateEqualityComparer<TItem> : IEqualityComparer<TItem>
     {
-        private readonly Func<TItem, TItem, bool> _isEqual;
+        private readonly Func<TItem, TItem, bool> isEqual;
 
         public DelegateEqualityComparer(Func<TItem, TItem, bool> isEqual)
         {
             Assumption.ThrowWhenNullArgument(() => isEqual);
 
-            this._isEqual = isEqual;
+            this.isEqual = isEqual;
         }
 
         public bool Equals(TItem leftItem, TItem rightItem)
         {
-            return this._isEqual(leftItem, rightItem);
+            return this.isEqual(leftItem, rightItem);
         }
 
         public int GetHashCode(TItem item)

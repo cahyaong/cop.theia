@@ -37,13 +37,13 @@ namespace nGratis.Cop.Core.Wpf
     {
         public static readonly PropertyInfo ValueProperty = typeof(FieldViewModel).GetProperty("Value", BindingFlags.Instance | BindingFlags.Public);
 
-        private FieldMode _mode;
+        private FieldMode mode;
 
-        private FieldType _type;
+        private FieldType type;
 
-        private string _label;
+        private string label;
 
-        private object _value;
+        private object value;
 
         internal FieldViewModel(AsFieldAttribute asFieldAttribute)
         {
@@ -56,26 +56,26 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldType Type
         {
-            get { return this._type; }
-            private set { this.RaiseAndSetIfChanged(ref this._type, value); }
+            get { return this.type; }
+            private set { this.RaiseAndSetIfChanged(ref this.type, value); }
         }
 
         public string Label
         {
-            get { return this._label; }
-            private set { this.RaiseAndSetIfChanged(ref this._label, value); }
+            get { return this.label; }
+            private set { this.RaiseAndSetIfChanged(ref this.label, value); }
         }
 
         public object Value
         {
-            get { return this._value; }
-            set { this.RaiseAndSetIfChanged(ref this._value, value); }
+            get { return this.value; }
+            set { this.RaiseAndSetIfChanged(ref this.value, value); }
         }
 
         public FieldMode Mode
         {
-            get { return this._mode; }
-            private set { this.RaiseAndSetIfChanged(ref this._mode, value); }
+            get { return this.mode; }
+            private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
         }
     }
 }

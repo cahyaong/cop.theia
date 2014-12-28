@@ -36,17 +36,17 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
     public class AssemblyViewModel : ReactiveObject
     {
-        private static readonly Regex _TitleRegex = new Regex(@"^nGratis\.Cop\.Theia\.Module\.(?<name>\w+)$", RegexOptions.Singleline);
+        private static readonly Regex TitleRegex = new Regex(@"^nGratis\.Cop\.Theia\.Module\.(?<name>\w+)$", RegexOptions.Singleline);
 
-        private string _name;
+        private string name;
 
-        private string _version;
+        private string version;
 
-        private DateTime _modifiedTimestamp;
+        private DateTime modifiedTimestamp;
 
-        private string _fileName;
+        private string fileName;
 
-        private string _configuration;
+        private string configuration;
 
         public AssemblyViewModel(Assembly assembly)
         {
@@ -55,7 +55,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
                 throw new ArgumentNullException();
             }
 
-            var titleMatch = AssemblyViewModel._TitleRegex.Match(assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title);
+            var titleMatch = AssemblyViewModel.TitleRegex.Match(assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title);
 
             if (!titleMatch.Success)
             {
@@ -71,32 +71,32 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public string Name
         {
-            get { return this._name; }
-            private set { this.RaiseAndSetIfChanged(ref this._name, value); }
+            get { return this.name; }
+            private set { this.RaiseAndSetIfChanged(ref this.name, value); }
         }
 
         public string Version
         {
-            get { return this._version; }
-            private set { this.RaiseAndSetIfChanged(ref this._version, value); }
+            get { return this.version; }
+            private set { this.RaiseAndSetIfChanged(ref this.version, value); }
         }
 
         public DateTime ModifiedTimestamp
         {
-            get { return this._modifiedTimestamp; }
-            private set { this.RaiseAndSetIfChanged(ref this._modifiedTimestamp, value); }
+            get { return this.modifiedTimestamp; }
+            private set { this.RaiseAndSetIfChanged(ref this.modifiedTimestamp, value); }
         }
 
         public string FileName
         {
-            get { return this._fileName; }
-            private set { this.RaiseAndSetIfChanged(ref this._fileName, value); }
+            get { return this.fileName; }
+            private set { this.RaiseAndSetIfChanged(ref this.fileName, value); }
         }
 
         public string Configuration
         {
-            get { return this._configuration; }
-            private set { this.RaiseAndSetIfChanged(ref this._configuration, value); }
+            get { return this.configuration; }
+            private set { this.RaiseAndSetIfChanged(ref this.configuration, value); }
         }
     }
 }
