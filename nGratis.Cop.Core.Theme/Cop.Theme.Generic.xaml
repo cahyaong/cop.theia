@@ -4,7 +4,9 @@
   xmlns:core="http://schemas.ngratis.com/2014/core">
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.Button.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.Field.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.ModernButton.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
   </ResourceDictionary.MergedDictionaries>
