@@ -7,8 +7,6 @@
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.Field.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
-    <ResourceDictionary>
-      <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}" />
-    </ResourceDictionary>
   </ResourceDictionary.MergedDictionaries>
+  <DynamicResource x:Key="Cop.Color.Accent" ResourceKey="AccentColor" />
 </ResourceDictionary>
