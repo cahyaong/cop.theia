@@ -28,7 +28,7 @@
 namespace nGratis.Cop.Core.Wpf
 {
     using System.Reflection;
-
+    using JetBrains.Annotations;
     using nGratis.Cop.Core;
 
     using ReactiveUI;
@@ -54,24 +54,28 @@ namespace nGratis.Cop.Core.Wpf
             this.Label = asFieldAttribute.Label;
         }
 
+        [UsedImplicitly]
         public FieldType Type
         {
             get { return this.type; }
             private set { this.RaiseAndSetIfChanged(ref this.type, value); }
         }
 
+        [UsedImplicitly]
         public string Label
         {
             get { return this.label; }
             private set { this.RaiseAndSetIfChanged(ref this.label, value); }
         }
 
+        [UsedImplicitly]
         public object Value
         {
             get { return this.value; }
             set { this.RaiseAndSetIfChanged(ref this.value, value); }
         }
 
+        [UsedImplicitly]
         public FieldMode Mode
         {
             get { return this.mode; }

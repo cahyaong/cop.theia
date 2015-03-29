@@ -28,19 +28,11 @@
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
+    using JetBrains.Annotations;
 
-    using nGratis.Cop.Core;
-
+    [UsedImplicitly]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public class AsFieldCallbackAttribute : Attribute
     {
-        public AsFieldCallbackAttribute(string id)
-        {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
-
-            this.Id = id;
-        }
-
-        public string Id { get; private set; }
     }
 }

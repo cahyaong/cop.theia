@@ -32,9 +32,8 @@ namespace nGratis.Cop.Core.Wpf
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
-
+    using JetBrains.Annotations;
     using nGratis.Cop.Core;
-
     using ReactiveUI;
 
     public class FieldGroupViewModel : ReactiveObject
@@ -63,25 +62,27 @@ namespace nGratis.Cop.Core.Wpf
                 .GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Select(property => new { Property = property, FieldAttribute = property.GetCustomAttribute<AsFieldAttribute>() })
-                .Where(tuple => tuple.FieldAttribute != null && tuple.FieldAttribute.Mode == mode)
+                .Where(annon => annon.FieldAttribute != null && annon.FieldAttribute.Mode == mode)
                 .ToList()
-                .ForEach(tuple =>
+                .ForEach(annon =>
                     {
-                        var field = new FieldViewModel(tuple.FieldAttribute);
+                        var field = new FieldViewModel(annon.FieldAttribute);
                         this.Fields.Add(field);
 
-                        var binder = new ObjectBinder(notifyingInstance, tuple.Property, field, FieldViewModel.ValueProperty);
-                        binder.BindSourceCallback(tuple.FieldAttribute.Id);
+                        var binder = new ObjectBinder(notifyingInstance, annon.Property, field, FieldViewModel.ValueProperty);
+                        binder.BindSourceCallback();
                         this.fieldBinders.Add(binder);
                     });
         }
 
+        [UsedImplicitly]
         public FieldMode Mode
         {
             get { return this.mode; }
             private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
         }
 
+        [UsedImplicitly]
         public ICollection<FieldViewModel> Fields
         {
             get { return this.fields; }

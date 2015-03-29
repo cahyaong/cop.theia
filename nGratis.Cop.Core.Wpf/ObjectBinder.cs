@@ -39,15 +39,10 @@ namespace nGratis.Cop.Core.Wpf
         // FIXME: Need to make this class disposable!
 
         private readonly INotifyPropertyChanged source;
-
         private readonly INotifyPropertyChanged target;
-
         private readonly PropertyInfo sourceProperty;
-
         private readonly PropertyInfo targetProperty;
-
         private MethodInfo sourceCallbackMethod;
-
         private MethodInfo targetCallbackMethod;
 
         public ObjectBinder(INotifyPropertyChanged source, PropertyInfo sourceProperty, INotifyPropertyChanged target, PropertyInfo targetProperty)
@@ -67,28 +62,24 @@ namespace nGratis.Cop.Core.Wpf
             WeakEventManager<INotifyPropertyChanged, PropertyChangedEventArgs>.AddHandler(target, "PropertyChanged", this.OnTargetPropertyChanged);
         }
 
-        public void BindSourceCallback(string id)
+        public void BindSourceCallback()
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
-
-            var callbackAttribute = null as AsFieldCallbackAttribute;
+            var callbackMethodName = "On{0}Changed".FormatWith(this.sourceProperty.Name);
 
             this.sourceCallbackMethod = this.source
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                .SingleOrDefault(method => (callbackAttribute = method.GetCustomAttribute<AsFieldCallbackAttribute>()) != null && callbackAttribute.Id == id);
+                .SingleOrDefault(method => method.Name == callbackMethodName && method.GetCustomAttribute<AsFieldCallbackAttribute>() != null);
         }
 
-        public void BindTargetCallback(string id)
+        public void BindTargetCallback()
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
-
-            var callbackAttribute = null as AsFieldCallbackAttribute;
+            var callbackMethodName = "On{0}Changed".FormatWith(this.targetProperty.Name);
 
             this.targetCallbackMethod = this.source
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                .SingleOrDefault(method => (callbackAttribute = method.GetCustomAttribute<AsFieldCallbackAttribute>()) != null && callbackAttribute.Id == id);
+                .SingleOrDefault(method => method.Name == callbackMethodName && method.GetCustomAttribute<AsFieldCallbackAttribute>() != null);
         }
 
         private void OnTargetPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ColorHistogramViewModel.cs" company="nGratis">
+// <copyright file="StringExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,59 +23,24 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Fundamental
+namespace nGratis.Cop.Core
 {
     using System;
-    using System.ComponentModel.Composition;
-    using System.IO;
-    using System.Windows.Media;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using JetBrains.Annotations;
 
-    using nGratis.Cop.Core;
-    using nGratis.Cop.Core.Media;
-    using nGratis.Cop.Core.Wpf;
-
-    using ReactiveUI;
-
-    [Export]
-    public class ColorHistogramViewModel : BasePageViewModel
+    public static class StringExtensions
     {
-        private readonly IImageProvider imageProvider;
-
-        private ImageSource rawImage;
-
-        [ImportingConstructor]
-        public ColorHistogramViewModel(IImageProvider imageProvider)
+        [StringFormatMethod("format")]
+        public static string FormatWith(this string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => imageProvider);
-
-            this.imageProvider = imageProvider;
-        }
-
-        [AsField(FieldMode.Input, FieldType.File, "Image File Path:")]
-        public string ImageFilePath { get; set; }
-
-        [AsField(FieldMode.Output, FieldType.Image, "Raw Image:")]
-        public ImageSource RawImage
-        {
-            get { return this.rawImage; }
-            private set { this.RaiseAndSetIfChanged(ref this.rawImage, value); }
-        }
-
-        [AsFieldCallback]
-        private void OnImageFilePathChanged()
-        {
-            if (!File.Exists(this.ImageFilePath))
-            {
-                this.RawImage = null;
-                return;
-            }
-
-            this.RawImage = this
-                .imageProvider
-                .LoadImage(new Uri(this.ImageFilePath))
-                .ToImageSource();
+            return string.IsNullOrWhiteSpace(format)
+                ? format
+                : string.Format(CultureInfo.InvariantCulture, format, args);
         }
     }
 }

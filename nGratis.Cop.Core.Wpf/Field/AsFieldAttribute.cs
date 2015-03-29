@@ -28,33 +28,28 @@
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
-
     using JetBrains.Annotations;
-
     using nGratis.Cop.Core;
 
+    [UsedImplicitly]
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false), MeansImplicitUse]
     public class AsFieldAttribute : Attribute
     {
-        public AsFieldAttribute(string id, FieldMode mode, string label)
-            : this(id, mode, FieldType.Text, label)
+        public AsFieldAttribute(FieldMode mode, string label)
+            : this(mode, FieldType.Text, label)
         {
         }
 
-        public AsFieldAttribute(string id, FieldMode mode, FieldType type, string label)
+        public AsFieldAttribute(FieldMode mode, FieldType type, string label)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
             Assumption.ThrowWhenInvalidArgument(() => mode == FieldMode.Unknown, () => label);
             Assumption.ThrowWhenInvalidArgument(() => type == FieldType.Unknown, () => type);
             Assumption.ThrowWhenNullOrWhitespaceArgument(() => label);
 
-            this.Id = id;
             this.Mode = mode;
             this.Type = type;
             this.Label = label;
         }
-
-        public string Id { get; private set; }
 
         public FieldMode Mode { get; private set; }
 

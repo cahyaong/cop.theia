@@ -65,12 +65,13 @@
     <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\ExpressionExtensions.cs" />
     <Compile Include="Common\MefExtensions.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Media\FileSystemImageProvider.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="Media\IImageProvider.cs" />
     <Compile Include="Media\WriteableImage.cs" />
     <Compile Include="NotifyingObject.cs" />
-    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations.JetBrains.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
