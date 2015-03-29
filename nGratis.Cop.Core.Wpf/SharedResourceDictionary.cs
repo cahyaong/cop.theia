@@ -15,18 +15,18 @@ namespace nGratis.Cop.Core.Wpf
     {
         private static readonly Dictionary<Uri, ResourceDictionary> SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
 
-        private Uri sourceUri;
+        private Uri source;
 
         public new Uri Source
         {
             get
             {
-                return this.sourceUri;
+                return this.source;
             }
 
             set
             {
-                this.sourceUri = value;
+                this.source = value;
 
                 if (!SharedDictionaries.ContainsKey(value))
                 {
