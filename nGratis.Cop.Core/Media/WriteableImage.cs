@@ -32,8 +32,6 @@ namespace nGratis.Cop.Core.Media
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
-    using nGratis.Cop.Core;
-
     public class WriteableImage : IImage
     {
         private WriteableBitmap writeableBitmap;
@@ -52,8 +50,6 @@ namespace nGratis.Cop.Core.Media
                 bitmap.EndInit();
 
                 this.writeableBitmap = new WriteableBitmap(bitmap);
-
-                Assumption.ThrowWhenUnexpectedNullValue(() => this.writeableBitmap);
             }
         }
 
