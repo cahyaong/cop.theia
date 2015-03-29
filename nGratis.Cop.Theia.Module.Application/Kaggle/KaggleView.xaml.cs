@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="AppView.xaml.cs" company="nGratis">
+// <copyright file="KaggleView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,42 +23,19 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 29 March 2015 5:17:29 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
     using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using nGratis.Cop.Core.Contract;
+    using System.Collections.Generic;
 
-    public partial class AppView
+    internal partial class KaggleView
     {
-        public AppView()
+        public KaggleView()
         {
-            InitializeComponent();
-        }
-
-        private async void OnViewLoaded(object sender, RoutedEventArgs args)
-        {
-            var vm = (AppViewModel)this.DataContext;
-            var page = default(Page);
-
-            await Task.Delay(TimeSpan.FromSeconds(0.1d));
-
-            await Task.Run(() =>
-            {
-                page = vm
-                    .Modules
-                    .SelectMany(module => module.Features)
-                    .OrderBy(feature => feature.Order)
-                    .ThenBy(feature => feature.Name)
-                    .SelectMany(feature => feature.Pages)
-                    .FirstOrDefault();
-            });
-
-            this.ContentSource = page != null ? page.SourceUri : null;
+            this.InitializeComponent();
         }
     }
 }

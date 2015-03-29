@@ -35,7 +35,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using nGratis.Cop.Core.Wpf;
 
     [Export]
-    public class DiabeticRetinopathyViewModel : BasePageViewModel
+    internal class DiabeticRetinopathyViewModel : BasePageViewModel
     {
     }
 }

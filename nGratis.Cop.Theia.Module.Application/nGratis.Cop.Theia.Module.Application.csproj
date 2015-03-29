@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.6.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
     <Reference Include="ReactiveUI">
       <HintPath>..\packages\reactiveui-core.6.2.1.1\lib\Net45\ReactiveUI.dll</HintPath>
     </Reference>
@@ -80,6 +84,10 @@
       <DependentUpon>DiabeticRetinopathyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Kaggle\DiabeticRetinopathyViewModel.cs" />
+    <Compile Include="Kaggle\KaggleView.xaml.cs">
+      <DependentUpon>KaggleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Kaggle\KaggleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Kaggle\DiabeticRetinopathyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Kaggle\KaggleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

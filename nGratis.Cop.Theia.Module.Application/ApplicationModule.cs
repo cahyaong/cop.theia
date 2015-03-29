@@ -41,8 +41,8 @@ namespace nGratis.Cop.Theia.Module.Application
         {
             this.Id = new Guid("7B16E195-F198-42F8-B49D-C14A6594EBB1");
 
-            var diabeticRetinopathyPage = new Page("Kaggle", @"/nGratis.Cop.Theia.Module.Application;component/Kaggle/DiabeticRetinopathyView.xaml");
-            var applicationFeature = new Feature("Application", new List<Page> { diabeticRetinopathyPage });
+            var kagglePage = new Page("Kaggle", @"/nGratis.Cop.Theia.Module.Application;component/Kaggle/KaggleView.xaml");
+            var applicationFeature = new Feature("Application", new List<Page> { kagglePage });
 
             this.Features = new List<Feature> { applicationFeature };
         }

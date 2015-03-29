@@ -31,10 +31,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Interaction logic for DiabeticRetinopathyView.xaml
-    /// </summary>
-    public partial class DiabeticRetinopathyView
+    internal partial class DiabeticRetinopathyView
     {
         public DiabeticRetinopathyView()
         {
