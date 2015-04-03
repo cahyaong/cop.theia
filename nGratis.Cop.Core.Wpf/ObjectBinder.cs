@@ -64,7 +64,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public void BindSourceCallback()
         {
-            var callbackMethodName = "On{0}Changed".FormatWith(this.sourceProperty.Name);
+            var callbackMethodName = "On{0}Changed".WithFormat(this.sourceProperty.Name);
 
             this.sourceCallbackMethod = this.source
                 .GetType()
@@ -74,7 +74,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public void BindTargetCallback()
         {
-            var callbackMethodName = "On{0}Changed".FormatWith(this.targetProperty.Name);
+            var callbackMethodName = "On{0}Changed".WithFormat(this.targetProperty.Name);
 
             this.targetCallbackMethod = this.source
                 .GetType()

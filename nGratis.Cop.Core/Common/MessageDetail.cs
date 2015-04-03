@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="nGratis">
+// <copyright file="MessageDetail.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,34 +23,36 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
+// <creation_timestamp>Friday, 3 April 2015 12:41:31 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
     using JetBrains.Annotations;
 
-    public static class StringExtensions
+    public struct MessageDetail
     {
         [UsedImplicitly]
-        [StringFormatMethod("format")]
-        public static string WithFormat(this string format, params object[] args)
-        {
-            return string.IsNullOrWhiteSpace(format)
-                ? format
-                : string.Format(CultureInfo.InvariantCulture, format, args);
-        }
+        public string Content { get; private set; }
 
         [UsedImplicitly]
-        public static string WithMessageDetails(this string input, params MessageDetail[] details)
+        public string Header { get; private set; }
+
+        public static MessageDetail New(string header, string content)
         {
-            return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
-                ? input
-                : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => header);
+            Assumption.ThrowWhenNullArgument(() => content);
+
+            return new MessageDetail
+            {
+                Header = header,
+                Content = content
+            };
+        }
+
+        public override string ToString()
+        {
+            return "{0}: '{1}'".WithFormat(this.Header, this.Content);
         }
     }
 }

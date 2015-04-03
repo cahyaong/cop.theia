@@ -74,7 +74,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
 
             this.RawImage = this
                 .imageProvider
-                .LoadImage(new Uri(this.ImageFilePath))
+                .LoadImage(new Uri(this.ImageFilePath).ToDataSpecification())
                 .ToImageSource();
         }
     }

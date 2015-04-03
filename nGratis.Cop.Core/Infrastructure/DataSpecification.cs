@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="nGratis">
+// <copyright file="DataSpecification.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,34 +23,59 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
+// <creation_timestamp>Friday, 3 April 2015 12:03:14 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using JetBrains.Annotations;
 
-    public static class StringExtensions
+    [UsedImplicitly]
+    public class DataSpecification : IDataSpecification
     {
-        [UsedImplicitly]
-        [StringFormatMethod("format")]
-        public static string WithFormat(this string format, params object[] args)
+        public DataSpecification(string name, Mime contentMime)
+            : this(VoidStorageProvider.Default, name, contentMime)
         {
-            return string.IsNullOrWhiteSpace(format)
-                ? format
-                : string.Format(CultureInfo.InvariantCulture, format, args);
         }
 
-        [UsedImplicitly]
-        public static string WithMessageDetails(this string input, params MessageDetail[] details)
+        public DataSpecification(IStorageProvider storageProvider, string name, Mime contentMime)
         {
-            return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
-                ? input
-                : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+            Assumption.ThrowWhenNullArgument(() => storageProvider);
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+            Assumption.ThrowWhenNullArgument(() => contentMime);
+            Assumption.ThrowWhenInvalidArgument(() => contentMime == Mime.Unknown, () => contentMime);
+
+            this.ContentMime = contentMime;
+            this.Name = name;
+            this.StorageProvider = storageProvider;
+        }
+
+        public Mime ContentMime { get; private set; }
+
+        public string Name { get; private set; }
+
+        public string FullName
+        {
+            get { return "{0}.{1}".WithFormat(this.Name, this.ContentMime.Names.First()); }
+        }
+
+        public IStorageProvider StorageProvider { get; private set; }
+
+        public Stream LoadData()
+        {
+            return this.StorageProvider.LoadData(this);
+        }
+
+        public void SaveData(Stream dataStream)
+        {
+            this.StorageProvider.SaveData(this, dataStream);
+        }
+
+        public override string ToString()
+        {
+            return "ngds://./{0}{1}".WithFormat(this.Name, this.ContentMime.Names.First());
         }
     }
 }

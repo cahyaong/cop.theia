@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileSystemImageProvider.cs" company="nGratis">
+// <copyright file="UriExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +23,33 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Friday, 3 April 2015 9:35:37 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Media
+namespace nGratis.Cop.Core
 {
     using System;
-    using System.ComponentModel.Composition;
+    using System.Collections.Generic;
     using System.IO;
 
-    using nGratis.Cop.Core;
+    using System.Linq;
 
-    [Export(typeof(IImageProvider))]
-    public class FileSystemImageProvider : IImageProvider
+    public static class UriExtensions
     {
-        public IImage LoadImage(Uri sourceUri)
+        public static IDataSpecification ToDataSpecification(this Uri uri)
         {
-            Assumption.ThrowWhenNullArgument(() => sourceUri);
+            Assumption.ThrowWhenNullArgument(() => uri);
 
-            using (var fileStream = File.OpenRead(sourceUri.LocalPath))
+            if (uri.IsFile)
             {
-                var writeableImage = new WriteableImage();
-                writeableImage.ReadData(fileStream);
+                var storageProvider = new FileBasedStorageProvider(uri);
+                var name = Path.GetFileNameWithoutExtension(uri.AbsoluteUri);
+                var contentMime = Mime.ParseByName(Path.GetExtension(uri.AbsoluteUri));
 
-                return writeableImage;
+                return new DataSpecification(storageProvider, name, contentMime);
             }
-        }
 
-        public void SaveImage(IImage image, Uri targetUri)
-        {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="nGratis">
+// <copyright file="VoidStorageProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,34 +23,37 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
+// <creation_timestamp>Friday, 3 April 2015 9:22:12 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
+    using System.IO;
     using System.Linq;
-    using JetBrains.Annotations;
 
-    public static class StringExtensions
+    public class VoidStorageProvider : IStorageProvider
     {
-        [UsedImplicitly]
-        [StringFormatMethod("format")]
-        public static string WithFormat(this string format, params object[] args)
+        static VoidStorageProvider()
         {
-            return string.IsNullOrWhiteSpace(format)
-                ? format
-                : string.Format(CultureInfo.InvariantCulture, format, args);
+            Default = new VoidStorageProvider();
         }
 
-        [UsedImplicitly]
-        public static string WithMessageDetails(this string input, params MessageDetail[] details)
+        private VoidStorageProvider()
         {
-            return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
-                ? input
-                : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+        }
+
+        public static VoidStorageProvider Default { get; private set; }
+
+        public Stream LoadData(IDataSpecification dataSpecification)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SaveData(IDataSpecification dataSpecification, Stream dataStream)
+        {
+            throw new NotSupportedException();
         }
     }
 }

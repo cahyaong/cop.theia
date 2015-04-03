@@ -31,8 +31,8 @@ namespace nGratis.Cop.Core.Media
 
     public interface IImageProvider
     {
-        IImage LoadImage(Uri sourceUri);
+        IImage LoadImage(IDataSpecification imageSpecification);
 
-        void SaveImage(IImage image, Uri targetUri);
+        void SaveImage(IImage image, IDataSpecification dataSpecification);
     }
 }

@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,12 +35,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reflection" />
     <Reference Include="System.Runtime.Serialization" />
@@ -64,9 +65,18 @@
     <Compile Include="Common\DoubleExtensions.cs" />
     <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\ExpressionExtensions.cs" />
-    <Compile Include="Common\MefExtensions.cs" />
+    <Compile Include="Common\MessageDetail.cs" />
     <Compile Include="Common\StringExtensions.cs" />
-    <Compile Include="Media\FileSystemImageProvider.cs" />
+    <Compile Include="Common\UriExtensions.cs" />
+    <Compile Include="Infrastructure\DataInformation.cs" />
+    <Compile Include="Infrastructure\DataSpecification.cs" />
+    <Compile Include="Infrastructure\FileBasedStorageProvider.cs" />
+    <Compile Include="Infrastructure\IDataInformation.cs" />
+    <Compile Include="Infrastructure\IDataSpecification.cs" />
+    <Compile Include="Infrastructure\IStorageProvider.cs" />
+    <Compile Include="Infrastructure\Mime.cs" />
+    <Compile Include="Infrastructure\VoidStorageProvider.cs" />
+    <Compile Include="Media\ImageProvider.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="Media\IImageProvider.cs" />
     <Compile Include="Media\WriteableImage.cs" />

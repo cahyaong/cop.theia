@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="nGratis">
+// <copyright file="ImageProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,34 +23,31 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+namespace nGratis.Cop.Core.Media
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using JetBrains.Annotations;
+    using nGratis.Cop.Core;
 
-    public static class StringExtensions
+    public class ImageProvider : IImageProvider
     {
-        [UsedImplicitly]
-        [StringFormatMethod("format")]
-        public static string WithFormat(this string format, params object[] args)
+        public IImage LoadImage(IDataSpecification imageSpecification)
         {
-            return string.IsNullOrWhiteSpace(format)
-                ? format
-                : string.Format(CultureInfo.InvariantCulture, format, args);
+            Assumption.ThrowWhenNullArgument(() => imageSpecification);
+
+            using (var imageStream = imageSpecification.LoadData())
+            {
+                var writeableImage = new WriteableImage();
+                writeableImage.ReadData(imageStream);
+
+                return writeableImage;
+            }
         }
 
-        [UsedImplicitly]
-        public static string WithMessageDetails(this string input, params MessageDetail[] details)
+        public void SaveImage(IImage image, IDataSpecification dataSpecification)
         {
-            return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
-                ? input
-                : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+            throw new NotImplementedException();
         }
     }
 }

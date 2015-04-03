@@ -31,14 +31,15 @@ namespace nGratis.Cop.Theia.Client
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
     using System.Windows;
-
     using Caliburn.Micro;
-
     using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Media;
 
+    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Will be disposed when main application is terminated.")]
     internal class AppBootstrapper : BootstrapperBase
     {
         private readonly IModuleProvider moduleProvider = new CopModuleProvider();
@@ -71,6 +72,8 @@ namespace nGratis.Cop.Theia.Client
 
             var caliburnBatch = new CompositionBatch();
             caliburnBatch.AddExport<IWindowManager>(() => new WindowManager());
+            caliburnBatch.AddExport<IImageProvider>(() => new ImageProvider());
+
             this.mefContainer.Compose(caliburnBatch);
         }
 

@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="CopModuleProvider.cs" />
+    <Compile Include="MefExtensions.cs" />
     <Compile Include="Shell\SettingsAppearanceView.xaml.cs">
       <DependentUpon>SettingsAppearanceView.xaml</DependentUpon>
     </Compile>

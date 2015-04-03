@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="nGratis">
+// <copyright file="DataInformation.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,34 +23,24 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
+// <creation_timestamp>Sunday, 29 March 2015 7:07:28 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using JetBrains.Annotations;
 
-    public static class StringExtensions
+    public class DataInformation : DataSpecification, IDataInformation
     {
-        [UsedImplicitly]
-        [StringFormatMethod("format")]
-        public static string WithFormat(this string format, params object[] args)
+        internal DataInformation(IStorageProvider storageProvider, string name, Mime contentMime)
+            : base(storageProvider, name, contentMime)
         {
-            return string.IsNullOrWhiteSpace(format)
-                ? format
-                : string.Format(CultureInfo.InvariantCulture, format, args);
         }
 
         [UsedImplicitly]
-        public static string WithMessageDetails(this string input, params MessageDetail[] details)
-        {
-            return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
-                ? input
-                : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
-        }
+        public DateTimeOffset CreatedTimestamp { get; internal set; }
     }
 }
