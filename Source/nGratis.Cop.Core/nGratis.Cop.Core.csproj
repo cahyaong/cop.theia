@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="..\nGratis.Cop.Theia.Common\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
+      <DependentUpon>GlobalAssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="Common\Assumption.cs" />
     <Compile Include="Common\DelegateEqualityComparer.cs" />
@@ -85,6 +86,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\nGratis.Cop.Theia.Common\GlobalAssemblyInfo.tt">
+      <Link>Properties\GlobalAssemblyInfo.tt</Link>
+    </None>
+    <None Include="Properties\nGratis.Cop.Core.PreBuild.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -95,4 +100,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>powershell.exe -executionpolicy remotesigned -command $(ProjectDir)Properties\$(ProjectName).PreBuild.ps1 -Configuration $(ConfigurationName)</PreBuildEvent>
+  </PropertyGroup>
 </Project>

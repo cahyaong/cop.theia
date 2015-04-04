@@ -1,8 +1,25 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿<#@ template  debug="true" hostSpecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
+<#
+	var EpochTimestamp = DateTimeOffset.Parse("01/01/2015 00:00:00AM +00:00", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
+	var BuildTimestamp = DateTimeOffset.UtcNow;
+	
+	var Version = new Version(this.Host.ResolveParameterValue(string.Empty, string.Empty, "Version"));
+	var Major = Version.Major.ToString(CultureInfo.InvariantCulture);
+	var Minor = Version.Minor.ToString(CultureInfo.InvariantCulture);
+	var Revision = ((int)(BuildTimestamp - EpochTimestamp).TotalDays).ToString(CultureInfo.InvariantCulture);
+	var Build = BuildTimestamp.ToString("HHmm", CultureInfo.InvariantCulture);
+#>
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
 // <copyright file="GlobalAssemblyInfo.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - <#= BuildTimestamp.Year #> Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +40,17 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 4 April 2015 08:52:16 AM</creation_timestamp>
+// <creation_timestamp><#= BuildTimestamp.ToString("dddd, d MMMM yyyy hh:mm:ss tt", CultureInfo.InvariantCulture) #></creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
 
 [assembly: AssemblyCompany("nGratis")]
 [assembly: AssemblyProduct("CommunityOfPractice.Theia")]
-[assembly: AssemblyCopyright("Copyright © 2014 - 2015 Cahya Ong")]
+[assembly: AssemblyCopyright("Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.93.0852")]
+[assembly: AssemblyVersion("<#= Major #>.<#= Minor #>.0.0")]
+[assembly: AssemblyFileVersion("<#= Major #>.<#= Minor #>.<#= Revision #>.<#= Build #>")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
