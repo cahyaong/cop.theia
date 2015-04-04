@@ -52,8 +52,8 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WriteableBitmapEx.Wpf, Version=1.0.14.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\02_NerdWorkshop\11_nCognito_AcidBean_GIT\02_Source_Trunk\packages\WriteableBitmapEx.1.0.14.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+      <HintPath>..\packages\WriteableBitmapEx.1.0.14.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +89,8 @@
     <None Include="..\nGratis.Cop.Theia.Common\GlobalAssemblyInfo.tt">
       <Link>Properties\GlobalAssemblyInfo.tt</Link>
     </None>
-    <None Include="Properties\nGratis.Cop.Core.PreBuild.ps1" />
     <None Include="packages.config" />
+    <None Include="Properties\nGratis.Cop.Core.PreBuild.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

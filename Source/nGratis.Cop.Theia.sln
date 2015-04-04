@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D62434F9-BA31-472F-9CD7-0B0A5474CF7C}"
 	ProjectSection(SolutionItems) = preProject
-		nGratis.Cop.Theia.Common\Cop.Theia.Module.targets = nGratis.Cop.Theia.Common\Cop.Theia.Module.targets
+		nGratis.Cop.Theia.Common\nGratis.Cop.Theia.Module.targets = nGratis.Cop.Theia.Common\nGratis.Cop.Theia.Module.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43CF542D-7F72-444A-A1A2-1443CCD577FB}"
@@ -35,6 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Client", "nGratis.Cop.Theia.Client\nGratis.Cop.Theia.Client.csproj", "{89857C8F-E254-4F96-8EE5-C0EB98609074}"
 	ProjectSection(ProjectDependencies) = postProject
+		{20E6970D-22A0-43E2-91FD-133A4F0EC51D} = {20E6970D-22A0-43E2-91FD-133A4F0EC51D}
 		{ADEB3029-BA9D-419D-AA88-5802FD7C7B59} = {ADEB3029-BA9D-419D-AA88-5802FD7C7B59}
 		{B90C4C38-A600-44BB-840E-2A7D4B46618A} = {B90C4C38-A600-44BB-840E-2A7D4B46618A}
 		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {E727CA53-5288-4E7E-828C-011803B0BEDD}
