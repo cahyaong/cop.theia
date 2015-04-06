@@ -1,15 +1,16 @@
 [Bb]in/
 [Oo]bj/
 
-TestResults
-packages
-
-nGratis.Cop.Theia.Binaries/
-Output/
-
 *.suo
 *.user
 *.vspscc
 *.vssscc
+
+Output/
+
+Source/nGratis.Cop.Theia.Binaries/
+Source/TestResults/
+Source/packages/
+!Source/packages/repositories.config
 
 StyleCop.Cache
