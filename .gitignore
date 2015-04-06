@@ -5,6 +5,7 @@ TestResults
 packages
 
 nGratis.Cop.Theia.Binaries/
+Output/
 
 *.suo
 *.user

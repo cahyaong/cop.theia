@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>nGratis.Cop.Core</id>
+    <version>0.1.95</version>
+    <authors>Cahya Ong</authors>
+    <owners>Cahya Ong</owners>
+    <licenseUrl>https://github.com/cahyaong/cop.theia/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/cahyaong/cop.theia</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Cop.Core package contains common core funcationalities used by other 'Community of Practice' projects.</description>
+    <language>en-US</language>
+  </metadata>
+  <files>
+    <file src="nGratis.Cop.Core.dll" target="lib\net45\nGratis.Cop.Core.dll" />
+    <file src="nGratis.Cop.Core.pdb" target="lib\net45\nGratis.Cop.Core.pdb" />
+    <file src="nGratis.Cop.Core.Contract.dll" target="lib\net45\nGratis.Cop.Core.Contract.dll" />
+    <file src="nGratis.Cop.Core.Contract.pdb" target="lib\net45\nGratis.Cop.Core.Contract.pdb" />
+  </files>
+</package>

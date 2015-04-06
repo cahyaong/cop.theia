@@ -1,4 +1,4 @@
-﻿<#@ template  debug="true" hostSpecific="true" language="C#" #>
+﻿<#@ template debug="true" hostSpecific="true" language="C#" #>
 <#@ output extension=".cs" #>
 <#@ Assembly Name="System.Core" #>
 <#@ import namespace="System" #>
@@ -6,14 +6,13 @@
 <#@ import namespace="System.Globalization" #>
 <#@ import namespace="System.Linq" #>
 <#
-	var EpochTimestamp = DateTimeOffset.Parse("01/01/2015 00:00:00AM +00:00", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-	var BuildTimestamp = DateTimeOffset.UtcNow;
-	
 	var Version = new Version(this.Host.ResolveParameterValue(string.Empty, string.Empty, "Version"));
-	var Major = Version.Major.ToString(CultureInfo.InvariantCulture);
-	var Minor = Version.Minor.ToString(CultureInfo.InvariantCulture);
-	var Revision = ((int)(BuildTimestamp - EpochTimestamp).TotalDays).ToString(CultureInfo.InvariantCulture);
-	var Build = BuildTimestamp.ToString("HHmm", CultureInfo.InvariantCulture);
+
+	var BuildTimestamp = DateTimeOffset.ParseExact(
+		this.Host.ResolveParameterValue(string.Empty, string.Empty, "BuildTimestamp"), 
+		"O",
+		CultureInfo.InvariantCulture, 
+		DateTimeStyles.AdjustToUniversal);
 #>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 // <copyright file="GlobalAssemblyInfo.cs" company="nGratis">
@@ -49,8 +48,8 @@ using System.Reflection;
 [assembly: AssemblyProduct("CommunityOfPractice.Theia")]
 [assembly: AssemblyCopyright("Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyVersion("<#= Major #>.<#= Minor #>.0.0")]
-[assembly: AssemblyFileVersion("<#= Major #>.<#= Minor #>.<#= Revision #>.<#= Build #>")]
+[assembly: AssemblyVersion("<#= Version.Major #>.<#= Version.Minor #>.0.0")]
+[assembly: AssemblyFileVersion("<#= Version #>")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else

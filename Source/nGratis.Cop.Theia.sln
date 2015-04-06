@@ -54,6 +54,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Contract",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Application", "nGratis.Cop.Theia.Module.Application\nGratis.Cop.Theia.Module.Application.csproj", "{20E6970D-22A0-43E2-91FD-133A4F0EC51D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{03488B47-6474-4B8C-9777-C3431627D12E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Build\NuGet\nGratis.Cop.Core.tt = ..\Build\NuGet\nGratis.Cop.Core.tt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{06153FE4-A566-40FC-9647-A70BCF7CDA58}"
+	ProjectSection(SolutionItems) = preProject
+		nGratis.Cop.Theia.Common\GlobalAssemblyInfo.tt = nGratis.Cop.Theia.Common\GlobalAssemblyInfo.tt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,5 +110,6 @@ Global
 		{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
 		{199487EB-64E4-4D48-9E9A-3AFDDDADF041} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
 		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
+		{03488B47-6474-4B8C-9777-C3431627D12E} = {D62434F9-BA31-472F-9CD7-0B0A5474CF7C}
 	EndGlobalSection
 EndGlobal
