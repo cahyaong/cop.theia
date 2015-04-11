@@ -3,9 +3,16 @@
 <#@ Assembly Name="System.Core" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
 <#@ import namespace="System.Linq" #>
 <#
 	var Version = new Version(this.Host.ResolveParameterValue(string.Empty, string.Empty, "Version"));
+
+	var BuildTimestamp = DateTimeOffset.ParseExact(
+		this.Host.ResolveParameterValue(string.Empty, string.Empty, "BuildTimestamp"), 
+		"O",
+		CultureInfo.InvariantCulture, 
+		DateTimeStyles.AdjustToUniversal);
 #>
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
@@ -17,8 +24,9 @@
     <licenseUrl>https://github.com/cahyaong/cop.theia/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/cahyaong/cop.theia</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Cop.Core package contains common core funcationalities used by other 'Community of Practice' projects.</description>
+    <description>Cop.Core package contains common core funcationality used by other 'Community of Practice' projects.</description>
     <language>en-US</language>
+    <copyright>Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong</copyright>
   </metadata>
   <files>
     <file src="nGratis.Cop.Core.dll" target="lib\net45\nGratis.Cop.Core.dll" />
