@@ -2,14 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>nGratis.Cop.Core</id>
-    <version>0.1.95</version>
+    <title>nGratis: Community of Practice - Core</title>
+    <version>0.1.100</version>
     <authors>Cahya Ong</authors>
     <owners>Cahya Ong</owners>
     <licenseUrl>https://github.com/cahyaong/cop.theia/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/cahyaong/cop.theia</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Cop.Core package contains common core funcationalities used by other 'Community of Practice' projects.</description>
+    <description>Cop.Core package contains common core funcationality used by other 'Community of Practice' projects.</description>
     <language>en-US</language>
+    <copyright>Copyright © 2014 - 2015 Cahya Ong</copyright>
   </metadata>
   <files>
     <file src="nGratis.Cop.Core.dll" target="lib\net45\nGratis.Cop.Core.dll" />
