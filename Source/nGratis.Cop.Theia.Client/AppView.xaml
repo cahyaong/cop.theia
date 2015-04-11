@@ -12,6 +12,7 @@
   MinWidth="640"
   MinHeight="720"
   ContentLoader="{StaticResource CaliburnContentLoader}"
+  Icon="Properties/app.ico"
   IsTitleVisible="True"
   Loaded="OnViewLoaded"
   MenuLinkGroups="{Binding Modules, Mode=OneWay, Converter={StaticResource ModulesToLinkGroupsConverter}}"
