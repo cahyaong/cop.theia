@@ -18,6 +18,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>nGratis.Cop.Core</id>
+    <title>nGratis: Community of Practice - Core</title>
     <version><#= Version.Major #>.<#= Version.Minor #>.<#= Version.Build #></version>
     <authors>Cahya Ong</authors>
     <owners>Cahya Ong</owners>
