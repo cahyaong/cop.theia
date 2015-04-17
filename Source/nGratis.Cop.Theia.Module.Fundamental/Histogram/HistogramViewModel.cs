@@ -28,7 +28,6 @@
 namespace nGratis.Cop.Theia.Module.Fundamental
 {
     using System.ComponentModel.Composition;
-
     using ReactiveUI;
 
     [Export]

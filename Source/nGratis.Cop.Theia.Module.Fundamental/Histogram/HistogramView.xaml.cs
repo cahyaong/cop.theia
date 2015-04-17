@@ -32,7 +32,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     {
         public HistogramView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

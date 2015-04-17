@@ -30,10 +30,11 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.Composition;
     using ReactiveUI;
 
-    internal class KaggleViewModel : ReactiveObject
+    [Export]
+    public class KaggleViewModel : ReactiveObject
     {
     }
 }

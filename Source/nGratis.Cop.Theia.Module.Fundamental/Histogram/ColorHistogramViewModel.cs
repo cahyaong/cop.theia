@@ -51,10 +51,10 @@ namespace nGratis.Cop.Theia.Module.Fundamental
             this.imageProvider = imageProvider;
         }
 
-        [AsField(FieldMode.Input, FieldType.File, "Image File Path:")]
+        [AsField(FieldMode.Input, FieldType.File, "Image file path:")]
         public string ImageFilePath { get; set; }
 
-        [AsField(FieldMode.Output, FieldType.Image, "Raw Image:")]
+        [AsField(FieldMode.Output, FieldType.Image, "Raw image:")]
         public ImageSource RawImage
         {
             get { return this.rawImage; }

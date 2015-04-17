@@ -31,11 +31,67 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-
+    using System.IO;
+    using System.Windows.Media;
+    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Vision.Imaging;
     using nGratis.Cop.Core.Wpf;
+    using ReactiveUI;
 
     [Export]
-    internal class DiabeticRetinopathyViewModel : BasePageViewModel
+    public class DiabeticRetinopathyViewModel : BasePageViewModel
     {
+        private readonly IImageProvider imageProvider;
+
+        private ImageSource rawImage;
+
+        private Range topBrightnessRange;
+
+        [ImportingConstructor]
+        public DiabeticRetinopathyViewModel(IImageProvider imageProvider)
+        {
+            Assumption.ThrowWhenNullArgument(() => imageProvider);
+
+            this.imageProvider = imageProvider;
+
+            this.TopBrightnessRange = new Range();
+        }
+
+        [AsField(FieldMode.Input, FieldType.File, "Image file path:")]
+        public string ImageFilePath { get; set; }
+
+        [AsField(FieldMode.Input, FieldType.Auto, "Top n-th brightness percentile:")]
+        public Range TopBrightnessRange
+        {
+            get { return this.topBrightnessRange; }
+            set { this.RaiseAndSetIfChanged(ref this.topBrightnessRange, value); }
+        }
+
+        [AsField(FieldMode.Output, FieldType.Image, "Raw image:")]
+        public ImageSource RawImage
+        {
+            get { return this.rawImage; }
+            private set { this.RaiseAndSetIfChanged(ref this.rawImage, value); }
+        }
+
+        [AsFieldCallback]
+        private void OnImageFilePathChanged()
+        {
+            if (!File.Exists(this.ImageFilePath))
+            {
+                this.RawImage = null;
+                return;
+            }
+
+            this.RawImage = this
+                .imageProvider
+                .LoadImage(new Uri(this.ImageFilePath).ToDataSpecification())
+                .ToImageSource();
+        }
+
+        [AsFieldCallback]
+        private void OnTopBrightnessRangeChanged()
+        {
+        }
     }
 }

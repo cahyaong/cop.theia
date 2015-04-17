@@ -18,7 +18,7 @@
       <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
       <DataGridTextColumn Binding="{Binding Version}" Header="Version" />
       <DataGridTextColumn Binding="{Binding ModifiedTimestamp}" Header="Modified" />
-      <DataGridTextColumn Binding="{Binding FileName}" Header="Filename" />
+      <DataGridTextColumn Binding="{Binding FileName}" Header="File Name" />
       <DataGridTextColumn Binding="{Binding Configuration}" Header="Configuration" />
     </DataGrid.Columns>
   </DataGrid>

@@ -7,8 +7,6 @@
   xmlns:fundamental="clr-namespace:nGratis.Cop.Theia.Module.Fundamental"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DataContext="{d:DesignInstance fundamental:ColorHistogramViewModel}"
-  d:DesignHeight="720"
-  d:DesignWidth="1280"
   mc:Ignorable="d">
   <UserControl.Resources>
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
