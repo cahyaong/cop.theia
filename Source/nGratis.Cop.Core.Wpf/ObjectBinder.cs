@@ -27,6 +27,7 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
+    using System;
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
@@ -58,8 +59,8 @@ namespace nGratis.Cop.Core.Wpf
             this.sourceProperty = sourceProperty;
             this.targetProperty = targetProperty;
 
-            WeakEventManager<INotifyPropertyChanged, PropertyChangedEventArgs>.AddHandler(source, "PropertyChanged", this.OnSourcePropertyChanged);
-            WeakEventManager<INotifyPropertyChanged, PropertyChangedEventArgs>.AddHandler(target, "PropertyChanged", this.OnTargetPropertyChanged);
+            source.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnSourcePropertyChanged);
+            target.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnTargetPropertyChanged);
         }
 
         public void BindSourceCallback()
