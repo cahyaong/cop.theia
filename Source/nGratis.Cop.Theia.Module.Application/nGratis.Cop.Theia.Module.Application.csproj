@@ -111,9 +111,17 @@
       <Project>{E727CA53-5288-4E7E-828C-011803B0BEDD}</Project>
       <Name>nGratis.Cop.Core.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\nGratis.Cop.Core.Vision\nGratis.Cop.Core.Vision.csproj">
+      <Project>{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}</Project>
+      <Name>nGratis.Cop.Core.Vision</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nGratis.Cop.Core.Wpf\nGratis.Cop.Core.Wpf.csproj">
       <Project>{199487EB-64E4-4D48-9E9A-3AFDDDADF041}</Project>
       <Name>nGratis.Cop.Core.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nGratis.Cop.Core\nGratis.Cop.Core.csproj">
+      <Project>{B90C4C38-A600-44BB-840E-2A7D4B46618A}</Project>
+      <Name>nGratis.Cop.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

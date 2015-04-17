@@ -26,13 +26,16 @@
 // <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+// ReSharper disable CheckNamespace
+namespace System
+// ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using JetBrains.Annotations;
+    using nGratis.Cop.Core;
 
     public static class StringExtensions
     {

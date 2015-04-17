@@ -31,11 +31,9 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Media;
-
     using nGratis.Cop.Core;
-    using nGratis.Cop.Core.Media;
+    using nGratis.Cop.Core.Vision.Imaging;
     using nGratis.Cop.Core.Wpf;
-
     using ReactiveUI;
 
     [Export]

@@ -28,14 +28,12 @@
 
 namespace nGratis.Cop.Core
 {
-    using JetBrains.Annotations;
+    using System;
 
     public struct MessageDetail
     {
-        [UsedImplicitly]
         public string Content { get; private set; }
 
-        [UsedImplicitly]
         public string Header { get; private set; }
 
         public static MessageDetail New(string header, string content)

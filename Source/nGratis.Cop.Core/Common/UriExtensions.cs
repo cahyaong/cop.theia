@@ -26,13 +26,15 @@
 // <creation_timestamp>Friday, 3 April 2015 9:35:37 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+// ReSharper disable CheckNamespace
+namespace System
+// ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-
     using System.Linq;
+    using nGratis.Cop.Core;
 
     public static class UriExtensions
     {

@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="DataSpecification.cs" company="nGratis">
+// <copyright file="TypeExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,60 +23,53 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Friday, 3 April 2015 12:03:14 AM</creation_timestamp>
+// <creation_timestamp>Monday, 13 April 2015 2:27:02 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+// ReSharper disable CheckNamespace
+namespace System
+// ReSharper restore CheckNamespace
 {
     using System;
-    using System.IO;
+    using System.Collections.Generic;
     using System.Linq;
-    using JetBrains.Annotations;
+    using System.Windows;
+    using nGratis.Cop.Core;
 
-    [UsedImplicitly]
-    public class DataSpecification : IDataSpecification
+    public static class TypeExtensions
     {
-        public DataSpecification(string name, Mime contentMime)
-            : this(VoidStorageProvider.Default, name, contentMime)
+        public static string GetGenericName(this Type type)
         {
+            if (type == null)
+            {
+                return null;
+            }
+
+            return type.IsGenericType
+                ? type.Name.Remove(type.Name.IndexOf('`'))
+                : type.Name;
         }
 
-        public DataSpecification(IStorageProvider storageProvider, string name, Mime contentMime)
+        public static void AddEventHandler<TInstance, TArgs>(this TInstance instance, string eventName, EventHandler<TArgs> handler)
+            where TInstance : class
+            where TArgs : EventArgs
         {
-            Assumption.ThrowWhenNullArgument(() => storageProvider);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
-            Assumption.ThrowWhenNullArgument(() => contentMime);
-            Assumption.ThrowWhenInvalidArgument(() => contentMime == Mime.Unknown, () => contentMime);
+            Assumption.ThrowWhenNullArgument(() => instance);
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => eventName);
+            Assumption.ThrowWhenNullArgument(() => handler);
 
-            this.ContentMime = contentMime;
-            this.Name = name;
-            this.StorageProvider = storageProvider;
+            WeakEventManager<TInstance, TArgs>.AddHandler(instance, eventName, handler);
         }
 
-        public Mime ContentMime { get; private set; }
-
-        public string Name { get; private set; }
-
-        public string FullName
+        public static void RemoveEventHandler<TInstance, TArgs>(this TInstance instance, string eventName, EventHandler<TArgs> handler)
+            where TInstance : class
+            where TArgs : EventArgs
         {
-            get { return "{0}.{1}".WithFormat(this.Name, this.ContentMime.Names.First()); }
-        }
+            Assumption.ThrowWhenNullArgument(() => instance);
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => eventName);
+            Assumption.ThrowWhenNullArgument(() => handler);
 
-        public IStorageProvider StorageProvider { get; private set; }
-
-        public Stream LoadData()
-        {
-            return this.StorageProvider.LoadData(this);
-        }
-
-        public void SaveData(Stream dataStream)
-        {
-            this.StorageProvider.SaveData(this, dataStream);
-        }
-
-        public override string ToString()
-        {
-            return "ngds://./{0}{1}".WithFormat(this.Name, this.ContentMime.Names.First());
+            WeakEventManager<TInstance, TArgs>.RemoveHandler(instance, eventName, handler);
         }
     }
 }

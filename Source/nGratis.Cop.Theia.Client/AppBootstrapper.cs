@@ -37,7 +37,7 @@ namespace nGratis.Cop.Theia.Client
     using System.Windows;
     using Caliburn.Micro;
     using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Media;
+    using nGratis.Cop.Core.Vision.Imaging;
 
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Will be disposed when main application is terminated.")]
     internal class AppBootstrapper : BootstrapperBase

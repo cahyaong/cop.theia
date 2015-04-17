@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="WriteableImage.cs" company="nGratis">
+// <copyright file="AssemblyInfo.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,44 +23,14 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Wednesday, 15 April 2015 12:45:36 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Media
-{
-    using System;
-    using System.IO;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-    public class WriteableImage : IImage
-    {
-        private WriteableBitmap writeableBitmap;
-
-        public void ReadData(Stream dataSteam)
-        {
-            using (dataSteam)
-            {
-                dataSteam.Position = 0;
-
-                var bitmap = new BitmapImage();
-
-                bitmap.BeginInit();
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.StreamSource = dataSteam;
-                bitmap.EndInit();
-
-                this.writeableBitmap = new WriteableBitmap(bitmap);
-            }
-        }
-
-        public Stream WriteData()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ImageSource ToImageSource()
-        {
-            return this.writeableBitmap;
-        }
-    }
-}
+[assembly: AssemblyTitle("nGratis.Cop.Core.Vision")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("3aac3008-2fec-4bdb-8ba0-1b35b89c49b4")]

@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IImageProvider.cs" company="nGratis">
+// <copyright file="IImage.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,14 +25,23 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Media
+namespace nGratis.Cop.Core.Vision.Imaging
 {
-    using System;
+    using System.IO;
+    using System.Windows.Media;
 
-    public interface IImageProvider
+    public interface IImage
     {
-        IImage LoadImage(IDataSpecification imageSpecification);
+        double Width { get; }
 
-        void SaveImage(IImage image, IDataSpecification dataSpecification);
+        double Height { get; }
+
+        Color this[int x, int y] { get; set; }
+
+        void ReadData(Stream dataSteam);
+
+        Stream WriteData();
+
+        ImageSource ToImageSource();
     }
 }

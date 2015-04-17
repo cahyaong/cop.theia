@@ -25,7 +25,7 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace - Namespace matches the one from the extended type for discoverability.
+// ReSharper disable CheckNamespace
 namespace System.Linq.Expressions
 // ReSharper restore CheckNamespace
 {

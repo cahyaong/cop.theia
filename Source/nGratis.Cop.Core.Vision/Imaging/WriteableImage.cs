@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="DataSpecification.cs" company="nGratis">
+// <copyright file="WriteableImage.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,60 +23,60 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Friday, 3 April 2015 12:03:14 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+namespace nGratis.Cop.Core.Vision.Imaging
 {
     using System;
     using System.IO;
-    using System.Linq;
-    using JetBrains.Annotations;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
-    [UsedImplicitly]
-    public class DataSpecification : IDataSpecification
+    public class WriteableImage : IImage
     {
-        public DataSpecification(string name, Mime contentMime)
-            : this(VoidStorageProvider.Default, name, contentMime)
+        private WriteableBitmap writeableBitmap;
+
+        public double Width
         {
+            get { return this.writeableBitmap != null ? this.writeableBitmap.Width : double.NaN; }
         }
 
-        public DataSpecification(IStorageProvider storageProvider, string name, Mime contentMime)
+        public double Height
         {
-            Assumption.ThrowWhenNullArgument(() => storageProvider);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
-            Assumption.ThrowWhenNullArgument(() => contentMime);
-            Assumption.ThrowWhenInvalidArgument(() => contentMime == Mime.Unknown, () => contentMime);
-
-            this.ContentMime = contentMime;
-            this.Name = name;
-            this.StorageProvider = storageProvider;
+            get { return this.writeableBitmap != null ? this.writeableBitmap.Height : double.NaN; }
         }
 
-        public Mime ContentMime { get; private set; }
-
-        public string Name { get; private set; }
-
-        public string FullName
+        public Color this[int x, int y]
         {
-            get { return "{0}.{1}".WithFormat(this.Name, this.ContentMime.Names.First()); }
+            get { return this.writeableBitmap.GetPixel(x, y); }
+            set { this.writeableBitmap.SetPixel(x, y, value); }
         }
 
-        public IStorageProvider StorageProvider { get; private set; }
-
-        public Stream LoadData()
+        public void ReadData(Stream dataSteam)
         {
-            return this.StorageProvider.LoadData(this);
+            using (dataSteam)
+            {
+                dataSteam.Position = 0;
+
+                var bitmap = new BitmapImage();
+
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.StreamSource = dataSteam;
+                bitmap.EndInit();
+
+                this.writeableBitmap = new WriteableBitmap(bitmap);
+            }
         }
 
-        public void SaveData(Stream dataStream)
+        public Stream WriteData()
         {
-            this.StorageProvider.SaveData(this, dataStream);
+            throw new NotImplementedException();
         }
 
-        public override string ToString()
+        public ImageSource ToImageSource()
         {
-            return "ngds://./{0}{1}".WithFormat(this.Name, this.ContentMime.Names.First());
+            return this.writeableBitmap;
         }
     }
 }
