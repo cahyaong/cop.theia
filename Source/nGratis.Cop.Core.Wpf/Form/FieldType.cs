@@ -30,6 +30,7 @@ namespace nGratis.Cop.Core.Wpf
     public enum FieldType
     {
         Unknown,
+        Auto,
         Text,
         File,
         Image,

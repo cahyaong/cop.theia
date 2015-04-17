@@ -66,7 +66,7 @@ namespace nGratis.Cop.Core.Wpf
                 .ToList()
                 .ForEach(annon =>
                     {
-                        var field = new FieldViewModel(annon.FieldAttribute);
+                        var field = new FieldViewModel(annon.Property.PropertyType, annon.FieldAttribute);
                         this.Fields.Add(field);
 
                         var binder = new ObjectBinder(notifyingInstance, annon.Property, field, FieldViewModel.ValueProperty);

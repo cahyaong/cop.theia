@@ -27,8 +27,10 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
+    using System;
+    using System.ComponentModel;
     using System.Reflection;
-    using JetBrains.Annotations;
+    using System.Windows;
     using nGratis.Cop.Core;
 
     using ReactiveUI;
@@ -45,41 +47,71 @@ namespace nGratis.Cop.Core.Wpf
 
         private object value;
 
-        internal FieldViewModel(AsFieldAttribute asFieldAttribute)
+        internal FieldViewModel(Type valueType, AsFieldAttribute asFieldAttribute)
         {
+            Assumption.ThrowWhenNullArgument(() => valueType);
             Assumption.ThrowWhenNullArgument(() => asFieldAttribute);
+
+            this.ValueType = valueType;
 
             this.Mode = asFieldAttribute.Mode;
             this.Type = asFieldAttribute.Type;
             this.Label = asFieldAttribute.Label;
         }
 
-        [UsedImplicitly]
         public FieldType Type
         {
             get { return this.type; }
             private set { this.RaiseAndSetIfChanged(ref this.type, value); }
         }
 
-        [UsedImplicitly]
         public string Label
         {
             get { return this.label; }
             private set { this.RaiseAndSetIfChanged(ref this.label, value); }
         }
 
-        [UsedImplicitly]
         public object Value
         {
-            get { return this.value; }
-            set { this.RaiseAndSetIfChanged(ref this.value, value); }
+            get
+            {
+                return this.value;
+            }
+
+            set
+            {
+                if (this.value != value)
+                {
+                    var oldNotifier = this.value as INotifyPropertyChanged;
+                    if (oldNotifier != null)
+                    {
+                        oldNotifier.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnValueInnerPropertyChanged);
+                    }
+
+                    var newNotifier = value as INotifyPropertyChanged;
+                    if (newNotifier != null)
+                    {
+                        newNotifier.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnValueInnerPropertyChanged);
+                    }
+                }
+
+                this.RaiseAndSetIfChanged(ref this.value, value);
+            }
         }
 
-        [UsedImplicitly]
         public FieldMode Mode
         {
             get { return this.mode; }
             private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
+        }
+
+        public Type ValueType { get; private set; }
+
+        private void OnValueInnerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            // ReSharper disable ExplicitCallerInfoArgument
+            this.RaisePropertyChanged("Value");
+            // ReSharper restore ExplicitCallerInfoArgument
         }
     }
 }

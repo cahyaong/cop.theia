@@ -28,6 +28,7 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Windows;
@@ -54,7 +55,7 @@ namespace nGratis.Cop.Core.Wpf
                 return null;
             }
 
-            var key = string.Format(CultureInfo.InvariantCulture, "Cop.{0}Field.{1}", field.Mode, field.Type);
+            var key = "Cop.{0}Field.{1}".WithFormat(field.Mode, field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
 
             if (this.templateLookup.ContainsKey(key))
             {
