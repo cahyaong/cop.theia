@@ -34,6 +34,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
+    using System.Windows.Input;
 
     public class AweSlider : Slider
     {
@@ -43,35 +44,40 @@ namespace nGratis.Cop.Core.Wpf
             typeof(AweSlider),
             new PropertyMetadata(default(double), OnStableValueChanged));
 
-        public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register(
-            "IsDragging",
-            typeof(bool),
-            typeof(AweSlider),
-            new PropertyMetadata(default(bool)));
-
         public double StableValue
         {
             get { return (double)this.GetValue(StableValueProperty); }
             set { this.SetValue(StableValueProperty, value); }
         }
 
-        public bool IsDragging
-        {
-            get { return (bool)this.GetValue(IsDraggingProperty); }
-            private set { this.SetValue(IsDraggingProperty, value); }
-        }
+        public bool IsMouseDraggaing { get; private set; }
+
+        public bool IsKeyPressed { get; private set; }
 
         protected override void OnThumbDragStarted(DragStartedEventArgs args)
         {
             base.OnThumbDragStarted(args);
-            this.IsDragging = true;
+            this.IsMouseDraggaing = true;
         }
 
         protected override void OnThumbDragCompleted(DragCompletedEventArgs args)
         {
             this.StableValue = this.Value;
-            this.IsDragging = false;
+            this.IsMouseDraggaing = false;
             base.OnThumbDragCompleted(args);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs args)
+        {
+            base.OnKeyDown(args);
+            this.IsKeyPressed = true;
+        }
+
+        protected override void OnKeyUp(KeyEventArgs args)
+        {
+            this.StableValue = this.Value;
+            this.IsKeyPressed = false;
+            base.OnKeyUp(args);
         }
 
         private static void OnStableValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)

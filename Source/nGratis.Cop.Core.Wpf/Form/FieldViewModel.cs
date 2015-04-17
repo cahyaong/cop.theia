@@ -30,7 +30,6 @@ namespace nGratis.Cop.Core.Wpf
     using System;
     using System.ComponentModel;
     using System.Reflection;
-    using System.Windows;
     using nGratis.Cop.Core;
 
     using ReactiveUI;
