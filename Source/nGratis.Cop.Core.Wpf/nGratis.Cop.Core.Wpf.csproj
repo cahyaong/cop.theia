@@ -119,7 +119,7 @@
     <Compile Include="Form\Field.cs" />
     <Compile Include="Form\Range.cs" />
     <Compile Include="ObjectBinder.cs" />
-    <Compile Include="FileDialogButton.cs" />
+    <Compile Include="Controls\FileDialogButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
