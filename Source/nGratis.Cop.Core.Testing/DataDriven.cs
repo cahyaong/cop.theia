@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IImage.cs" company="nGratis">
+// <copyright file="DataDriven.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,15 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Monday, 20 April 2015 1:09:29 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Vision.Imaging
+namespace nGratis.Cop.Core.Testing
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Windows.Media;
-
-    public interface IImage
+    public static class DataDriven
     {
-        int Width { get; }
+        public const string RootFolderPath = @"|DataDirectory|\";
 
-        int Height { get; }
-
-        Color this[int x, int y] { get; set; }
-
-        void LoadData(Stream dataSteam);
-
-        Stream SaveData();
-
-        ImageSource ToImageSource();
-
-        IEnumerable<Color> ToPixels();
+        public const string XmlTool = "Microsoft.VisualStudio.TestTools.DataSource.XML";
     }
 }

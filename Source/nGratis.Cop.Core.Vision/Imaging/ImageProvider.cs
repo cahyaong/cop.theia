@@ -39,7 +39,7 @@ namespace nGratis.Cop.Core.Vision.Imaging
             using (var imageStream = imageSpecification.LoadData())
             {
                 var writeableImage = new WriteableImage();
-                writeableImage.ReadData(imageStream);
+                writeableImage.LoadData(imageStream);
 
                 return writeableImage;
             }

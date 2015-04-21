@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="WriteableImage.cs" company="nGratis">
+// <copyright file="TypeExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,69 +23,31 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 18 April 2015 5:06:16 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Vision.Imaging
+namespace nGratis.Cop.Core.Testing
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
 
-    public class WriteableImage : IImage
+    public static class TypeExtensions
     {
-        private WriteableBitmap writeableBitmap;
-
-        public int Width { get; private set; }
-
-        public int Height { get; private set; }
-
-        public Color this[int x, int y]
+        public static Stream LoadEmbeddedResource<T>(this T instance, string resourcePath)
+            where T : class
         {
-            get { return this.writeableBitmap.GetPixel(x, y); }
-            set { this.writeableBitmap.SetPixel(x, y, value); }
-        }
+            Assumption.ThrowWhenNullArgument(() => instance);
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => resourcePath);
 
-        public void LoadData(Stream dataSteam)
-        {
-            // TODO: Handle a case when input data contains transparency.
+            var assembly = typeof(T).Assembly;
+            resourcePath = "{0}.{1}".WithFormat(assembly.GetName().Name, resourcePath.Replace("\\", "."));
+            var stream = assembly.GetManifestResourceStream(resourcePath);
 
-            dataSteam.Position = 0;
+            Assumption.ThrowWhenInvalidOperation(() => stream == null);
 
-            var bitmap = new BitmapImage();
-
-            bitmap.BeginInit();
-            bitmap.CacheOption = BitmapCacheOption.OnLoad;
-            bitmap.StreamSource = dataSteam;
-            bitmap.EndInit();
-
-            this.writeableBitmap = new WriteableBitmap(bitmap);
-
-            this.Width = this.writeableBitmap.PixelWidth;
-            this.Height = this.writeableBitmap.PixelHeight;
-        }
-
-        public Stream SaveData()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ImageSource ToImageSource()
-        {
-            return this.writeableBitmap;
-        }
-
-        public IEnumerable<Color> ToPixels()
-        {
-            for (var y = 0; y < this.Height; y++)
-            {
-                for (var x = 0; x < this.Width; x++)
-                {
-                    yield return this[x, y];
-                }
-            }
+            return stream;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IImage.cs" company="nGratis">
+// <copyright file="AssemblyInfo.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,14 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>a</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Vision.Imaging
-{
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Windows.Media;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-    public interface IImage
-    {
-        int Width { get; }
-
-        int Height { get; }
-
-        Color this[int x, int y] { get; set; }
-
-        void LoadData(Stream dataSteam);
-
-        Stream SaveData();
-
-        ImageSource ToImageSource();
-
-        IEnumerable<Color> ToPixels();
-    }
-}
+[assembly: AssemblyTitle("nGratis.Cop.Core.Vision.UnitTest")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("ef9953a9-46a1-47e0-a04f-be04c2f21105")]
