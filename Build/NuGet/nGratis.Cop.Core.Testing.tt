@@ -17,28 +17,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>nGratis.Cop.Core.Wpf</id>
-    <title>nGratis: Community of Practice - Core WPF</title>
+    <id>nGratis.Cop.Core.Testing</id>
+    <title>nGratis: Community of Practice - Core Testing</title>
     <version><#= Version.Major #>.<#= Version.Minor #>.<#= Version.Build #></version>
     <authors>Cahya Ong</authors>
     <owners>Cahya Ong</owners>
     <licenseUrl>https://github.com/cahyaong/cop.theia/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/cahyaong/cop.theia</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Cop.Core.Wpf package contains common core Windows Presentation Foundation (WPF) funcationality used by other 'Community of Practice' projects.</description>
+    <description>Cop.Core.Testing package contains common core testing funcationality used by other 'Community of Practice' projects.</description>
     <language>en-US</language>
     <copyright>Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong</copyright>
     <dependencies>
-      <dependency id="Caliburn.Micro" version="[2.0.1]" />
-      <dependency id="ModernUI.WPF" version="[1.0.6]" />
       <dependency id="nGratis.Cop.Core" version="[<#= Version.Major #>.<#= Version.Minor #>.<#= Version.Build #>]" />
-      <dependency id="reactiveui" version="[6.2.1.1]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="nGratis.Cop.Core.Wpf.dll" target="lib\net45\nGratis.Cop.Core.Wpf.dll" />
-    <file src="nGratis.Cop.Core.Wpf.pdb" target="lib\net45\nGratis.Cop.Core.Wpf.pdb" />
-    <file src="nGratis.Cop.Core.Theme.dll" target="lib\net45\nGratis.Cop.Core.Theme.dll" />
-    <file src="nGratis.Cop.Core.Theme.pdb" target="lib\net45\nGratis.Cop.Core.Theme.pdb" />
+    <file src="nGratis.Cop.Core.Testing.dll" target="lib\net45\nGratis.Cop.Core.Testing.dll" />
+    <file src="nGratis.Cop.Core.Testing.pdb" target="lib\net45\nGratis.Cop.Core.Testing.pdb" />
   </files>
 </package>
