@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="Page.cs" company="nGratis">
+// <copyright file="NLogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,32 +23,26 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 25 April 2015 11:41:23 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+namespace nGratis.Cop.Core
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using nGratis.Cop.Core.Contract;
 
-    public class Page
+    public class NLogger : ILogger
     {
-        public Page(string name, string source)
+        public void LogAs(Verbosity verbosity, string message)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException();
-            }
-
-            if (string.IsNullOrEmpty(source))
-            {
-                throw new ArgumentException();
-            }
-
-            this.Name = name;
-            this.SourceUri = new Uri(source, UriKind.Relative);
+            throw new NotImplementedException();
         }
 
-        public string Name { get; private set; }
-
-        public Uri SourceUri { get; private set; }
+        public void LogAs(Verbosity verbosity, Exception exception, string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

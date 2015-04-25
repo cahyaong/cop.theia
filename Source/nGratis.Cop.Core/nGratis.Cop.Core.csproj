@@ -69,11 +69,19 @@
     <Compile Include="Infrastructure\IDataInformation.cs" />
     <Compile Include="Infrastructure\IDataSpecification.cs" />
     <Compile Include="Infrastructure\IStorageProvider.cs" />
+    <Compile Include="Infrastructure\LoggerExtensions.cs" />
     <Compile Include="Infrastructure\Mime.cs" />
+    <Compile Include="Infrastructure\NLogger.cs" />
     <Compile Include="Infrastructure\VoidStorageProvider.cs" />
     <Compile Include="NotifyingObject.cs" />
     <Compile Include="Properties\Annotations.JetBrains.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj">
+      <Project>{e727ca53-5288-4e7e-828c-011803b0bedd}</Project>
+      <Name>nGratis.Cop.Core.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -43,7 +43,7 @@ namespace nGratis.Cop.Theia.Client
         private async void OnViewLoaded(object sender, RoutedEventArgs args)
         {
             var vm = (AppViewModel)this.DataContext;
-            var page = default(Page);
+            var page = default(IPage);
 
             await Task.Delay(TimeSpan.FromSeconds(0.1d));
 

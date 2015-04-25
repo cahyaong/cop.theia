@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ApplicationModule.cs" company="nGratis">
+// <copyright file="Feature.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,32 +23,35 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 4:26:34 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Application
+namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
+    using System.Linq;
     using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
 
-    [Export(typeof(IModule))]
-    public class ApplicationModule : IModule
+    public class Feature : IFeature
     {
-        public ApplicationModule()
+        public Feature(string name, IEnumerable<Page> pages)
+            : this(name, int.MinValue, pages)
         {
-            this.Id = new Guid("7B16E195-F198-42F8-B49D-C14A6594EBB1");
-
-            var kagglePage = new Page("Kaggle", @"/nGratis.Cop.Theia.Module.Application;component/Kaggle/KaggleView.xaml");
-            var applicationFeature = new Feature("Application", new List<Page> { kagglePage });
-
-            this.Features = new List<Feature> { applicationFeature };
         }
 
-        public Guid Id { get; private set; }
+        public Feature(string name, int order, IEnumerable<Page> pages)
+        {
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
 
-        public IEnumerable<IFeature> Features { get; private set; }
+            this.Name = name;
+            this.Order = order;
+            this.Pages = pages ?? Enumerable.Empty<Page>();
+        }
+
+        public string Name { get; private set; }
+
+        public int Order { get; private set; }
+
+        public IEnumerable<IPage> Pages { get; private set; }
     }
 }

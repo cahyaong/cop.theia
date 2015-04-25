@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ApplicationModule.cs" company="nGratis">
+// <copyright file="IFeature.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,32 +23,19 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 4:26:34 AM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 12:02:57 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Application
+namespace nGratis.Cop.Core.Contract
 {
-    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
 
-    [Export(typeof(IModule))]
-    public class ApplicationModule : IModule
+    public interface IFeature
     {
-        public ApplicationModule()
-        {
-            this.Id = new Guid("7B16E195-F198-42F8-B49D-C14A6594EBB1");
+        string Name { get; }
 
-            var kagglePage = new Page("Kaggle", @"/nGratis.Cop.Theia.Module.Application;component/Kaggle/KaggleView.xaml");
-            var applicationFeature = new Feature("Application", new List<Page> { kagglePage });
+        int Order { get; }
 
-            this.Features = new List<Feature> { applicationFeature };
-        }
-
-        public Guid Id { get; private set; }
-
-        public IEnumerable<IFeature> Features { get; private set; }
+        IEnumerable<IPage> Pages { get; }
     }
 }

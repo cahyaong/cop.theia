@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModule.cs" company="nGratis">
+// <copyright file="ILogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,19 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 25 April 2015 11:33:09 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    public interface IModule
+    public interface ILogger
     {
-        Guid Id { get; }
+        void LogAs(Verbosity verbosity, string message);
 
-        IEnumerable<Feature> Features { get; }
+        void LogAs(Verbosity verbosity, Exception exception, string message);
     }
 }
