@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
 
     public static class LoggerExtensions
@@ -43,6 +44,7 @@ namespace nGratis.Cop.Core
             logger.LogAs(Verbosity.Trace, message);
         }
 
+        [StringFormatMethod("format")]
         public static void LogAsTrace(this ILogger logger, string format, params object[] args)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
@@ -57,6 +59,7 @@ namespace nGratis.Cop.Core
             logger.LogAs(Verbosity.Debug, message);
         }
 
+        [StringFormatMethod("format")]
         public static void LogAsDebug(this ILogger logger, string format, params object[] args)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
@@ -71,6 +74,7 @@ namespace nGratis.Cop.Core
             logger.LogAs(Verbosity.Information, message);
         }
 
+        [StringFormatMethod("format")]
         public static void LogAsInformation(this ILogger logger, string format, params object[] args)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
@@ -85,6 +89,7 @@ namespace nGratis.Cop.Core
             logger.LogAs(Verbosity.Warning, message);
         }
 
+        [StringFormatMethod("format")]
         public static void LogAsWarning(this ILogger logger, string format, params object[] args)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
@@ -99,6 +104,7 @@ namespace nGratis.Cop.Core
             logger.LogAs(Verbosity.Error, message);
         }
 
+        [StringFormatMethod("format")]
         public static void LogAsError(this ILogger logger, string format, params object[] args)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
@@ -113,6 +119,7 @@ namespace nGratis.Cop.Core
             logger.LogAs(Verbosity.Error, exception, message);
         }
 
+        [StringFormatMethod("format")]
         public static void LogAsFatal(this ILogger logger, Exception exception, string format, params object[] args)
         {
             Assumption.ThrowWhenNullArgument(() => logger);

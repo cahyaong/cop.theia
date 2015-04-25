@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="NLogger.cs" company="nGratis">
+// <copyright file="VerbosityExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 11:41:23 AM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 1:23:52 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
@@ -34,28 +34,34 @@ namespace nGratis.Cop.Core
     using nGratis.Cop.Core.Contract;
     using NLog;
 
-    public class NLogger : ILogger
+    internal static class VerbosityExtensions
     {
-        private readonly Logger logger;
-
-        public NLogger(string name)
+        public static LogLevel ToLogLevel(this Verbosity verbosity)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+            Assumption.ThrowWhenDefaultArgument(() => verbosity);
 
-            this.logger = LogManager.GetLogger(name);
-            this.Name = name;
-        }
+            switch (verbosity)
+            {
+                case Verbosity.Trace:
+                    return LogLevel.Trace;
 
-        public string Name { get; private set; }
+                case Verbosity.Debug:
+                    return LogLevel.Debug;
 
-        public void LogAs(Verbosity verbosity, string message)
-        {
-            this.logger.Log(verbosity.ToLogLevel(), message);
-        }
+                case Verbosity.Information:
+                    return LogLevel.Info;
 
-        public void LogAs(Verbosity verbosity, Exception exception, string message)
-        {
-            this.logger.Log(verbosity.ToLogLevel(), message, exception);
+                case Verbosity.Warning:
+                    return LogLevel.Warn;
+
+                case Verbosity.Error:
+                    return LogLevel.Error;
+
+                case Verbosity.Fatal:
+                    return LogLevel.Fatal;
+            }
+
+            throw new NotSupportedException();
         }
     }
 }

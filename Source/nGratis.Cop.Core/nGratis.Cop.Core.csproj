@@ -81,6 +81,7 @@
     <Compile Include="Infrastructure\Mime.cs" />
     <Compile Include="Infrastructure\NLogger.cs" />
     <Compile Include="Infrastructure\TemporalProvider.cs" />
+    <Compile Include="Infrastructure\VerbosityExtensions.cs" />
     <Compile Include="Infrastructure\VoidStorageProvider.cs" />
     <Compile Include="NotifyingObject.cs" />
     <Compile Include="Properties\Annotations.JetBrains.cs" />
