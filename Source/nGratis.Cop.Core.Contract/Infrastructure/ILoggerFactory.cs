@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IPage.cs" company="nGratis">
+// <copyright file="ILoggerFactory.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 12:03:50 PM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 12:18:38 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
@@ -32,10 +32,8 @@ namespace nGratis.Cop.Core.Contract
     using System.Collections.Generic;
     using System.Linq;
 
-    public interface IPage
+    public interface ILoggerFactory
     {
-        string Name { get; }
-
-        Uri SourceUri { get; }
+        ILogger GetLoggerFor(Type type);
     }
 }
