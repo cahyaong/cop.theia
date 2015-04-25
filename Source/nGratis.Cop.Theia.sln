@@ -58,6 +58,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{03488B47-6474-4B8C-9777-C3431627D12E}"
 	ProjectSection(SolutionItems) = preProject
+		..\Build\NuGet\nGratis.Cop.Core.Testing.tt = ..\Build\NuGet\nGratis.Cop.Core.Testing.tt
 		..\Build\NuGet\nGratis.Cop.Core.tt = ..\Build\NuGet\nGratis.Cop.Core.tt
 		..\Build\NuGet\nGratis.Cop.Core.Wpf.tt = ..\Build\NuGet\nGratis.Cop.Core.Wpf.tt
 	EndProjectSection
@@ -119,7 +120,6 @@ Global
 		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B199217E-4103-44A9-AFB9-65287A52D06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B199217E-4103-44A9-AFB9-65287A52D06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B199217E-4103-44A9-AFB9-65287A52D06F}.Release|Any CPU.ActiveCfg = Release|Any CPU

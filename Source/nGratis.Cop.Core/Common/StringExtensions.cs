@@ -39,7 +39,6 @@ namespace System
 
     public static class StringExtensions
     {
-        [UsedImplicitly]
         [StringFormatMethod("format")]
         public static string WithFormat(this string format, params object[] args)
         {
@@ -48,12 +47,18 @@ namespace System
                 : string.Format(CultureInfo.InvariantCulture, format, args);
         }
 
-        [UsedImplicitly]
         public static string WithMessageDetails(this string input, params MessageDetail[] details)
         {
             return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
                 ? input
                 : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+        }
+
+        public static string WithLowerCaseAtBeginning(this string input)
+        {
+            return string.IsNullOrWhiteSpace(input)
+                ? input
+                : "{0}{1}".WithFormat(char.ToLower(input.First()), input.Substring(1, input.Length - 1));
         }
     }
 }

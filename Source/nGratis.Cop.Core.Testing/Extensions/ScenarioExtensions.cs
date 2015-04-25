@@ -78,6 +78,19 @@ namespace nGratis.Cop.Core.Testing
             return value;
         }
 
+        public static DateTime AsDateTime(this DataRow dataRow, string columnName)
+        {
+            Assumption.ThrowWhenNullArgument(() => dataRow);
+
+            var value = DateTime.MinValue;
+
+            Assumption.ThrowWhenInvalidOperation(
+                () => !DateTime.TryParseExact(dataRow.AsString(columnName), "O", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out value),
+                Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "DATETIME"));
+
+            return value;
+        }
+
         public static DateTimeOffset AsDateTimeOffset(this DataRow dataRow, string columnName)
         {
             Assumption.ThrowWhenNullArgument(() => dataRow);
@@ -85,12 +98,7 @@ namespace nGratis.Cop.Core.Testing
             var value = DateTimeOffset.MinValue;
 
             Assumption.ThrowWhenInvalidOperation(
-                () => !DateTimeOffset.TryParseExact(
-                    dataRow.AsString(columnName),
-                    "O",
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.AdjustToUniversal,
-                    out value),
+                () => !DateTimeOffset.TryParseExact(dataRow.AsString(columnName), "O", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out value),
                 Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "DATETIMEOFFSET"));
 
             return value;
