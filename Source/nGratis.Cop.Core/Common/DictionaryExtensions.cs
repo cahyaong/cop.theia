@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILogger.cs" company="nGratis">
+// <copyright file="DictionaryExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,21 +23,30 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 11:33:09 AM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 12:26:52 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public interface ILogger
+    public static class DictionaryExtensions
     {
-        string Name { get; }
+        public static void Upsert<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
+        {
+            Assumption.ThrowWhenNullArgument(() => dictionary);
+            Assumption.ThrowWhenDefaultArgument(() => key);
 
-        void LogAs(Verbosity verbosity, string message);
-
-        void LogAs(Verbosity verbosity, Exception exception, string message);
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary[key] = value;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+            }
+        }
     }
 }

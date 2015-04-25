@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="LoggerFactory.cs" company="nGratis">
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// <copyright file="IIdentityProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,21 +23,21 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 12:21:18 PM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 12:59:14 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+namespace nGratis.Cop.Core.Contract
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using nGratis.Cop.Core.Contract;
 
-    internal class LoggerFactory : ILoggerFactory
+    public interface IIdentityProvider
     {
-        public ILogger GetLoggerFor(Type type)
-        {
-            throw new NotImplementedException();
-        }
+        Guid CreateGuid();
+
+        Guid CreateGuid(string content);
+
+        string CreateId();
     }
 }

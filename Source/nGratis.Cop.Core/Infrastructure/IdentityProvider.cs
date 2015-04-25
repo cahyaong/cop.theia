@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILogger.cs" company="nGratis">
+// <copyright file="IdentityProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,21 +23,51 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 11:33:09 AM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 1:01:42 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using nGratis.Cop.Core.Contract;
 
-    public interface ILogger
+    public class IdentityProvider : IIdentityProvider
     {
-        string Name { get; }
+        static IdentityProvider()
+        {
+            Instance = new IdentityProvider();
+        }
 
-        void LogAs(Verbosity verbosity, string message);
+        private IdentityProvider()
+        {
+        }
 
-        void LogAs(Verbosity verbosity, Exception exception, string message);
+        public static IIdentityProvider Instance { get; private set; }
+
+        public Guid CreateGuid()
+        {
+            return Guid.NewGuid();
+        }
+
+        public Guid CreateGuid(string content)
+        {
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => content);
+
+            var md5 = MD5.Create();
+            return new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(content)));
+        }
+
+        public string CreateId()
+        {
+            return this
+                .CreateGuid()
+                .ToString("D")
+                .ToUpper(CultureInfo.InvariantCulture);
+        }
     }
 }

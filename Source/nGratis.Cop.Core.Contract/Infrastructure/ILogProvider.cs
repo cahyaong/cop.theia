@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILogger.cs" company="nGratis">
+// <copyright file="ILogProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 11:33:09 AM</creation_timestamp>
+// <creation_timestamp>Saturday, 25 April 2015 12:18:38 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
@@ -32,12 +32,8 @@ namespace nGratis.Cop.Core.Contract
     using System.Collections.Generic;
     using System.Linq;
 
-    public interface ILogger
+    public interface ILogProvider
     {
-        string Name { get; }
-
-        void LogAs(Verbosity verbosity, string message);
-
-        void LogAs(Verbosity verbosity, Exception exception, string message);
+        ILogger GetLoggerFor(Type type);
     }
 }

@@ -35,6 +35,15 @@ namespace nGratis.Cop.Core
 
     public class NLogger : ILogger
     {
+        public NLogger(string name)
+        {
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+
+            this.Name = name;
+        }
+
+        public string Name { get; private set; }
+
         public void LogAs(Verbosity verbosity, string message)
         {
             throw new NotImplementedException();
