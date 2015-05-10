@@ -30,15 +30,14 @@ namespace nGratis.Cop.Core.Wpf
     using System;
     using System.Globalization;
     using System.Windows.Data;
-
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     [ValueConversion(typeof(object), typeof(string))]
     public class AnyToTypeNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Assumption.ThrowWhenInvalidArgument(() => targetType != typeof(string), () => targetType);
+            Guard.AgainstInvalidArgument(targetType != typeof(string), () => targetType);
 
             return value != null ? value.GetType().FullName : "<NULL>";
         }

@@ -29,12 +29,13 @@ namespace nGratis.Cop.Core.Vision.Imaging
 {
     using System;
     using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     public class ImageProvider : IImageProvider
     {
         public IImage LoadImage(IDataSpecification imageSpecification)
         {
-            Assumption.ThrowWhenNullArgument(() => imageSpecification);
+            Guard.AgainstNullArgument(() => imageSpecification);
 
             using (var imageStream = imageSpecification.LoadData())
             {

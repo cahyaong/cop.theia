@@ -41,7 +41,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public Feature(string name, int order, IEnumerable<Page> pages)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+            Guard.AgainstNullOrWhitespaceArgument(() => name);
 
             this.Name = name;
             this.Order = order;

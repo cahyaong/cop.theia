@@ -44,7 +44,7 @@ namespace nGratis.Cop.Core.Wpf
         {
             var modules = value as IEnumerable<IModule>;
 
-            Assumption.ThrowWhenInvalidArgument(() => modules == null, () => value);
+            Guard.AgainstInvalidArgument(modules == null, () => value);
 
             var linkGroups = new LinkGroupCollection();
 
