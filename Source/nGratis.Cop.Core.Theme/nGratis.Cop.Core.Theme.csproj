@@ -80,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Cop.Style.AweLogViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Cop.Style.Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +118,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj">
+      <Project>{E727CA53-5288-4E7E-828C-011803B0BEDD}</Project>
+      <Name>nGratis.Cop.Core.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nGratis.Cop.Core.Wpf\nGratis.Cop.Core.Wpf.csproj">
       <Project>{199487eb-64e4-4d48-9e9a-3afdddadf041}</Project>
       <Name>nGratis.Cop.Core.Wpf</Name>

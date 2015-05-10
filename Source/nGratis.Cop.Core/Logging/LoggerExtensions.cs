@@ -41,7 +41,7 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Trace, message);
+            logger.LogWith(Verbosity.Trace, message);
         }
 
         [StringFormatMethod("format")]
@@ -49,14 +49,14 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Trace, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Trace, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsDebug(this ILogger logger, string message)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Debug, message);
+            logger.LogWith(Verbosity.Debug, message);
         }
 
         [StringFormatMethod("format")]
@@ -64,14 +64,14 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Debug, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Debug, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsInformation(this ILogger logger, string message)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Information, message);
+            logger.LogWith(Verbosity.Information, message);
         }
 
         [StringFormatMethod("format")]
@@ -79,14 +79,14 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Information, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Information, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsWarning(this ILogger logger, string message)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Warning, message);
+            logger.LogWith(Verbosity.Warning, message);
         }
 
         [StringFormatMethod("format")]
@@ -94,14 +94,14 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Warning, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Warning, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsError(this ILogger logger, string message)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Error, message);
+            logger.LogWith(Verbosity.Error, message);
         }
 
         [StringFormatMethod("format")]
@@ -109,14 +109,14 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Error, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Error, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsFatal(this ILogger logger, Exception exception, string message)
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Error, exception, message);
+            logger.LogWith(Verbosity.Error, exception, message);
         }
 
         [StringFormatMethod("format")]
@@ -124,7 +124,7 @@ namespace nGratis.Cop.Core
         {
             Assumption.ThrowWhenNullArgument(() => logger);
 
-            logger.LogAs(Verbosity.Error, exception, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Error, exception, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
     }
 }

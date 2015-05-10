@@ -55,7 +55,7 @@ namespace nGratis.Cop.Core.Wpf
                 return null;
             }
 
-            var key = "Cop.{0}Field.{1}".WithFormat(field.Mode, field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
+            var key = "Cop.{0}Field.{1}".WithInvariantFormat(field.Mode, field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
 
             if (this.templateLookup.ContainsKey(key))
             {

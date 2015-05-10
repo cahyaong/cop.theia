@@ -39,7 +39,7 @@ namespace nGratis.Cop.Core
 
         protected void RaiseAndSetIfChanged<TValue>(ref TValue oldValue, TValue newValue, [CallerMemberName] string propertyName = null)
         {
-            if (Equals(oldValue, newValue))
+            if (object.Equals(oldValue, newValue))
             {
                 return;
             }

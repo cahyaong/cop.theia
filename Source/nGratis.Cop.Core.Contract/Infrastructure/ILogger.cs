@@ -34,10 +34,14 @@ namespace nGratis.Cop.Core.Contract
 
     public interface ILogger
     {
-        string Name { get; }
+        string Id { get; }
 
-        void LogAs(Verbosity verbosity, string message);
+        IEnumerable<string> Components { get; }
 
-        void LogAs(Verbosity verbosity, Exception exception, string message);
+        void LogWith(Verbosity verbosity, string message);
+
+        void LogWith(Verbosity verbosity, Exception exception, string message);
+
+        IObservable<LogEntry> AsObservable();
     }
 }

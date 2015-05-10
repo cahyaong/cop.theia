@@ -31,11 +31,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
-
-    using JetBrains.Annotations;
-
     using nGratis.Cop.Core.Contract;
-
     using ReactiveUI;
 
     [Export]
@@ -58,7 +54,6 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
                 .ToList();
         }
 
-        [UsedImplicitly]
         public IEnumerable<AssemblyViewModel> Assemblies
         {
             get { return this.assemblies; }

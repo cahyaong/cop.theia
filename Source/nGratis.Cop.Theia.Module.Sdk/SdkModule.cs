@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILogProvider.cs" company="nGratis">
+// <copyright file="SdkModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,32 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 12:18:38 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+namespace nGratis.Cop.Theia.Module.Sdk
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.ComponentModel.Composition;
+    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Wpf;
 
-    public interface ILogProvider
+    [Export(typeof(IModule))]
+    public class SdkModule : IModule
     {
-        ILogger GetLoggerFor(Type type);
+        public SdkModule()
+        {
+            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
+
+            var loggingPage = new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml");
+
+            var diagnosticFeature = new Feature("SDK", int.MaxValue, new List<Page> { loggingPage });
+
+            this.Features = new List<Feature> { diagnosticFeature };
+        }
+
+        public Guid Id { get; private set; }
+
+        public IEnumerable<IFeature> Features { get; private set; }
     }
 }

@@ -41,7 +41,9 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
             this.Id = new Guid("FAD2D7B3-60B5-46F8-93CC-CE0F21C440E4");
 
             var moduleSummaryPage = new Page("Module Summary", "/nGratis.Cop.Theia.Module.Diagnostic;component/ModuleSummaryView.xaml");
-            var diagnosticFeature = new Feature("Diagnostic", int.MaxValue, new List<Page> { moduleSummaryPage });
+            var loggingPage = new Page("Logging", "/nGratis.Cop.Theia.Module.Diagnostic;component/LoggingView.xaml");
+
+            var diagnosticFeature = new Feature("Diagnostic", int.MaxValue, new List<Page> { moduleSummaryPage, loggingPage });
 
             this.Features = new List<Feature> { diagnosticFeature };
         }

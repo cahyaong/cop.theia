@@ -59,7 +59,7 @@ namespace nGratis.Cop.Core
 
         public string FullName
         {
-            get { return "{0}.{1}".WithFormat(this.Name, this.ContentMime.Names.First()); }
+            get { return "{0}.{1}".WithInvariantFormat(this.Name, this.ContentMime.Names.First()); }
         }
 
         public IStorageProvider StorageProvider { get; private set; }
@@ -76,7 +76,7 @@ namespace nGratis.Cop.Core
 
         public override string ToString()
         {
-            return "ngds://./{0}{1}".WithFormat(this.Name, this.ContentMime.Names.First());
+            return "ngds://./{0}{1}".WithInvariantFormat(this.Name, this.ContentMime.Names.First());
         }
     }
 }

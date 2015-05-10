@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="NLogger.cs" company="nGratis">
+// <copyright file="ExpressionExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,39 +23,24 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 11:41:23 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+// ReSharper disable CheckNamespace
+namespace System.Linq.Expressions
+// ReSharper restore CheckNamespace
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using nGratis.Cop.Core.Contract;
-    using NLog;
 
-    public class NLogger : ILogger
+    public static class ExpressionExtensions
     {
-        private readonly Logger logger;
-
-        public NLogger(string name)
+        public static string FindName<TProperty>(this Expression<Func<TProperty>> expression)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+            Guard.AgainstNullArgument(() => expression);
 
-            this.logger = LogManager.GetLogger(name);
-            this.Name = name;
-        }
+            var bodyExpression = expression.Body as MemberExpression ?? (MemberExpression)((UnaryExpression)expression.Body).Operand;
 
-        public string Name { get; private set; }
-
-        public void LogAs(Verbosity verbosity, string message)
-        {
-            this.logger.Log(verbosity.ToLogLevel(), message);
-        }
-
-        public void LogAs(Verbosity verbosity, Exception exception, string message)
-        {
-            this.logger.Log(verbosity.ToLogLevel(), message, exception);
+            return bodyExpression.Member.Name;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace nGratis.Cop.Core
             Instance = new InfrastructureManager
                 {
                     IdentityProvider = Core.IdentityProvider.Instance,
-                    LogProvider = Core.LogProvider.Instance,
+                    LoggingProvider = Core.LoggingProvider.Instance,
                     TemporalProvider = Core.TemporalProvider.Instance
                 };
         }
@@ -53,7 +53,7 @@ namespace nGratis.Cop.Core
 
         public IIdentityProvider IdentityProvider { get; private set; }
 
-        public ILogProvider LogProvider { get; private set; }
+        public ILoggingProvider LoggingProvider { get; private set; }
 
         public ITemporalProvider TemporalProvider { get; private set; }
     }

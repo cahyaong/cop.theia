@@ -61,7 +61,7 @@ namespace nGratis.Cop.Core.Testing
 
             Assumption.ThrowWhenInvalidOperation(
                 () => !ParsingMethodLookup.TryGetValue(typeof(TValue), out parsingMethod),
-                Messages.Error_TestContext_UnsupporedParser.WithFormat(typeof(TValue).FullName));
+                Messages.Error_TestContext_UnsupporedParser.WithInvariantFormat(typeof(TValue).FullName));
 
             return (TValue)parsingMethod.Invoke(null, new object[] { testContext.DataRow, variableName });
         }

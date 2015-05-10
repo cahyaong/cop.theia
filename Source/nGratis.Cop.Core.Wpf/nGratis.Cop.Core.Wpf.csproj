@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="BasePageViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
+    <Compile Include="Controls\AweLogViewer.cs" />
     <Compile Include="Controls\AweSlider.cs" />
     <Compile Include="Converters\EnumerableToCountConverter.cs" />
     <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />

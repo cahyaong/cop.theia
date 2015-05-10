@@ -26,12 +26,15 @@
 // <creation_timestamp>Saturday, 18 April 2015 5:06:16 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Testing
+// ReSharper disable CheckNamespace
+namespace System
+// ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using nGratis.Cop.Core;
 
     public static class TypeExtensions
     {
@@ -42,7 +45,7 @@ namespace nGratis.Cop.Core.Testing
             Assumption.ThrowWhenNullOrWhitespaceArgument(() => resourcePath);
 
             var assembly = typeof(T).Assembly;
-            resourcePath = "{0}.{1}".WithFormat(assembly.GetName().Name, resourcePath.Replace("\\", "."));
+            resourcePath = "{0}.{1}".WithInvariantFormat(assembly.GetName().Name, resourcePath.Replace("\\", "."));
             var stream = assembly.GetManifestResourceStream(resourcePath);
 
             Assumption.ThrowWhenInvalidOperation(() => stream == null);

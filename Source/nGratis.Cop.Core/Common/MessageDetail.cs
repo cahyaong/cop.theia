@@ -50,7 +50,7 @@ namespace nGratis.Cop.Core
 
         public override string ToString()
         {
-            return "{0}: '{1}'".WithFormat(this.Header, this.Content);
+            return "{0}: {1}".WithCurrentFormat(this.Header, this.Content);
         }
     }
 }

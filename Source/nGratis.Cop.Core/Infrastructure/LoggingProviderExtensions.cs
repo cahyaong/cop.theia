@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExpressionExtensions.cs" company="nGratis">
+// <copyright file="LoggingProviderExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,39 +23,45 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Friday, 1 May 2015 1:04:31 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
-namespace System.Linq.Expressions
-// ReSharper restore CheckNamespace
+namespace nGratis.Cop.Core
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
     using System.Reflection;
+    using nGratis.Cop.Core.Contract;
 
-    using nGratis.Cop.Core;
-
-    public static class ExpressionExtensions
+    public static class LoggingProviderExtensions
     {
-        public static string FindPropertyName<TProperty>(this Expression<Func<TProperty>> expression)
+        public static ILogger GetLoggerFromCaller(this ILoggingProvider loggingProvider)
         {
-            Assumption.ThrowWhenNullArgument(() => expression);
+            Assumption.ThrowWhenNullArgument(() => loggingProvider);
 
-            var bodyExpression = expression.Body as MemberExpression ?? (MemberExpression)((UnaryExpression)expression.Body).Operand;
+            var stackTrace = new StackTrace();
+            var stackFrames = stackTrace.GetFrames();
+            var category = default(string);
 
-            return bodyExpression.Member.Name;
-        }
+            if (stackFrames != null && stackFrames.Any())
+            {
+                var loggingAttribute = stackFrames
+                    .Select(frame => frame
+                        .GetMethod()
+                        .DeclaringType
+                        .GetCustomAttributes<LoggingAttribute>()
+                        .SingleOrDefault())
+                    .FirstOrDefault(attribute => attribute != null);
 
-        public static PropertyInfo FindProperty<TOwner, TProperty>(this Expression<Func<TOwner, TProperty>> expression)
-        {
-            Assumption.ThrowWhenNullArgument(() => expression);
+                if (loggingAttribute != null)
+                {
+                    category = loggingAttribute.Category;
+                }
+            }
 
-            var bodyExpression = expression.Body as MemberExpression;
-
-            Assumption.ThrowWhenInvalidArgument(() => bodyExpression == null, () => expression);
-
-            // ReSharper disable PossibleNullReferenceException - Null assertion is performed above.
-            return (PropertyInfo)bodyExpression.Member;
-            // ReSharper restore PossibleNullReferenceException
+            return loggingProvider.GetLoggerFor(category ?? "<default>");
         }
     }
 }

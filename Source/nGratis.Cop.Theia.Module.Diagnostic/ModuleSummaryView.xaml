@@ -6,14 +6,11 @@
   xmlns:diagnostic="clr-namespace:nGratis.Cop.Theia.Module.Diagnostic"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DataContext="{d:DesignInstance diagnostic:ModuleSummaryViewModel}"
-  d:DesignHeight="300"
-  d:DesignWidth="300"
   mc:Ignorable="d">
   <DataGrid
-    Name="Assemblies"
     AutoGenerateColumns="False"
     IsReadOnly="True"
-    d:DataContext="{d:DesignInstance diagnostic:AssemblyViewModel}">
+    ItemsSource="{Binding Assemblies, Mode=OneWay}">
     <DataGrid.Columns>
       <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
       <DataGridTextColumn Binding="{Binding Version}" Header="Version" />

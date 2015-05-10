@@ -101,6 +101,10 @@
     </Compile>
     <Compile Include="AssemblyViewModel.cs" />
     <Compile Include="DiagnosticModule.cs" />
+    <Compile Include="LoggingView.xaml.cs">
+      <DependentUpon>LoggingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoggingViewModel.cs" />
     <Compile Include="ModuleSummaryView.xaml.cs">
       <DependentUpon>ModuleSummaryView.xaml</DependentUpon>
     </Compile>
@@ -114,6 +118,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="LoggingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModuleSummaryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

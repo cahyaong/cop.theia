@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogProvider.cs" company="nGratis">
+// <copyright file="LoggingAttribute.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,47 +23,25 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 12:21:18 PM</creation_timestamp>
+// <creation_timestamp>Friday, 1 May 2015 1:00:44 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using nGratis.Cop.Core.Contract;
 
-    internal class LogProvider : ILogProvider
+    [AttributeUsage(AttributeTargets.Class)]
+    public class LoggingAttribute : Attribute
     {
-        private readonly ConcurrentDictionary<Type, ILogger> loggerLookup = new ConcurrentDictionary<Type, ILogger>();
-
-        static LogProvider()
+        public LoggingAttribute(string category)
         {
-            Instance = new LogProvider();
+            Assumption.ThrowWhenNullOrWhitespaceArgument(() => category);
+
+            this.Category = category;
         }
 
-        private LogProvider()
-        {
-        }
-
-        public static ILogProvider Instance { get; private set; }
-
-        public ILogger GetLoggerFor(Type type)
-        {
-            var logger = default(ILogger);
-
-            if (!this.loggerLookup.TryGetValue(type, out logger))
-            {
-                logger = new NLogger(type.FullName);
-
-                if (!this.loggerLookup.TryAdd(type, logger))
-                {
-                    logger = this.loggerLookup[type];
-                }
-            }
-
-            return logger;
-        }
+        public string Category { get; private set; }
     }
 }
