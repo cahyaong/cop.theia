@@ -28,11 +28,9 @@
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
-    using JetBrains.Annotations;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
-    [UsedImplicitly]
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false), MeansImplicitUse]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class AsFieldAttribute : Attribute
     {
         public AsFieldAttribute(FieldMode mode, string label)
@@ -42,9 +40,9 @@ namespace nGratis.Cop.Core.Wpf
 
         public AsFieldAttribute(FieldMode mode, FieldType type, string label)
         {
-            Assumption.ThrowWhenInvalidArgument(() => mode == FieldMode.Unknown, () => label);
-            Assumption.ThrowWhenInvalidArgument(() => type == FieldType.Unknown, () => type);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => label);
+            Guard.AgainstInvalidArgument(mode == FieldMode.Unknown, () => label);
+            Guard.AgainstInvalidArgument(type == FieldType.Unknown, () => type);
+            Guard.AgainstNullOrWhitespaceArgument(() => label);
 
             this.Mode = mode;
             this.Type = type;

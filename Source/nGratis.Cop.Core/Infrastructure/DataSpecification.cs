@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core
     using System.IO;
     using System.Linq;
     using JetBrains.Annotations;
+    using nGratis.Cop.Core.Contract;
 
     [UsedImplicitly]
     public class DataSpecification : IDataSpecification
@@ -43,10 +44,10 @@ namespace nGratis.Cop.Core
 
         public DataSpecification(IStorageProvider storageProvider, string name, Mime contentMime)
         {
-            Assumption.ThrowWhenNullArgument(() => storageProvider);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
-            Assumption.ThrowWhenNullArgument(() => contentMime);
-            Assumption.ThrowWhenInvalidArgument(() => contentMime == Mime.Unknown, () => contentMime);
+            Guard.AgainstNullArgument(() => storageProvider);
+            Guard.AgainstNullOrWhitespaceArgument(() => name);
+            Guard.AgainstNullArgument(() => contentMime);
+            Guard.AgainstInvalidArgument(contentMime == Mime.Unknown, () => contentMime);
 
             this.ContentMime = contentMime;
             this.Name = name;
@@ -59,7 +60,7 @@ namespace nGratis.Cop.Core
 
         public string FullName
         {
-            get { return "{0}.{1}".WithFormat(this.Name, this.ContentMime.Names.First()); }
+            get { return "{0}.{1}".WithInvariantFormat(this.Name, this.ContentMime.Names.First()); }
         }
 
         public IStorageProvider StorageProvider { get; private set; }
@@ -76,7 +77,7 @@ namespace nGratis.Cop.Core
 
         public override string ToString()
         {
-            return "ngds://./{0}{1}".WithFormat(this.Name, this.ContentMime.Names.First());
+            return "ngds://./{0}{1}".WithInvariantFormat(this.Name, this.ContentMime.Names.First());
         }
     }
 }

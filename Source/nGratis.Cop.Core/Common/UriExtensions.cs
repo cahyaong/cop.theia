@@ -35,12 +35,13 @@ namespace System
     using System.IO;
     using System.Linq;
     using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     public static class UriExtensions
     {
         public static IDataSpecification ToDataSpecification(this Uri uri)
         {
-            Assumption.ThrowWhenNullArgument(() => uri);
+            Guard.AgainstNullArgument(() => uri);
 
             if (uri.IsFile)
             {

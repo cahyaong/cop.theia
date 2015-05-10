@@ -30,8 +30,8 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-
     using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Wpf;
 
     [Export(typeof(IModule))]
     public class DiagnosticModule : IModule
@@ -41,15 +41,15 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
             this.Id = new Guid("FAD2D7B3-60B5-46F8-93CC-CE0F21C440E4");
 
             var moduleSummaryPage = new Page("Module Summary", "/nGratis.Cop.Theia.Module.Diagnostic;component/ModuleSummaryView.xaml");
+            var loggingPage = new Page("Logging", "/nGratis.Cop.Theia.Module.Diagnostic;component/LoggingView.xaml");
 
-            this.Features = new List<Feature>
-                {
-                    new Feature("Diagnostic", int.MaxValue, new List<Page> { moduleSummaryPage })
-                };
+            var diagnosticFeature = new Feature("Diagnostic", int.MaxValue, new List<Page> { moduleSummaryPage, loggingPage });
+
+            this.Features = new List<Feature> { diagnosticFeature };
         }
 
         public Guid Id { get; private set; }
 
-        public IEnumerable<Feature> Features { get; private set; }
+        public IEnumerable<IFeature> Features { get; private set; }
     }
 }

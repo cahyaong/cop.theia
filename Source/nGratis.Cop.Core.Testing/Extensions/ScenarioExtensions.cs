@@ -47,7 +47,7 @@ namespace nGratis.Cop.Core.Testing
 
             Assumption.ThrowWhenInvalidOperation(
                 () => !Guid.TryParse(dataRow.AsString(columnName), out value),
-                Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "GUID"));
+                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "GUID"));
 
             return value;
         }
@@ -60,7 +60,7 @@ namespace nGratis.Cop.Core.Testing
 
             Assumption.ThrowWhenInvalidOperation(
                 () => !short.TryParse(dataRow.AsString(columnName), NumberStyles.Integer, CultureInfo.InvariantCulture, out value),
-                Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "INT16"));
+                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "INT16"));
 
             return value;
         }
@@ -73,7 +73,7 @@ namespace nGratis.Cop.Core.Testing
 
             Assumption.ThrowWhenInvalidOperation(
                 () => !int.TryParse(dataRow.AsString(columnName), NumberStyles.Integer, CultureInfo.InvariantCulture, out value),
-                Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "INT32"));
+                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "INT32"));
 
             return value;
         }
@@ -86,7 +86,7 @@ namespace nGratis.Cop.Core.Testing
 
             Assumption.ThrowWhenInvalidOperation(
                 () => !DateTime.TryParseExact(dataRow.AsString(columnName), "O", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out value),
-                Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "DATETIME"));
+                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIME"));
 
             return value;
         }
@@ -99,7 +99,7 @@ namespace nGratis.Cop.Core.Testing
 
             Assumption.ThrowWhenInvalidOperation(
                 () => !DateTimeOffset.TryParseExact(dataRow.AsString(columnName), "O", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out value),
-                Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "DATETIMEOFFSET"));
+                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIMEOFFSET"));
 
             return value;
         }
@@ -118,7 +118,7 @@ namespace nGratis.Cop.Core.Testing
             {
                 Assumption.ThrowWhenInvalidOperation(
                     () => true,
-                    Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "SIZE"),
+                    Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "SIZE"),
                     exception);
             }
 
@@ -138,13 +138,13 @@ namespace nGratis.Cop.Core.Testing
 
                 Assumption.ThrowWhenInvalidOperation(
                     () => value == null,
-                    Messages.Error_Scenario_InvalidFormat.WithFormat(columnName, dataRow.Table.TableName, "STRING"));
+                    Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "STRING"));
             }
             catch (ArgumentException exception)
             {
                 Assumption.ThrowWhenInvalidOperation(
                     () => true,
-                    Messages.Error_Scenario_UndefinedVariable.WithFormat(columnName, dataRow.Table.TableName),
+                    Messages.Error_Scenario_UndefinedVariable.WithInvariantFormat(columnName, dataRow.Table.TableName),
                     exception);
             }
 

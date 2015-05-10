@@ -30,8 +30,8 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-
     using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Wpf;
 
     [Export(typeof(IModule))]
     internal class FundamentalModule : IModule
@@ -50,6 +50,6 @@ namespace nGratis.Cop.Theia.Module.Fundamental
 
         public Guid Id { get; private set; }
 
-        public IEnumerable<Feature> Features { get; private set; }
+        public IEnumerable<IFeature> Features { get; private set; }
     }
 }

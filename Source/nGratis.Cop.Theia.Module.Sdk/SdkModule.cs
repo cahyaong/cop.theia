@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="Feature.cs" company="nGratis">
+// <copyright file="SdkModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,32 +25,30 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+namespace nGratis.Cop.Theia.Module.Sdk
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.ComponentModel.Composition;
+    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Wpf;
 
-    public class Feature
+    [Export(typeof(IModule))]
+    public class SdkModule : IModule
     {
-        public Feature(string name, IEnumerable<Page> subtopics)
-            : this(name, int.MinValue, subtopics)
+        public SdkModule()
         {
+            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
+
+            var loggingPage = new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml");
+
+            var diagnosticFeature = new Feature("SDK", int.MaxValue, new List<Page> { loggingPage });
+
+            this.Features = new List<Feature> { diagnosticFeature };
         }
 
-        public Feature(string name, int order, IEnumerable<Page> subtopics)
-        {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+        public Guid Id { get; private set; }
 
-            this.Name = name;
-            this.Order = order;
-            this.Pages = subtopics ?? Enumerable.Empty<Page>();
-        }
-
-        public string Name { get; private set; }
-
-        public int Order { get; private set; }
-
-        public IEnumerable<Page> Pages { get; private set; }
+        public IEnumerable<IFeature> Features { get; private set; }
     }
 }

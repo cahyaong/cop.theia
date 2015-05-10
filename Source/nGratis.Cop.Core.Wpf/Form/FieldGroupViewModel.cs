@@ -33,7 +33,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.Linq;
     using System.Reflection;
     using JetBrains.Annotations;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
     public class FieldGroupViewModel : ReactiveObject
@@ -46,12 +46,12 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldGroupViewModel(object instance, FieldMode mode)
         {
-            Assumption.ThrowWhenNullArgument(() => instance);
-            Assumption.ThrowWhenInvalidArgument(() => mode == FieldMode.Unknown, () => mode);
+            Guard.AgainstNullArgument(() => instance);
+            Guard.AgainstInvalidArgument(mode == FieldMode.Unknown, () => mode);
 
             var notifyingInstance = instance as INotifyPropertyChanged;
 
-            Assumption.ThrowWhenInvalidArgument(() => notifyingInstance == null, () => instance);
+            Guard.AgainstInvalidArgument(notifyingInstance == null, () => instance);
 
             this.fieldBinders = new List<ObjectBinder>();
 

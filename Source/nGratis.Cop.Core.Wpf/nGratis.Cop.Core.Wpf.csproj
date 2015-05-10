@@ -104,11 +104,13 @@
     </Compile>
     <Compile Include="BasePageViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
+    <Compile Include="Controls\AweLogViewer.cs" />
     <Compile Include="Controls\AweSlider.cs" />
     <Compile Include="Converters\EnumerableToCountConverter.cs" />
     <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />
     <Compile Include="Converters\AnyToTypeNameConverter.cs" />
     <Compile Include="Converters\AnyToUpperCaseConverter.cs" />
+    <Compile Include="Feature.cs" />
     <Compile Include="Form\AsFieldAttribute.cs" />
     <Compile Include="Form\AsFieldCallbackAttribute.cs" />
     <Compile Include="Form\FieldGroupViewModel.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Form\Range.cs" />
     <Compile Include="ObjectBinder.cs" />
     <Compile Include="Controls\FileDialogButton.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="Page.cs" company="nGratis">
+// <copyright file="ExpressionExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -25,30 +25,22 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+// ReSharper disable CheckNamespace
+namespace System.Linq.Expressions
+// ReSharper restore CheckNamespace
 {
     using System;
+    using nGratis.Cop.Core.Contract;
 
-    public class Page
+    public static class ExpressionExtensions
     {
-        public Page(string name, string source)
+        public static string FindName<TProperty>(this Expression<Func<TProperty>> expression)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException();
-            }
+            Guard.AgainstNullArgument(() => expression);
 
-            if (string.IsNullOrEmpty(source))
-            {
-                throw new ArgumentException();
-            }
+            var bodyExpression = expression.Body as MemberExpression ?? (MemberExpression)((UnaryExpression)expression.Body).Operand;
 
-            this.Name = name;
-            this.SourceUri = new Uri(source, UriKind.Relative);
+            return bodyExpression.Member.Name;
         }
-
-        public string Name { get; private set; }
-
-        public Uri SourceUri { get; private set; }
     }
 }

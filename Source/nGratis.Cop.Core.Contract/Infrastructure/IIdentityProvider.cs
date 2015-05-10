@@ -1,8 +1,8 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModuleProvider.cs" company="nGratis">
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// <copyright file="IIdentityProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,21 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 25 April 2015 12:59:14 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
+    using System;
     using System.Collections.Generic;
-    using System.Reflection;
+    using System.Linq;
 
-    public interface IModuleProvider
+    public interface IIdentityProvider
     {
-        IEnumerable<Assembly> FindModuleAssemblies();
+        Guid CreateGuid();
 
-        IEnumerable<Assembly> FindInternalAssemblies();
+        Guid CreateGuid(string content);
+
+        string CreateId();
     }
 }

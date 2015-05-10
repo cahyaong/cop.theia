@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExpressionExtensions.cs" company="nGratis">
+// <copyright file="IPage.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,39 +23,19 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 25 April 2015 12:03:50 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
-namespace System.Linq.Expressions
-// ReSharper restore CheckNamespace
+namespace nGratis.Cop.Core.Contract
 {
     using System;
-    using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    using nGratis.Cop.Core;
-
-    public static class ExpressionExtensions
+    public interface IPage
     {
-        public static string FindPropertyName<TProperty>(this Expression<Func<TProperty>> expression)
-        {
-            Assumption.ThrowWhenNullArgument(() => expression);
+        string Name { get; }
 
-            var bodyExpression = expression.Body as MemberExpression ?? (MemberExpression)((UnaryExpression)expression.Body).Operand;
-
-            return bodyExpression.Member.Name;
-        }
-
-        public static PropertyInfo FindProperty<TOwner, TProperty>(this Expression<Func<TOwner, TProperty>> expression)
-        {
-            Assumption.ThrowWhenNullArgument(() => expression);
-
-            var bodyExpression = expression.Body as MemberExpression;
-
-            Assumption.ThrowWhenInvalidArgument(() => bodyExpression == null, () => expression);
-
-            // ReSharper disable PossibleNullReferenceException - Null assertion is performed above.
-            return (PropertyInfo)bodyExpression.Member;
-            // ReSharper restore PossibleNullReferenceException
-        }
+        Uri SourceUri { get; }
     }
 }

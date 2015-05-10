@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModule.cs" company="nGratis">
+// <copyright file="TemporalProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,32 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 25 April 2015 1:01:42 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Contract
+namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using nGratis.Cop.Core.Contract;
 
-    public interface IModule
+    internal class TemporalProvider : ITemporalProvider
     {
-        Guid Id { get; }
+        static TemporalProvider()
+        {
+            Instance = new TemporalProvider();
+        }
 
-        IEnumerable<Feature> Features { get; }
+        private TemporalProvider()
+        {
+        }
+
+        public static ITemporalProvider Instance { get; private set; }
+
+        public DateTimeOffset UtcNow
+        {
+            get { return DateTimeOffset.UtcNow; }
+        }
     }
 }

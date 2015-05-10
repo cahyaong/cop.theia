@@ -30,6 +30,7 @@ namespace nGratis.Cop.Core
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using nGratis.Cop.Core.Contract;
 
     public abstract class NotifyingObject : INotifyPropertyChanging, INotifyPropertyChanged
     {
@@ -39,12 +40,12 @@ namespace nGratis.Cop.Core
 
         protected void RaiseAndSetIfChanged<TValue>(ref TValue oldValue, TValue newValue, [CallerMemberName] string propertyName = null)
         {
-            if (Equals(oldValue, newValue))
+            if (object.Equals(oldValue, newValue))
             {
                 return;
             }
 
-            Assumption.ThrowWhenNullArgument(() => propertyName);
+            Guard.AgainstNullArgument(() => propertyName);
 
             if (this.PropertyChanging != null)
             {

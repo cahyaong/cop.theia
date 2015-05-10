@@ -31,9 +31,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
-    using System.Windows;
-
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     public class ObjectBinder
     {
@@ -48,10 +46,10 @@ namespace nGratis.Cop.Core.Wpf
 
         public ObjectBinder(INotifyPropertyChanged source, PropertyInfo sourceProperty, INotifyPropertyChanged target, PropertyInfo targetProperty)
         {
-            Assumption.ThrowWhenNullArgument(() => source);
-            Assumption.ThrowWhenNullArgument(() => sourceProperty);
-            Assumption.ThrowWhenNullArgument(() => target);
-            Assumption.ThrowWhenNullArgument(() => targetProperty);
+            Guard.AgainstNullArgument(() => source);
+            Guard.AgainstNullArgument(() => sourceProperty);
+            Guard.AgainstNullArgument(() => target);
+            Guard.AgainstNullArgument(() => targetProperty);
 
             this.source = source;
             this.target = target;
@@ -65,7 +63,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public void BindSourceCallback()
         {
-            var callbackMethodName = "On{0}Changed".WithFormat(this.sourceProperty.Name);
+            var callbackMethodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
 
             this.sourceCallbackMethod = this.source
                 .GetType()
@@ -75,7 +73,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public void BindTargetCallback()
         {
-            var callbackMethodName = "On{0}Changed".WithFormat(this.targetProperty.Name);
+            var callbackMethodName = "On{0}Changed".WithInvariantFormat(this.targetProperty.Name);
 
             this.targetCallbackMethod = this.source
                 .GetType()

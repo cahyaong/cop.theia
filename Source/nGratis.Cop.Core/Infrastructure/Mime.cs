@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core
     using System.Linq;
     using System.Reflection;
     using JetBrains.Annotations;
+    using nGratis.Cop.Core.Contract;
 
     public sealed class Mime
     {
@@ -71,8 +72,8 @@ namespace nGratis.Cop.Core
 
         private Mime(string uniqueId, int rfcId, int isoId, params string[] names)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => uniqueId);
-            Assumption.ThrowWhenInvalidArgument(() => !names.Any(), () => names);
+            Guard.AgainstNullOrWhitespaceArgument(() => uniqueId);
+            Guard.AgainstInvalidArgument(!names.Any(), () => names);
 
             this.UniqueId = uniqueId;
             this.RfcId = rfcId;
@@ -94,18 +95,18 @@ namespace nGratis.Cop.Core
 
         public static Mime ParseByUniqueId(string uniqueId)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => uniqueId);
-            Assumption.ThrowWhenInvalidOperation(() => !UniqueIdToMimeMapping.ContainsKey(uniqueId));
+            Guard.AgainstNullOrWhitespaceArgument(() => uniqueId);
+            Guard.AgainstInvalidOperation(!UniqueIdToMimeMapping.ContainsKey(uniqueId));
 
             return UniqueIdToMimeMapping[uniqueId];
         }
 
         public static Mime ParseByName(string name)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+            Guard.AgainstNullOrWhitespaceArgument(() => name);
 
             name = name.Replace(".", string.Empty);
-            Assumption.ThrowWhenInvalidOperation(() => !NameToMimeMapping.ContainsKey(name));
+            Guard.AgainstInvalidOperation(!NameToMimeMapping.ContainsKey(name));
 
             return NameToMimeMapping[name];
         }

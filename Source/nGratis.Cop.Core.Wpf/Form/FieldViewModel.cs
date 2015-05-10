@@ -30,8 +30,7 @@ namespace nGratis.Cop.Core.Wpf
     using System;
     using System.ComponentModel;
     using System.Reflection;
-    using nGratis.Cop.Core;
-
+    using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
     public class FieldViewModel : ReactiveObject
@@ -48,8 +47,8 @@ namespace nGratis.Cop.Core.Wpf
 
         internal FieldViewModel(Type valueType, AsFieldAttribute asFieldAttribute)
         {
-            Assumption.ThrowWhenNullArgument(() => valueType);
-            Assumption.ThrowWhenNullArgument(() => asFieldAttribute);
+            Guard.AgainstNullArgument(() => valueType);
+            Guard.AgainstNullArgument(() => asFieldAttribute);
 
             this.ValueType = valueType;
 

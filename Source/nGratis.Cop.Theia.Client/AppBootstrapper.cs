@@ -2,7 +2,7 @@
 // <copyright file="AppBootstrapper.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Wednesday, 24 December 2014 12:14:47 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Client
@@ -36,6 +37,7 @@ namespace nGratis.Cop.Theia.Client
     using System.Reflection;
     using System.Windows;
     using Caliburn.Micro;
+    using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Vision.Imaging;
 
@@ -72,6 +74,8 @@ namespace nGratis.Cop.Theia.Client
 
             var caliburnBatch = new CompositionBatch();
             caliburnBatch.AddExport<IWindowManager>(() => new WindowManager());
+
+            caliburnBatch.AddExport<IInfrastructureManager>(() => InfrastructureManager.Instance);
             caliburnBatch.AddExport<IImageProvider>(() => new ImageProvider());
 
             this.mefContainer.Compose(caliburnBatch);

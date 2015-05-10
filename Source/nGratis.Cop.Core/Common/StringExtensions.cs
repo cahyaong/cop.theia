@@ -32,33 +32,23 @@ namespace System
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
-    using JetBrains.Annotations;
     using nGratis.Cop.Core;
 
     public static class StringExtensions
     {
-        [StringFormatMethod("format")]
-        public static string WithFormat(this string format, params object[] args)
-        {
-            return string.IsNullOrWhiteSpace(format)
-                ? format
-                : string.Format(CultureInfo.InvariantCulture, format, args);
-        }
-
         public static string WithMessageDetails(this string input, params MessageDetail[] details)
         {
             return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
                 ? input
-                : "{0} [{1}]".WithFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+                : "{0} [{1}]".WithCurrentFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
         }
 
         public static string WithLowerCaseAtBeginning(this string input)
         {
             return string.IsNullOrWhiteSpace(input)
                 ? input
-                : "{0}{1}".WithFormat(char.ToLower(input.First()), input.Substring(1, input.Length - 1));
+                : "{0}{1}".WithCurrentFormat(char.ToLower(input.First()), input.Substring(1, input.Length - 1));
         }
     }
 }

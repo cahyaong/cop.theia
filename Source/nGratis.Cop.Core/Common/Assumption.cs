@@ -32,13 +32,14 @@ namespace nGratis.Cop.Core
 
     using JetBrains.Annotations;
 
+    [Obsolete("Use [Guard] or [Throw] class from [nGratis.Cop.Contract] library instead.")]
     public static class Assumption
     {
         public static void ThrowWhenInvalidArgument<T>([InstantHandle] Func<bool> isInvalidCondition, [InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
         {
             if (isInvalidCondition())
             {
-                throw new ArgumentException(reason, argumentExpression.FindPropertyName());
+                throw new ArgumentException(reason, argumentExpression.FindName());
             }
         }
 
@@ -47,7 +48,7 @@ namespace nGratis.Cop.Core
         {
             if (argumentExpression.Compile()() == null)
             {
-                throw new ArgumentNullException(argumentExpression.FindPropertyName(), reason);
+                throw new ArgumentNullException(argumentExpression.FindName(), reason);
             }
         }
 
@@ -55,7 +56,7 @@ namespace nGratis.Cop.Core
         {
             if (argumentExpression.Compile()().Equals(default(T)))
             {
-                throw new ArgumentException(argumentExpression.FindPropertyName(), reason);
+                throw new ArgumentException(argumentExpression.FindName(), reason);
             }
         }
 
@@ -65,7 +66,7 @@ namespace nGratis.Cop.Core
 
             if (string.IsNullOrEmpty(argument) || string.IsNullOrWhiteSpace(argument))
             {
-                throw new ArgumentException(argumentExpression.FindPropertyName(), reason);
+                throw new ArgumentException(argumentExpression.FindName(), reason);
             }
         }
 

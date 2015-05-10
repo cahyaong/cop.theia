@@ -33,78 +33,79 @@ namespace System.Collections.Generic
     using System.Linq;
 
     using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     public static class EnumerableExtensions
     {
-        public static IEnumerable<TItem> Append<TItem>(this IEnumerable<TItem> leftItems, IEnumerable<TItem> rightItems)
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> lefts, IEnumerable<T> rights)
         {
-            Assumption.ThrowWhenNullArgument(() => leftItems);
-            Assumption.ThrowWhenNullArgument(() => rightItems);
+            Guard.AgainstNullArgument(() => lefts);
+            Guard.AgainstNullArgument(() => rights);
 
-            foreach (var leftItem in leftItems)
+            foreach (var left in lefts)
             {
-                yield return leftItem;
+                yield return left;
             }
 
-            foreach (var rightItem in rightItems)
+            foreach (var right in rights)
             {
-                yield return rightItem;
-            }
-        }
-
-        public static IEnumerable<TItem> Prepend<TItem>(this IEnumerable<TItem> leftItems, IEnumerable<TItem> rightItems)
-        {
-            Assumption.ThrowWhenNullArgument(() => leftItems);
-            Assumption.ThrowWhenNullArgument(() => rightItems);
-
-            foreach (var rightItem in rightItems)
-            {
-                yield return rightItem;
-            }
-
-            foreach (var leftItem in leftItems)
-            {
-                yield return leftItem;
+                yield return right;
             }
         }
 
-        public static IEnumerable<TItem> Append<TItem>(this IEnumerable<TItem> leftItems, TItem rightItem)
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lefts, IEnumerable<T> rights)
         {
-            Assumption.ThrowWhenNullArgument(() => leftItems);
+            Guard.AgainstNullArgument(() => lefts);
+            Guard.AgainstNullArgument(() => rights);
 
-            foreach (var leftItem in leftItems)
+            foreach (var right in rights)
             {
-                yield return leftItem;
+                yield return right;
             }
 
-            yield return rightItem;
-        }
-
-        public static IEnumerable<TItem> Prepend<TItem>(this IEnumerable<TItem> leftItems, TItem rightItem)
-        {
-            Assumption.ThrowWhenNullArgument(() => leftItems);
-
-            yield return rightItem;
-
-            foreach (var leftItem in leftItems)
+            foreach (var left in lefts)
             {
-                yield return leftItem;
+                yield return left;
             }
         }
 
-        public static IEnumerable<TItem> Except<TItem>(this IEnumerable<TItem> leftItems, IEnumerable<TItem> rightItems, Func<TItem, TItem, bool> isEqual)
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> lefts, T right)
         {
-            Assumption.ThrowWhenNullArgument(() => leftItems);
-            Assumption.ThrowWhenNullArgument(() => rightItems);
-            Assumption.ThrowWhenNullArgument(() => isEqual);
+            Guard.AgainstNullArgument(() => lefts);
 
-            return leftItems.Except(rightItems, new DelegateEqualityComparer<TItem>(isEqual));
+            foreach (var left in lefts)
+            {
+                yield return left;
+            }
+
+            yield return right;
         }
 
-        public static void ForEach<TItem>(this IEnumerable<TItem> items, Action<TItem> perform)
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lefts, T right)
         {
-            Assumption.ThrowWhenNullArgument(() => items);
-            Assumption.ThrowWhenNullArgument(() => perform);
+            Guard.AgainstNullArgument(() => lefts);
+
+            yield return right;
+
+            foreach (var left in lefts)
+            {
+                yield return left;
+            }
+        }
+
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> lefts, IEnumerable<T> rights, Func<T, T, bool> isEqual)
+        {
+            Guard.AgainstNullArgument(() => lefts);
+            Guard.AgainstNullArgument(() => rights);
+            Guard.AgainstNullArgument(() => isEqual);
+
+            return lefts.Except(rights, new DelegateEqualityComparer<T>(isEqual));
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T> perform)
+        {
+            Guard.AgainstNullArgument(() => items);
+            Guard.AgainstNullArgument(() => perform);
 
             foreach (var item in items)
             {
@@ -112,10 +113,10 @@ namespace System.Collections.Generic
             }
         }
 
-        public static void ForEach<TItem>(this IEnumerable<TItem> items, Action<TItem, int> apply)
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> apply)
         {
-            Assumption.ThrowWhenNullArgument(() => items);
-            Assumption.ThrowWhenNullArgument(() => apply);
+            Guard.AgainstNullArgument(() => items);
+            Guard.AgainstNullArgument(() => apply);
 
             var index = 0;
 
@@ -123,6 +124,11 @@ namespace System.Collections.Generic
             {
                 apply(item, index++);
             }
+        }
+
+        public static IList<T> PutInList<T>(this T item)
+        {
+            return new List<T> { item };
         }
     }
 }

@@ -31,8 +31,8 @@ namespace nGratis.Cop.Theia.Module.Application
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-
     using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Wpf;
 
     [Export(typeof(IModule))]
     public class ApplicationModule : IModule
@@ -49,6 +49,6 @@ namespace nGratis.Cop.Theia.Module.Application
 
         public Guid Id { get; private set; }
 
-        public IEnumerable<Feature> Features { get; private set; }
+        public IEnumerable<IFeature> Features { get; private set; }
     }
 }

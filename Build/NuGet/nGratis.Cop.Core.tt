@@ -28,6 +28,11 @@
     <description>Cop.Core package contains common core funcationality used by other 'Community of Practice' projects.</description>
     <language>en-US</language>
     <copyright>Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong</copyright>
+    <dependencies>
+      <dependency id="NLog" version="[3.2.1]" />
+      <dependency id="PostSharp" version="[4.1.13]" />
+      <dependency id="Rx-Main" version="[2.2.5]" />
+    </dependencies>
   </metadata>
   <files>
     <file src="nGratis.Cop.Core.dll" target="lib\net45\nGratis.Cop.Core.dll" />
