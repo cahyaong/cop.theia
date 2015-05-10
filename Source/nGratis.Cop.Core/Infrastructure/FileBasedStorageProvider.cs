@@ -33,21 +33,20 @@ namespace nGratis.Cop.Core
     using System.IO;
     using System.Text;
     using JetBrains.Annotations;
+    using nGratis.Cop.Core.Contract;
 
     [UsedImplicitly]
     public class FileBasedStorageProvider : IStorageProvider
     {
         public FileBasedStorageProvider(Uri rootFolderUri)
         {
-            Assumption.ThrowWhenNullArgument(() => rootFolderUri);
-            Assumption.ThrowWhenInvalidArgument(() => !rootFolderUri.IsFile, () => rootFolderUri);
+            Guard.AgainstNullArgument(() => rootFolderUri);
+            Guard.AgainstInvalidArgument(!rootFolderUri.IsFile, () => rootFolderUri);
 
             var rootFolderPath = Path.GetDirectoryName(rootFolderUri.AbsolutePath);
-            Assumption.ThrowWhenUnexpectedNullValue(() => rootFolderPath);
+            Guard.AgainstUnexpectedNullValue(rootFolderPath);
 
-            // ReSharper disable AssignNullToNotNullAttribute
             this.RootUri = new Uri(rootFolderPath, UriKind.Absolute);
-            // ReSharper restore AssignNullToNotNullAttribute
         }
 
         [UsedImplicitly]
@@ -55,7 +54,7 @@ namespace nGratis.Cop.Core
 
         public Stream LoadData(IDataSpecification dataSpecification)
         {
-            Assumption.ThrowWhenNullArgument(() => dataSpecification);
+            Guard.AgainstNullArgument(() => dataSpecification);
 
             return File.Open(
                 Path.Combine(this.RootUri.LocalPath, dataSpecification.FullName),
@@ -64,14 +63,14 @@ namespace nGratis.Cop.Core
 
         public void SaveData(IDataSpecification dataSpecification, Stream dataStream)
         {
-            Assumption.ThrowWhenNullArgument(() => dataSpecification);
-            Assumption.ThrowWhenNullArgument(() => dataStream);
+            Guard.AgainstNullArgument(() => dataSpecification);
+            Guard.AgainstNullArgument(() => dataStream);
 
             var filePath = Path.Combine(this.RootUri.LocalPath, dataSpecification.FullName);
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => File.Exists(filePath),
-                "Failed to save data".WithMessageDetails(MessageDetail.New("Path", filePath)));
+            Guard.AgainstInvalidOperation(
+                File.Exists(filePath),
+                () => "Failed to save data".WithMessageDetails(MessageDetail.New("Path", filePath)));
 
             dataStream.Position = 0;
 

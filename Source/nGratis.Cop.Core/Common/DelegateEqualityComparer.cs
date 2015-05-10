@@ -29,6 +29,7 @@ namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
+    using nGratis.Cop.Core.Contract;
 
     internal class DelegateEqualityComparer<TItem> : IEqualityComparer<TItem>
     {
@@ -36,7 +37,7 @@ namespace nGratis.Cop.Core
 
         public DelegateEqualityComparer(Func<TItem, TItem, bool> isEqual)
         {
-            Assumption.ThrowWhenNullArgument(() => isEqual);
+            Guard.AgainstNullArgument(() => isEqual);
 
             this.isEqual = isEqual;
         }

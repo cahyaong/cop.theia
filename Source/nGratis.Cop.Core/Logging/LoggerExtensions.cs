@@ -39,7 +39,7 @@ namespace nGratis.Cop.Core
     {
         public static void LogAsTrace(this ILogger logger, string message)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Trace, message);
         }
@@ -47,14 +47,14 @@ namespace nGratis.Cop.Core
         [StringFormatMethod("format")]
         public static void LogAsTrace(this ILogger logger, string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Trace, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsDebug(this ILogger logger, string message)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Debug, message);
         }
@@ -62,14 +62,14 @@ namespace nGratis.Cop.Core
         [StringFormatMethod("format")]
         public static void LogAsDebug(this ILogger logger, string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Debug, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsInformation(this ILogger logger, string message)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Information, message);
         }
@@ -77,14 +77,14 @@ namespace nGratis.Cop.Core
         [StringFormatMethod("format")]
         public static void LogAsInformation(this ILogger logger, string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Information, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsWarning(this ILogger logger, string message)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Warning, message);
         }
@@ -92,14 +92,14 @@ namespace nGratis.Cop.Core
         [StringFormatMethod("format")]
         public static void LogAsWarning(this ILogger logger, string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Warning, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsError(this ILogger logger, string message)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Error, message);
         }
@@ -107,14 +107,14 @@ namespace nGratis.Cop.Core
         [StringFormatMethod("format")]
         public static void LogAsError(this ILogger logger, string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Error, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
         public static void LogAsFatal(this ILogger logger, Exception exception, string message)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Error, exception, message);
         }
@@ -122,7 +122,7 @@ namespace nGratis.Cop.Core
         [StringFormatMethod("format")]
         public static void LogAsFatal(this ILogger logger, Exception exception, string format, params object[] args)
         {
-            Assumption.ThrowWhenNullArgument(() => logger);
+            Guard.AgainstNullArgument(() => logger);
 
             logger.LogWith(Verbosity.Error, exception, string.Format(CultureInfo.CurrentUICulture, format, args));
         }

@@ -42,7 +42,7 @@ namespace nGratis.Cop.Core
 
         protected BaseLogger(string id, IList<string> components = null)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => id);
+            Guard.AgainstNullOrWhitespaceArgument(() => id);
 
             this.loggingSubject = new ReplaySubject<LogEntry>();
 
@@ -104,7 +104,7 @@ namespace nGratis.Cop.Core
 
         protected void LogWith(LogEntry logEntry)
         {
-            Assumption.ThrowWhenNullArgument(() => logEntry);
+            Guard.AgainstNullArgument(() => logEntry);
 
             this.loggingSubject.OnNext(logEntry);
         }

@@ -35,7 +35,7 @@ namespace System
     using System.Linq;
     using nGratis.Cop.Core;
 
-    public static partial class StringExtensions
+    public static class StringExtensions
     {
         public static string WithMessageDetails(this string input, params MessageDetail[] details)
         {

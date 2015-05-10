@@ -39,7 +39,7 @@ namespace nGratis.Cop.Core
     {
         public static ILogger GetLoggerFromCaller(this ILoggingProvider loggingProvider)
         {
-            Assumption.ThrowWhenNullArgument(() => loggingProvider);
+            Guard.AgainstNullArgument(() => loggingProvider);
 
             var stackTrace = new StackTrace();
             var stackFrames = stackTrace.GetFrames();

@@ -29,6 +29,7 @@
 namespace nGratis.Cop.Core
 {
     using System;
+    using nGratis.Cop.Core.Contract;
 
     public struct MessageDetail
     {
@@ -38,8 +39,8 @@ namespace nGratis.Cop.Core
 
         public static MessageDetail New(string header, string content)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => header);
-            Assumption.ThrowWhenNullArgument(() => content);
+            Guard.AgainstNullOrWhitespaceArgument(() => header);
+            Guard.AgainstNullArgument(() => content);
 
             return new MessageDetail
             {

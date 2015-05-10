@@ -31,13 +31,14 @@ namespace nGratis.Cop.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using nGratis.Cop.Core.Contract;
 
     public static class DictionaryExtensions
     {
         public static void Upsert<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
         {
-            Assumption.ThrowWhenNullArgument(() => dictionary);
-            Assumption.ThrowWhenDefaultArgument(() => key);
+            Guard.AgainstNullArgument(() => dictionary);
+            Guard.AgainstDefaultArgument(() => key);
 
             if (dictionary.ContainsKey(key))
             {

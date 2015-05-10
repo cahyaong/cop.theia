@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core
     using System.IO;
     using System.Linq;
     using JetBrains.Annotations;
+    using nGratis.Cop.Core.Contract;
 
     [UsedImplicitly]
     public class DataSpecification : IDataSpecification
@@ -43,10 +44,10 @@ namespace nGratis.Cop.Core
 
         public DataSpecification(IStorageProvider storageProvider, string name, Mime contentMime)
         {
-            Assumption.ThrowWhenNullArgument(() => storageProvider);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
-            Assumption.ThrowWhenNullArgument(() => contentMime);
-            Assumption.ThrowWhenInvalidArgument(() => contentMime == Mime.Unknown, () => contentMime);
+            Guard.AgainstNullArgument(() => storageProvider);
+            Guard.AgainstNullOrWhitespaceArgument(() => name);
+            Guard.AgainstNullArgument(() => contentMime);
+            Guard.AgainstInvalidArgument(contentMime == Mime.Unknown, () => contentMime);
 
             this.ContentMime = contentMime;
             this.Name = name;

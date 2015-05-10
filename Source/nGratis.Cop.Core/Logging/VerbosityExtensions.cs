@@ -38,7 +38,7 @@ namespace nGratis.Cop.Core
     {
         public static LogLevel ToLogLevel(this Verbosity verbosity)
         {
-            Assumption.ThrowWhenDefaultArgument(() => verbosity);
+            Guard.AgainstDefaultArgument(() => verbosity);
 
             switch (verbosity)
             {

@@ -31,13 +31,14 @@ namespace nGratis.Cop.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using nGratis.Cop.Core.Contract;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class LoggingAttribute : Attribute
     {
         public LoggingAttribute(string category)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => category);
+            Guard.AgainstNullOrWhitespaceArgument(() => category);
 
             this.Category = category;
         }

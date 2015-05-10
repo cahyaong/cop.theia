@@ -34,7 +34,7 @@ namespace System
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     public static class TypeExtensions
     {
@@ -54,9 +54,9 @@ namespace System
             where TInstance : class
             where TArgs : EventArgs
         {
-            Assumption.ThrowWhenNullArgument(() => instance);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => eventName);
-            Assumption.ThrowWhenNullArgument(() => handler);
+            Guard.AgainstNullArgument(() => instance);
+            Guard.AgainstNullOrWhitespaceArgument(() => eventName);
+            Guard.AgainstNullArgument(() => handler);
 
             WeakEventManager<TInstance, TArgs>.AddHandler(instance, eventName, handler);
         }
@@ -65,9 +65,9 @@ namespace System
             where TInstance : class
             where TArgs : EventArgs
         {
-            Assumption.ThrowWhenNullArgument(() => instance);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => eventName);
-            Assumption.ThrowWhenNullArgument(() => handler);
+            Guard.AgainstNullArgument(() => instance);
+            Guard.AgainstNullOrWhitespaceArgument(() => eventName);
+            Guard.AgainstNullArgument(() => handler);
 
             WeakEventManager<TInstance, TArgs>.RemoveHandler(instance, eventName, handler);
         }

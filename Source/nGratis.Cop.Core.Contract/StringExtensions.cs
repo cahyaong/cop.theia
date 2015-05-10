@@ -35,9 +35,8 @@ namespace System
     using System.Globalization;
     using System.Linq;
     using JetBrains.Annotations;
-    using nGratis.Cop.Core;
 
-    public static partial class StringExtensions
+    public static class StringExtensions
     {
         [StringFormatMethod("format")]
         public static string WithCurrentFormat(this string format, params object[] args)

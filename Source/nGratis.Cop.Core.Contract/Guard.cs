@@ -46,9 +46,9 @@ namespace nGratis.Cop.Core.Contract
                 var argument = argumentExpression.FindName();
                 var reason = getReason != null ? getReason() : null;
 
-                var message = "{0} {1}".WithCurrentFormat(
+                var message = "{0}{1}".WithCurrentFormat(
                     Localization.Messages.Guard_Exception_NullArgument.WithCurrentFormat(argument),
-                    !string.IsNullOrWhiteSpace(reason) ? Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+                    !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
 
                 Throw.ArgumentNullException(argument, message);
             }
@@ -56,16 +56,50 @@ namespace nGratis.Cop.Core.Contract
 
         [DebuggerStepThrough]
         public static void AgainstDefaultArgument<T>([NotNull][InstantHandle] Expression<Func<T>> argumentExpression, Func<string> getReason = null)
-            where T : struct
         {
             if (argumentExpression.Compile()().Equals(default(T)))
             {
                 var argument = argumentExpression.FindName();
                 var reason = getReason != null ? getReason() : null;
 
-                var message = "{0} {1}".WithCurrentFormat(
+                var message = "{0}{1}".WithCurrentFormat(
                     Localization.Messages.Guard_Exception_DefaultArgument.WithCurrentFormat(argument),
-                    !string.IsNullOrWhiteSpace(reason) ? Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+                    !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+
+                Throw.ArgumentException(argument, message);
+            }
+        }
+
+        [DebuggerStepThrough]
+        public static void AgainstNullOrWhitespaceArgument([NotNull][InstantHandle] Expression<Func<string>> argumentExpression, Func<string> getReason = null)
+        {
+            var value = argumentExpression.Compile()();
+
+            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+            {
+                var argument = argumentExpression.FindName();
+                var reason = getReason != null ? getReason() : null;
+
+                var message = "{0}{1}".WithCurrentFormat(
+                    Localization.Messages.Guard_Exception_StringNullOrWhitespace.WithCurrentFormat(argument),
+                    !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+
+                Throw.ArgumentException(argument, message);
+            }
+        }
+
+        [DebuggerStepThrough]
+        [ContractAnnotation("isInvalid:true => halt")]
+        public static void AgainstInvalidArgument<T>(bool isInvalid, [InstantHandle] Expression<Func<T>> argumentExpression, Func<string> getReason = null)
+        {
+            if (isInvalid)
+            {
+                var argument = argumentExpression.FindName();
+                var reason = getReason != null ? getReason() : null;
+
+                var message = "{0}{1}".WithCurrentFormat(
+                    Localization.Messages.Guard_Exception_InvalidArgument.WithCurrentFormat(argument),
+                    !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
 
                 Throw.ArgumentException(argument, message);
             }
@@ -77,9 +111,9 @@ namespace nGratis.Cop.Core.Contract
         {
             var reason = getReason != null ? getReason() : null;
 
-            var message = "{0} {1}".WithCurrentFormat(
+            var message = "{0}{1}".WithCurrentFormat(
                 Localization.Messages.Guard_Exception_InvalidOperation,
-                !string.IsNullOrWhiteSpace(reason) ? Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+                !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
 
             Throw.InvalidOperationException(message);
         }
@@ -92,9 +126,9 @@ namespace nGratis.Cop.Core.Contract
             {
                 var reason = getReason != null ? getReason() : null;
 
-                var message = "{0} {1}".WithCurrentFormat(
+                var message = "{0}{1}".WithCurrentFormat(
                     Localization.Messages.Guard_Exception_InvalidOperation,
-                    !string.IsNullOrWhiteSpace(reason) ? Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+                    !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
 
                 Throw.InvalidOperationException(message);
             }
@@ -109,9 +143,9 @@ namespace nGratis.Cop.Core.Contract
             {
                 var reason = getReason != null ? getReason() : null;
 
-                var message = "{0} {1}".WithCurrentFormat(
+                var message = "{0}{1}".WithCurrentFormat(
                     Localization.Messages.Guard_Exception_UnexpectedNullValue,
-                    !string.IsNullOrWhiteSpace(reason) ? Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
+                    !string.IsNullOrWhiteSpace(reason) ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason) : string.Empty);
 
                 Throw.InvalidOperationException(message);
             }

@@ -88,6 +88,15 @@ namespace nGratis.Cop.Core.Contract.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter [{0}] is not valid..
+        /// </summary>
+        internal static string Guard_Exception_InvalidArgument {
+            get {
+                return ResourceManager.GetString("Guard_Exception_InvalidArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation is not valid..
         /// </summary>
         internal static string Guard_Exception_InvalidOperation {
@@ -102,6 +111,15 @@ namespace nGratis.Cop.Core.Contract.Localization {
         internal static string Guard_Exception_NullArgument {
             get {
                 return ResourceManager.GetString("Guard_Exception_NullArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter [{0}] cannot be &lt;null&gt; or contains only whitespaces..
+        /// </summary>
+        internal static string Guard_Exception_StringNullOrWhitespace {
+            get {
+                return ResourceManager.GetString("Guard_Exception_StringNullOrWhitespace", resourceCulture);
             }
         }
         

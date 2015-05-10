@@ -58,7 +58,7 @@ namespace nGratis.Cop.Core
 
         public void RegisterLoggers(params ILogger[] loggers)
         {
-            Assumption.ThrowWhenNullArgument(() => loggers);
+            Guard.AgainstNullArgument(() => loggers);
 
             loggers
                 .Where(logger => !this.loggerLookup.ContainsKey(logger.Id))
@@ -76,7 +76,7 @@ namespace nGratis.Cop.Core
 
         public void UnregisterLoggers(params ILogger[] loggers)
         {
-            Assumption.ThrowWhenNullArgument(() => loggers);
+            Guard.AgainstNullArgument(() => loggers);
 
             loggers
                 .Where(logger => this.loggerLookup.ContainsKey(logger.Id))

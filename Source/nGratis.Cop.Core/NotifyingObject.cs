@@ -30,6 +30,7 @@ namespace nGratis.Cop.Core
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using nGratis.Cop.Core.Contract;
 
     public abstract class NotifyingObject : INotifyPropertyChanging, INotifyPropertyChanged
     {
@@ -44,7 +45,7 @@ namespace nGratis.Cop.Core
                 return;
             }
 
-            Assumption.ThrowWhenNullArgument(() => propertyName);
+            Guard.AgainstNullArgument(() => propertyName);
 
             if (this.PropertyChanging != null)
             {

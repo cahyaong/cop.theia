@@ -59,7 +59,7 @@ namespace nGratis.Cop.Core
 
         public ILogger GetLoggerFor(Type type)
         {
-            Assumption.ThrowWhenNullArgument(() => type);
+            Guard.AgainstNullArgument(() => type);
 
             var logger = this
                 .loggerLookup
@@ -72,7 +72,7 @@ namespace nGratis.Cop.Core
 
         public ILogger GetLoggerFor(string component)
         {
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => component);
+            Guard.AgainstNullOrWhitespaceArgument(() => component);
 
             if (component == "*")
             {

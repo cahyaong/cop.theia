@@ -131,11 +131,19 @@
     <value>Parameter [{0}] cannot be &lt;default&gt;.</value>
     <comment>{0} = Parameter name.</comment>
   </data>
+  <data name="Guard_Exception_InvalidArgument" xml:space="preserve">
+    <value>Parameter [{0}] is not valid.</value>
+    <comment>{0} = Parameter name.</comment>
+  </data>
   <data name="Guard_Exception_InvalidOperation" xml:space="preserve">
     <value>Operation is not valid.</value>
   </data>
   <data name="Guard_Exception_NullArgument" xml:space="preserve">
     <value>Parameter [{0}] cannot be &lt;null&gt;.</value>
+    <comment>{0} = Parameter name.</comment>
+  </data>
+  <data name="Guard_Exception_StringNullOrWhitespace" xml:space="preserve">
+    <value>Parameter [{0}] cannot be &lt;null&gt; or contains only whitespaces.</value>
     <comment>{0} = Parameter name.</comment>
   </data>
   <data name="Guard_Exception_UnexpectedNullValue" xml:space="preserve">
