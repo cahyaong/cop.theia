@@ -32,9 +32,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Reactive.Concurrency;
     using System.Reactive.Linq;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
     using nGratis.Cop.Core.Contract;
@@ -45,7 +43,7 @@ namespace nGratis.Cop.Core.Wpf
             "Logger",
             typeof(ILogger),
             typeof(AweLogViewer),
-            new PropertyMetadata(null, LoggerPropertyChanged));
+            new PropertyMetadata(null, OnLoggerPropertyChanged));
 
         public static readonly DependencyProperty LogEntriesProperty = DependencyProperty.Register(
             "LogEntries",
@@ -85,7 +83,7 @@ namespace nGratis.Cop.Core.Wpf
             get { return (IList<LogEntry>)this.GetValue(LogEntriesProperty); }
         }
 
-        private static void LoggerPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        private static void OnLoggerPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
             var logViewer = dependencyObject as AweLogViewer;
 
