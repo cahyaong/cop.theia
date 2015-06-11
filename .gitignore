@@ -1,3 +1,10 @@
+Archive/
+Output/
+Source/nGratis.Cop.Theia.Binaries/
+Source/TestResults/
+Source/packages/
+!Source/packages/repositories.config
+
 [Bb]in/
 [Oo]bj/
 
@@ -5,12 +12,5 @@
 *.user
 *.vspscc
 *.vssscc
-
-Output/
-
-Source/nGratis.Cop.Theia.Binaries/
-Source/TestResults/
-Source/packages/
-!Source/packages/repositories.config
 
 StyleCop.Cache
