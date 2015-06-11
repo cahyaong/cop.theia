@@ -6,7 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
   <ResourceDictionary.MergedDictionaries>
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.Button.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweFileDialogButton.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
   </ResourceDictionary.MergedDictionaries>
@@ -32,11 +32,11 @@
         Margin="0,0,5,0"
         Style="{StaticResource Cop.TextBox.Normal}"
         Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-      <core:FileDialogButton
+      <core:AweFileDialogButton
         Grid.Column="1"
         Content="Browse"
         SelectedFilePath="{Binding Value, Mode=TwoWay}"
-        Style="{StaticResource Cop.FileDialogButton.Normal}" />
+        Style="{StaticResource Cop.AweFileDialogButton.Normal}" />
     </Grid>
   </DataTemplate>
 

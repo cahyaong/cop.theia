@@ -6,13 +6,13 @@
     <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Button.xaml" />
   </ResourceDictionary.MergedDictionaries>
   <Style
-    x:Key="{x:Type core:FileDialogButton}"
+    x:Key="{x:Type core:AweFileDialogButton}"
     BasedOn="{StaticResource {x:Type Button}}"
-    TargetType="core:FileDialogButton" />
+    TargetType="core:AweFileDialogButton" />
   <Style
-    x:Key="Cop.FileDialogButton.Normal"
-    BasedOn="{StaticResource {x:Type core:FileDialogButton}}"
-    TargetType="{x:Type core:FileDialogButton}">
+    x:Key="Cop.AweFileDialogButton.Normal"
+    BasedOn="{StaticResource {x:Type core:AweFileDialogButton}}"
+    TargetType="{x:Type core:AweFileDialogButton}">
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="FontFamily" Value="Segoe UI Semilight" />

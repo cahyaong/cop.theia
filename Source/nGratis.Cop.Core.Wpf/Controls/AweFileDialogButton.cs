@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileDialogButton.cs" company="nGratis">
+// <copyright file="AweFileDialogButton.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -34,20 +34,20 @@ namespace nGratis.Cop.Core.Wpf
     using FirstFloor.ModernUI.Presentation;
     using Microsoft.Win32;
 
-    public class FileDialogButton : Button
+    public class AweFileDialogButton : Button
     {
         public static readonly DependencyProperty SelectedFilePathProperty = DependencyProperty.Register(
-            "SelectedFilePath", typeof(string), typeof(FileDialogButton), new PropertyMetadata(null));
+            "SelectedFilePath", typeof(string), typeof(AweFileDialogButton), new PropertyMetadata(null));
 
-        public FileDialogButton()
+        public AweFileDialogButton()
         {
             this.Command = new RelayCommand(this.OnMouseClicked, _ => true);
         }
 
         public string SelectedFilePath
         {
-            get { return (string)this.GetValue(FileDialogButton.SelectedFilePathProperty); }
-            set { this.SetValue(FileDialogButton.SelectedFilePathProperty, value); }
+            get { return (string)this.GetValue(SelectedFilePathProperty); }
+            set { this.SetValue(SelectedFilePathProperty, value); }
         }
 
         private void OnMouseClicked(object parameter)
