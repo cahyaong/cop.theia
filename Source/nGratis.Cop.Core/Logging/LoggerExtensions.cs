@@ -116,7 +116,7 @@ namespace nGratis.Cop.Core
         {
             Guard.AgainstNullArgument(() => logger);
 
-            logger.LogWith(Verbosity.Error, exception, message);
+            logger.LogWith(Verbosity.Fatal, exception, message);
         }
 
         [StringFormatMethod("format")]
@@ -124,7 +124,7 @@ namespace nGratis.Cop.Core
         {
             Guard.AgainstNullArgument(() => logger);
 
-            logger.LogWith(Verbosity.Error, exception, string.Format(CultureInfo.CurrentUICulture, format, args));
+            logger.LogWith(Verbosity.Fatal, exception, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
     }
 }

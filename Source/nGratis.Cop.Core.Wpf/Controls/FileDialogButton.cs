@@ -31,9 +31,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.IO;
     using System.Windows;
     using System.Windows.Controls;
-
     using FirstFloor.ModernUI.Presentation;
-
     using Microsoft.Win32;
 
     public class FileDialogButton : Button

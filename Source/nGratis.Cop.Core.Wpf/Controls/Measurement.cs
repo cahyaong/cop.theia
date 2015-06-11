@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="App.xaml.cs" company="nGratis">
+// <copyright file="Measurement.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +23,27 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 10 May 2015 1:01:55 PM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Windows;
-    using System.Windows.Media;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    using FirstFloor.ModernUI.Presentation;
+    // ReSharper disable InconsistentNaming
 
-    public partial class App
+    public enum Measurement
     {
-        protected override void OnStartup(StartupEventArgs args)
-        {
-            AppearanceManager.Current.AccentColor = Color.FromRgb(0x53, 0x81, 0x35);
-
-            base.OnStartup(args);
-        }
+        Unknown,
+        XS,
+        S,
+        M,
+        L,
+        XL,
+        XXL
     }
+
+    // ReSharper restore InconsistentNaming
 }
