@@ -42,20 +42,26 @@ namespace nGratis.Cop.Theia.Module.Sdk
     public class LoggingSource : ReactiveObject
     {
         private bool isExecuting;
+
         private string name;
 
         public LoggingSource(IInfrastructureManager infrastructureManager, string name)
         {
-            Assumption.ThrowWhenNullArgument(() => infrastructureManager);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => name);
+            Guard.AgainstNullArgument(() => infrastructureManager);
+            Guard.AgainstNullOrWhitespaceArgument(() => name);
 
             this.Name = name;
             this.Logger = infrastructureManager.LoggingProvider.GetLoggerFor("<SDK>");
 
-            this.GenerateLogsCommand = ReactiveCommand.CreateAsyncTask(
+            this.GenerateFatalCommand = ReactiveCommand.CreateAsyncTask(
                 this.WhenAnyValue(vm => vm.IsExecuting, isExecuting => !isExecuting)
                     .ObserveOn(RxApp.MainThreadScheduler),
-                _ => Task.Run(() => this.GenerateLogs()));
+                _ => Task.Run(() => this.GenerateFatal()));
+
+            this.GenerateTracesCommand = ReactiveCommand.CreateAsyncTask(
+                this.WhenAnyValue(vm => vm.IsExecuting, isExecuting => !isExecuting)
+                    .ObserveOn(RxApp.MainThreadScheduler),
+                _ => Task.Run(() => this.GenerateTraces()));
         }
 
         public bool IsExecuting
@@ -70,11 +76,20 @@ namespace nGratis.Cop.Theia.Module.Sdk
             private set { this.RaiseAndSetIfChanged(ref this.name, value); }
         }
 
-        public ICommand GenerateLogsCommand { get; private set; }
+        public ICommand GenerateFatalCommand { get; private set; }
+
+        public ICommand GenerateTracesCommand { get; private set; }
 
         protected ILogger Logger { get; private set; }
 
-        private void GenerateLogs()
+        private void GenerateFatal()
+        {
+            this.IsExecuting = true;
+            this.Logger.LogAsFatal(new CopException(), "Unhandled exception.");
+            this.IsExecuting = false;
+        }
+
+        private void GenerateTraces()
         {
             this.IsExecuting = true;
 

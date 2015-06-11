@@ -30,7 +30,6 @@ namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -55,7 +54,9 @@ namespace nGratis.Cop.Core.Wpf
                 return null;
             }
 
-            var key = "Cop.{0}Field.{1}".WithInvariantFormat(field.Mode, field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
+            var key = "Cop.{0}Field.{1}".WithInvariantFormat(
+                field.Mode,
+                field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
 
             if (this.templateLookup.ContainsKey(key))
             {

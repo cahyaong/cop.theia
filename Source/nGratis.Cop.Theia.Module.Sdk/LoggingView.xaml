@@ -2,12 +2,15 @@
   x:Class="nGratis.Cop.Theia.Module.Sdk.LoggingView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:core="http://schemas.ngratis.com/2014/core"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:sdk="clr-namespace:nGratis.Cop.Theia.Module.Sdk"
-  xmlns:wpf="http://schemas.ngratis.com/2014/core"
   d:DataContext="{d:DesignInstance sdk:LoggingViewModel}"
   mc:Ignorable="d">
+  <UserControl.Resources>
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Icon.Control.xaml" />
+  </UserControl.Resources>
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -21,10 +24,12 @@
       </ListView.ItemsPanel>
       <ListView.ItemTemplate>
         <DataTemplate DataType="sdk:LoggingSource">
-          <Button
-            Width="100"
-            Command="{Binding GenerateLogsCommand, Mode=OneWay}"
-            Content="{Binding Name, Mode=OneWay}" />
+          <core:AweButton
+            AccentColor="Firebrick"
+            Command="{Binding GenerateFatalCommand, Mode=OneWay}"
+            IconGeometry="{StaticResource Cop.Icon.Stop}"
+            IsBorderHidden="True"
+            Measurement="S" />
         </DataTemplate>
       </ListView.ItemTemplate>
       <ListView.ItemContainerStyle>
@@ -34,6 +39,6 @@
         </Style>
       </ListView.ItemContainerStyle>
     </ListView>
-    <wpf:AweLogViewer Grid.Row="1" Logger="{Binding Logger, Mode=OneWay}" />
+    <core:AweLogViewer Grid.Row="1" Logger="{Binding Logger, Mode=OneWay}" />
   </Grid>
 </UserControl>
