@@ -107,7 +107,7 @@
     <Compile Include="Controls\AweButton.cs" />
     <Compile Include="Controls\AweLogViewer.cs" />
     <Compile Include="Controls\AweSlider.cs" />
-    <Compile Include="Controls\Measurement.cs" />
+    <Compile Include="Measurement.cs" />
     <Compile Include="Converters\EnumerableToCountConverter.cs" />
     <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />
     <Compile Include="Converters\AnyToTypeNameConverter.cs" />
