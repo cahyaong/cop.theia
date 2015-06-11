@@ -3,7 +3,7 @@
   <metadata>
     <id>nGratis.Cop.Core</id>
     <title>nGratis: Community of Practice - Core</title>
-    <version>0.1.100</version>
+    <version>0.1.162</version>
     <authors>Cahya Ong</authors>
     <owners>Cahya Ong</owners>
     <licenseUrl>https://github.com/cahyaong/cop.theia/blob/master/LICENSE.md</licenseUrl>
@@ -12,6 +12,11 @@
     <description>Cop.Core package contains common core funcationality used by other 'Community of Practice' projects.</description>
     <language>en-US</language>
     <copyright>Copyright © 2014 - 2015 Cahya Ong</copyright>
+    <dependencies>
+      <dependency id="NLog" version="[3.2.1]" />
+      <dependency id="PostSharp" version="[4.1.13]" />
+      <dependency id="Rx-Main" version="[2.2.5]" />
+    </dependencies>
   </metadata>
   <files>
     <file src="nGratis.Cop.Core.dll" target="lib\net45\nGratis.Cop.Core.dll" />
