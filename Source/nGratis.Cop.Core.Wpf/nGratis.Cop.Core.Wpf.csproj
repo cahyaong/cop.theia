@@ -120,7 +120,7 @@
     <Compile Include="Form\FieldTemplateSelector.cs" />
     <Compile Include="Form\FieldType.cs" />
     <Compile Include="Form\FieldViewModel.cs" />
-    <Compile Include="Form\Field.cs" />
+    <Compile Include="Form\AweField.cs" />
     <Compile Include="Form\Range.cs" />
     <Compile Include="ObjectBinder.cs" />
     <Compile Include="Controls\AweFileDialogButton.cs" />

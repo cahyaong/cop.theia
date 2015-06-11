@@ -24,7 +24,7 @@
         ItemsSource="{Binding InputFieldGroup.Fields, Mode=OneWay}">
         <ItemsControl.ItemTemplate>
           <DataTemplate DataType="core:FieldViewModel">
-            <core:Field Label="{Binding Label, Mode=OneWay}" Value="{Binding Value, Mode=TwoWay}" />
+            <core:AweField Label="{Binding Label, Mode=OneWay}" Value="{Binding Value, Mode=TwoWay}" />
           </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemsPanel>
@@ -36,7 +36,7 @@
       <ItemsControl Grid.Column="1" ItemsSource="{Binding OutputFieldGroup.Fields, Mode=OneWay}">
         <ItemsControl.ItemTemplate>
           <DataTemplate DataType="core:FieldViewModel">
-            <core:Field Label="{Binding Label, Mode=OneWay}" Value="{Binding Value, Mode=TwoWay}" />
+            <core:AweField Label="{Binding Label, Mode=OneWay}" Value="{Binding Value, Mode=TwoWay}" />
           </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemsPanel>

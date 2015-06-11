@@ -11,16 +11,16 @@
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
-  <core:FieldTemplateSelector x:Key="Cop.TemplateSelector.Field" />
+  <core:FieldTemplateSelector x:Key="Cop.AweField.TemplateSelector" />
 
-  <DataTemplate x:Key="Cop.Field.Default" DataType="core:Field">
+  <DataTemplate x:Key="Cop.AweField.Default" DataType="core:AweField">
     <TextBlock
       FontStyle="Italic"
       Style="{StaticResource Cop.TextBlock.Body}"
       Text="___UNSUPPORTED___" />
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.InputField.File" DataType="core:Field">
+  <DataTemplate x:Key="Cop.AweField.Input.File" DataType="core:AweField">
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
@@ -40,7 +40,7 @@
     </Grid>
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.InputField.Range" DataType="core:Field">
+  <DataTemplate x:Key="Cop.AweField.Input.Range" DataType="core:AweField">
     <Grid DataContext="{Binding Value, Mode=OneWay}">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
@@ -65,26 +65,26 @@
     </Grid>
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.OutputField.ReadOnlyText" DataType="core:Field">
+  <DataTemplate x:Key="Cop.AweField.Output.ReadOnlyText" DataType="core:AweField">
     <TextBlock Style="{StaticResource Cop.TextBlock.Body}" Text="{Binding Value, Mode=OneWay}" />
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.OutputField.Image" DataType="core:Field">
+  <DataTemplate x:Key="Cop.AweField.Output.Image" DataType="core:AweField">
     <Image Source="{Binding Value, Mode=OneWay}" Stretch="UniformToFill" />
   </DataTemplate>
 
-  <Style x:Key="{x:Type core:Field}" TargetType="core:Field">
+  <Style x:Key="{x:Type core:AweField}" TargetType="core:AweField">
     <Setter Property="Margin" Value="0,0,0,10" />
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="core:Field">
+        <ControlTemplate TargetType="core:AweField">
           <StackPanel Orientation="Vertical">
             <TextBlock
               x:Name="PART_Label"
               Margin="0,0,0,5"
               Style="{StaticResource Cop.TextBlock.SmallSubheader}"
               Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource Cop.TemplateSelector.Field}" />
+            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource Cop.AweField.TemplateSelector}" />
           </StackPanel>
         </ControlTemplate>
       </Setter.Value>

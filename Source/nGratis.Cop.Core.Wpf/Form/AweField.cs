@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="Field.cs" company="nGratis">
+// <copyright file="AweField.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -30,24 +30,24 @@ namespace nGratis.Cop.Core.Wpf
     using System.Windows;
     using System.Windows.Controls;
 
-    public class Field : ContentControl
+    public class AweField : ContentControl
     {
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
-            "Label", typeof(string), typeof(Field), new PropertyMetadata("[_UNDEFINED_]"));
+            "Label", typeof(string), typeof(AweField), new PropertyMetadata("[_UNDEFINED_]"));
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-            "Value", typeof(object), typeof(Field), new PropertyMetadata(string.Empty));
+            "Value", typeof(object), typeof(AweField), new PropertyMetadata(string.Empty));
 
         public string Label
         {
-            get { return (string)this.GetValue(Field.LabelProperty); }
-            set { this.SetValue(Field.LabelProperty, value); }
+            get { return (string)this.GetValue(LabelProperty); }
+            set { this.SetValue(LabelProperty, value); }
         }
 
         public string Value
         {
-            get { return (string)this.GetValue(Field.ValueProperty); }
-            set { this.SetValue(Field.ValueProperty, value); }
+            get { return (string)this.GetValue(ValueProperty); }
+            set { this.SetValue(ValueProperty, value); }
         }
     }
 }

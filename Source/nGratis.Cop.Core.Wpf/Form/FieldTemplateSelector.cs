@@ -35,7 +35,7 @@ namespace nGratis.Cop.Core.Wpf
 
     public class FieldTemplateSelector : DataTemplateSelector
     {
-        private const string DefaultKey = "Cop.Field.Default";
+        private const string DefaultKey = "Cop.AweField.Default";
 
         private readonly IDictionary<string, DataTemplate> templateLookup;
 
@@ -54,7 +54,7 @@ namespace nGratis.Cop.Core.Wpf
                 return null;
             }
 
-            var key = "Cop.{0}Field.{1}".WithInvariantFormat(
+            var key = "Cop.AweField.{0}.{1}".WithInvariantFormat(
                 field.Mode,
                 field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
 
