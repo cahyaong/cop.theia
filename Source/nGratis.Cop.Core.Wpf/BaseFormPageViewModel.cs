@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="BasePageViewModel.cs" company="nGratis">
+// <copyright file="BaseFormPageViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 Cahya Ong
@@ -30,13 +30,13 @@ namespace nGratis.Cop.Core.Wpf
     using JetBrains.Annotations;
     using ReactiveUI;
 
-    public abstract class BasePageViewModel : ReactiveObject
+    public abstract class BaseFormPageViewModel : ReactiveObject
     {
         private FieldGroupViewModel inputFieldGroup;
 
         private FieldGroupViewModel outputFieldGroup;
 
-        protected BasePageViewModel()
+        protected BaseFormPageViewModel()
         {
             this.InputFieldGroup = new FieldGroupViewModel(this, FieldMode.Input);
             this.OutputFieldGroup = new FieldGroupViewModel(this, FieldMode.Output);

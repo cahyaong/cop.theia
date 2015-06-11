@@ -39,7 +39,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using ReactiveUI;
 
     [Export]
-    public class DiabeticRetinopathyViewModel : BasePageViewModel
+    public class DiabeticRetinopathyViewModel : BaseFormPageViewModel
     {
         private readonly IImageProvider imageProvider;
 
