@@ -20,6 +20,10 @@
       Text="___UNSUPPORTED___" />
   </DataTemplate>
 
+  <DataTemplate x:Key="Cop.AweField.Input.Text" DataType="core:AweField">
+    <TextBox Style="{StaticResource Cop.TextBox.Normal}" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+  </DataTemplate>
+
   <DataTemplate x:Key="Cop.AweField.Input.File" DataType="core:AweField">
     <Grid>
       <Grid.ColumnDefinitions>
