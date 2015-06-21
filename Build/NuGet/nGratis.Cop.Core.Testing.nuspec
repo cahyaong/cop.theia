@@ -3,7 +3,7 @@
   <metadata>
     <id>nGratis.Cop.Core.Testing</id>
     <title>nGratis: Community of Practice - Core Testing</title>
-    <version>0.1.162</version>
+    <version>0.1.171</version>
     <authors>Cahya Ong</authors>
     <owners>Cahya Ong</owners>
     <licenseUrl>https://github.com/cahyaong/cop.theia/blob/master/LICENSE.md</licenseUrl>
@@ -13,7 +13,7 @@
     <language>en-US</language>
     <copyright>Copyright © 2014 - 2015 Cahya Ong</copyright>
     <dependencies>
-      <dependency id="nGratis.Cop.Core" version="[0.1.162]" />
+      <dependency id="nGratis.Cop.Core" version="[0.1.171]" />
     </dependencies>
   </metadata>
   <files>

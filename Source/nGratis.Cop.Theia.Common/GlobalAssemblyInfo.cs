@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Thursday, 11 June 2015 12:26:06 PM</creation_timestamp>
+// <creation_timestamp>Sunday, 21 June 2015 10:10:00 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
@@ -33,7 +33,7 @@ using System.Reflection;
 [assembly: AssemblyCopyright("Copyright © 2014 - 2015 Cahya Ong")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.162.1226")]
+[assembly: AssemblyFileVersion("0.1.171.1010")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
