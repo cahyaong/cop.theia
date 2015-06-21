@@ -106,6 +106,7 @@
     <Compile Include="CaliburnContentLoader.cs" />
     <Compile Include="Controls\AweButton.cs" />
     <Compile Include="Controls\AweLogViewer.cs" />
+    <Compile Include="Controls\AweProgressBar.cs" />
     <Compile Include="Controls\AweSlider.cs" />
     <Compile Include="Measurement.cs" />
     <Compile Include="Converters\EnumerableToCountConverter.cs" />

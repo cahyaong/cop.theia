@@ -83,6 +83,10 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="LoggingSource.cs" />
+    <Compile Include="ProgressBarView.xaml.cs">
+      <DependentUpon>ProgressBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressBarViewModel.cs" />
     <Compile Include="SdkModule.cs" />
     <Compile Include="LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
@@ -95,6 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="LoggingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProgressBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

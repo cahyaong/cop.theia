@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="SdkModule.cs" company="nGratis">
+// <copyright file="ProgressBarViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 21 June 2015 6:39:55 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Sdk
@@ -30,30 +31,38 @@ namespace nGratis.Cop.Theia.Module.Sdk
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
+    using System.Linq;
+    using System.Reactive.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using ReactiveUI;
 
-    [Export(typeof(IModule))]
-    public class SdkModule : IModule
+    [Export]
+    public class ProgressBarViewModel : ReactiveObject
     {
-        public SdkModule()
+        private bool isBusy;
+
+        public ProgressBarViewModel()
         {
-            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
+            this.StartWorkCommand = ReactiveCommand.CreateAsyncTask(
+                this.WhenAnyValue(vm => vm.IsBusy, isBusy => !isBusy)
+                    .ObserveOn(RxApp.MainThreadScheduler),
+                async _ => await Task.Run(() => this.IsBusy = true));
 
-            var diagnosticFeature = new Feature(
-                "SDK",
-                int.MaxValue,
-                new List<Page>
-                    {
-                        new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
-                        new Page("Progress Bar", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressBarView.xaml")
-                    });
-
-            this.Features = new List<Feature> { diagnosticFeature };
+            this.StopWorkCommand = ReactiveCommand.CreateAsyncTask(
+                this.WhenAnyValue(vm => vm.IsBusy)
+                    .ObserveOn(RxApp.MainThreadScheduler),
+                async _ => await Task.Run(() => this.IsBusy = false));
         }
 
-        public Guid Id { get; private set; }
+        public bool IsBusy
+        {
+            get { return this.isBusy; }
+            private set { this.RaiseAndSetIfChanged(ref this.isBusy, value); }
+        }
 
-        public IEnumerable<IFeature> Features { get; private set; }
+        public ICommand StartWorkCommand { get; private set; }
+
+        public ICommand StopWorkCommand { get; private set; }
     }
 }

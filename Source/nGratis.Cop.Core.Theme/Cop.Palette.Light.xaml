@@ -8,4 +8,7 @@
   <Color x:Key="Cop.Color.Shade6">#FF404040</Color>
   <Color x:Key="Cop.Color.Shade7">#FF202020</Color>
   <Color x:Key="Cop.Color.Shade8">#FF000000</Color>
+
+  <!--  TODO Update this resource dictionary to match up with the 'Dark' version.  -->
+
 </ResourceDictionary>

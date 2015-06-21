@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="SdkModule.cs" company="nGratis">
+// <copyright file="AweProgressBar.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,37 +23,41 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 21 June 2015 6:14:43 AM</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Sdk
+namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
 
-    [Export(typeof(IModule))]
-    public class SdkModule : IModule
+    public class AweProgressBar : ContentControl
     {
-        public SdkModule()
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
+            "IsActive",
+            typeof(bool),
+            typeof(AweProgressBar),
+            new PropertyMetadata(false));
+
+        public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
+            "Message",
+            typeof(string),
+            typeof(AweProgressBar),
+            new PropertyMetadata(null));
+
+        public bool IsActive
         {
-            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
-
-            var diagnosticFeature = new Feature(
-                "SDK",
-                int.MaxValue,
-                new List<Page>
-                    {
-                        new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
-                        new Page("Progress Bar", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressBarView.xaml")
-                    });
-
-            this.Features = new List<Feature> { diagnosticFeature };
+            get { return (bool)this.GetValue(IsActiveProperty); }
+            set { this.SetValue(IsActiveProperty, value); }
         }
 
-        public Guid Id { get; private set; }
-
-        public IEnumerable<IFeature> Features { get; private set; }
+        public string Message
+        {
+            get { return (string)this.GetValue(MessageProperty); }
+            set { this.SetValue(MessageProperty, value); }
+        }
     }
 }
