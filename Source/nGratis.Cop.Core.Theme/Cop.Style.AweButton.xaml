@@ -9,8 +9,6 @@
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ModernButton.xaml" />
   </ResourceDictionary.MergedDictionaries>
-  <!--  ReSharper disable InconsistentNaming  -->
-
   <Style
     x:Key="{x:Type core:AweButton}"
     BasedOn="{StaticResource {x:Type Button}}"
@@ -19,9 +17,9 @@
       <Setter.Value>
         <ControlTemplate TargetType="core:AweButton">
           <mui:ModernButton
-            EllipseStrokeThickness="0"
             x:Name="PART_Content"
             Command="{TemplateBinding Command}"
+            EllipseStrokeThickness="0"
             IconData="{TemplateBinding IconGeometry}" />
           <ControlTemplate.Triggers>
             <Trigger Property="Measurement" Value="{x:Static core:Measurement.XS}">
@@ -65,6 +63,4 @@
       </Setter.Value>
     </Setter>
   </Style>
-
-  <!--  ReSharper restore InconsistentNaming  -->
 </ResourceDictionary>

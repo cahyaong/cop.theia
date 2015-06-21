@@ -8,7 +8,6 @@
     <Setter Property="FontSize" Value="11pt" />
     <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
   </Style>
-
   <Style
     x:Key="Cop.TextBlock.Header"
     BasedOn="{StaticResource Cop.TextBlock.Base}"
