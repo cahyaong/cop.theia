@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Monday, 13 April 2015 2:27:02 PM</creation_timestamp>
+// <creation_timestamp>Monday, 13 April 2015 2:27:02 PM UTC</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable CheckNamespace

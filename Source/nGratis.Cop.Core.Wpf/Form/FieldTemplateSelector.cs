@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 28 December 2014 12:37:57 AM</creation_timestamp>
+// <creation_timestamp>Sunday, 28 December 2014 12:37:57 AM UTC</creation_timestamp>
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf

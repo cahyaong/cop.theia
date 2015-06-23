@@ -65,7 +65,7 @@
 //  SOFTWARE.&#xD;
 // &lt;/copyright&gt;&#xD;
 // &lt;author&gt;Cahya Ong - cahya.ong@gmail.com&lt;/author&gt;&#xD;
-// &lt;creation_timestamp&gt;$CREATION_TIMESTAMP$&lt;/creation_timestamp&gt;&#xD;
+// &lt;creation_timestamp&gt;$CREATION_TIMESTAMP$ UTC&lt;/creation_timestamp&gt;&#xD;
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
