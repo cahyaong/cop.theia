@@ -50,20 +50,20 @@ namespace nGratis.Cop.Core.Wpf
             set { this.SetValue(StableValueProperty, value); }
         }
 
-        public bool IsMouseDraggaing { get; private set; }
+        public bool IsMouseDragging { get; private set; }
 
         public bool IsKeyPressed { get; private set; }
 
         protected override void OnThumbDragStarted(DragStartedEventArgs args)
         {
             base.OnThumbDragStarted(args);
-            this.IsMouseDraggaing = true;
+            this.IsMouseDragging = true;
         }
 
         protected override void OnThumbDragCompleted(DragCompletedEventArgs args)
         {
             this.StableValue = this.Value;
-            this.IsMouseDraggaing = false;
+            this.IsMouseDragging = false;
             base.OnThumbDragCompleted(args);
         }
 
