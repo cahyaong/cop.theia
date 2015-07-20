@@ -63,7 +63,7 @@ namespace nGratis.Cop.Core
 
             var logger = this
                 .loggerLookup
-                .GetOrAdd("TYP_{0}".WithInvariantFormat(type.FullName), key => new NLogger(key, "<undefined>"));
+                .GetOrAdd("TYP.{0}".WithInvariantFormat(type.FullName), key => new NLogger(key, "<undefined>"));
 
             this.aggregatingLogger.RegisterLoggers(logger);
 
@@ -81,7 +81,7 @@ namespace nGratis.Cop.Core
 
             var logger = this
                 .loggerLookup
-                .GetOrAdd("COM_{0}".WithInvariantFormat(component), key => new NLogger(key, component));
+                .GetOrAdd("COM.{0}".WithInvariantFormat(component), key => new NLogger(key, component));
 
             this.aggregatingLogger.RegisterLoggers(logger);
 
