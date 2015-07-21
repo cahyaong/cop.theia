@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="VerbosityExtensions.cs" company="nGratis">
+// <copyright file="ConsoleLogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,73 +23,48 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 25 April 2015 1:23:52 PM UTC</creation_timestamp>
+// <creation_timestamp>Monday, 20 July 2015 2:25:29 PM UTC</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
+    using System.Text;
     using nGratis.Cop.Core.Contract;
-    using NLog;
 
-    internal static class VerbosityExtensions
+    public class ConsoleLogger : BaseLogger
     {
-        public static LogLevel ToLogLevel(this Verbosity verbosity)
+        public ConsoleLogger(string id, string component)
+            : base(id, component.PutInList())
         {
-            Guard.AgainstDefaultArgument(() => verbosity);
-
-            switch (verbosity)
-            {
-                case Verbosity.Trace:
-                    return LogLevel.Trace;
-
-                case Verbosity.Debug:
-                    return LogLevel.Debug;
-
-                case Verbosity.Information:
-                    return LogLevel.Info;
-
-                case Verbosity.Warning:
-                    return LogLevel.Warn;
-
-                case Verbosity.Error:
-                    return LogLevel.Error;
-
-                case Verbosity.Fatal:
-                    return LogLevel.Fatal;
-            }
-
-            throw new NotSupportedException();
         }
 
-        public static string ToConsoleString(this Verbosity verbosity)
+        public override void LogWith(Verbosity verbosity, string message)
         {
-            Guard.AgainstDefaultArgument(() => verbosity);
+            var line = "{0} | {1} | {2}".WithInvariantFormat(
+                DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
+                verbosity.ToConsoleString(),
+                message);
 
-            switch (verbosity)
-            {
-                case Verbosity.Trace:
-                    return "TRC";
+            Console.WriteLine(line);
+        }
 
-                case Verbosity.Debug:
-                    return "DBG";
+        public override void LogWith(Verbosity verbosity, Exception exception, string message)
+        {
+            var lineBuilder = new StringBuilder();
 
-                case Verbosity.Information:
-                    return "INF";
+            lineBuilder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "{0} | {1} | {2} {3}",
+                DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
+                verbosity.ToConsoleString(),
+                message,
+                exception.Message);
 
-                case Verbosity.Warning:
-                    return "WRN";
-
-                case Verbosity.Error:
-                    return "ERR";
-
-                case Verbosity.Fatal:
-                    return "FTL";
-            }
-
-            throw new NotSupportedException();
+            Console.WriteLine(lineBuilder.ToString());
         }
     }
 }

@@ -32,13 +32,14 @@ namespace nGratis.Cop.Core
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reactive.Linq;
     using nGratis.Cop.Core.Contract;
 
     public class CompositeLogger : BaseLogger
     {
         private readonly ConcurrentDictionary<string, ILogger> loggerLookup = new ConcurrentDictionary<string, ILogger>();
 
-        private readonly ConcurrentDictionary<string, IDisposable> subscriptionLookup = new ConcurrentDictionary<string, IDisposable>();
+        private bool isDisposed;
 
         public CompositeLogger(string id)
             : base(id)
@@ -61,17 +62,9 @@ namespace nGratis.Cop.Core
             Guard.AgainstNullArgument(() => loggers);
 
             loggers
-                .Where(logger => !this.loggerLookup.ContainsKey(logger.Id))
-                .ForEach(logger =>
-                    {
-                        this.loggerLookup.TryAdd(logger.Id, logger);
-
-                        var subscription = logger
-                            .AsObservable()
-                            .Subscribe(this.LogWith);
-
-                        this.subscriptionLookup.TryAdd(logger.Id, subscription);
-                    });
+                .Select(logger => new { Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name), Logger = logger })
+                .Where(annon => !this.loggerLookup.ContainsKey(annon.Key))
+                .ForEach(annon => this.loggerLookup.TryAdd(annon.Key, annon.Logger));
         }
 
         public void UnregisterLoggers(params ILogger[] loggers)
@@ -79,19 +72,13 @@ namespace nGratis.Cop.Core
             Guard.AgainstNullArgument(() => loggers);
 
             loggers
-                .Where(logger => this.loggerLookup.ContainsKey(logger.Id))
-                .ForEach(logger =>
-                {
-                    this.loggerLookup.TryRemove(logger.Id, out logger);
-
-                    var subscription = default(IDisposable);
-                    this.subscriptionLookup.TryRemove(logger.Id, out subscription);
-
-                    if (subscription != null)
+                .Select(logger => new { Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name), Logger = logger })
+                .Where(annon => this.loggerLookup.ContainsKey(annon.Key))
+                .ForEach(annon =>
                     {
-                        subscription.Dispose();
-                    }
-                });
+                        var logger = default(ILogger);
+                        this.loggerLookup.TryRemove(annon.Key, out logger);
+                    });
         }
 
         public override void LogWith(Verbosity verbosity, string message)
@@ -100,8 +87,6 @@ namespace nGratis.Cop.Core
                 .loggerLookup
                 .Values
                 .ForEach(logger => logger.LogWith(verbosity, message));
-
-            base.LogWith(verbosity, message);
         }
 
         public override void LogWith(Verbosity verbosity, Exception exception, string message)
@@ -110,8 +95,35 @@ namespace nGratis.Cop.Core
                 .loggerLookup
                 .Values
                 .ForEach(logger => logger.LogWith(verbosity, exception, message));
+        }
 
-            base.LogWith(verbosity, exception, message);
+        public override IObservable<LogEntry> AsObservable()
+        {
+            return this
+                .loggerLookup
+                .Values
+                .Select(logger => logger.AsObservable())
+                .Merge();
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            if (this.isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                this
+                    .loggerLookup
+                    .Values
+                    .ForEach(logger => logger.Dispose());
+            }
+
+            base.Dispose(isDisposing);
+
+            this.isDisposed = true;
         }
     }
 }

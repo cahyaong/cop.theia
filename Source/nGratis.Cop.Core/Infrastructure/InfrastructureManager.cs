@@ -37,16 +37,14 @@ namespace nGratis.Cop.Core
     {
         static InfrastructureManager()
         {
-            Instance = new InfrastructureManager
-                {
-                    IdentityProvider = Core.IdentityProvider.Instance,
-                    LoggingProvider = Core.LoggingProvider.Instance,
-                    TemporalProvider = Core.TemporalProvider.Instance
-                };
+            Instance = new InfrastructureManager(LoggingModes.All);
         }
 
-        private InfrastructureManager()
+        public InfrastructureManager(LoggingModes loggingModes)
         {
+            this.IdentityProvider = Core.IdentityProvider.Instance;
+            this.LoggingProvider = new LoggingProvider(loggingModes);
+            this.TemporalProvider = Core.TemporalProvider.Instance;
         }
 
         public static IInfrastructureManager Instance { get; private set; }

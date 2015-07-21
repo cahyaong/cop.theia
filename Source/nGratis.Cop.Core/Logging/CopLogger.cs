@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="VoidLogger.cs" company="nGratis">
+// <copyright file="CopLogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Friday, 1 May 2015 1:44:25 PM UTC</creation_timestamp>
+// <creation_timestamp>Monday, 20 July 2015 1:58:42 PM UTC</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
@@ -31,32 +31,75 @@ namespace nGratis.Cop.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reactive.Subjects;
     using nGratis.Cop.Core.Contract;
 
-    public sealed class VoidLogger : BaseLogger
+    public sealed class CopLogger : BaseLogger
     {
-        static VoidLogger()
+        private readonly ReplaySubject<LogEntry> loggingSubject;
+
+        private bool isDisposed;
+
+        public CopLogger(string id, string component)
+            : base(id, component.PutInList())
         {
-            Instance = new VoidLogger();
+            this.loggingSubject = new ReplaySubject<LogEntry>();
         }
 
-        private VoidLogger()
-            : base("<void>", new List<string>())
+        ~CopLogger()
         {
-        }
-
-        public static ILogger Instance
-        {
-            get;
-            private set;
+            this.Dispose(false);
         }
 
         public override void LogWith(Verbosity verbosity, string message)
         {
+            var logEntry = new LogEntry
+                {
+                    Components = this.Components,
+                    Verbosity = verbosity,
+                    Message = message
+                };
+
+            logEntry.Freeze();
+
+            this.loggingSubject.OnNext(logEntry);
         }
 
         public override void LogWith(Verbosity verbosity, Exception exception, string message)
         {
+            var logEntry = new LogEntry
+                {
+                    Components = this.Components,
+                    Verbosity = verbosity,
+                    Exception = exception,
+                    Message = message
+                };
+
+            logEntry.Freeze();
+
+            this.loggingSubject.OnNext(logEntry);
+        }
+
+        public override IObservable<LogEntry> AsObservable()
+        {
+            return this.loggingSubject;
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            if (this.isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                this.loggingSubject.Dispose();
+            }
+
+            base.Dispose(isDisposing);
+
+            this.isDisposed = true;
         }
     }
 }

@@ -47,13 +47,11 @@ namespace nGratis.Cop.Core
         public override void LogWith(Verbosity verbosity, string message)
         {
             this.logger.Log(verbosity.ToLogLevel(), message);
-            base.LogWith(verbosity, message);
         }
 
         public override void LogWith(Verbosity verbosity, Exception exception, string message)
         {
             this.logger.Log(verbosity.ToLogLevel(), message, exception);
-            base.LogWith(verbosity, exception, message);
         }
     }
 }

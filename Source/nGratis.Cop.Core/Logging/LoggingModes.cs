@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// <copyright file="VoidLogger.cs" company="nGratis">
+// <copyright file="LoggingModes.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Friday, 1 May 2015 1:44:25 PM UTC</creation_timestamp>
+// <creation_timestamp>Monday, 20 July 2015 2:22:28 PM UTC</creation_timestamp>
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
@@ -31,32 +31,18 @@ namespace nGratis.Cop.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using nGratis.Cop.Core.Contract;
 
-    public sealed class VoidLogger : BaseLogger
+    [Flags]
+    public enum LoggingModes
     {
-        static VoidLogger()
-        {
-            Instance = new VoidLogger();
-        }
+        None = 0,
 
-        private VoidLogger()
-            : base("<void>", new List<string>())
-        {
-        }
+        CommunityOfPractice = 1 << 0,
 
-        public static ILogger Instance
-        {
-            get;
-            private set;
-        }
+        NLogger = 1 << 1,
 
-        public override void LogWith(Verbosity verbosity, string message)
-        {
-        }
+        Console = 1 << 2,
 
-        public override void LogWith(Verbosity verbosity, Exception exception, string message)
-        {
-        }
+        All = CommunityOfPractice | NLogger | Console
     }
 }

@@ -36,18 +36,19 @@ namespace nGratis.Cop.Core
 
     internal class LoggingProvider : ILoggingProvider
     {
+        private readonly LoggingModes loggingModes;
+
         private readonly ConcurrentDictionary<string, ILogger> loggerLookup = new ConcurrentDictionary<string, ILogger>();
 
         private readonly CompositeLogger aggregatingLogger = new CompositeLogger("*");
+
         private bool isDisposed;
 
-        static LoggingProvider()
+        public LoggingProvider(LoggingModes loggingModes)
         {
-            Instance = new LoggingProvider();
-        }
+            Guard.AgainstDefaultArgument(() => loggingModes);
 
-        private LoggingProvider()
-        {
+            this.loggingModes = loggingModes;
         }
 
         ~LoggingProvider()
@@ -55,15 +56,13 @@ namespace nGratis.Cop.Core
             this.Dispose(false);
         }
 
-        public static ILoggingProvider Instance { get; private set; }
-
         public ILogger GetLoggerFor(Type type)
         {
             Guard.AgainstNullArgument(() => type);
 
             var logger = this
                 .loggerLookup
-                .GetOrAdd("TYP.{0}".WithInvariantFormat(type.FullName), key => new NLogger(key, "<undefined>"));
+                .GetOrAdd("TYP.{0}".WithInvariantFormat(type.FullName), key => this.CreateLogger(key));
 
             this.aggregatingLogger.RegisterLoggers(logger);
 
@@ -81,7 +80,7 @@ namespace nGratis.Cop.Core
 
             var logger = this
                 .loggerLookup
-                .GetOrAdd("COM.{0}".WithInvariantFormat(component), key => new NLogger(key, component));
+                .GetOrAdd("COM.{0}".WithInvariantFormat(component), key => this.CreateLogger(key, component));
 
             this.aggregatingLogger.RegisterLoggers(logger);
 
@@ -92,6 +91,28 @@ namespace nGratis.Cop.Core
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        private ILogger CreateLogger(string id, string component = "<undefined>")
+        {
+            var logger = new CompositeLogger(id);
+
+            if (this.loggingModes.HasFlag(LoggingModes.CommunityOfPractice))
+            {
+                logger.RegisterLoggers(new CopLogger(id, component));
+            }
+
+            if (this.loggingModes.HasFlag(LoggingModes.NLogger))
+            {
+                logger.RegisterLoggers(new NLogger(id, component));
+            }
+
+            if (this.loggingModes.HasFlag(LoggingModes.Console))
+            {
+                logger.RegisterLoggers(new ConsoleLogger(id, component));
+            }
+
+            return logger;
         }
 
         private void Dispose(bool isDisposing)

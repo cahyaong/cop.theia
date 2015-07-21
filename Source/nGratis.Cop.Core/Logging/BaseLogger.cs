@@ -31,20 +31,14 @@ namespace nGratis.Cop.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reactive.Subjects;
+    using System.Reactive.Linq;
     using nGratis.Cop.Core.Contract;
 
-    public abstract class BaseLogger : ILogger, IDisposable
+    public abstract class BaseLogger : ILogger
     {
-        private readonly ReplaySubject<LogEntry> loggingSubject;
-
-        private bool isDisposed;
-
         protected BaseLogger(string id, IList<string> components = null)
         {
             Guard.AgainstNullOrWhitespaceArgument(() => id);
-
-            this.loggingSubject = new ReplaySubject<LogEntry>();
 
             this.Id = id;
 
@@ -62,38 +56,13 @@ namespace nGratis.Cop.Core
 
         public virtual IEnumerable<string> Components { get; private set; }
 
-        public virtual void LogWith(Verbosity verbosity, string message)
+        public abstract void LogWith(Verbosity verbosity, string message);
+
+        public abstract void LogWith(Verbosity verbosity, Exception exception, string message);
+
+        public virtual IObservable<LogEntry> AsObservable()
         {
-            var logEntry = new LogEntry()
-                {
-                    Components = this.Components,
-                    Verbosity = verbosity,
-                    Message = message
-                };
-
-            logEntry.Freeze();
-
-            this.loggingSubject.OnNext(logEntry);
-        }
-
-        public virtual void LogWith(Verbosity verbosity, Exception exception, string message)
-        {
-            var logEntry = new LogEntry()
-                {
-                    Components = this.Components,
-                    Verbosity = verbosity,
-                    Exception = exception,
-                    Message = message
-                };
-
-            logEntry.Freeze();
-
-            this.loggingSubject.OnNext(logEntry);
-        }
-
-        public IObservable<LogEntry> AsObservable()
-        {
-            return this.loggingSubject;
+            return Observable.Empty<LogEntry>();
         }
 
         public void Dispose()
@@ -102,26 +71,8 @@ namespace nGratis.Cop.Core
             GC.SuppressFinalize(this);
         }
 
-        protected void LogWith(LogEntry logEntry)
+        protected virtual void Dispose(bool isDisposing)
         {
-            Guard.AgainstNullArgument(() => logEntry);
-
-            this.loggingSubject.OnNext(logEntry);
-        }
-
-        private void Dispose(bool isDisposing)
-        {
-            if (this.isDisposed)
-            {
-                return;
-            }
-
-            if (isDisposing)
-            {
-                this.loggingSubject.Dispose();
-            }
-
-            this.isDisposed = true;
         }
     }
 }
