@@ -41,7 +41,7 @@ namespace System
         {
             return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
                 ? input
-                : "{0} [{1}]".WithCurrentFormat(input, string.Join(" | ", details.Select(detail => detail.ToString())));
+                : "{0} [{1}]".WithCurrentFormat(input, string.Join(", ", details.Select(detail => detail.ToString())));
         }
 
         public static string WithLowerCaseAtBeginning(this string input)

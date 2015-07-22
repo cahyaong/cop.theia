@@ -43,15 +43,15 @@ namespace nGratis.Cop.Core
             Guard.AgainstNullArgument(() => content);
 
             return new MessageDetail
-            {
-                Header = header,
-                Content = content
-            };
+                {
+                    Header = header,
+                    Content = content
+                };
         }
 
         public override string ToString()
         {
-            return "{0}: {1}".WithCurrentFormat(this.Header, this.Content);
+            return "{0}: '{1}'".WithCurrentFormat(this.Header, this.Content);
         }
     }
 }
