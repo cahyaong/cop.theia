@@ -41,22 +41,26 @@ namespace nGratis.Cop.Core.Contract
             throw new NotSupportedException(message ?? Values.Empty);
         }
 
-        internal static void CopException(string message, Exception innerException)
+        [ContractAnnotation(" => halt")]
+        public static void CopException(string message, Exception innerException)
         {
             throw new CopException(message ?? Values.Empty, innerException);
         }
 
-        internal static void ArgumentNullException(string parameter, string message)
+        [ContractAnnotation(" => halt")]
+        public static void ArgumentNullException(string parameter, string message)
         {
             throw new ArgumentNullException(parameter ?? Values.Unknown, message ?? Values.Empty);
         }
 
-        internal static void ArgumentException(string parameter, string message)
+        [ContractAnnotation(" => halt")]
+        public static void ArgumentException(string parameter, string message)
         {
             throw new ArgumentException(parameter ?? Values.Unknown, message ?? Values.Empty);
         }
 
-        internal static void InvalidOperationException(string message)
+        [ContractAnnotation(" => halt")]
+        public static void InvalidOperationException(string message)
         {
             throw new InvalidOperationException(message ?? Values.Empty);
         }
