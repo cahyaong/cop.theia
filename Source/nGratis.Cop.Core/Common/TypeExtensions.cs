@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TypeExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Monday, 13 April 2015 2:27:02 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable CheckNamespace
 namespace System
@@ -50,7 +50,10 @@ namespace System
                 : type.Name;
         }
 
-        public static void AddEventHandler<TInstance, TArgs>(this TInstance instance, string eventName, EventHandler<TArgs> handler)
+        public static void AddEventHandler<TInstance, TArgs>(
+            this TInstance instance,
+            string eventName,
+            EventHandler<TArgs> handler)
             where TInstance : class
             where TArgs : EventArgs
         {
@@ -61,7 +64,10 @@ namespace System
             WeakEventManager<TInstance, TArgs>.AddHandler(instance, eventName, handler);
         }
 
-        public static void RemoveEventHandler<TInstance, TArgs>(this TInstance instance, string eventName, EventHandler<TArgs> handler)
+        public static void RemoveEventHandler<TInstance, TArgs>(
+            this TInstance instance,
+            string eventName,
+            EventHandler<TArgs> handler)
             where TInstance : class
             where TArgs : EventArgs
         {
