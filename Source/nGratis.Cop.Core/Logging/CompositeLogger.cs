@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CompositeLogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Wednesday, 29 April 2015 1:41:08 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
@@ -37,7 +37,8 @@ namespace nGratis.Cop.Core
 
     public class CompositeLogger : BaseLogger
     {
-        private readonly ConcurrentDictionary<string, ILogger> loggerLookup = new ConcurrentDictionary<string, ILogger>();
+        private readonly ConcurrentDictionary<string, ILogger> loggerLookup =
+            new ConcurrentDictionary<string, ILogger>();
 
         private bool isDisposed;
 
@@ -62,7 +63,11 @@ namespace nGratis.Cop.Core
             Guard.AgainstNullArgument(() => loggers);
 
             loggers
-                .Select(logger => new { Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name), Logger = logger })
+                .Select(logger => new
+	                {
+	                    Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name),
+	                    Logger = logger
+	                })
                 .Where(annon => !this.loggerLookup.ContainsKey(annon.Key))
                 .ForEach(annon => this.loggerLookup.TryAdd(annon.Key, annon.Logger));
         }
@@ -70,9 +75,14 @@ namespace nGratis.Cop.Core
         public void UnregisterLoggers(params ILogger[] loggers)
         {
             Guard.AgainstNullArgument(() => loggers);
+            Guard.AgainstNullArgument(() => loggers);
 
             loggers
-                .Select(logger => new { Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name), Logger = logger })
+                .Select(logger => new
+	                {
+	                    Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name),
+	                    Logger = logger
+	                })
                 .Where(annon => this.loggerLookup.ContainsKey(annon.Key))
                 .ForEach(annon =>
                     {

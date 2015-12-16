@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="VoidStorageProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,20 +24,18 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Friday, 3 April 2015 9:22:12 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
 
     public class VoidStorageProvider : IStorageProvider
     {
         static VoidStorageProvider()
         {
-            Default = new VoidStorageProvider();
+            VoidStorageProvider.Default = new VoidStorageProvider();
         }
 
         private VoidStorageProvider()

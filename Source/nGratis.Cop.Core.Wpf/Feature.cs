@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Feature.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,17 +23,26 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using nGratis.Cop.Core.Contract;
 
     public class Feature : IFeature
     {
+        public Feature(string name, params Page[] pages)
+            : this(name, pages.AsEnumerable())
+        {
+        }
+
+        public Feature(string name, int order, params Page[] pages)
+            : this(name, order, pages.AsEnumerable())
+        {
+        }
+
         public Feature(string name, IEnumerable<Page> pages)
             : this(name, int.MinValue, pages)
         {

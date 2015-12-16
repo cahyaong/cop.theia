@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AweLogViewer.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,13 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Monday, 27 April 2015 2:19:34 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Reactive.Linq;
     using System.Windows;
     using System.Windows.Controls;

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MefExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,11 +23,10 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace - Namespace matches the one from the extended type for discoverability.
+// ReSharper disable CheckNamespace
 namespace System.ComponentModel.Composition
-// ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;

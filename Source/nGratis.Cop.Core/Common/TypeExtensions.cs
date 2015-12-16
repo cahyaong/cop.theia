@@ -28,11 +28,7 @@
 
 // ReSharper disable CheckNamespace
 namespace System
-// ReSharper restore CheckNamespace
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Windows;
     using nGratis.Cop.Core.Contract;
 

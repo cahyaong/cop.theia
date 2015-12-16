@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ConsoleLogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,13 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Monday, 20 July 2015 2:25:29 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
     using System.Text;
     using nGratis.Cop.Core.Contract;
 

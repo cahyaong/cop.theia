@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ImageHistogramView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 28 December 2014 12:33:38 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Fundamental
 {
@@ -32,7 +32,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     {
         public ImageHistogramView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IInfrastructureManager.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Saturday, 25 April 2015 12:59:14 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public interface IInfrastructureManager
     {
         IIdentityProvider IdentityProvider { get; }

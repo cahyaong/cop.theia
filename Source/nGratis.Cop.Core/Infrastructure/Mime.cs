@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Mime.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 29 March 2015 7:10:38 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
@@ -62,10 +62,10 @@ namespace nGratis.Cop.Core
                 .OfType<Mime>()
                 .ToList();
 
-            UniqueIdToMimeMapping = mimes
+            Mime.UniqueIdToMimeMapping = mimes
                 .ToDictionary(mime => mime.UniqueId, mime => mime);
 
-            NameToMimeMapping = mimes
+            Mime.NameToMimeMapping = mimes
                  .SelectMany(mime => mime.Names.Select(name => new { Name = name, Mime = mime }))
                  .ToDictionary(annon => annon.Name, annon => annon.Mime);
         }
@@ -96,9 +96,9 @@ namespace nGratis.Cop.Core
         public static Mime ParseByUniqueId(string uniqueId)
         {
             Guard.AgainstNullOrWhitespaceArgument(() => uniqueId);
-            Guard.AgainstInvalidOperation(!UniqueIdToMimeMapping.ContainsKey(uniqueId));
+            Guard.AgainstInvalidOperation(!Mime.UniqueIdToMimeMapping.ContainsKey(uniqueId));
 
-            return UniqueIdToMimeMapping[uniqueId];
+            return Mime.UniqueIdToMimeMapping[uniqueId];
         }
 
         public static Mime ParseByName(string name)
@@ -106,9 +106,9 @@ namespace nGratis.Cop.Core
             Guard.AgainstNullOrWhitespaceArgument(() => name);
 
             name = name.Replace(".", string.Empty);
-            Guard.AgainstInvalidOperation(!NameToMimeMapping.ContainsKey(name));
+            Guard.AgainstInvalidOperation(!Mime.NameToMimeMapping.ContainsKey(name));
 
-            return NameToMimeMapping[name];
+            return Mime.NameToMimeMapping[name];
         }
 
         [UsedImplicitly]

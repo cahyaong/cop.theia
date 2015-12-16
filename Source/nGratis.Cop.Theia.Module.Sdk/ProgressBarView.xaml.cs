@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ProgressBarView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 21 June 2015 6:39:43 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public partial class ProgressBarView
     {
         public ProgressBarView()

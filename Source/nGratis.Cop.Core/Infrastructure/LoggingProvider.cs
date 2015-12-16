@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoggingProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,21 +24,20 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Saturday, 25 April 2015 12:21:18 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
     using nGratis.Cop.Core.Contract;
 
     internal class LoggingProvider : ILoggingProvider
     {
         private readonly LoggingModes loggingModes;
 
-        private readonly ConcurrentDictionary<string, ILogger> loggerLookup = new ConcurrentDictionary<string, ILogger>();
+        private readonly ConcurrentDictionary<string, ILogger> loggerLookup =
+            new ConcurrentDictionary<string, ILogger>();
 
         private readonly CompositeLogger aggregatingLogger = new CompositeLogger("*");
 

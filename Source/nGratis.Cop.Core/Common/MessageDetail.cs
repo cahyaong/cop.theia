@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MessageDetail.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Friday, 3 April 2015 12:41:31 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
@@ -43,10 +43,10 @@ namespace nGratis.Cop.Core
             Guard.AgainstNullArgument(() => content);
 
             return new MessageDetail
-                {
-                    Header = header,
-                    Content = content
-                };
+            {
+                Header = header,
+                Content = content
+            };
         }
 
         public override string ToString()

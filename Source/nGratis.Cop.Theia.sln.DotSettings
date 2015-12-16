@@ -7,6 +7,8 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=RedundantBaseQualifier/@EntryIndexedValue">DO_NOT_SHOW</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=RedundantThisQualifier/@EntryIndexedValue">DO_NOT_SHOW</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeCleanup/SilentCleanupProfile/@EntryValue">Default: Full Cleanup</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/StaticQualifier/STATIC_MEMBERS_QUALIFY_MEMBERS/@EntryValue">Field, Property, Event, Method</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/ThisQualifier/INSTANCE_MEMBERS_QUALIFY_MEMBERS/@EntryValue">Field, Property, Event, Method</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CSharpUsing/AddImportsToDeepestScope/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/CSharpUsing/KeepImports/=System/@EntryIndexedValue">System</s:String>
 	<s:String x:Key="/Default/CodeStyle/CSharpUsing/KeepImports/=System_002ECollections_002EGeneric/@EntryIndexedValue">System.Collections.Generic</s:String>
@@ -40,7 +42,7 @@
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=250FB82B415C774CA7AB327300FF924F/Scope/=139FF4CE89E7094686FDA7BF5FFBBE92/Type/@EntryValue">Everywhere</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=250FB82B415C774CA7AB327300FF924F/Shortcut/@EntryValue">header</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=250FB82B415C774CA7AB327300FF924F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=250FB82B415C774CA7AB327300FF924F/Text/@EntryValue">// ------------------------------------------------------------------------------------------------------------------------------------------------------------&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=250FB82B415C774CA7AB327300FF924F/Text/@EntryValue">// --------------------------------------------------------------------------------------------------------------------&#xD;
 // &lt;copyright file="$FILENAME$" company="nGratis"&gt;&#xD;
 //  The MIT License (MIT)&#xD;
 //&#xD;
@@ -66,7 +68,7 @@
 // &lt;/copyright&gt;&#xD;
 // &lt;author&gt;Cahya Ong - cahya.ong@gmail.com&lt;/author&gt;&#xD;
 // &lt;creation_timestamp&gt;$CREATION_TIMESTAMP$ UTC&lt;/creation_timestamp&gt;&#xD;
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------</s:String>
+// --------------------------------------------------------------------------------------------------------------------</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/Description/@EntryValue">Insert a unit test method with default Arrange-Act-Assert sections.</s:String>

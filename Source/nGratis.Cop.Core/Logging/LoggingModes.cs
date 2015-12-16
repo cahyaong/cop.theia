@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoggingModes.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,13 +24,11 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Monday, 20 July 2015 2:22:28 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     [Flags]
     public enum LoggingModes
@@ -43,6 +41,6 @@ namespace nGratis.Cop.Core
 
         Console = 1 << 2,
 
-        All = CommunityOfPractice | NLogger | Console
+        All = LoggingModes.CommunityOfPractice | LoggingModes.NLogger | LoggingModes.Console
     }
 }

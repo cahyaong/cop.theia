@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DiagnosticModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Diagnostic
 {
@@ -40,10 +40,11 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
         {
             this.Id = new Guid("FAD2D7B3-60B5-46F8-93CC-CE0F21C440E4");
 
-            var moduleSummaryPage = new Page("Module Summary", "/nGratis.Cop.Theia.Module.Diagnostic;component/ModuleSummaryView.xaml");
-            var loggingPage = new Page("Logging", "/nGratis.Cop.Theia.Module.Diagnostic;component/LoggingView.xaml");
-
-            var diagnosticFeature = new Feature("Diagnostic", int.MaxValue, new List<Page> { moduleSummaryPage, loggingPage });
+            var diagnosticFeature = new Feature(
+                "Diagnostic",
+                int.MaxValue,
+                new Page("Module Summary", "/nGratis.Cop.Theia.Module.Diagnostic;component/ModuleSummaryView.xaml"),
+                new Page("Logging", "/nGratis.Cop.Theia.Module.Diagnostic;component/LoggingView.xaml"));
 
             this.Features = new List<Feature> { diagnosticFeature };
         }

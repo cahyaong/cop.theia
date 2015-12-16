@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Measurement.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 10 May 2015 1:01:55 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     // ReSharper disable InconsistentNaming
 
     public enum Measurement

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CopLogger.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,13 +24,12 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Monday, 20 July 2015 1:58:42 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Reactive.Subjects;
     using nGratis.Cop.Core.Contract;
 
@@ -54,11 +53,11 @@ namespace nGratis.Cop.Core
         public override void LogWith(Verbosity verbosity, string message)
         {
             var logEntry = new LogEntry
-                {
-                    Components = this.Components,
-                    Verbosity = verbosity,
-                    Message = message
-                };
+            {
+                Components = this.Components,
+                Verbosity = verbosity,
+                Message = message
+            };
 
             logEntry.Freeze();
 
@@ -68,12 +67,12 @@ namespace nGratis.Cop.Core
         public override void LogWith(Verbosity verbosity, Exception exception, string message)
         {
             var logEntry = new LogEntry
-                {
-                    Components = this.Components,
-                    Verbosity = verbosity,
-                    Exception = exception,
-                    Message = message
-                };
+            {
+                Components = this.Components,
+                Verbosity = verbosity,
+                Exception = exception,
+                Message = message
+            };
 
             logEntry.Freeze();
 

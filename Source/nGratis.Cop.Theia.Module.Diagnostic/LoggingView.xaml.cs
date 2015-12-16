@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoggingView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Tuesday, 28 April 2015 1:31:37 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Diagnostic
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public partial class LoggingView
     {
         public LoggingView()

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FreezableAspectAttribute.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,13 +24,11 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Thursday, 7 May 2015 1:18:16 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using PostSharp.Aspects;
 
     [Serializable]

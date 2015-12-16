@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BaseFreezable.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Tuesday, 5 May 2015 2:01:21 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public class BaseFreezable : IFreezable
     {
         public bool IsFrozen { get; private set; }

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FundamentalModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Fundamental
 {
@@ -42,8 +42,9 @@ namespace nGratis.Cop.Theia.Module.Fundamental
 
             // FIXME: Use custom attribute to generate features and their pages.
 
-            var histogramPage = new Page("Histogram", @"/nGratis.Cop.Theia.Module.Fundamental;component/Histogram/HistogramView.xaml");
-            var fundamentalFeature = new Feature("Fundamental", new List<Page> { histogramPage });
+            var fundamentalFeature = new Feature(
+                "Fundamental",
+                new Page("Histogram", "/nGratis.Cop.Theia.Module.Fundamental;component/Histogram/HistogramView.xaml"));
 
             this.Features = new List<Feature> { fundamentalFeature };
         }

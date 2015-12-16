@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CopModuleProvider.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Client
 {
@@ -39,9 +39,11 @@ namespace nGratis.Cop.Theia.Client
     [Export(typeof(IModuleProvider))]
     internal class CopModuleProvider : IModuleProvider
     {
-        private readonly Lazy<IEnumerable<Assembly>> deferredModuleAssemblies = new Lazy<IEnumerable<Assembly>>(OnModuleAssembliesMaterializing);
+        private readonly Lazy<IEnumerable<Assembly>> deferredModuleAssemblies = new Lazy<IEnumerable<Assembly>>(
+            CopModuleProvider.OnModuleAssembliesMaterializing);
 
-        private readonly Lazy<IEnumerable<Assembly>> deferredInternalAssemblies = new Lazy<IEnumerable<Assembly>>(OnInternalAssembliesMaterializing);
+        private readonly Lazy<IEnumerable<Assembly>> deferredInternalAssemblies = new Lazy<IEnumerable<Assembly>>(
+            CopModuleProvider.OnInternalAssembliesMaterializing);
 
         public IEnumerable<Assembly> FindModuleAssemblies()
         {

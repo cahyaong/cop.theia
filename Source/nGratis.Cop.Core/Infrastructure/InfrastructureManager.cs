@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="InfrastructureManager.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,20 +24,17 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Saturday, 25 April 2015 1:01:42 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using nGratis.Cop.Core.Contract;
 
     public class InfrastructureManager : IInfrastructureManager
     {
         static InfrastructureManager()
         {
-            Instance = new InfrastructureManager(LoggingModes.All);
+            InfrastructureManager.Instance = new InfrastructureManager(LoggingModes.All);
         }
 
         public InfrastructureManager(LoggingModes loggingModes)

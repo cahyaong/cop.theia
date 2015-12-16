@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Assumption.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
@@ -35,7 +35,9 @@ namespace nGratis.Cop.Core
     [Obsolete("Use [Guard] or [Throw] class from [nGratis.Cop.Contract] library instead.")]
     public static class Assumption
     {
-        public static void ThrowWhenInvalidArgument<T>([InstantHandle] Func<bool> isInvalidCondition, [InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenInvalidArgument<T>(
+            [InstantHandle] Func<bool> isInvalidCondition,
+            [InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
         {
             if (isInvalidCondition())
             {
@@ -43,8 +45,10 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenNullArgument<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
-             where T : class
+        public static void ThrowWhenNullArgument<T>(
+            [InstantHandle] Expression<Func<T>> argumentExpression,
+            string reason = null)
+            where T : class
         {
             if (argumentExpression.Compile()() == null)
             {
@@ -52,7 +56,9 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenDefaultArgument<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenDefaultArgument<T>(
+            [InstantHandle] Expression<Func<T>> argumentExpression,
+            string reason = null)
         {
             if (argumentExpression.Compile()().Equals(default(T)))
             {
@@ -60,7 +66,9 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenNullOrWhitespaceArgument([InstantHandle] Expression<Func<string>> argumentExpression, string reason = null)
+        public static void ThrowWhenNullOrWhitespaceArgument(
+            [InstantHandle] Expression<Func<string>> argumentExpression,
+            string reason = null)
         {
             var argument = argumentExpression.Compile()();
 
@@ -70,7 +78,9 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenUnexpectedNullValue<T>([InstantHandle] Expression<Func<T>> argumentExpression, string reason = null)
+        public static void ThrowWhenUnexpectedNullValue<T>(
+            [InstantHandle] Expression<Func<T>> argumentExpression,
+            string reason = null)
             where T : class
         {
             if (argumentExpression.Compile()() == null)
@@ -79,7 +89,10 @@ namespace nGratis.Cop.Core
             }
         }
 
-        public static void ThrowWhenInvalidOperation([InstantHandle] Func<bool> isInvalidCondition, string reason = null, Exception innerException = null)
+        public static void ThrowWhenInvalidOperation(
+            [InstantHandle] Func<bool> isInvalidCondition,
+            string reason = null,
+            Exception innerException = null)
         {
             if (isInvalidCondition())
             {

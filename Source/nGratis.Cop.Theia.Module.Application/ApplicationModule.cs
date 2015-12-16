@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ApplicationModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 29 March 2015 4:26:34 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Application
 {
@@ -41,8 +41,9 @@ namespace nGratis.Cop.Theia.Module.Application
         {
             this.Id = new Guid("7B16E195-F198-42F8-B49D-C14A6594EBB1");
 
-            var kagglePage = new Page("Kaggle", @"/nGratis.Cop.Theia.Module.Application;component/Kaggle/KaggleView.xaml");
-            var applicationFeature = new Feature("Application", new List<Page> { kagglePage });
+            var applicationFeature = new Feature(
+                "Application",
+                new Page("Kaggle", @"/nGratis.Cop.Theia.Module.Application;component/Kaggle/KaggleView.xaml"));
 
             this.Features = new List<Feature> { applicationFeature };
         }

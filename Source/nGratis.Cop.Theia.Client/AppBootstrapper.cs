@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AppBootstrapper.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Wednesday, 24 December 2014 12:14:47 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Client
 {
@@ -32,7 +32,6 @@ namespace nGratis.Cop.Theia.Client
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
     using System.Windows;
@@ -41,7 +40,6 @@ namespace nGratis.Cop.Theia.Client
     using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Vision.Imaging;
 
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Will be disposed when main application is terminated.")]
     internal class AppBootstrapper : BootstrapperBase
     {
         private readonly IModuleProvider moduleProvider = new CopModuleProvider();

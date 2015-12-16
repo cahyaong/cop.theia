@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="KaggleViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,12 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 29 March 2015 5:14:54 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using ReactiveUI;
 

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DictionaryExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,13 +24,11 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Saturday, 25 April 2015 12:26:52 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using nGratis.Cop.Core.Contract;
 
     public static class DictionaryExtensions

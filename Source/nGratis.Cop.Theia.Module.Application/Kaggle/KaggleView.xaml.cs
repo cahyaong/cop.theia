@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="KaggleView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,13 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 29 March 2015 5:17:29 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
-    using System;
-    using System.Collections.Generic;
-
     internal partial class KaggleView
     {
         public KaggleView()

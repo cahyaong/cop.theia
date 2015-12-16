@@ -14,7 +14,7 @@
 		CultureInfo.InvariantCulture, 
 		DateTimeStyles.AdjustToUniversal);
 #>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GlobalAssemblyInfo.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -40,7 +40,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp><#= BuildTimestamp.ToString("dddd, d MMMM yyyy hh:mm:ss tt", CultureInfo.InvariantCulture) #> UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
 

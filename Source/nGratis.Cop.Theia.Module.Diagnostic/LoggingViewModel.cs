@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoggingViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,14 +24,11 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Tuesday, 28 April 2015 1:26:58 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Diagnostic
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using System.Linq;
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
     using ReactiveUI;

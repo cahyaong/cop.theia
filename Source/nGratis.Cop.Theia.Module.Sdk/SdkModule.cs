@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SdkModule.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
@@ -43,17 +43,22 @@ namespace nGratis.Cop.Theia.Module.Sdk
             var diagnosticFeature = new Feature(
                 "SDK",
                 int.MaxValue,
-                new List<Page>
-                    {
-                        new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
-                        new Page("Progress Bar", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressBarView.xaml")
-                    });
+                new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
+                new Page("Progress Bar", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressBarView.xaml"));
 
             this.Features = new List<Feature> { diagnosticFeature };
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id
+        {
+            get;
+            private set;
+        }
 
-        public IEnumerable<IFeature> Features { get; private set; }
+        public IEnumerable<IFeature> Features
+        {
+            get;
+            private set;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TypeExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,16 +24,14 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Saturday, 18 April 2015 5:06:16 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable CheckNamespace
 namespace System
+
 // ReSharper restore CheckNamespace
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using nGratis.Cop.Core;
 
     public static class TypeExtensions

@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="UriExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,16 +24,12 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Friday, 3 April 2015 9:35:37 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable CheckNamespace
 namespace System
-// ReSharper restore CheckNamespace
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
 

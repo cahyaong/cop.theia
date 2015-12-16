@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ScenarioExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,15 +24,13 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Monday, 20 April 2015 1:14:58 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Testing
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using System.Globalization;
-    using System.Linq;
     using System.Windows;
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Testing.Properties;
@@ -150,6 +148,7 @@ namespace nGratis.Cop.Core.Testing
 
             // ReSharper disable PossibleNullReferenceException
             return value.Trim();
+
             // ReSharper restore PossibleNullReferenceException
         }
     }

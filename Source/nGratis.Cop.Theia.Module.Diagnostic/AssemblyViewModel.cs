@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AssemblyViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Diagnostic
 {
@@ -36,7 +36,9 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
     public class AssemblyViewModel : ReactiveObject
     {
-        private static readonly Regex TitleRegex = new Regex(@"^nGratis\.Cop\.Theia\.Module\.(?<name>\w+)$", RegexOptions.Singleline);
+        private static readonly Regex TitleRegex = new Regex(
+            @"^nGratis\.Cop\.Theia\.Module\.(?<name>\w+)$",
+            RegexOptions.Singleline);
 
         private string name;
 
@@ -55,7 +57,9 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
                 throw new ArgumentNullException();
             }
 
-            var titleMatch = AssemblyViewModel.TitleRegex.Match(assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title);
+            var titleMatch = AssemblyViewModel
+                .TitleRegex
+                .Match(assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title);
 
             if (!titleMatch.Success)
             {

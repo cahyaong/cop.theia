@@ -38,7 +38,10 @@ namespace nGratis.Cop.Core
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaiseAndSetIfChanged<TValue>(ref TValue oldValue, TValue newValue, [CallerMemberName] string propertyName = null)
+        protected void RaiseAndSetIfChanged<TValue>(
+            ref TValue oldValue,
+            TValue newValue,
+            [CallerMemberName] string propertyName = null)
         {
             if (object.Equals(oldValue, newValue))
             {

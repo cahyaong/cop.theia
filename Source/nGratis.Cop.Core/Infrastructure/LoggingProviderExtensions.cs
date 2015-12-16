@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoggingProviderExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,12 +24,10 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Friday, 1 May 2015 1:04:31 PM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;

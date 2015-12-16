@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AweFileDialogButton.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -23,7 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
@@ -53,11 +53,11 @@ namespace nGratis.Cop.Core.Wpf
         private void OnMouseClicked(object parameter)
         {
             var fileDialog = new OpenFileDialog
-                {
-                    InitialDirectory = File.Exists(this.SelectedFilePath)
+            {
+                InitialDirectory = File.Exists(this.SelectedFilePath)
                         ? Path.GetDirectoryName(this.SelectedFilePath)
                         : Environment.GetFolderPath(Environment.SpecialFolder.Personal)
-                };
+            };
 
             var isOkSelected = fileDialog.ShowDialog();
 

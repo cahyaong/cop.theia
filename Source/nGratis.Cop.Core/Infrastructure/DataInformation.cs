@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataInformation.cs" company="nGratis">
 //  The MIT License (MIT)
 //
@@ -24,13 +24,11 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 29 March 2015 7:07:28 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using JetBrains.Annotations;
 
     public class DataInformation : DataSpecification, IDataInformation
