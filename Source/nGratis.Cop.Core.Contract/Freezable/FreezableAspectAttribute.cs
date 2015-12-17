@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core.Contract
     using PostSharp.Aspects;
 
     [Serializable]
+    [LinesOfCodeAvoided(4)]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class FreezableAspectAttribute : LocationInterceptionAspect
     {

@@ -50,7 +50,7 @@ namespace nGratis.Cop.Core
 
         public override void LogWith(Verbosity verbosity, Exception exception, string message)
         {
-            this.logger.Log(verbosity.ToLogLevel(), message, exception);
+            this.logger.Log(verbosity.ToLogLevel(), exception, message);
         }
     }
 }
