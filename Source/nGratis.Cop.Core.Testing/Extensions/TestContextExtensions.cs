@@ -35,7 +35,7 @@ namespace nGratis.Cop.Core.Testing
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Testing.Properties;
 
     public static class TestContextExtensions
@@ -44,24 +44,26 @@ namespace nGratis.Cop.Core.Testing
 
         static TestContextExtensions()
         {
-            ParsingMethodLookup = typeof(ScenarioExtensions)
+            TestContextExtensions.ParsingMethodLookup = typeof(ScenarioExtensions)
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(method => method.IsDefined(typeof(ExtensionAttribute), false))
                 .Select(method => new { Method = method, Parameters = method.GetParameters() })
                 .Where(annon => annon.Parameters.Count() == 2)
-                .Where(annon => annon.Parameters[0].ParameterType == typeof(DataRow) && annon.Parameters[1].ParameterType == typeof(string))
+                .Where(annon =>
+                    annon.Parameters[0].ParameterType == typeof(DataRow) &&
+                    annon.Parameters[1].ParameterType == typeof(string))
                 .ToDictionary(annon => annon.Method.ReturnType, annon => annon.Method);
         }
 
         public static TValue FindScenarioVariableAs<TValue>(this TestContext testContext, string variableName)
         {
-            Assumption.ThrowWhenNullArgument(() => testContext);
+            Guard.AgainstNullArgument(() => testContext);
 
             var parsingMethod = default(MethodInfo);
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => !ParsingMethodLookup.TryGetValue(typeof(TValue), out parsingMethod),
-                Messages.Error_TestContext_UnsupporedParser.WithInvariantFormat(typeof(TValue).FullName));
+            Guard.AgainstInvalidOperation(
+                !TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out parsingMethod),
+                () => Messages.Error_TestContext_UnsupporedParser.WithInvariantFormat(typeof(TValue).FullName));
 
             return (TValue)parsingMethod.Invoke(null, new object[] { testContext.DataRow, variableName });
         }

@@ -31,7 +31,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Media;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Vision.Imaging;
     using nGratis.Cop.Core.Wpf;
     using ReactiveUI;
@@ -46,7 +46,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
         [ImportingConstructor]
         public ColorHistogramViewModel(IImageProvider imageProvider)
         {
-            Assumption.ThrowWhenNullArgument(() => imageProvider);
+            Guard.AgainstNullArgument(() => imageProvider);
 
             this.imageProvider = imageProvider;
         }

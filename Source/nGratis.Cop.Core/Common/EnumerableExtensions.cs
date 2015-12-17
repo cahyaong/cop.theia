@@ -30,7 +30,6 @@ namespace System.Collections.Generic
 {
     using System;
     using System.Linq;
-
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
 

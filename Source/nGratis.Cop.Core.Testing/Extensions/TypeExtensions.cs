@@ -28,25 +28,23 @@
 
 // ReSharper disable CheckNamespace
 namespace System
-
-// ReSharper restore CheckNamespace
 {
     using System.IO;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
 
     public static class TypeExtensions
     {
         public static Stream LoadEmbeddedResource<T>(this T instance, string resourcePath)
             where T : class
         {
-            Assumption.ThrowWhenNullArgument(() => instance);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => resourcePath);
+            Guard.AgainstNullArgument(() => instance);
+            Guard.AgainstNullOrWhitespaceArgument(() => resourcePath);
 
             var assembly = typeof(T).Assembly;
             resourcePath = "{0}.{1}".WithInvariantFormat(assembly.GetName().Name, resourcePath.Replace("\\", "."));
             var stream = assembly.GetManifestResourceStream(resourcePath);
 
-            Assumption.ThrowWhenInvalidOperation(() => stream == null);
+            Guard.AgainstInvalidOperation(stream == null);
 
             return stream;
         }

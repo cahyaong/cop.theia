@@ -30,7 +30,6 @@ namespace nGratis.Cop.Theia.Module.Sdk
 {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
@@ -42,7 +41,7 @@ namespace nGratis.Cop.Theia.Module.Sdk
         [ImportingConstructor]
         public LoggingViewModel(IInfrastructureManager infrastructureManager)
         {
-            Assumption.ThrowWhenNullArgument(() => infrastructureManager);
+            Guard.AgainstNullArgument(() => infrastructureManager);
 
             this.Logger = infrastructureManager.LoggingProvider.GetLoggerFor("<SDK>");
 

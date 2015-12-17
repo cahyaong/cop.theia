@@ -32,79 +32,107 @@ namespace nGratis.Cop.Core.Testing
     using System.Data;
     using System.Globalization;
     using System.Windows;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Testing.Properties;
 
     public static class ScenarioExtensions
     {
         public static Guid AsGuid(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
+            Guard.AgainstNullArgument(() => dataRow);
 
             var value = Guid.Empty;
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => !Guid.TryParse(dataRow.AsString(columnName), out value),
-                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "GUID"));
+            Guard.AgainstInvalidOperation(
+                !Guid.TryParse(dataRow.AsString(columnName), out value),
+                () => Messages
+                    .Error_Scenario_InvalidFormat
+                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "GUID"));
 
             return value;
         }
 
         public static short AsInt16(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
+            Guard.AgainstNullArgument(() => dataRow);
 
             var value = (short)0;
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => !short.TryParse(dataRow.AsString(columnName), NumberStyles.Integer, CultureInfo.InvariantCulture, out value),
-                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "INT16"));
+            Guard.AgainstInvalidOperation(
+                !short.TryParse(
+                    dataRow.AsString(columnName),
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out value),
+                () => Messages
+                    .Error_Scenario_InvalidFormat
+                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "INT16"));
 
             return value;
         }
 
         public static int AsInt32(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
+            Guard.AgainstNullArgument(() => dataRow);
 
             var value = 0;
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => !int.TryParse(dataRow.AsString(columnName), NumberStyles.Integer, CultureInfo.InvariantCulture, out value),
-                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "INT32"));
+            Guard.AgainstInvalidOperation(
+                !int.TryParse(
+                    dataRow.AsString(columnName),
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out value),
+                () => Messages
+                    .Error_Scenario_InvalidFormat
+                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "INT32"));
 
             return value;
         }
 
         public static DateTime AsDateTime(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
+            Guard.AgainstNullArgument(() => dataRow);
 
             var value = DateTime.MinValue;
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => !DateTime.TryParseExact(dataRow.AsString(columnName), "O", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out value),
-                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIME"));
+            Guard.AgainstInvalidOperation(
+                !DateTime.TryParseExact(
+                    dataRow.AsString(columnName),
+                    "O",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal,
+                    out value),
+                () => Messages
+                    .Error_Scenario_InvalidFormat
+                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIME"));
 
             return value;
         }
 
         public static DateTimeOffset AsDateTimeOffset(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
+            Guard.AgainstNullArgument(() => dataRow);
 
             var value = DateTimeOffset.MinValue;
 
-            Assumption.ThrowWhenInvalidOperation(
-                () => !DateTimeOffset.TryParseExact(dataRow.AsString(columnName), "O", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out value),
-                Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIMEOFFSET"));
+            Guard.AgainstInvalidOperation(
+                !DateTimeOffset.TryParseExact(
+                    dataRow.AsString(columnName),
+                    "O",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal,
+                    out value),
+                () => Messages
+                    .Error_Scenario_InvalidFormat
+                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIMEOFFSET"));
 
             return value;
         }
 
         public static Size AsSize(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
+            Guard.AgainstNullArgument(() => dataRow);
 
             var value = default(Size);
 
@@ -112,12 +140,12 @@ namespace nGratis.Cop.Core.Testing
             {
                 value = Size.Parse(dataRow.AsString(columnName));
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                Assumption.ThrowWhenInvalidOperation(
-                    () => true,
-                    Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "SIZE"),
-                    exception);
+                Guard.AgainstInvalidOperation(
+                    () => Messages
+                        .Error_Scenario_InvalidFormat
+                        .WithInvariantFormat(columnName, dataRow.Table.TableName, "SIZE"));
             }
 
             return value;
@@ -125,8 +153,8 @@ namespace nGratis.Cop.Core.Testing
 
         public static string AsString(this DataRow dataRow, string columnName)
         {
-            Assumption.ThrowWhenNullArgument(() => dataRow);
-            Assumption.ThrowWhenNullOrWhitespaceArgument(() => columnName);
+            Guard.AgainstNullArgument(() => dataRow);
+            Guard.AgainstNullOrWhitespaceArgument(() => columnName);
 
             var value = string.Empty;
 
@@ -134,22 +162,21 @@ namespace nGratis.Cop.Core.Testing
             {
                 value = dataRow[columnName] as string;
 
-                Assumption.ThrowWhenInvalidOperation(
-                    () => value == null,
-                    Messages.Error_Scenario_InvalidFormat.WithInvariantFormat(columnName, dataRow.Table.TableName, "STRING"));
+                Guard.AgainstInvalidOperation(
+                    value == null,
+                    () => Messages
+                        .Error_Scenario_InvalidFormat
+                        .WithInvariantFormat(columnName, dataRow.Table.TableName, "STRING"));
             }
-            catch (ArgumentException exception)
+            catch (ArgumentException)
             {
-                Assumption.ThrowWhenInvalidOperation(
-                    () => true,
-                    Messages.Error_Scenario_UndefinedVariable.WithInvariantFormat(columnName, dataRow.Table.TableName),
-                    exception);
+                Guard.AgainstInvalidOperation(
+                    () => Messages
+                        .Error_Scenario_UndefinedVariable
+                        .WithInvariantFormat(columnName, dataRow.Table.TableName));
             }
 
-            // ReSharper disable PossibleNullReferenceException
             return value.Trim();
-
-            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

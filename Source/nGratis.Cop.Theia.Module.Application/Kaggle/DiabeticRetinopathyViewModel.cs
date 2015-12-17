@@ -32,7 +32,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Media;
-    using nGratis.Cop.Core;
+    using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Vision.Imaging;
     using nGratis.Cop.Core.Wpf;
     using ReactiveUI;
@@ -49,7 +49,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
         [ImportingConstructor]
         public DiabeticRetinopathyViewModel(IImageProvider imageProvider)
         {
-            Assumption.ThrowWhenNullArgument(() => imageProvider);
+            Guard.AgainstNullArgument(() => imageProvider);
 
             this.imageProvider = imageProvider;
 

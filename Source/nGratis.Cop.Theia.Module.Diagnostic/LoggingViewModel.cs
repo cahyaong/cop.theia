@@ -29,7 +29,6 @@
 namespace nGratis.Cop.Theia.Module.Diagnostic
 {
     using System.ComponentModel.Composition;
-    using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
@@ -41,7 +40,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
         [ImportingConstructor]
         public LoggingViewModel(IInfrastructureManager infrastructureManager)
         {
-            Assumption.ThrowWhenNullArgument(() => infrastructureManager);
+            Guard.AgainstNullArgument(() => infrastructureManager);
 
             this.Logger = infrastructureManager
                 .LoggingProvider

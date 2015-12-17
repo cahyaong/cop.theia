@@ -45,11 +45,6 @@ namespace nGratis.Cop.Core
             this.loggingSubject = new ReplaySubject<LogEntry>();
         }
 
-        ~CopLogger()
-        {
-            this.Dispose(false);
-        }
-
         public override void LogWith(Verbosity verbosity, string message)
         {
             var logEntry = new LogEntry
