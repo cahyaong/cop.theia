@@ -156,7 +156,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj">
