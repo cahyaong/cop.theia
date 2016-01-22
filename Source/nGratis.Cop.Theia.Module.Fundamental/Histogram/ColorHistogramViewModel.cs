@@ -37,7 +37,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
     using ReactiveUI;
 
     [Export]
-    public class ColorHistogramViewModel : BaseFormPageViewModel
+    public class ColorHistogramViewModel : BaseFormViewModel
     {
         private readonly IImageProvider imageProvider;
 

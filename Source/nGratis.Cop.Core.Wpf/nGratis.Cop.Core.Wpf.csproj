@@ -99,7 +99,8 @@
     <Compile Include="..\nGratis.Cop.Theia.Common\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseFormPageViewModel.cs" />
+    <Compile Include="BasePageViewModel.cs" />
+    <Compile Include="BaseFormViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
     <Compile Include="Controls\AweButton.cs" />
     <Compile Include="Controls\AweLogViewer.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="SharedResourceDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

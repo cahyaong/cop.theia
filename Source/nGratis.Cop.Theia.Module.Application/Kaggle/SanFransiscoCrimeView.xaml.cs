@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BaseFormPageViewModel.cs" company="nGratis">
+// <copyright file="SanFransiscoCrimeView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,37 +23,16 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 29 March 2015 4:34:35 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Wpf
+namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
-    using JetBrains.Annotations;
-    using ReactiveUI;
-
-    public abstract class BaseFormPageViewModel : ReactiveObject
+    internal partial class SanFransiscoCrimeView
     {
-        private FieldGroupViewModel inputFieldGroup;
-
-        private FieldGroupViewModel outputFieldGroup;
-
-        protected BaseFormPageViewModel()
+        public SanFransiscoCrimeView()
         {
-            this.InputFieldGroup = new FieldGroupViewModel(this, FieldMode.Input);
-            this.OutputFieldGroup = new FieldGroupViewModel(this, FieldMode.Output);
-        }
-
-        [UsedImplicitly]
-        public FieldGroupViewModel InputFieldGroup
-        {
-            get { return this.inputFieldGroup; }
-            private set { this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value); }
-        }
-
-        [UsedImplicitly]
-        public FieldGroupViewModel OutputFieldGroup
-        {
-            get { return this.outputFieldGroup; }
-            private set { this.RaiseAndSetIfChanged(ref this.outputFieldGroup, value); }
+            this.InitializeComponent();
         }
     }
 }

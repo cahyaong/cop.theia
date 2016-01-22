@@ -92,10 +92,10 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ApplicationModule.cs" />
-    <Compile Include="Kaggle\DiabeticRetinopathyView.xaml.cs">
-      <DependentUpon>DiabeticRetinopathyView.xaml</DependentUpon>
+    <Compile Include="Kaggle\SanFransiscoCrimeView.xaml.cs">
+      <DependentUpon>SanFransiscoCrimeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Kaggle\DiabeticRetinopathyViewModel.cs" />
+    <Compile Include="Kaggle\SanFransiscoCrimeViewModel.cs" />
     <Compile Include="Kaggle\KaggleView.xaml.cs">
       <DependentUpon>KaggleView.xaml</DependentUpon>
     </Compile>
@@ -103,6 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
@@ -125,7 +126,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Kaggle\DiabeticRetinopathyView.xaml">
+    <Page Include="Kaggle\SanFransiscoCrimeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

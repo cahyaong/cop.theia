@@ -76,6 +76,7 @@
     <Compile Include="Infrastructure\Verbosity.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Throw.cs" />
+    <Compile Include="Wpf\IActivatable.cs" />
     <Compile Include="Wpf\IFeature.cs" />
     <Compile Include="Wpf\IModule.cs" />
     <Compile Include="Wpf\IModuleProvider.cs" />

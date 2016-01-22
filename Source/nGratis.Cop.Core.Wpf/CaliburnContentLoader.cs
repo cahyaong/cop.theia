@@ -29,9 +29,9 @@ namespace nGratis.Cop.Core.Wpf
 {
     using System;
     using System.Windows;
-
     using Caliburn.Micro;
     using FirstFloor.ModernUI.Windows;
+    using nGratis.Cop.Core.Contract;
 
     public class CaliburnContentLoader : DefaultContentLoader
     {
@@ -54,6 +54,15 @@ namespace nGratis.Cop.Core.Wpf
             if (content is DependencyObject)
             {
                 ViewModelBinder.Bind(vm, content as DependencyObject, null);
+            }
+
+            var element = content as FrameworkElement;
+            var activatable = vm as IActivatable;
+
+            if (element != null && activatable != null)
+            {
+                element.Loaded += (_, __) => activatable.Activate();
+                element.Unloaded += (_, __) => activatable.Deactivate();
             }
 
             return content;

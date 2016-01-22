@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DiabeticRetinopathyView.xaml.cs" company="nGratis">
+// <copyright file="BaseFormViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,16 +23,37 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 4:34:35 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Application.Kaggle
+namespace nGratis.Cop.Core.Wpf
 {
-    internal partial class DiabeticRetinopathyView
+    using JetBrains.Annotations;
+    using ReactiveUI;
+
+    public abstract class BaseFormViewModel : BasePageViewModel
     {
-        public DiabeticRetinopathyView()
+        private FieldGroupViewModel inputFieldGroup;
+
+        private FieldGroupViewModel outputFieldGroup;
+
+        protected BaseFormViewModel()
         {
-            this.InitializeComponent();
+            this.InputFieldGroup = new FieldGroupViewModel(this, FieldMode.Input);
+            this.OutputFieldGroup = new FieldGroupViewModel(this, FieldMode.Output);
+        }
+
+        [UsedImplicitly]
+        public FieldGroupViewModel InputFieldGroup
+        {
+            get { return this.inputFieldGroup; }
+            private set { this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value); }
+        }
+
+        [UsedImplicitly]
+        public FieldGroupViewModel OutputFieldGroup
+        {
+            get { return this.outputFieldGroup; }
+            private set { this.RaiseAndSetIfChanged(ref this.outputFieldGroup, value); }
         }
     }
 }
