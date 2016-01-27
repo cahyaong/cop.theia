@@ -1,8 +1,8 @@
-﻿// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FieldTemplateSelector.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // <creation_timestamp>Sunday, 28 December 2014 12:37:57 AM UTC</creation_timestamp>
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Controls;
+    using nGratis.Cop.Core.Contract;
 
     public class FieldTemplateSelector : DataTemplateSelector
     {
@@ -46,24 +47,23 @@ namespace nGratis.Cop.Core.Wpf
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var element = container as FrameworkElement;
-            var field = item as FieldViewModel;
+            var control = (FrameworkElement)container;
+            var context = (FieldViewModel)item;
 
-            if (element == null || field == null)
-            {
-                return null;
-            }
+            Guard.AgainstUnexpectedNullValue(context);
 
             var key = "Cop.AweField.{0}.{1}".WithInvariantFormat(
-                field.Mode,
-                field.Type == FieldType.Auto ? field.ValueType.GetGenericName() : field.Type.ToString());
+                context.Mode,
+                context.Type == FieldType.Auto ? context.ValueType.GetGenericName() : context.Type.ToString());
 
             if (this.templateLookup.ContainsKey(key))
             {
                 return this.templateLookup[key];
             }
 
-            var template = element.TryFindResource(key) as DataTemplate ?? element.TryFindResource(FieldTemplateSelector.DefaultKey) as DataTemplate;
+            var template =
+                (DataTemplate)control.TryFindResource(key) ??
+                (DataTemplate)control.TryFindResource(FieldTemplateSelector.DefaultKey);
 
             this.templateLookup.Add(key, template);
 

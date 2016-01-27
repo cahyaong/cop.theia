@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SanFransiscoCrimeViewModel.cs" company="nGratis">
+// <copyright file="SanFranciscoCrimeView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,20 +23,16 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 4:36:35 AM UTC</creation_timestamp>
+// <creation_timestamp>Sunday, 29 March 2015 4:34:35 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
-    using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Wpf;
-
-    [Export]
-    public class SanFransiscoCrimeViewModel : BasePageViewModel
+    internal partial class SanFranciscoCrimeView
     {
-        [ImportingConstructor]
-        public SanFransiscoCrimeViewModel()
+        public SanFranciscoCrimeView()
         {
+            this.InitializeComponent();
         }
     }
 }

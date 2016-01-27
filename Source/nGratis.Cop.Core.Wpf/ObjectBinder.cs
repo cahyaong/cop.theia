@@ -2,7 +2,7 @@
 // <copyright file="ObjectBinder.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Wednesday, 24 December 2014 12:14:47 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
@@ -31,20 +32,36 @@ namespace nGratis.Cop.Core.Wpf
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
+    using System.Threading.Tasks;
     using nGratis.Cop.Core.Contract;
 
-    public class ObjectBinder
+    public sealed class ObjectBinder
     {
-        // FIXME: Need to make this class disposable!
-
         private readonly INotifyPropertyChanged source;
+
         private readonly INotifyPropertyChanged target;
+
         private readonly PropertyInfo sourceProperty;
+
         private readonly PropertyInfo targetProperty;
+
         private MethodInfo sourceCallbackMethod;
+
         private MethodInfo targetCallbackMethod;
 
-        public ObjectBinder(INotifyPropertyChanged source, PropertyInfo sourceProperty, INotifyPropertyChanged target, PropertyInfo targetProperty)
+        private Action onSourceValueUpdated;
+
+        private Action onSourceValueUpdating;
+
+        private Action onTargetValueUpdating;
+
+        private Action onTargetValueUpdated;
+
+        public ObjectBinder(
+            INotifyPropertyChanged source,
+            PropertyInfo sourceProperty,
+            INotifyPropertyChanged target,
+            PropertyInfo targetProperty)
         {
             Guard.AgainstNullArgument(() => source);
             Guard.AgainstNullArgument(() => sourceProperty);
@@ -57,49 +74,45 @@ namespace nGratis.Cop.Core.Wpf
             this.sourceProperty = sourceProperty;
             this.targetProperty = targetProperty;
 
-            source.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnSourcePropertyChanged);
-            target.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnTargetPropertyChanged);
+            source.PropertyChanged += async (_, args) => await this.OnSourcePropertyChangedAsync(args.PropertyName);
+            target.PropertyChanged += async (_, args) => await this.OnTargetPropertyChangedAsync(args.PropertyName);
         }
 
-        public void BindSourceCallback()
+        public void BindSourceCallback(Action onValueUpdating = null, Action onValueUpdated = null)
         {
-            var callbackMethodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
+            var methodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
 
-            this.sourceCallbackMethod = this.source
+            this.sourceCallbackMethod = this
+                .source
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                .SingleOrDefault(method => method.Name == callbackMethodName && method.GetCustomAttribute<AsFieldCallbackAttribute>() != null);
+                .SingleOrDefault(method =>
+                    method.GetCustomAttribute<AsFieldCallbackAttribute>() != null &&
+                    method.Name == methodName && !method.GetParameters().Any());
+
+            this.onSourceValueUpdating = onValueUpdating;
+            this.onSourceValueUpdated = onValueUpdated;
         }
 
-        public void BindTargetCallback()
+        public void BindTargetCallback(Action onValueUpdating = null, Action onValueUpdated = null)
         {
-            var callbackMethodName = "On{0}Changed".WithInvariantFormat(this.targetProperty.Name);
+            var methodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
 
-            this.targetCallbackMethod = this.source
+            this.targetCallbackMethod = this
+                .target
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                .SingleOrDefault(method => method.Name == callbackMethodName && method.GetCustomAttribute<AsFieldCallbackAttribute>() != null);
+                .SingleOrDefault(method =>
+                    method.GetCustomAttribute<AsFieldCallbackAttribute>() != null &&
+                    method.Name == methodName && !method.GetParameters().Any());
+
+            this.onTargetValueUpdating = onValueUpdating;
+            this.onTargetValueUpdated = onValueUpdated;
         }
 
-        private void OnTargetPropertyChanged(object sender, PropertyChangedEventArgs args)
+        private async Task OnSourcePropertyChangedAsync(string propertyName)
         {
-            if (args.PropertyName != this.targetProperty.Name)
-            {
-                return;
-            }
-
-            var value = this.targetProperty.GetValue(this.target);
-            this.sourceProperty.SetValue(this.source, value);
-
-            if (this.sourceCallbackMethod != null)
-            {
-                this.sourceCallbackMethod.Invoke(this.source, new object[] { });
-            }
-        }
-
-        private void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName != this.sourceProperty.Name)
+            if (this.sourceProperty.Name != propertyName)
             {
                 return;
             }
@@ -107,9 +120,59 @@ namespace nGratis.Cop.Core.Wpf
             var value = this.sourceProperty.GetValue(this.source);
             this.targetProperty.SetValue(this.target, value);
 
+            if (this.onSourceValueUpdating != null)
+            {
+                this.onSourceValueUpdating();
+            }
+
             if (this.targetCallbackMethod != null)
             {
-                this.targetCallbackMethod.Invoke(this.target, new object[] { });
+                if (typeof(Task).IsAssignableFrom(this.targetCallbackMethod.ReturnType))
+                {
+                    await (Task)this.targetCallbackMethod.Invoke(this.target, null);
+                }
+                else
+                {
+                    this.targetCallbackMethod.Invoke(this.target, null);
+                }
+            }
+
+            if (this.onSourceValueUpdated != null)
+            {
+                this.onSourceValueUpdated();
+            }
+        }
+
+        private async Task OnTargetPropertyChangedAsync(string propertyName)
+        {
+            if (this.targetProperty.Name != propertyName)
+            {
+                return;
+            }
+
+            var value = this.targetProperty.GetValue(this.target);
+            this.sourceProperty.SetValue(this.source, value);
+
+            if (this.onTargetValueUpdating != null)
+            {
+                this.onTargetValueUpdating();
+            }
+
+            if (this.sourceCallbackMethod != null)
+            {
+                if (typeof(Task).IsAssignableFrom(this.sourceCallbackMethod.ReturnType))
+                {
+                    await (Task)this.sourceCallbackMethod.Invoke(this.source, null);
+                }
+                else
+                {
+                    this.sourceCallbackMethod.Invoke(this.source, null);
+                }
+            }
+
+            if (this.onTargetValueUpdated != null)
+            {
+                this.onTargetValueUpdated();
             }
         }
     }

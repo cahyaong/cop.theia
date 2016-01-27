@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Range.cs" company="nGratis">
+// <copyright file="SanFranciscoCrime.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,57 +23,41 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 12 April 2015 1:52:17 PM UTC</creation_timestamp>
+// <creation_timestamp>Friday, 22 January 2016 10:54:09 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core.Wpf
+namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
     using System;
-    using nGratis.Cop.Core.Contract;
-    using ReactiveUI;
+    using LINQtoCSV;
 
-    public class Range : ReactiveObject
+    internal class SanFranciscoCrime
     {
-        private double currentValue;
+        [CsvColumn(Name = "Dates", FieldIndex = 1)]
+        public DateTime OffenceDate { get; set; }
 
-        private double interval;
+        [CsvColumn(FieldIndex = 2)]
+        public string Category { get; set; }
 
-        public Range()
-            : this(0.0, 100.0, 1.0)
-        {
-        }
+        [CsvColumn(Name = "Descript", FieldIndex = 3)]
+        public string Description { get; set; }
 
-        public Range(double interval)
-            : this(0.0, 100.0, interval)
-        {
-        }
+        [CsvColumn(FieldIndex = 4)]
+        public string DayOfWeek { get; set; }
 
-        public Range(double minimumValue, double maximumValue, double interval)
-        {
-            Guard.AgainstInvalidArgument(
-                minimumValue >= maximumValue,
-                () => minimumValue,
-                () => "Minimum value must be less than maximum value");
+        [CsvColumn(Name = "PdDistrict", FieldIndex = 5)]
+        public string PoliceDepartment { get; set; }
 
-            this.MinimumValue = minimumValue;
-            this.MaximumValue = maximumValue;
-            this.Interval = Math.Max(interval, 1.0);
-        }
+        [CsvColumn(FieldIndex = 6)]
+        public string Resolution { get; set; }
 
-        public double MinimumValue { get; private set; }
+        [CsvColumn(FieldIndex = 7)]
+        public string Address { get; set; }
 
-        public double MaximumValue { get; private set; }
+        [CsvColumn(Name = "X", FieldIndex = 8)]
+        public double Longitude { get; set; }
 
-        public double CurrentValue
-        {
-            get { return this.currentValue; }
-            set { this.RaiseAndSetIfChanged(ref this.currentValue, value); }
-        }
-
-        public double Interval
-        {
-            get { return this.interval; }
-            private set { this.RaiseAndSetIfChanged(ref this.interval, value); }
-        }
+        [CsvColumn(Name = "Y", FieldIndex = 9)]
+        public double Latitude { get; set; }
     }
 }

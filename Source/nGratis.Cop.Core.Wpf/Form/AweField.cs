@@ -2,7 +2,7 @@
 // <copyright file="AweField.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,31 +23,14 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Wednesday, 24 December 2014 12:14:47 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System.Windows;
     using System.Windows.Controls;
 
     public class AweField : ContentControl
     {
-        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
-            "Label", typeof(string), typeof(AweField), new PropertyMetadata("[_UNDEFINED_]"));
-
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-            "Value", typeof(object), typeof(AweField), new PropertyMetadata(string.Empty));
-
-        public string Label
-        {
-            get { return (string)this.GetValue(LabelProperty); }
-            set { this.SetValue(LabelProperty, value); }
-        }
-
-        public string Value
-        {
-            get { return (string)this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
-        }
     }
 }

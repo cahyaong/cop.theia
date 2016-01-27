@@ -35,7 +35,9 @@ namespace nGratis.Cop.Core.Wpf
 
     public class FieldViewModel : ReactiveObject
     {
-        public static readonly PropertyInfo ValueProperty = typeof(FieldViewModel).GetProperty("Value", BindingFlags.Instance | BindingFlags.Public);
+        public static readonly PropertyInfo ValueProperty = typeof(FieldViewModel).GetProperty(
+            "Value",
+            BindingFlags.Instance | BindingFlags.Public);
 
         private FieldMode mode;
 
@@ -44,6 +46,8 @@ namespace nGratis.Cop.Core.Wpf
         private string label;
 
         private object value;
+
+        private bool isValueUpdating;
 
         internal FieldViewModel(Type valueType, AsFieldAttribute asFieldAttribute)
         {
@@ -83,13 +87,17 @@ namespace nGratis.Cop.Core.Wpf
                     var oldNotifier = this.value as INotifyPropertyChanged;
                     if (oldNotifier != null)
                     {
-                        oldNotifier.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnValueInnerPropertyChanged);
+                        oldNotifier.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
+                            "PropertyChanged",
+                            this.OnInnerPropertyChanged);
                     }
 
                     var newNotifier = value as INotifyPropertyChanged;
                     if (newNotifier != null)
                     {
-                        newNotifier.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>("PropertyChanged", this.OnValueInnerPropertyChanged);
+                        newNotifier.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
+                            "PropertyChanged",
+                            this.OnInnerPropertyChanged);
                     }
                 }
 
@@ -103,14 +111,21 @@ namespace nGratis.Cop.Core.Wpf
             private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
         }
 
-        public Type ValueType { get; private set; }
-
-        private void OnValueInnerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        public Type ValueType
         {
-            // ReSharper disable ExplicitCallerInfoArgument
-            this.RaisePropertyChanged("Value");
+            get;
+            private set;
+        }
 
-            // ReSharper restore ExplicitCallerInfoArgument
+        public bool IsValueUpdating
+        {
+            get { return this.isValueUpdating; }
+            set { this.RaiseAndSetIfChanged(ref this.isValueUpdating, value); }
+        }
+
+        private void OnInnerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            this.RaisePropertyChanged("Value");
         }
     }
 }

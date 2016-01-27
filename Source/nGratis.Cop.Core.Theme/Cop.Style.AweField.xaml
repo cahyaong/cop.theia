@@ -4,6 +4,7 @@
   xmlns:core="http://schemas.ngratis.com/2014/core"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:system="clr-namespace:System;assembly=mscorlib"
   mc:Ignorable="d">
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweFileDialogButton.xaml" />
@@ -13,25 +14,24 @@
 
   <core:FieldTemplateSelector x:Key="Cop.AweField.TemplateSelector" />
 
-  <DataTemplate x:Key="Cop.AweField.Default" DataType="core:AweField">
+  <DataTemplate x:Key="Cop.AweField.Default" DataType="core:FieldViewModel">
     <TextBlock
       FontStyle="Italic"
       Style="{StaticResource Cop.TextBlock.Body}"
       Text="___UNSUPPORTED___" />
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.AweField.Input.Text" DataType="core:AweField">
+  <DataTemplate x:Key="Cop.AweField.Input.Text" DataType="core:FieldViewModel">
     <TextBox Style="{StaticResource Cop.TextBox.Normal}" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.AweField.Input.File" DataType="core:AweField">
+  <DataTemplate x:Key="Cop.AweField.Input.File" DataType="core:FieldViewModel">
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="Auto" />
       </Grid.ColumnDefinitions>
       <TextBox
-        x:Name="PART_Value"
         Grid.Column="0"
         Margin="0,0,5,0"
         Style="{StaticResource Cop.TextBox.Normal}"
@@ -44,36 +44,33 @@
     </Grid>
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.AweField.Input.Range" DataType="core:AweField">
-    <Grid DataContext="{Binding Value, Mode=OneWay}">
+  <DataTemplate x:Key="Cop.AweField.Input.Range" DataType="core:FieldViewModel">
+    <Grid DataContext="{Binding Value, Mode=OneWay}" d:DataContext="{d:DesignInstance core:Range}">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="25" />
       </Grid.ColumnDefinitions>
       <core:AweSlider
-        x:Name="Slider"
         Grid.Column="0"
         IsSnapToTickEnabled="True"
         Maximum="{Binding MaximumValue, Mode=OneWay}"
         Minimum="{Binding MinimumValue, Mode=OneWay}"
         StableValue="{Binding CurrentValue, Mode=TwoWay}"
-        TickFrequency="{Binding Interval, Mode=OneWay}"
-        d:DataContext="{d:DesignInstance core:Range}" />
+        TickFrequency="{Binding Interval, Mode=OneWay}" />
       <TextBlock
         Grid.Column="1"
         Margin="0,0,0,0"
         HorizontalAlignment="Right"
         Style="{StaticResource Cop.TextBlock.Body}"
-        Text="{Binding Value, ElementName=Slider, Mode=OneWay}"
-        d:DataContext="{d:DesignInstance core:Range}" />
+        Text="{Binding CurrentValue, Mode=OneWay}" />
     </Grid>
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.AweField.Output.ReadOnlyText" DataType="core:AweField">
+  <DataTemplate x:Key="Cop.AweField.Output.ReadOnlyText" DataType="core:FieldViewModel">
     <TextBlock Style="{StaticResource Cop.TextBlock.Body}" Text="{Binding Value, Mode=OneWay}" />
   </DataTemplate>
 
-  <DataTemplate x:Key="Cop.AweField.Output.Image" DataType="core:AweField">
+  <DataTemplate x:Key="Cop.AweField.Output.Image" DataType="core:FieldViewModel">
     <Image Source="{Binding Value, Mode=OneWay}" Stretch="UniformToFill" />
   </DataTemplate>
 
@@ -81,13 +78,12 @@
     <Setter Property="Margin" Value="0,0,0,10" />
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="core:AweField">
+        <ControlTemplate TargetType="core:AweField" d:DataContext="{d:DesignInstance core:FieldViewModel}">
           <StackPanel Orientation="Vertical">
             <TextBlock
-              x:Name="PART_Label"
               Margin="0,0,0,5"
               Style="{StaticResource Cop.TextBlock.SmallSubheader}"
-              Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+              Text="{Binding Label, Mode=OneWay}" />
             <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource Cop.AweField.TemplateSelector}" />
           </StackPanel>
         </ControlTemplate>
