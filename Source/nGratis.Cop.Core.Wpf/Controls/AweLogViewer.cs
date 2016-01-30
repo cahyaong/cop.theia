@@ -36,13 +36,13 @@ namespace nGratis.Cop.Core.Wpf
     using System.Windows.Controls;
     using nGratis.Cop.Core.Contract;
 
-    public class AweLogViewer : UserControl
+    public class AweLogViewer : ContentControl
     {
         public static readonly DependencyProperty LoggerProperty = DependencyProperty.Register(
             "Logger",
             typeof(ILogger),
             typeof(AweLogViewer),
-            new PropertyMetadata(null, OnLoggerPropertyChanged));
+            new PropertyMetadata(null, AweLogViewer.OnLoggerPropertyChanged));
 
         public static readonly DependencyProperty LogEntriesProperty = DependencyProperty.Register(
             "LogEntries",
@@ -56,7 +56,7 @@ namespace nGratis.Cop.Core.Wpf
         {
             get
             {
-                return (ILogger)this.GetValue(LoggerProperty);
+                return (ILogger)this.GetValue(AweLogViewer.LoggerProperty);
             }
 
             set
@@ -73,18 +73,20 @@ namespace nGratis.Cop.Core.Wpf
                     .ObserveOn(Application.Current.Dispatcher)
                     .Subscribe(entry => this.LogEntries.Add(entry));
 
-                this.SetValue(LoggerProperty, value);
+                this.SetValue(AweLogViewer.LoggerProperty, value);
             }
         }
 
         public IList<LogEntry> LogEntries
         {
-            get { return (IList<LogEntry>)this.GetValue(LogEntriesProperty); }
+            get { return (IList<LogEntry>)this.GetValue(AweLogViewer.LogEntriesProperty); }
         }
 
-        private static void OnLoggerPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        private static void OnLoggerPropertyChanged(
+            DependencyObject container,
+            DependencyPropertyChangedEventArgs args)
         {
-            var logViewer = dependencyObject as AweLogViewer;
+            var logViewer = container as AweLogViewer;
 
             if (logViewer == null)
             {

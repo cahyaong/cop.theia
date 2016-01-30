@@ -7,7 +7,7 @@
   mc:Ignorable="d">
   <Style
     x:Key="{x:Type core:AweLogViewer}"
-    BasedOn="{StaticResource {x:Type UserControl}}"
+    BasedOn="{StaticResource {x:Type ContentControl}}"
     TargetType="core:AweLogViewer">
     <Style.Setters>
       <Setter Property="Template">
