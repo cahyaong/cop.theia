@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AweProgressBar.cs" company="nGratis">
+// <copyright file="VisualizationMode.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,38 +23,15 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 21 June 2015 6:14:43 AM UTC</creation_timestamp>
+// <creation_timestamp>Saturday, 30 January 2016 1:48:45 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System.Windows;
-    using System.Windows.Controls;
-
-    public class AweProgressBar : ContentControl
+    public enum VisualizationMode
     {
-        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
-            "IsActive",
-            typeof(bool),
-            typeof(AweProgressBar),
-            new PropertyMetadata(false));
-
-        public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
-            "Message",
-            typeof(string),
-            typeof(AweProgressBar),
-            new PropertyMetadata(null));
-
-        public bool IsActive
-        {
-            get { return (bool)this.GetValue(IsActiveProperty); }
-            set { this.SetValue(IsActiveProperty, value); }
-        }
-
-        public string Message
-        {
-            get { return (string)this.GetValue(MessageProperty); }
-            set { this.SetValue(MessageProperty, value); }
-        }
+        None,
+        Ring,
+        Bar
     }
 }

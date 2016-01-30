@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProgressBarView.xaml.cs" company="nGratis">
+// <copyright file="ProgressIndicatorView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -28,9 +28,9 @@
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
-    public partial class ProgressBarView
+    public partial class ProgressIndicatorView
     {
-        public ProgressBarView()
+        public ProgressIndicatorView()
         {
             this.InitializeComponent();
         }

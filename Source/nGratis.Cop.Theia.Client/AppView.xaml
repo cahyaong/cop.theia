@@ -15,7 +15,7 @@
   Icon="Properties/App.ico"
   IsTitleVisible="True"
   Loaded="OnViewLoaded"
-  MenuLinkGroups="{Binding Modules, Mode=OneWay, Converter={StaticResource ModulesToLinkGroupsConverter}}"
+  MenuLinkGroups="{Binding Modules, Mode=OneWay, Converter={StaticResource Cop.Converter.ModulesToLinkGroupsConverter}}"
   d:DataContext="{d:DesignInstance client:AppViewModel, IsDesignTimeCreatable=True}"
   mc:Ignorable="d">
   <mui:ModernWindow.LogoData>

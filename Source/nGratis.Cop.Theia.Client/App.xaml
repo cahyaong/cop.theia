@@ -12,9 +12,7 @@
           <client:AppBootstrapper x:Key="Bootstrapper" />
           <core:CaliburnContentLoader x:Key="CaliburnContentLoader" />
         </ResourceDictionary>
-        <ResourceDictionary>
-          <core:ModulesToLinkGroupsConverter x:Key="ModulesToLinkGroupsConverter" />
-        </ResourceDictionary>
+        <ResourceDictionary Source="/nGratis.Cop.Core.Wpf;component/Cop.Converter.xaml" />
         <ResourceDictionary>
           <Style TargetType="mui:ModernWindow">
             <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />

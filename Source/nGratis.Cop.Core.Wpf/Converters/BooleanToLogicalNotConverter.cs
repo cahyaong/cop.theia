@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProgressBarViewModel.cs" company="nGratis">
+// <copyright file="BooleanToLogicalNotConverter.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,43 +23,26 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 21 June 2015 6:39:55 AM UTC</creation_timestamp>
+// <creation_timestamp>Friday, 29 January 2016 11:47:24 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Sdk
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.ComponentModel.Composition;
-    using System.Reactive.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
-    using ReactiveUI;
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
 
-    [Export]
-    public class ProgressBarViewModel : ReactiveObject
+    [ValueConversion(typeof(bool), typeof(bool))]
+    public class BooleanToLogicalNotConverter : IValueConverter
     {
-        private bool isBusy;
-
-        public ProgressBarViewModel()
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            this.StartWorkCommand = ReactiveCommand.CreateAsyncTask(
-                this.WhenAnyValue(vm => vm.IsBusy, isBusy => !isBusy)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                async _ => await Task.Run(() => this.IsBusy = true));
-
-            this.StopWorkCommand = ReactiveCommand.CreateAsyncTask(
-                this.WhenAnyValue(vm => vm.IsBusy)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                async _ => await Task.Run(() => this.IsBusy = false));
+            return !(bool)value;
         }
 
-        public bool IsBusy
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            get { return this.isBusy; }
-            private set { this.RaiseAndSetIfChanged(ref this.isBusy, value); }
+            return !(bool)value;
         }
-
-        public ICommand StartWorkCommand { get; private set; }
-
-        public ICommand StopWorkCommand { get; private set; }
     }
 }

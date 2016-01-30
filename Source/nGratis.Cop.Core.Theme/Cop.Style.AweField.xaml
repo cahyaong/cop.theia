@@ -4,12 +4,12 @@
   xmlns:core="http://schemas.ngratis.com/2014/core"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:system="clr-namespace:System;assembly=mscorlib"
   mc:Ignorable="d">
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweFileDialogButton.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Wpf;component/Cop.Converter.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
   <core:FieldTemplateSelector x:Key="Cop.AweField.TemplateSelector" />
@@ -26,7 +26,7 @@
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Input.File" DataType="core:FieldViewModel">
-    <Grid>
+    <Grid IsEnabled="{Binding IsValueUpdating, Mode=OneWay, Converter={StaticResource Cop.Converter.BooleanToLogicalNotConverter}}">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="Auto" />
@@ -84,7 +84,16 @@
               Margin="0,0,0,5"
               Style="{StaticResource Cop.TextBlock.SmallSubheader}"
               Text="{Binding Label, Mode=OneWay}" />
-            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource Cop.AweField.TemplateSelector}" />
+            <Grid>
+              <ContentControl
+                Grid.Column="0"
+                Content="{Binding}"
+                ContentTemplateSelector="{StaticResource Cop.AweField.TemplateSelector}" />
+              <core:AweProgressIndicator
+                Grid.Column="0"
+                IsActive="{Binding IsValueUpdating, Mode=OneWay}"
+                VisualizationMode="Bar" />
+            </Grid>
           </StackPanel>
         </ControlTemplate>
       </Setter.Value>

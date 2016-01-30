@@ -104,8 +104,9 @@
     <Compile Include="CaliburnContentLoader.cs" />
     <Compile Include="Controls\AweButton.cs" />
     <Compile Include="Controls\AweLogViewer.cs" />
-    <Compile Include="Controls\AweProgressBar.cs" />
+    <Compile Include="Controls\AweProgressIndicator.cs" />
     <Compile Include="Controls\AweSlider.cs" />
+    <Compile Include="Converters\BooleanToLogicalNotConverter.cs" />
     <Compile Include="Measurement.cs" />
     <Compile Include="Converters\EnumerableToCountConverter.cs" />
     <Compile Include="Converters\ModulesToLinkGroupsConverter.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="ObjectBinder.cs" />
     <Compile Include="Controls\AweFileDialogButton.cs" />
     <Compile Include="Page.cs" />
+    <Compile Include="VisualizationMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,6 +134,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Page Include="Cop.Converter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

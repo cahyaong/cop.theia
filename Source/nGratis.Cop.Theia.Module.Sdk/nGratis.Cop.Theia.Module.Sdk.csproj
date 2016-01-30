@@ -98,10 +98,10 @@
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MapViewModel.cs" />
-    <Compile Include="ProgressBarView.xaml.cs">
-      <DependentUpon>ProgressBarView.xaml</DependentUpon>
+    <Compile Include="ProgressIndicatorView.xaml.cs">
+      <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgressBarViewModel.cs" />
+    <Compile Include="ProgressIndicatorViewModel.cs" />
     <Compile Include="SdkModule.cs" />
     <Compile Include="LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
@@ -121,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProgressBarView.xaml">
+    <Page Include="ProgressIndicatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
