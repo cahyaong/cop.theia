@@ -49,6 +49,8 @@ namespace nGratis.Cop.Core.Wpf
 
         private bool isValueUpdating;
 
+        private bool hasError;
+
         internal FieldViewModel(Type valueType, AsFieldAttribute asFieldAttribute)
         {
             Guard.AgainstNullArgument(() => valueType);
@@ -121,6 +123,12 @@ namespace nGratis.Cop.Core.Wpf
         {
             get { return this.isValueUpdating; }
             set { this.RaiseAndSetIfChanged(ref this.isValueUpdating, value); }
+        }
+
+        public bool HasError
+        {
+            get { return this.hasError; }
+            set { this.RaiseAndSetIfChanged(ref this.hasError, value); }
         }
 
         private void OnInnerPropertyChanged(object sender, PropertyChangedEventArgs args)

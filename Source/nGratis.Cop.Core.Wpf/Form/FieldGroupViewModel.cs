@@ -62,10 +62,10 @@ namespace nGratis.Cop.Core.Wpf
                 .GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Select(property => new
-                {
-                    Property = property,
-                    FieldAttribute = property.GetCustomAttribute<AsFieldAttribute>()
-                })
+                    {
+                        Property = property,
+                        FieldAttribute = property.GetCustomAttribute<AsFieldAttribute>()
+                    })
                 .Where(annon => annon.FieldAttribute != null && annon.FieldAttribute.Mode == mode)
                 .ToList()
                 .ForEach(annon =>
@@ -76,13 +76,23 @@ namespace nGratis.Cop.Core.Wpf
                         var binder = new ObjectBinder(
                             notifyingInstance,
                             annon.Property,
-                            field, FieldViewModel.ValueProperty);
+                            field,
+                            FieldViewModel.ValueProperty);
 
                         binder.BindSourceCallback();
 
                         binder.BindTargetCallback(
-                            () => field.IsValueUpdating = true,
-                            () => field.IsValueUpdating = false);
+                            () =>
+                                {
+                                    field.HasError = false;
+                                    field.IsValueUpdating = true;
+                                },
+                            () => field.IsValueUpdating = false,
+                            () =>
+                                {
+                                    field.HasError = true;
+                                    field.IsValueUpdating = false;
+                                });
 
                         this.fieldBinders.Add(binder);
                     });

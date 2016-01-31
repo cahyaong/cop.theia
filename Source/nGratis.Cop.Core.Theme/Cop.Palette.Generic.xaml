@@ -7,4 +7,7 @@
   </ResourceDictionary.MergedDictionaries>
   <DynamicResource x:Key="Cop.Color.Accent" ResourceKey="AccentColor" />
   <SolidColorBrush x:Key="Cop.Brush.Accent" Color="{DynamicResource AccentColor}" />
+
+  <SolidColorBrush x:Key="Cop.Brush.Error">#FF953734</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Warning">#FFE36C09</SolidColorBrush>
 </ResourceDictionary>

@@ -6,6 +6,8 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
   <ResourceDictionary.MergedDictionaries>
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Icon.Control.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Palette.Generic.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweFileDialogButton.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBox.xaml" />
@@ -33,11 +35,16 @@
       </Grid.ColumnDefinitions>
       <TextBox
         Grid.Column="0"
-        Margin="0,0,5,0"
         Style="{StaticResource Cop.TextBox.Normal}"
         Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+      <Border
+        Grid.Column="0"
+        BorderBrush="{StaticResource Cop.Brush.Error}"
+        BorderThickness="1"
+        Visibility="{Binding HasError, Mode=OneWay, Converter={StaticResource Cop.Converter.BooleanToVisibilityConverter}}" />
       <core:AweFileDialogButton
         Grid.Column="1"
+        Margin="5,0,0,0"
         Content="Browse"
         SelectedFilePath="{Binding Value, Mode=TwoWay}"
         Style="{StaticResource Cop.AweFileDialogButton.Normal}" />
@@ -91,6 +98,7 @@
                 ContentTemplateSelector="{StaticResource Cop.AweField.TemplateSelector}" />
               <core:AweProgressIndicator
                 Grid.Column="0"
+                VerticalAlignment="Bottom"
                 IsActive="{Binding IsValueUpdating, Mode=OneWay}"
                 VisualizationMode="Bar" />
             </Grid>

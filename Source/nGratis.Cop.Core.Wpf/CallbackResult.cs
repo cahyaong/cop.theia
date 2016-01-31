@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SanFranciscoCrimeViewModel.cs" company="nGratis">
+// <copyright file="CallbackResult.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,53 +23,37 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 4:36:35 AM UTC</creation_timestamp>
+// <creation_timestamp>Sunday, 31 January 2016 7:00:05 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Module.Application.Kaggle
+namespace nGratis.Cop.Core.Wpf
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using LINQtoCSV;
-    using nGratis.Cop.Core.Wpf;
+    using nGratis.Cop.Core.Contract;
 
-    [Export]
-    public class SanFranciscoCrimeViewModel : BaseFormViewModel
+    public class CallbackResult
     {
-        private readonly List<SanFranciscoCrime> crimes = new List<SanFranciscoCrime>();
-
-        [ImportingConstructor]
-        public SanFranciscoCrimeViewModel()
+        private CallbackResult()
         {
         }
 
-        [AsField(FieldMode.Input, FieldType.File, "Data file path:")]
-        public string DataFilePath { get; set; }
 
-        [AsFieldCallback]
-        private async Task<CallbackResult> OnDataFilePathChanged()
+        public bool HasError
         {
-            this.crimes.Clear();
+            get;
+            private set;
+        }
 
-            if (!File.Exists(this.DataFilePath))
-            {
-                return CallbackResult.OnFailure();
-            }
+        public static CallbackResult OnSuccessful()
+        {
+            return new CallbackResult();
+        }
 
-            await Task.Run(() =>
+        public static CallbackResult OnFailure()
+        {
+            return new CallbackResult()
                 {
-                    var context = new CsvContext();
-                    this.crimes.AddRange(context
-                        .Read<SanFranciscoCrime>(
-                            this.DataFilePath,
-                            new CsvFileDescription { SeparatorChar = ',', FirstLineHasColumnNames = true })
-                        .ToList());
-                });
-
-            return CallbackResult.OnSuccessful();
+                    HasError = true
+                };
         }
     }
 }

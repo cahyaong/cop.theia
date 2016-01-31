@@ -57,6 +57,10 @@ namespace nGratis.Cop.Core.Wpf
 
         private Action onTargetValueUpdated;
 
+        private Action onSourceErrorEncountered;
+
+        private Action onTargetErrorEncountered;
+
         public ObjectBinder(
             INotifyPropertyChanged source,
             PropertyInfo sourceProperty,
@@ -78,7 +82,10 @@ namespace nGratis.Cop.Core.Wpf
             target.PropertyChanged += async (_, args) => await this.OnTargetPropertyChangedAsync(args.PropertyName);
         }
 
-        public void BindSourceCallback(Action onValueUpdating = null, Action onValueUpdated = null)
+        public void BindSourceCallback(
+            Action onValueUpdating = null,
+            Action onValueUpdated = null,
+            Action onErrorEncountered = null)
         {
             var methodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
 
@@ -92,9 +99,13 @@ namespace nGratis.Cop.Core.Wpf
 
             this.onSourceValueUpdating = onValueUpdating;
             this.onSourceValueUpdated = onValueUpdated;
+            this.onSourceErrorEncountered = onErrorEncountered;
         }
 
-        public void BindTargetCallback(Action onValueUpdating = null, Action onValueUpdated = null)
+        public void BindTargetCallback(
+            Action onValueUpdating = null,
+            Action onValueUpdated = null,
+            Action onErrorEncountered = null)
         {
             var methodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
 
@@ -108,6 +119,7 @@ namespace nGratis.Cop.Core.Wpf
 
             this.onTargetValueUpdating = onValueUpdating;
             this.onTargetValueUpdated = onValueUpdated;
+            this.onTargetErrorEncountered = onErrorEncountered;
         }
 
         private async Task OnSourcePropertyChangedAsync(string propertyName)
@@ -117,29 +129,53 @@ namespace nGratis.Cop.Core.Wpf
                 return;
             }
 
-            var value = this.sourceProperty.GetValue(this.source);
-            this.targetProperty.SetValue(this.target, value);
-
-            if (this.onSourceValueUpdating != null)
+            try
             {
-                this.onSourceValueUpdating();
-            }
+                var value = this.sourceProperty.GetValue(this.source);
+                this.targetProperty.SetValue(this.target, value);
 
-            if (this.targetCallbackMethod != null)
-            {
-                if (typeof(Task).IsAssignableFrom(this.targetCallbackMethod.ReturnType))
+                if (this.onSourceValueUpdating != null)
                 {
-                    await (Task)this.targetCallbackMethod.Invoke(this.target, null);
+                    this.onSourceValueUpdating();
                 }
-                else
+
+                if (this.targetCallbackMethod != null)
                 {
-                    this.targetCallbackMethod.Invoke(this.target, null);
+                    if (typeof(Task<CallbackResult>).IsAssignableFrom(this.targetCallbackMethod.ReturnType))
+                    {
+                        var result = await (Task<CallbackResult>)this.targetCallbackMethod.Invoke(this.target, null);
+
+                        if (result.HasError)
+                        {
+                            if (this.onSourceErrorEncountered != null)
+                            {
+                                this.onSourceErrorEncountered();
+                            }
+
+                            return;
+                        }
+                    }
+                    else if (typeof(Task).IsAssignableFrom(this.targetCallbackMethod.ReturnType))
+                    {
+                        await (Task)this.targetCallbackMethod.Invoke(this.target, null);
+                    }
+                    else
+                    {
+                        this.targetCallbackMethod.Invoke(this.target, null);
+                    }
+                }
+
+                if (this.onSourceValueUpdated != null)
+                {
+                    this.onSourceValueUpdated();
                 }
             }
-
-            if (this.onSourceValueUpdated != null)
+            catch
             {
-                this.onSourceValueUpdated();
+                if (this.onSourceErrorEncountered != null)
+                {
+                    this.onSourceErrorEncountered();
+                }
             }
         }
 
@@ -150,29 +186,53 @@ namespace nGratis.Cop.Core.Wpf
                 return;
             }
 
-            var value = this.targetProperty.GetValue(this.target);
-            this.sourceProperty.SetValue(this.source, value);
-
-            if (this.onTargetValueUpdating != null)
+            try
             {
-                this.onTargetValueUpdating();
-            }
+                var value = this.targetProperty.GetValue(this.target);
+                this.sourceProperty.SetValue(this.source, value);
 
-            if (this.sourceCallbackMethod != null)
-            {
-                if (typeof(Task).IsAssignableFrom(this.sourceCallbackMethod.ReturnType))
+                if (this.onTargetValueUpdating != null)
                 {
-                    await (Task)this.sourceCallbackMethod.Invoke(this.source, null);
+                    this.onTargetValueUpdating();
                 }
-                else
+
+                if (this.sourceCallbackMethod != null)
                 {
-                    this.sourceCallbackMethod.Invoke(this.source, null);
+                    if (typeof(Task<CallbackResult>).IsAssignableFrom(this.sourceCallbackMethod.ReturnType))
+                    {
+                        var result = await (Task<CallbackResult>)this.sourceCallbackMethod.Invoke(this.source, null);
+
+                        if (result.HasError)
+                        {
+                            if (this.onTargetErrorEncountered != null)
+                            {
+                                this.onTargetErrorEncountered();
+                            }
+
+                            return;
+                        }
+                    }
+                    else if (typeof(Task).IsAssignableFrom(this.sourceCallbackMethod.ReturnType))
+                    {
+                        await (Task)this.sourceCallbackMethod.Invoke(this.source, null);
+                    }
+                    else
+                    {
+                        this.sourceCallbackMethod.Invoke(this.source, null);
+                    }
+                }
+
+                if (this.onTargetValueUpdated != null)
+                {
+                    this.onTargetValueUpdated();
                 }
             }
-
-            if (this.onTargetValueUpdated != null)
+            catch
             {
-                this.onTargetValueUpdated();
+                if (this.onTargetErrorEncountered != null)
+                {
+                    this.onTargetErrorEncountered();
+                }
             }
         }
     }

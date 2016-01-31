@@ -102,6 +102,7 @@
     <Compile Include="BasePageViewModel.cs" />
     <Compile Include="BaseFormViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
+    <Compile Include="CallbackResult.cs" />
     <Compile Include="Controls\AweButton.cs" />
     <Compile Include="Controls\AweLogViewer.cs" />
     <Compile Include="Controls\AweProgressIndicator.cs" />
