@@ -29,35 +29,273 @@
 namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
     using System;
-    using LINQtoCSV;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
+    using CsvHelper.Configuration;
+    using CsvHelper.TypeConversion;
 
     internal class SanFranciscoCrime
     {
-        [CsvColumn(Name = "Dates", FieldIndex = 1)]
-        public DateTime OffenceDate { get; set; }
+        public DateTime OffenceDate
+        {
+            get;
+            set;
+        }
 
-        [CsvColumn(FieldIndex = 2)]
-        public string Category { get; set; }
+        public Category Category
+        {
+            get;
+            set;
+        }
 
-        [CsvColumn(Name = "Descript", FieldIndex = 3)]
-        public string Description { get; set; }
+        public DayOfWeek DayOfWeek
+        {
+            get { return this.OffenceDate.DayOfWeek; }
+        }
 
-        [CsvColumn(FieldIndex = 4)]
-        public string DayOfWeek { get; set; }
+        public PoliceDepartment PoliceDepartment
+        {
+            get;
+            set;
+        }
 
-        [CsvColumn(Name = "PdDistrict", FieldIndex = 5)]
-        public string PoliceDepartment { get; set; }
+        public double Longitude
+        {
+            get;
+            set;
+        }
 
-        [CsvColumn(FieldIndex = 6)]
-        public string Resolution { get; set; }
+        public double Latitude
+        {
+            get;
+            set;
+        }
 
-        [CsvColumn(FieldIndex = 7)]
-        public string Address { get; set; }
+        public class CsvConfiguration : CsvHelper.Configuration.CsvConfiguration
+        {
+            static CsvConfiguration()
+            {
+                CsvConfiguration.Instance = new CsvConfiguration()
+                    {
+                        BufferSize = 1 << 24,
+                        HasHeaderRecord = true,
+                    };
 
-        [CsvColumn(Name = "X", FieldIndex = 8)]
-        public double Longitude { get; set; }
+                CsvConfiguration.Instance.RegisterClassMap(CsvMap.Instance);
+            }
 
-        [CsvColumn(Name = "Y", FieldIndex = 9)]
-        public double Latitude { get; set; }
+            private CsvConfiguration()
+            {
+            }
+
+            public static CsvConfiguration Instance
+            {
+                get;
+                private set;
+            }
+        }
+
+        private class CsvMap : CsvClassMap<SanFranciscoCrime>
+        {
+            static CsvMap()
+            {
+                CsvMap.Instance = new CsvMap();
+
+                CsvMap
+                    .Instance
+                    .Map(entry => entry.OffenceDate)
+                    .Index(0)
+                    .TypeConverterOption(DateTimeStyles.None);
+
+                CsvMap
+                    .Instance
+                    .Map(entry => entry.Category)
+                    .Index(1)
+                    .TypeConverter(CategoryConverter.Instance);
+
+                CsvMap
+                    .Instance
+                    .Map(entry => entry.PoliceDepartment)
+                    .Index(4)
+                    .TypeConverter(PoliceDepartmentConverter.Instance);
+
+                CsvMap
+                    .Instance
+                    .Map(entry => entry.Longitude)
+                    .Index(7)
+                    .TypeConverterOption(NumberStyles.Float);
+
+                CsvMap
+                    .Instance
+                    .Map(entry => entry.Latitude)
+                    .Index(8)
+                    .TypeConverterOption(NumberStyles.Float);
+            }
+
+            private CsvMap()
+            {
+            }
+
+            public static CsvMap Instance
+            {
+                get;
+                private set;
+            }
+        }
+
+        private class CategoryConverter : ITypeConverter
+        {
+            private static readonly IDictionary<string, Category> Lookup = new Dictionary<string, Category>()
+                {
+                    { "SUSPICIOUS OCC", Category.SuspiciousOccurrence },
+                    { "TREA", Category.Trespass }
+                };
+
+            static CategoryConverter()
+            {
+                CategoryConverter.Instance = new CategoryConverter();
+            }
+
+            private CategoryConverter()
+            {
+            }
+
+            public static CategoryConverter Instance
+            {
+                get;
+                private set;
+            }
+
+            public string ConvertToString(TypeConverterOptions options, object value)
+            {
+                return value.ToString();
+            }
+
+            public object ConvertFromString(TypeConverterOptions options, string text)
+            {
+                var category = default(Category);
+                if (CategoryConverter.Lookup.TryGetValue(text, out category))
+                {
+                    return category;
+                }
+
+                return Enum.Parse(
+                    typeof(Category),
+                    Regexes.InputCleaner.Replace(text, string.Empty).Split('/')[0],
+                    true);
+            }
+
+            public bool CanConvertFrom(Type type)
+            {
+                return type == typeof(string);
+            }
+
+            public bool CanConvertTo(Type type)
+            {
+                return type == typeof(string);
+            }
+
+            private static class Regexes
+            {
+                public static readonly Regex InputCleaner = new Regex(@"[\s-]", RegexOptions.Compiled);
+            }
+        }
+
+        private class PoliceDepartmentConverter : ITypeConverter
+        {
+            static PoliceDepartmentConverter()
+            {
+                PoliceDepartmentConverter.Instance = new PoliceDepartmentConverter();
+            }
+
+            private PoliceDepartmentConverter()
+            {
+            }
+
+            public static PoliceDepartmentConverter Instance
+            {
+                get;
+                private set;
+            }
+
+            public string ConvertToString(TypeConverterOptions options, object value)
+            {
+                return value.ToString();
+            }
+
+            public object ConvertFromString(TypeConverterOptions options, string text)
+            {
+                return Enum.Parse(typeof(PoliceDepartment), text, true);
+            }
+
+            public bool CanConvertFrom(Type type)
+            {
+                return type == typeof(string);
+            }
+
+            public bool CanConvertTo(Type type)
+            {
+                return type == typeof(string);
+            }
+        }
+    }
+
+    public enum PoliceDepartment
+    {
+        Unknown,
+        Bayview,
+        Central,
+        Ingleside,
+        Mission,
+        Northern,
+        Park,
+        Richmond,
+        Southern,
+        Taraval,
+        Tenderloin
+    }
+
+    public enum Category
+    {
+        Unknown,
+        Arson,
+        Assault,
+        BadChecks,
+        Bribery,
+        Burglary,
+        DisorderlyConduct,
+        DrivingUnderTheInfluence,
+        Drug,
+        Drunkenness,
+        Embezzlement,
+        Extortion,
+        FamilyOffenses,
+        Forgery,
+        Fraud,
+        Gambling,
+        Kidnapping,
+        Larceny,
+        LiquorLaws,
+        Loitering,
+        MissingPerson,
+        NonCriminal,
+        OtherOffenses,
+        Pornography,
+        Prostitution,
+        RecoveredVehicle,
+        Robbery,
+        Runaway,
+        SecondaryCodes,
+        SexOffensesForcible,
+        SexOffensesNonForcible,
+        StolenProperty,
+        Suicide,
+        SuspiciousOccurrence,
+        Trespass,
+        Vandalism,
+        VehicleTheft,
+        Warrants,
+        WeaponLaws
     }
 }

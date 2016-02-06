@@ -64,10 +64,10 @@ namespace nGratis.Cop.Core
 
             loggers
                 .Select(logger => new
-	                {
-	                    Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name),
-	                    Logger = logger
-	                })
+                    {
+                        Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name),
+                        Logger = logger
+                    })
                 .Where(annon => !this.loggerLookup.ContainsKey(annon.Key))
                 .ForEach(annon => this.loggerLookup.TryAdd(annon.Key, annon.Logger));
         }
@@ -79,10 +79,10 @@ namespace nGratis.Cop.Core
 
             loggers
                 .Select(logger => new
-	                {
-	                    Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name),
-	                    Logger = logger
-	                })
+                    {
+                        Key = "{0}.{1}".WithInvariantFormat(logger.Id, logger.GetType().Name),
+                        Logger = logger
+                    })
                 .Where(annon => this.loggerLookup.ContainsKey(annon.Key))
                 .ForEach(annon =>
                     {

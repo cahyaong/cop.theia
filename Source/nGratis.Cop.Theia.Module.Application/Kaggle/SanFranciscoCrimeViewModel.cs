@@ -31,9 +31,8 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
-    using LINQtoCSV;
+    using CsvHelper;
     using nGratis.Cop.Core.Wpf;
 
     [Export]
@@ -61,12 +60,12 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
 
             await Task.Run(() =>
                 {
-                    var context = new CsvContext();
-                    this.crimes.AddRange(context
-                        .Read<SanFranciscoCrime>(
-                            this.DataFilePath,
-                            new CsvFileDescription { SeparatorChar = ',', FirstLineHasColumnNames = true })
-                        .ToList());
+                    using (var stream = File.OpenRead(this.DataFilePath))
+                    using (var reader = new StreamReader(stream))
+                    using (var parser = new CsvReader(reader, SanFranciscoCrime.CsvConfiguration.Instance))
+                    {
+                        this.crimes.AddRange(parser.GetRecords<SanFranciscoCrime>());
+                    }
                 });
 
             return CallbackResult.OnSuccessful();
