@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AnyToTypeNameConverter.cs" company="nGratis">
+// <copyright file="ValueUpdateException.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,28 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Friday, 19 February 2016 10:15:54 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
-    using System.Globalization;
-    using System.Windows.Data;
-    using nGratis.Cop.Core.Contract;
 
-    [ValueConversion(typeof(object), typeof(string))]
-    public class AnyToTypeNameConverter : IValueConverter
+    [Serializable]
+    public class ValueUpdateException : Exception
     {
-        public object Convert(object value, Type type, object parameter, CultureInfo culture)
+        public ValueUpdateException()
         {
-            Guard.AgainstInvalidArgument(type != typeof(string), () => type);
-
-            return value != null ? value.GetType().FullName : "<NULL>";
         }
 
-        public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
+        public ValueUpdateException(string message)
+            : base(message)
         {
-            throw new NotSupportedException();
+        }
+
+        public ValueUpdateException(string message, Exception exception)
+            : base(message, exception)
+        {
         }
     }
 }

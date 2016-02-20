@@ -35,7 +35,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using CsvHelper.Configuration;
     using CsvHelper.TypeConversion;
 
-    internal class SanFranciscoCrime
+    public class SanFranciscoCrime
     {
         public DateTime OffenceDate
         {

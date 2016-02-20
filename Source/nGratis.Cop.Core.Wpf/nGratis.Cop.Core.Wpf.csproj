@@ -52,6 +52,18 @@
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0-unstable1978\lib\net45\OxyPlot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0-unstable1978\lib\net45\OxyPlot.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot.Xps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0-unstable1978\lib\net45\OxyPlot.Xps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReactiveUI, Version=6.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\reactiveui-core.6.5.0\lib\Net45\ReactiveUI.dll</HintPath>
       <Private>True</Private>
@@ -103,7 +115,13 @@
     <Compile Include="BaseFormViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
     <Compile Include="CallbackResult.cs" />
+    <Compile Include="Chart\ChartConfiguration.cs" />
+    <Compile Include="Chart\ChartConfigurationToPlotModelConverter.cs" />
+    <Compile Include="ValueUpdateException.cs" />
+    <Compile Include="IThemeManager.cs" />
+    <Compile Include="Chart\SeriesConfiguration.cs" />
     <Compile Include="Controls\AweButton.cs" />
+    <Compile Include="Chart\AweChart.cs" />
     <Compile Include="Controls\AweLogViewer.cs" />
     <Compile Include="Controls\AweProgressIndicator.cs" />
     <Compile Include="Controls\AweSlider.cs" />
@@ -126,6 +144,7 @@
     <Compile Include="ObjectBinder.cs" />
     <Compile Include="Controls\AweFileDialogButton.cs" />
     <Compile Include="Page.cs" />
+    <Compile Include="ThemeManager.cs" />
     <Compile Include="VisualizationMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

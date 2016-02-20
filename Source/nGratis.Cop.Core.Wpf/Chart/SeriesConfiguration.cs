@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AnyToTypeNameConverter.cs" company="nGratis">
+// <copyright file="SeriesConfiguration.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,51 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 13 February 2016 12:30:15 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System;
-    using System.Globalization;
-    using System.Windows.Data;
+    using System.Collections;
     using nGratis.Cop.Core.Contract;
 
-    [ValueConversion(typeof(object), typeof(string))]
-    public class AnyToTypeNameConverter : IValueConverter
+    public class SeriesConfiguration
     {
-        public object Convert(object value, Type type, object parameter, CultureInfo culture)
+        public SeriesConfiguration(string title, ICollection points, string category, string value)
         {
-            Guard.AgainstInvalidArgument(type != typeof(string), () => type);
+            Guard.AgainstNullOrWhitespaceArgument(() => title);
+            Guard.AgainstNullArgument(() => points);
+            Guard.AgainstNullOrWhitespaceArgument(() => category);
+            Guard.AgainstNullOrWhitespaceArgument(() => value);
 
-            return value != null ? value.GetType().FullName : "<NULL>";
+            this.Title = title;
+            this.Points = points;
+            this.Category = category;
+            this.Value = value;
         }
 
-        public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
+        public string Title
         {
-            throw new NotSupportedException();
+            get;
+            private set;
+        }
+
+        public ICollection Points
+        {
+            get;
+            private set;
+        }
+
+        public string Category
+        {
+            get;
+            private set;
+        }
+
+        public string Value
+        {
+            get;
+            private set;
         }
     }
 }

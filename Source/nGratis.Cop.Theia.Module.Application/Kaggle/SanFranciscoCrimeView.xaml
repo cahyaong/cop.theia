@@ -9,42 +9,34 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DataContext="{d:DesignInstance kaggle:SanFranciscoCrimeViewModel}"
   mc:Ignorable="d">
-  <UserControl.Resources>
-    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
-  </UserControl.Resources>
-  <ScrollViewer HorizontalScrollBarVisibility="Auto">
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="480" />
-        <ColumnDefinition Width="640" />
-      </Grid.ColumnDefinitions>
-      <ItemsControl
-        Grid.Column="0"
-        Margin="0,0,40,0"
-        ItemsSource="{Binding InputFieldGroup.Fields, Mode=OneWay}">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate DataType="core:FieldViewModel">
-            <core:AweField />
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <ItemsControl.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Vertical" />
-          </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-      </ItemsControl>
-      <ItemsControl Grid.Column="1" ItemsSource="{Binding OutputFieldGroup.Fields, Mode=OneWay}">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate DataType="core:FieldViewModel">
-            <core:AweField />
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <ItemsControl.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Vertical" />
-          </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-      </ItemsControl>
-    </Grid>
-  </ScrollViewer>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="480" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <ItemsControl
+      Grid.Column="0"
+      Margin="0,0,40,0"
+      ItemsSource="{Binding InputFieldGroup.Fields, Mode=OneWay}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="core:FieldViewModel">
+          <core:AweField />
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Vertical" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+    </ItemsControl>
+    <StackPanel
+      Grid.Column="1"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top">
+      <core:AweChart
+        Width="600"
+        Height="600"
+        Configuration="{Binding ChartConfiguration, Mode=OneWay}" />
+    </StackPanel>
+  </Grid>
 </UserControl>

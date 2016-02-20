@@ -170,7 +170,7 @@ namespace nGratis.Cop.Core.Wpf
                     this.onSourceValueUpdated();
                 }
             }
-            catch
+            catch (ValueUpdateException)
             {
                 if (this.onSourceErrorEncountered != null)
                 {
@@ -227,7 +227,7 @@ namespace nGratis.Cop.Core.Wpf
                     this.onTargetValueUpdated();
                 }
             }
-            catch
+            catch (ValueUpdateException)
             {
                 if (this.onTargetErrorEncountered != null)
                 {

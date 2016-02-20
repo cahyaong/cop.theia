@@ -37,14 +37,14 @@ namespace nGratis.Cop.Core.Wpf
     [ValueConversion(typeof(IEnumerable), typeof(int))]
     public class EnumerableToCountConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
             var enumerable = value as IEnumerable;
 
             return enumerable == null ? 0 : enumerable.Cast<object>().Count();
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }

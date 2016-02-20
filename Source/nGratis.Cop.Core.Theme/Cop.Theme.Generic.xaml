@@ -5,6 +5,7 @@
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Palette.Generic.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweButton.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweChart.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweFileDialogButton.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweLogViewer.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.AweProgressIndicator.xaml" />

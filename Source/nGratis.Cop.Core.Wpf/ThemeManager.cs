@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AnyToTypeNameConverter.cs" company="nGratis">
+// <copyright file="ThemeManager.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,48 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Friday, 19 February 2016 9:05:33 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System;
-    using System.Globalization;
-    using System.Windows.Data;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Media;
     using nGratis.Cop.Core.Contract;
 
-    [ValueConversion(typeof(object), typeof(string))]
-    public class AnyToTypeNameConverter : IValueConverter
+    public class ThemeManager : IThemeManager
     {
-        public object Convert(object value, Type type, object parameter, CultureInfo culture)
+        public ThemeManager()
         {
-            Guard.AgainstInvalidArgument(type != typeof(string), () => type);
-
-            return value != null ? value.GetType().FullName : "<NULL>";
+            this.ResourceDictionaries = new Collection<ResourceDictionary>();
         }
 
-        public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
+        public Collection<ResourceDictionary> ResourceDictionaries
         {
-            throw new NotSupportedException();
+            get;
+            set;
+        }
+
+        public Color FindColor(string key)
+        {
+            return this.FindResource<Color>(key);
+        }
+
+        public Brush FindBrush(string key)
+        {
+            return this.FindResource<Brush>(key);
+        }
+
+        public TResource FindResource<TResource>(string key)
+        {
+            Guard.AgainstNullOrWhitespaceArgument(() => key);
+
+            return (TResource)this
+                .ResourceDictionaries
+                .Select(dictionary => dictionary[key])
+                .Single(resource => resource != null);
         }
     }
 }

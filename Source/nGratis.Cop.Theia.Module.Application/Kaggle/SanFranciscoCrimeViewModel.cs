@@ -28,17 +28,23 @@
 
 namespace nGratis.Cop.Theia.Module.Application.Kaggle
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using CsvHelper;
+    using Humanizer;
     using nGratis.Cop.Core.Wpf;
+    using ReactiveUI;
 
     [Export]
     public class SanFranciscoCrimeViewModel : BaseFormViewModel
     {
-        private readonly List<SanFranciscoCrime> crimes = new List<SanFranciscoCrime>();
+        private IEnumerable<SanFranciscoCrime> crimes;
+
+        private ChartConfiguration chartConfiguration;
 
         [ImportingConstructor]
         public SanFranciscoCrimeViewModel()
@@ -46,13 +52,27 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
         }
 
         [AsField(FieldMode.Input, FieldType.File, "Data file path:")]
-        public string DataFilePath { get; set; }
+        public string DataFilePath
+        {
+            get;
+            set;
+        }
+
+        public IEnumerable<SanFranciscoCrime> Crimes
+        {
+            get { return this.crimes; }
+            private set { this.RaiseAndSetIfChanged(ref this.crimes, value); }
+        }
+
+        public ChartConfiguration ChartConfiguration
+        {
+            get { return this.chartConfiguration; }
+            private set { this.RaiseAndSetIfChanged(ref this.chartConfiguration, value); }
+        }
 
         [AsFieldCallback]
         private async Task<CallbackResult> OnDataFilePathChanged()
         {
-            this.crimes.Clear();
-
             if (!File.Exists(this.DataFilePath))
             {
                 return CallbackResult.OnFailure();
@@ -64,9 +84,40 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
                     using (var reader = new StreamReader(stream))
                     using (var parser = new CsvReader(reader, SanFranciscoCrime.CsvConfiguration.Instance))
                     {
-                        this.crimes.AddRange(parser.GetRecords<SanFranciscoCrime>());
+                        try
+                        {
+                            this.Crimes = parser
+                                .GetRecords<SanFranciscoCrime>()
+                                .ToList();
+                        }
+                        catch (FormatException exception)
+                        {
+                            throw new ValueUpdateException(
+                                "CSV file does not contain San Francisco crime data",
+                                exception);
+                        }
                     }
                 });
+
+            var configurations = this
+                .Crimes
+                .AsParallel()
+                .Where(crime =>
+                    crime.Category == Category.Embezzlement ||
+                    crime.Category == Category.Robbery ||
+                    crime.Category == Category.VehicleTheft)
+                .GroupBy(crime => new { crime.Category, crime.OffenceDate.Year }, crime => crime)
+                .Select(group => new { group.Key.Category, group.Key.Year, Occurrence = group.Count() })
+                .GroupBy(annon => annon.Category, annon => annon)
+                .Select(group => new
+                    {
+                        Title = group.Key.ToString().Humanize(LetterCasing.Title),
+                        Points = group.OrderBy(annon => annon.Year).ToList()
+                    })
+                .Select(annon => new SeriesConfiguration(annon.Title, annon.Points, "Year", "Occurrence"))
+                .ToList();
+
+            this.ChartConfiguration = new ChartConfiguration("Occurrence by Category", configurations);
 
             return CallbackResult.OnSuccessful();
         }

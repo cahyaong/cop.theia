@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AnyToTypeNameConverter.cs" company="nGratis">
+// <copyright file="AweChart.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,26 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 6 February 2016 12:26:05 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System;
-    using System.Globalization;
-    using System.Windows.Data;
-    using nGratis.Cop.Core.Contract;
+    using System.Windows;
+    using System.Windows.Controls;
 
-    [ValueConversion(typeof(object), typeof(string))]
-    public class AnyToTypeNameConverter : IValueConverter
+    public class AweChart : ItemsControl
     {
-        public object Convert(object value, Type type, object parameter, CultureInfo culture)
-        {
-            Guard.AgainstInvalidArgument(type != typeof(string), () => type);
+        public static DependencyProperty ConfigurationProperty = DependencyProperty.Register(
+            "Configuration",
+            typeof(ChartConfiguration),
+            typeof(AweChart),
+            new PropertyMetadata(null));
 
-            return value != null ? value.GetType().FullName : "<NULL>";
-        }
-
-        public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
+        public ChartConfiguration Configuration
         {
-            throw new NotSupportedException();
+            get { return (ChartConfiguration)this.GetValue(AweChart.ConfigurationProperty); }
+            set { this.SetValue(AweChart.ConfigurationProperty, value); }
         }
     }
 }

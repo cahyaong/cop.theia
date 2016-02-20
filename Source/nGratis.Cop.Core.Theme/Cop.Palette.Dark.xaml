@@ -10,18 +10,22 @@
   <Color x:Key="Cop.Color.Shade7">#FFE0E0E0</Color>
   <Color x:Key="Cop.Color.Shade8">#FFFFFFFF</Color>
 
-  <Color x:Key="Cop.Color.WindowBackground">#FF252526</Color>
+  <Color x:Key="Cop.Color.App.Background">#FF252526</Color>
 
-  <Color x:Key="Cop.Color.ButtonBackground">#FF333333</Color>
-  <Color x:Key="Cop.Color.ButtonBorder">#FF333333</Color>
-  <Color x:Key="Cop.Color.ButtonText">#FFD1D1D1</Color>
-  <Color x:Key="Cop.Color.ButtonBackground.OnHovered">#FF3E3E42</Color>
-  <Color x:Key="Cop.Color.ButtonBorder.OnHovered">#FF3E3E42</Color>
-  <Color x:Key="Cop.Color.ButtonText.OnHovered">#FFD1D1D1</Color>
-  <Color x:Key="Cop.Color.ButtonText.OnPressed">#FFD1D1D1</Color>
-  <Color x:Key="Cop.Color.ButtonBackground.OnDisabled">#66333333</Color>
-  <Color x:Key="Cop.Color.ButtonBorder.OnDisabled">#66333333</Color>
-  <Color x:Key="Cop.Color.ButtonText.OnDisabled">#FF515151</Color>
+  <Color x:Key="Cop.Color.Button.Background">#FF333333</Color>
+  <Color x:Key="Cop.Color.Button.Border">#FF333333</Color>
+  <Color x:Key="Cop.Color.Button.Text">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Background.OnHovered">#FF3E3E42</Color>
+  <Color x:Key="Cop.Color.Button.Border.OnHovered">#FF3E3E42</Color>
+  <Color x:Key="Cop.Color.Button.Text.OnHovered">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Text.OnPressed">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Background.OnDisabled">#66333333</Color>
+  <Color x:Key="Cop.Color.Button.Border.OnDisabled">#66333333</Color>
+  <Color x:Key="Cop.Color.Button.Text.OnDisabled">#FF515151</Color>
+
+  <Color x:Key="Cop.Color.AweChart.Border">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.AweChart.Text">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.AweChart.Tickline">#FFD1D1D1</Color>
 
   <SolidColorBrush x:Key="Cop.Brush.Shade0">#FF000000</SolidColorBrush>
   <SolidColorBrush x:Key="Cop.Brush.Shade1">#FF202020</SolidColorBrush>
@@ -32,5 +36,10 @@
   <SolidColorBrush x:Key="Cop.Brush.Shade6">#FFC0C0C0</SolidColorBrush>
   <SolidColorBrush x:Key="Cop.Brush.Shade7">#FFE0E0E0</SolidColorBrush>
   <SolidColorBrush x:Key="Cop.Brush.Shade8">#FFFFFFFF</SolidColorBrush>
+
+  <SolidColorBrush x:Key="Cop.Brush.App.Background">#FF252526</SolidColorBrush>
+
+  <SolidColorBrush x:Key="Cop.Brush.AweChart.Border">#FF404040</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.AweChart.Text">#FFD1D1D1</SolidColorBrush>
 
 </ResourceDictionary>

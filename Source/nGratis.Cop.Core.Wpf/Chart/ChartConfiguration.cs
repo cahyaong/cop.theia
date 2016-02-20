@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ModulesToLinkGroupsConverter.cs" company="nGratis">
+// <copyright file="ChartConfiguration.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,55 +23,38 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 13 February 2016 12:20:50 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
-    using System.Windows.Data;
-    using FirstFloor.ModernUI.Presentation;
     using nGratis.Cop.Core.Contract;
 
-    [ValueConversion(typeof(IEnumerable<IModule>), typeof(LinkGroupCollection))]
-    public class ModulesToLinkGroupsConverter : IValueConverter
+    public class ChartConfiguration : NotifyingObject
     {
-        public object Convert(object value, Type type, object parameter, CultureInfo culture)
+        public ChartConfiguration(string title, ICollection<SeriesConfiguration> seriesConfigurations)
         {
-            var modules = value as IEnumerable<IModule>;
+            Guard.AgainstNullOrWhitespaceArgument(() => title);
+            Guard.AgainstNullArgument(() => seriesConfigurations);
+            Guard.AgainstInvalidArgument(!seriesConfigurations.Any(), () => seriesConfigurations);
 
-            Guard.AgainstInvalidArgument(modules == null, () => value);
+            this.Title = title;
 
-            var linkGroups = new LinkGroupCollection();
-
-            // TODO: Need a proper grouping of multiple features based their name.
-
-            var orderedFeatures = modules
-                .SelectMany(module => module.Features)
-                .OrderBy(feature => feature.Order)
-                .ThenBy(feature => feature.Name);
-
-            foreach (var orderedFeature in orderedFeatures)
-            {
-                var linkGroup = new LinkGroup { DisplayName = orderedFeature.Name };
-
-                orderedFeature
-                    .Pages
-                    .Select(page => new Link { DisplayName = page.Name, Source = page.SourceUri })
-                    .ToList()
-                    .ForEach(linkGroup.Links.Add);
-
-                linkGroups.Add(linkGroup);
-            }
-
-            return linkGroups;
+            this.SeriesConfigurations = seriesConfigurations;
         }
 
-        public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
+        public string Title
         {
-            throw new NotSupportedException();
+            get;
+            private set;
+        }
+
+        public IEnumerable<SeriesConfiguration> SeriesConfigurations
+        {
+            get;
+            private set;
         }
     }
 }
