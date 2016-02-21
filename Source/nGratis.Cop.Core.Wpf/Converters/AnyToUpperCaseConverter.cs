@@ -31,12 +31,19 @@ namespace nGratis.Cop.Core.Wpf
     using System.Globalization;
     using System.Windows.Data;
 
-    [ValueConversion(typeof(string), typeof(string))]
+    [ValueConversion(typeof(object), typeof(string))]
     public class AnyToUpperCaseConverter : IValueConverter
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            return ((string)value).ToUpper(culture);
+            if (value == null)
+            {
+                return null;
+            }
+
+            return value
+                .ToString()
+                .ToUpper(culture);
         }
 
         public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)

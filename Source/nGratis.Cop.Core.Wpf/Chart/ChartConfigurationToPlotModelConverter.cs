@@ -40,6 +40,7 @@ namespace nGratis.Cop.Core.Wpf
     using OxyPlot.Wpf;
     using LinearAxis = OxyPlot.Axes.LinearAxis;
     using LineSeries = OxyPlot.Series.LineSeries;
+    using LogarithmicAxis = OxyPlot.Axes.LogarithmicAxis;
 
     [ValueConversion(typeof(ChartConfiguration), typeof(PlotModel))]
     public class ChartConfigurationToPlotModelConverter : Freezable, IValueConverter
@@ -96,8 +97,11 @@ namespace nGratis.Cop.Core.Wpf
                     TitleColor = textColor,
                     SubtitleColor = textColor,
                     LegendTextColor = textColor,
+                    IsLegendVisible = false,
                     PlotAreaBorderColor = borderColor
                 };
+
+            // TODO: Add axis configuration concept.
 
             var horizontalAxis = new LinearAxis()
                 {
@@ -109,10 +113,12 @@ namespace nGratis.Cop.Core.Wpf
                     Title = subchart.Category,
                     TitleColor = textColor,
                     TitleFontSize = 14,
-                    AxisTitleDistance = 20
+                    AxisTitleDistance = 20,
+                    Minimum = 2002,
+                    Maximum = 2016
                 };
 
-            var verticalAxis = new LinearAxis()
+            var verticalAxis = new LogarithmicAxis()
                 {
                     TicklineColor = ticklineColor,
                     Position = AxisPosition.Left,
@@ -122,7 +128,9 @@ namespace nGratis.Cop.Core.Wpf
                     Title = subchart.Value,
                     TitleColor = textColor,
                     TitleFontSize = 14,
-                    AxisTitleDistance = 20
+                    AxisTitleDistance = 20,
+                    Minimum = 0,
+                    Maximum = 100000
                 };
 
             plotModel.Axes.Add(horizontalAxis);

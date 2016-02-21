@@ -33,6 +33,8 @@ namespace nGratis.Cop.Core.Wpf
     using System.Windows.Controls;
     using nGratis.Cop.Core.Contract;
 
+    // TODO: Implement a functionality to avoid progress bar if the active flag is toggled under certain threshold.
+
     [TemplatePart(Name = "PART_BusyRing", Type = typeof(FrameworkElement))]
     [TemplatePart(Name = "PART_BusyBar", Type = typeof(FrameworkElement))]
     [TemplatePart(Name = "PART_Message", Type = typeof(FrameworkElement))]

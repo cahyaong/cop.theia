@@ -73,6 +73,16 @@
     </Grid>
   </DataTemplate>
 
+  <DataTemplate x:Key="Cop.AweField.Input.Enumeration" DataType="core:FieldViewModel">
+    <ComboBox ItemsSource="{Binding ValueType, Mode=OneWay, Converter={StaticResource Cop.Converter.EnumerationToPossibleValuesConverter}}" SelectedValue="{Binding Value, Mode=TwoWay}">
+      <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource Cop.Converter.AnyToTitleCaseCoverter}}" />
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+  </DataTemplate>
+
   <DataTemplate x:Key="Cop.AweField.Output.ReadOnlyText" DataType="core:FieldViewModel">
     <TextBlock Style="{StaticResource Cop.TextBlock.Body}" Text="{Binding Value, Mode=OneWay}" />
   </DataTemplate>

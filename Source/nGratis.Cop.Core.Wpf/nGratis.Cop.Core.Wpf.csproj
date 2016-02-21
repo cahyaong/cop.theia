@@ -52,6 +52,10 @@
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer, Version=2.0.1.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.0.1\lib\dotnet\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.1.0.0-unstable1978\lib\net45\OxyPlot.dll</HintPath>
       <Private>True</Private>
@@ -117,6 +121,8 @@
     <Compile Include="CallbackResult.cs" />
     <Compile Include="Chart\ChartConfiguration.cs" />
     <Compile Include="Chart\ChartConfigurationToPlotModelConverter.cs" />
+    <Compile Include="Converters\AnyToTitleCaseCoverter.cs" />
+    <Compile Include="Converters\EnumerationToPossibleValuesConverter.cs" />
     <Compile Include="ValueUpdateException.cs" />
     <Compile Include="IThemeManager.cs" />
     <Compile Include="Chart\SeriesConfiguration.cs" />

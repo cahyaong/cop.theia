@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FieldTemplateSelector.cs" company="nGratis">
+// <copyright file="AnyToTitleCaseCoverter.cs" company="nGratis">
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2014 - 2015 Cahya Ong
@@ -23,53 +23,34 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 28 December 2014 12:37:57 AM UTC</creation_timestamp>
+// <creation_timestamp>Saturday, 20 February 2016 10:17:26 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
-    using System.Collections.Generic;
-    using System.Windows;
-    using System.Windows.Controls;
-    using nGratis.Cop.Core.Contract;
+    using System.Globalization;
+    using System.Windows.Data;
+    using Humanizer;
 
-    public class FieldTemplateSelector : DataTemplateSelector
+    [ValueConversion(typeof(string), typeof(string))]
+    public class AnyToTitleCaseCoverter : IValueConverter
     {
-        private const string DefaultKey = "Cop.AweField.Default";
-
-        private readonly IDictionary<string, DataTemplate> templateLookup;
-
-        public FieldTemplateSelector()
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            this.templateLookup = new Dictionary<string, DataTemplate>();
-        }
-
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
-        {
-            var control = (FrameworkElement)container;
-            var context = (FieldViewModel)item;
-
-            Guard.AgainstUnexpectedNullValue(context);
-
-            var key = "Cop.AweField.{0}.{1}".WithInvariantFormat(
-                context.Mode,
-                context.Type == FieldType.Auto
-                    ? context.ValueType.IsEnum ? "Enumeration" : context.ValueType.GetGenericName()
-                    : context.Type.ToString());
-
-            if (this.templateLookup.ContainsKey(key))
+            if (value == null)
             {
-                return this.templateLookup[key];
+                return null;
             }
 
-            var template =
-                (DataTemplate)control.TryFindResource(key) ??
-                (DataTemplate)control.TryFindResource(FieldTemplateSelector.DefaultKey);
+            return value
+                .ToString()
+                .Humanize(LetterCasing.Title);
+        }
 
-            this.templateLookup.Add(key, template);
-
-            return template;
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
         }
     }
 }

@@ -42,6 +42,8 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     [Export]
     public class SanFranciscoCrimeViewModel : BaseFormViewModel
     {
+        private Category category;
+
         private IEnumerable<SanFranciscoCrime> crimes;
 
         private ChartConfiguration chartConfiguration;
@@ -56,6 +58,13 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
         {
             get;
             set;
+        }
+
+        [AsField(FieldMode.Input, FieldType.Auto, "Category:")]
+        public Category Category
+        {
+            get { return this.category; }
+            set { this.RaiseAndSetIfChanged(ref this.category, value); }
         }
 
         public IEnumerable<SanFranciscoCrime> Crimes
@@ -99,23 +108,36 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
                     }
                 });
 
-            var configurations = this
-                .Crimes
-                .AsParallel()
-                .Where(crime =>
-                    crime.Category == Category.Embezzlement ||
-                    crime.Category == Category.Robbery ||
-                    crime.Category == Category.VehicleTheft)
-                .GroupBy(crime => new { crime.Category, crime.OffenceDate.Year }, crime => crime)
-                .Select(group => new { group.Key.Category, group.Key.Year, Occurrence = group.Count() })
-                .GroupBy(annon => annon.Category, annon => annon)
-                .Select(group => new
-                    {
-                        Title = group.Key.ToString().Humanize(LetterCasing.Title),
-                        Points = group.OrderBy(annon => annon.Year).ToList()
-                    })
-                .Select(annon => new SeriesConfiguration(annon.Title, annon.Points, "Year", "Occurrence"))
-                .ToList();
+            this.Category = Category.Arson;
+
+            return CallbackResult.OnSuccessful();
+        }
+
+        [AsFieldCallback]
+        private async Task<CallbackResult> OnCategoryChanged()
+        {
+            if (this.Category == Category.Unknown || this.Crimes == null)
+            {
+                return CallbackResult.OnSuccessful();
+            }
+
+            var configurations = await Task.Run(() =>
+                {
+                    return this
+                       .Crimes
+                       .AsParallel()
+                       .Where(crime => crime.Category == this.Category)
+                       .GroupBy(crime => new { crime.Category, crime.OffenceDate.Year }, crime => crime)
+                       .Select(group => new { group.Key.Category, group.Key.Year, Occurrence = group.Count() })
+                       .GroupBy(annon => annon.Category, annon => annon)
+                       .Select(group => new
+                       {
+                           Title = group.Key.ToString().Humanize(LetterCasing.Title),
+                           Points = group.OrderBy(annon => annon.Year).ToList()
+                       })
+                       .Select(annon => new SeriesConfiguration(annon.Title, annon.Points, "Year", "Occurrence"))
+                       .ToList();
+                });
 
             this.ChartConfiguration = new ChartConfiguration("Occurrence by Category", configurations);
 

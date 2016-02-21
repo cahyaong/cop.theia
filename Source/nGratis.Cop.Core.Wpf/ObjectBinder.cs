@@ -45,6 +45,8 @@ namespace nGratis.Cop.Core.Wpf
 
         private readonly PropertyInfo targetProperty;
 
+        private readonly bool isCallbackInvokedBothWays;
+
         private MethodInfo sourceCallbackMethod;
 
         private MethodInfo targetCallbackMethod;
@@ -65,7 +67,8 @@ namespace nGratis.Cop.Core.Wpf
             INotifyPropertyChanged source,
             PropertyInfo sourceProperty,
             INotifyPropertyChanged target,
-            PropertyInfo targetProperty)
+            PropertyInfo targetProperty,
+            bool isCallbackInvokedBothWays = true)
         {
             Guard.AgainstNullArgument(() => source);
             Guard.AgainstNullArgument(() => sourceProperty);
@@ -74,9 +77,9 @@ namespace nGratis.Cop.Core.Wpf
 
             this.source = source;
             this.target = target;
-
             this.sourceProperty = sourceProperty;
             this.targetProperty = targetProperty;
+            this.isCallbackInvokedBothWays = isCallbackInvokedBothWays;
 
             source.PropertyChanged += async (_, args) => await this.OnSourcePropertyChangedAsync(args.PropertyName);
             target.PropertyChanged += async (_, args) => await this.OnTargetPropertyChangedAsync(args.PropertyName);
@@ -169,6 +172,11 @@ namespace nGratis.Cop.Core.Wpf
                 {
                     this.onSourceValueUpdated();
                 }
+
+                if (this.isCallbackInvokedBothWays)
+                {
+                    await this.OnTargetPropertyChangedAsync(propertyName);
+                }
             }
             catch (ValueUpdateException)
             {
@@ -225,6 +233,11 @@ namespace nGratis.Cop.Core.Wpf
                 if (this.onTargetValueUpdated != null)
                 {
                     this.onTargetValueUpdated();
+                }
+
+                if (this.isCallbackInvokedBothWays)
+                {
+                    await this.OnSourcePropertyChangedAsync(propertyName);
                 }
             }
             catch (ValueUpdateException)
