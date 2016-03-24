@@ -28,11 +28,15 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
+    using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
+    using System.Windows.Input;
     using System.Windows.Media;
+    using System.Windows.Threading;
 
-    public class AweButton : Button
+    public class AweButton : ButtonBase
     {
         public static readonly DependencyProperty IconGeometryProperty = DependencyProperty.Register(
             "IconGeometry",
@@ -50,36 +54,236 @@ namespace nGratis.Cop.Core.Wpf
             "Measurement",
             typeof(Measurement),
             typeof(AweButton),
-            new PropertyMetadata(Measurement.M));
+            new PropertyMetadata(Measurement.M, AweButton.OnMeasurementChanged));
 
-        public static readonly DependencyProperty IsBorderHiddenProperty = DependencyProperty.Register(
-            "IsBorderHidden",
+        public static readonly DependencyProperty EllipseDiameterProperty = DependencyProperty.Register(
+            "EllipseDiameter",
+            typeof(double),
+            typeof(AweButton),
+            new PropertyMetadata(0.0));
+
+        public static readonly DependencyProperty IconLengthProperty = DependencyProperty.Register(
+            "IconLength",
+            typeof(double),
+            typeof(AweButton),
+            new PropertyMetadata(0.0));
+
+        public static readonly DependencyProperty IsRepeatedProperty = DependencyProperty.Register(
+            "IsRepeated",
             typeof(bool),
             typeof(AweButton),
-            new PropertyMetadata(true));
+            new PropertyMetadata(false));
+
+        public static readonly DependencyProperty RepeatingIntervalProperty = DependencyProperty.Register(
+            "RepeatingInterval",
+            typeof(TimeSpan),
+            typeof(AweButton),
+            new PropertyMetadata(TimeSpan.FromMilliseconds(100), AweButton.OnRepeatingIntervalChanged));
+
+        public static readonly DependencyProperty IsMousePressedProperty = DependencyProperty.Register(
+            "IsMousePressed",
+            typeof(bool),
+            typeof(AweButton),
+            new PropertyMetadata(false));
+
+        private readonly DispatcherTimer repeatingTimer = new DispatcherTimer();
+
+        public AweButton()
+        {
+            this.repeatingTimer.Tick += this.OnRepeatingTimerTicked;
+            this.repeatingTimer.Interval = this.RepeatingInterval;
+
+            this.RecalculateMeasurement();
+        }
 
         public Geometry IconGeometry
         {
-            get { return (Geometry)this.GetValue(IconGeometryProperty); }
-            set { this.SetValue(IconGeometryProperty, value); }
+            get { return (Geometry)this.GetValue(AweButton.IconGeometryProperty); }
+            set { this.SetValue(AweButton.IconGeometryProperty, value); }
         }
 
         public Color AccentColor
         {
-            get { return (Color)this.GetValue(AccentColorProperty); }
-            set { this.SetValue(AccentColorProperty, value); }
+            get { return (Color)this.GetValue(AweButton.AccentColorProperty); }
+            set { this.SetValue(AweButton.AccentColorProperty, value); }
         }
 
         public Measurement Measurement
         {
-            get { return (Measurement)this.GetValue(MeasurementProperty); }
-            set { this.SetValue(MeasurementProperty, value); }
+            get { return (Measurement)this.GetValue(AweButton.MeasurementProperty); }
+            set { this.SetValue(AweButton.MeasurementProperty, value); }
         }
 
-        public bool IsBorderHidden
+        public double EllipseDiameter
         {
-            get { return (bool)this.GetValue(IsBorderHiddenProperty); }
-            set { this.SetValue(IsBorderHiddenProperty, value); }
+            get { return (double)this.GetValue(AweButton.EllipseDiameterProperty); }
+            private set { this.SetValue(AweButton.EllipseDiameterProperty, value); }
+        }
+
+        public double IconLength
+        {
+            get { return (double)this.GetValue(AweButton.IconLengthProperty); }
+            private set { this.SetValue(AweButton.IconLengthProperty, value); }
+        }
+
+        public bool IsRepeated
+        {
+            get { return (bool)this.GetValue(AweButton.IsRepeatedProperty); }
+            set { this.SetValue(AweButton.IsRepeatedProperty, value); }
+        }
+
+        public TimeSpan RepeatingInterval
+        {
+            get { return (TimeSpan)this.GetValue(AweButton.RepeatingIntervalProperty); }
+            set { this.SetValue(AweButton.RepeatingIntervalProperty, value); }
+        }
+
+        public bool IsMousePressed
+        {
+            get { return (bool)this.GetValue(AweButton.IsMousePressedProperty); }
+            private set { this.SetValue(AweButton.IsMousePressedProperty, value); }
+        }
+
+        private static void OnMeasurementChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
+        {
+            var button = container as AweButton;
+
+            if (button == null)
+            {
+                return;
+            }
+
+            button.RecalculateMeasurement();
+        }
+
+        private static void OnRepeatingIntervalChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
+        {
+            var button = container as AweButton;
+
+            if (button == null)
+            {
+                return;
+            }
+
+            button.repeatingTimer.Interval = (TimeSpan)args.NewValue;
+        }
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs args)
+        {
+            base.OnMouseLeftButtonDown(args);
+
+            if (this.IsRepeated && this.ClickMode != ClickMode.Hover)
+            {
+                if (Mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.IsMousePressed = true;
+                    this.Focus();
+                }
+
+                this.repeatingTimer.Start();
+            }
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs args)
+        {
+            base.OnMouseLeftButtonUp(args);
+
+            if (this.IsRepeated && this.ClickMode != ClickMode.Hover)
+            {
+                this.repeatingTimer.Stop();
+                this.IsMousePressed = false;
+            }
+        }
+
+        protected override void OnLostMouseCapture(MouseEventArgs args)
+        {
+            base.OnLostMouseCapture(args);
+
+            this.repeatingTimer.Stop();
+            this.IsMousePressed = false;
+        }
+
+        protected override void OnMouseEnter(MouseEventArgs args)
+        {
+            base.OnMouseEnter(args);
+
+            if (this.IsRepeated && this.IsMouseOver && this.ClickMode != ClickMode.Hover)
+            {
+                if (Mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.IsMousePressed = true;
+                    this.Focus();
+                }
+
+                this.repeatingTimer.Start();
+            }
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs args)
+        {
+            base.OnMouseLeave(args);
+
+            if (this.IsRepeated && !this.IsMouseOver && this.ClickMode != ClickMode.Hover)
+            {
+                this.repeatingTimer.Stop();
+                this.IsMousePressed = false;
+            }
+        }
+
+        private void OnRepeatingTimerTicked(object sender, EventArgs args)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                this.IsMousePressed = true;
+                this.OnClick();
+            }
+            else
+            {
+                this.repeatingTimer.Stop();
+                this.IsMousePressed = false;
+            }
+        }
+
+        private void RecalculateMeasurement()
+        {
+            switch (this.Measurement)
+            {
+                case Measurement.XS:
+                    this.EllipseDiameter = 20;
+                    this.IconLength = 10;
+                    this.BorderThickness = new Thickness(1);
+                    break;
+
+                case Measurement.S:
+                    this.EllipseDiameter = 24;
+                    this.IconLength = 12;
+                    this.BorderThickness = new Thickness(1);
+                    break;
+
+                case Measurement.L:
+                    this.EllipseDiameter = 64;
+                    this.IconLength = 36;
+                    this.BorderThickness = new Thickness(2);
+                    break;
+
+                case Measurement.XL:
+                    this.EllipseDiameter = 48;
+                    this.IconLength = 26;
+                    this.BorderThickness = new Thickness(2);
+                    break;
+
+                case Measurement.XXL:
+                    this.EllipseDiameter = 96;
+                    this.IconLength = 54;
+                    this.BorderThickness = new Thickness(3);
+                    break;
+
+                default:
+                    this.EllipseDiameter = 32;
+                    this.IconLength = 16;
+                    this.BorderThickness = new Thickness(1);
+                    break;
+            }
         }
     }
 }

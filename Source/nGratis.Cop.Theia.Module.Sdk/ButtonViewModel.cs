@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SdkModule.cs" company="nGratis">
+// <copyright file="ButtonViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,44 +23,51 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Friday, 11 March 2016 8:22:45 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
+    using System.Reactive.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using ReactiveUI;
 
-    [Export(typeof(IModule))]
-    public class SdkModule : IModule
+    [Export]
+    public class ButtonViewModel : ReactiveObject
     {
-        public SdkModule()
+        private int count;
+
+        public ButtonViewModel()
         {
-            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
+            this.IncrementCountCommand = ReactiveCommand.CreateAsyncTask(
+                this.WhenAny(it => it.Count, observation => observation.Value < 10)
+                    .ObserveOn(RxApp.MainThreadScheduler),
+                async _ => await Task.Run(() => this.Count++));
 
-            var diagnosticFeature = new Feature(
-                "SDK",
-                int.MaxValue,
-                new Page("Button", "/nGratis.Cop.Theia.Module.Sdk;component/ButtonView.xaml"),
-                new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
-                new Page("Map", "/nGratis.Cop.Theia.Module.Sdk;component/MapView.xaml"),
-                new Page("Progress Indicator", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressIndicatorView.xaml"));
-
-            this.Features = new List<Feature> { diagnosticFeature };
+            this.DecrementCountCommand = ReactiveCommand.CreateAsyncTask(
+                this.WhenAny(it => it.Count, observation => observation.Value > 0)
+                    .ObserveOn(RxApp.MainThreadScheduler),
+                async _ => await Task.Run(() => this.Count--));
         }
 
-        public Guid Id
+        public int Count
         {
-            get;
-            private set;
+            get { return this.count; }
+            set { this.RaiseAndSetIfChanged(ref this.count, value); }
         }
 
-        public IEnumerable<IFeature> Features
+        public ICommand IncrementCountCommand
         {
             get;
-            private set;
+            set;
+        }
+
+        public ICommand DecrementCountCommand
+        {
+            get;
+            set;
         }
     }
 }

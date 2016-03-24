@@ -115,13 +115,16 @@
     <Compile Include="..\nGratis.Cop.Theia.Common\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationExtensions.cs" />
     <Compile Include="BasePageViewModel.cs" />
     <Compile Include="BaseFormViewModel.cs" />
     <Compile Include="CaliburnContentLoader.cs" />
     <Compile Include="CallbackResult.cs" />
     <Compile Include="Chart\ChartConfiguration.cs" />
     <Compile Include="Chart\ChartConfigurationToPlotModelConverter.cs" />
+    <Compile Include="Controls\AweScrollViewer.cs" />
     <Compile Include="Converters\AnyToTitleCaseCoverter.cs" />
+    <Compile Include="Converters\ColorToSolidBrushConverter.cs" />
     <Compile Include="Converters\EnumerationToPossibleValuesConverter.cs" />
     <Compile Include="ValueUpdateException.cs" />
     <Compile Include="IThemeManager.cs" />

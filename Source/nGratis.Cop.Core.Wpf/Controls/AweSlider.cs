@@ -40,12 +40,12 @@ namespace nGratis.Cop.Core.Wpf
             "StableValue",
             typeof(double),
             typeof(AweSlider),
-            new PropertyMetadata(default(double), OnStableValueChanged));
+            new PropertyMetadata(default(double), AweSlider.OnStableValueChanged));
 
         public double StableValue
         {
-            get { return (double)this.GetValue(StableValueProperty); }
-            set { this.SetValue(StableValueProperty, value); }
+            get { return (double)this.GetValue(AweSlider.StableValueProperty); }
+            set { this.SetValue(AweSlider.StableValueProperty, value); }
         }
 
         public bool IsMouseDragging { get; private set; }
@@ -78,14 +78,14 @@ namespace nGratis.Cop.Core.Wpf
             base.OnKeyUp(args);
         }
 
-        private static void OnStableValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        private static void OnStableValueChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
         {
-            var slider = dependencyObject as AweSlider;
-            var newValue = (double)args.NewValue;
+            var slider = container as AweSlider;
+            var value = (double)args.NewValue;
 
-            if (slider != null && !newValue.IsCloseTo(slider.Value))
+            if (slider != null && !value.IsCloseTo(slider.Value))
             {
-                slider.Value = newValue;
+                slider.Value = value;
             }
         }
     }

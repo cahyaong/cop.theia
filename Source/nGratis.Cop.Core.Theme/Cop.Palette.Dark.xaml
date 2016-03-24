@@ -1,5 +1,4 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
   <Color x:Key="Cop.Color.Shade0">#FF000000</Color>
   <Color x:Key="Cop.Color.Shade1">#FF202020</Color>
   <Color x:Key="Cop.Color.Shade2">#FF404040</Color>
@@ -12,16 +11,18 @@
 
   <Color x:Key="Cop.Color.App.Background">#FF252526</Color>
 
-  <Color x:Key="Cop.Color.Button.Background">#FF333333</Color>
-  <Color x:Key="Cop.Color.Button.Border">#FF333333</Color>
+  <Color x:Key="Cop.Color.Button.Border">#FF919191</Color>
+  <Color x:Key="Cop.Color.Button.Border.OnHovered">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Border.OnPressed">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Border.OnDisabled">#FF515151</Color>
   <Color x:Key="Cop.Color.Button.Text">#FFD1D1D1</Color>
-  <Color x:Key="Cop.Color.Button.Background.OnHovered">#FF3E3E42</Color>
-  <Color x:Key="Cop.Color.Button.Border.OnHovered">#FF3E3E42</Color>
   <Color x:Key="Cop.Color.Button.Text.OnHovered">#FFD1D1D1</Color>
   <Color x:Key="Cop.Color.Button.Text.OnPressed">#FFD1D1D1</Color>
-  <Color x:Key="Cop.Color.Button.Background.OnDisabled">#66333333</Color>
-  <Color x:Key="Cop.Color.Button.Border.OnDisabled">#66333333</Color>
   <Color x:Key="Cop.Color.Button.Text.OnDisabled">#FF515151</Color>
+  <Color x:Key="Cop.Color.Button.Icon">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Icon.OnHovered">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Icon.OnPressed">#FFD1D1D1</Color>
+  <Color x:Key="Cop.Color.Button.Icon.OnDisabled">#FF515151</Color>
 
   <Color x:Key="Cop.Color.AweChart.Border">#FFD1D1D1</Color>
   <Color x:Key="Cop.Color.AweChart.Text">#FFD1D1D1</Color>
@@ -41,5 +42,18 @@
 
   <SolidColorBrush x:Key="Cop.Brush.AweChart.Border">#FF404040</SolidColorBrush>
   <SolidColorBrush x:Key="Cop.Brush.AweChart.Text">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.AweChart.Tickline">#FFD1D1D1</SolidColorBrush>
 
+  <SolidColorBrush x:Key="Cop.Brush.Button.Border">#FF919191</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Border.OnHovered">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Border.OnPressed">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Border.OnDisabled">#FF515151</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Text">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Text.OnHovered">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Text.OnPressed">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Text.OnDisabled">#FF515151</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Icon">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Icon.OnHovered">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Icon.OnPressed">#FFD1D1D1</SolidColorBrush>
+  <SolidColorBrush x:Key="Cop.Brush.Button.Icon.OnDisabled">#FF515151</SolidColorBrush>
 </ResourceDictionary>

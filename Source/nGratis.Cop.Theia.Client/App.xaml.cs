@@ -30,12 +30,16 @@ namespace nGratis.Cop.Theia.Client
     using System.Windows;
     using System.Windows.Media;
     using FirstFloor.ModernUI.Presentation;
+    using nGratis.Cop.Core.Wpf;
 
     public partial class App
     {
         protected override void OnStartup(StartupEventArgs args)
         {
-            AppearanceManager.Current.AccentColor = Color.FromRgb(0x53, 0x81, 0x35);
+            var accentColor = Color.FromRgb(0x53, 0x81, 0x35);
+
+            AppearanceManager.Current.AccentColor = accentColor;
+            this.AdjustAccentColor(accentColor);
 
             base.OnStartup(args);
         }

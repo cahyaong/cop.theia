@@ -12,7 +12,7 @@
           <client:AppBootstrapper x:Key="Bootstrapper" />
           <core:CaliburnContentLoader x:Key="CaliburnContentLoader" />
         </ResourceDictionary>
-        <ResourceDictionary Source="/nGratis.Cop.Core.Wpf;component/Cop.Converter.xaml" />
+        <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Wpf;component/Cop.Converter.xaml" />
         <ResourceDictionary>
           <Style TargetType="mui:ModernWindow">
             <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
@@ -24,7 +24,7 @@
             <Setter Property="ContentLoader" Value="{StaticResource CaliburnContentLoader}" />
           </Style>
         </ResourceDictionary>
-        <ResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Theme.Dark.xaml" />
+        <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Theme.Dark.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

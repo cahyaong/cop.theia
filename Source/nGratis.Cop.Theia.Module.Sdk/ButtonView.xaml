@@ -1,0 +1,71 @@
+﻿<UserControl
+  x:Class="nGratis.Cop.Theia.Module.Sdk.ButtonView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:core="http://schemas.ngratis.com/2014/core"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:sdk="clr-namespace:nGratis.Cop.Theia.Module.Sdk"
+  d:DataContext="{d:DesignInstance sdk:ButtonViewModel}"
+  mc:Ignorable="d">
+  <UserControl.Resources>
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Icon.Control.xaml" />
+  </UserControl.Resources>
+  <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+    <Grid Width="150" Height="110">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <TextBlock
+        Grid.Row="0"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        Foreground="{DynamicResource Cop.Brush.Shade5}"
+        Text="is repeated" />
+      <Line
+        Grid.Row="1"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        Margin="0,5"
+        Stroke="{DynamicResource Cop.Brush.Shade2}"
+        StrokeThickness="1"
+        X1="0"
+        X2="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" />
+      <StackPanel
+        Grid.Row="2"
+        Grid.Column="0"
+        Orientation="Vertical">
+        <TextBlock
+          FontSize="48"
+          Foreground="{DynamicResource Cop.Brush.Shade7}"
+          Text="{Binding Count, Mode=OneWay}" />
+        <TextBlock Foreground="{DynamicResource Cop.Brush.Shade2}" Text="COUNT" />
+      </StackPanel>
+      <StackPanel
+        Grid.Row="2"
+        Grid.Column="1"
+        VerticalAlignment="Bottom"
+        Orientation="Horizontal">
+        <core:AweButton
+          Margin="5,0"
+          AccentColor="{DynamicResource Cop.Color.Accent}"
+          Command="{Binding IncrementCountCommand, Mode=OneWay}"
+          IconGeometry="{StaticResource Cop.Icon.Add}"
+          IsRepeated="True"
+          Measurement="S" />
+        <core:AweButton
+          AccentColor="{DynamicResource Cop.Color.Accent}"
+          Command="{Binding DecrementCountCommand, Mode=OneWay}"
+          IconGeometry="{StaticResource Cop.Icon.Minus}"
+          IsRepeated="True"
+          Measurement="S" />
+      </StackPanel>
+    </Grid>
+  </StackPanel>
+</UserControl>

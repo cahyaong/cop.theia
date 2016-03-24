@@ -118,7 +118,13 @@ namespace nGratis.Cop.Core.Wpf
 
         private static void OnIsActiveChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
         {
-            var indicator = (AweProgressIndicator)container;
+            var indicator = container as AweProgressIndicator;
+
+            if (indicator == null)
+            {
+                return;
+            }
+
             var isActive = (bool)args.NewValue;
 
             if (!isActive)

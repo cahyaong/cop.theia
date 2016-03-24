@@ -4,59 +4,53 @@
   xmlns:core="http://schemas.ngratis.com/2014/core"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
   mc:Ignorable="d">
   <ResourceDictionary.MergedDictionaries>
-    <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ModernButton.xaml" />
+    <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Wpf;component/Cop.Converter.xaml" />
   </ResourceDictionary.MergedDictionaries>
-  <Style
-    x:Key="{x:Type core:AweButton}"
-    BasedOn="{StaticResource {x:Type Button}}"
-    TargetType="core:AweButton">
+  <Style x:Key="{x:Type core:AweButton}" TargetType="core:AweButton">
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="1" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="core:AweButton">
-          <mui:ModernButton
-            x:Name="PART_Content"
-            Command="{TemplateBinding Command}"
-            EllipseStrokeThickness="0"
-            IconData="{TemplateBinding IconGeometry}" />
+          <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
+            <Ellipse
+              x:Name="PART_Border"
+              Width="{TemplateBinding EllipseDiameter}"
+              Height="{TemplateBinding EllipseDiameter}"
+              Stroke="{DynamicResource Cop.Brush.Button.Border}"
+              StrokeThickness="{TemplateBinding BorderThickness}" />
+            <Path
+              x:Name="PART_Icon"
+              Width="{TemplateBinding IconLength}"
+              Height="{TemplateBinding IconLength}"
+              Data="{TemplateBinding IconGeometry}"
+              Fill="{DynamicResource Cop.Brush.Button.Icon}"
+              Stretch="Uniform" />
+          </Grid>
           <ControlTemplate.Triggers>
-            <Trigger Property="Measurement" Value="{x:Static core:Measurement.XS}">
-              <Setter TargetName="PART_Content" Property="EllipseDiameter" Value="20" />
-              <Setter TargetName="PART_Content" Property="IconHeight" Value="10" />
-              <Setter TargetName="PART_Content" Property="IconWidth" Value="10" />
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="PART_Border" Property="Stroke" Value="{DynamicResource Cop.Brush.Button.Border.OnHovered}" />
             </Trigger>
-            <Trigger Property="Measurement" Value="{x:Static core:Measurement.S}">
-              <Setter TargetName="PART_Content" Property="EllipseDiameter" Value="24" />
-              <Setter TargetName="PART_Content" Property="IconHeight" Value="12" />
-              <Setter TargetName="PART_Content" Property="IconWidth" Value="12" />
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="PART_Border" Property="Stroke" Value="{DynamicResource Cop.Brush.Button.Border.OnDisabled}" />
+              <Setter TargetName="PART_Icon" Property="Stroke" Value="{DynamicResource Cop.Brush.Button.Icon.OnDisabled}" />
             </Trigger>
-            <Trigger Property="Measurement" Value="{x:Static core:Measurement.M}">
-              <Setter TargetName="PART_Content" Property="EllipseDiameter" Value="32" />
-              <Setter TargetName="PART_Content" Property="IconHeight" Value="16" />
-              <Setter TargetName="PART_Content" Property="IconWidth" Value="16" />
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="PART_Border" Property="Stroke" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
+              <Setter TargetName="PART_Border" Property="Fill" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
+              <Setter TargetName="PART_Icon" Property="Fill" Value="{DynamicResource Cop.Brush.Button.Icon.OnPressed}" />
             </Trigger>
-            <Trigger Property="Measurement" Value="{x:Static core:Measurement.L}">
-              <Setter TargetName="PART_Content" Property="EllipseDiameter" Value="64" />
-              <Setter TargetName="PART_Content" Property="EllipseStrokeThickness" Value="2" />
-              <Setter TargetName="PART_Content" Property="IconHeight" Value="36" />
-              <Setter TargetName="PART_Content" Property="IconWidth" Value="36" />
+            <Trigger Property="IsMousePressed" Value="True">
+              <Setter TargetName="PART_Border" Property="Stroke" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
+              <Setter TargetName="PART_Border" Property="Fill" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
+              <Setter TargetName="PART_Icon" Property="Fill" Value="{DynamicResource Cop.Brush.Button.Icon.OnPressed}" />
             </Trigger>
-            <Trigger Property="Measurement" Value="{x:Static core:Measurement.XL}">
-              <Setter TargetName="PART_Content" Property="EllipseDiameter" Value="48" />
-              <Setter TargetName="PART_Content" Property="EllipseStrokeThickness" Value="2" />
-              <Setter TargetName="PART_Content" Property="IconHeight" Value="26" />
-              <Setter TargetName="PART_Content" Property="IconWidth" Value="26" />
-            </Trigger>
-            <Trigger Property="Measurement" Value="{x:Static core:Measurement.XXL}">
-              <Setter TargetName="PART_Content" Property="EllipseDiameter" Value="96" />
-              <Setter TargetName="PART_Content" Property="EllipseStrokeThickness" Value="3" />
-              <Setter TargetName="PART_Content" Property="IconHeight" Value="54" />
-              <Setter TargetName="PART_Content" Property="IconWidth" Value="54" />
-            </Trigger>
-            <Trigger Property="IsBorderHidden" Value="False">
-              <Setter TargetName="PART_Content" Property="EllipseStrokeThickness" Value="0" />
+            <Trigger Property="IsFocused" Value="True">
+              <Setter TargetName="PART_Border" Property="Stroke" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>

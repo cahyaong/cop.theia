@@ -8,6 +8,7 @@
   <BooleanToVisibilityConverter x:Key="Cop.Converter.BooleanToVisibilityConverter" />
   <local:BooleanToLogicalNotConverter x:Key="Cop.Converter.BooleanToLogicalNotConverter" />
   <local:ChartConfigurationToPlotModelConverter x:Key="Cop.Converter.ChartConfigurationToPlotModelConverter" ThemeManager="{DynamicResource Cop.ThemeManager}" />
+  <local:ColorToSolidBrushConverter x:Key="Cop.Converter.ColorToSolidBrushConverter" />
   <local:EnumerableToCountConverter x:Key="Cop.Converter.EnumerableToCountConverter" />
   <local:EnumerationToPossibleValuesConverter x:Key="Cop.Converter.EnumerationToPossibleValuesConverter" />
   <local:ModulesToLinkGroupsConverter x:Key="Cop.Converter.ModulesToLinkGroupsConverter" />

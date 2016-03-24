@@ -28,7 +28,6 @@
             AccentColor="Firebrick"
             Command="{Binding GenerateFatalCommand, Mode=OneWay}"
             IconGeometry="{StaticResource Cop.Icon.Stop}"
-            IsBorderHidden="True"
             Measurement="S" />
         </DataTemplate>
       </ListView.ItemTemplate>
@@ -36,6 +35,13 @@
         <Style TargetType="ListViewItem">
           <Setter Property="Padding" Value="0" />
           <Setter Property="Margin" Value="0,0,5,0" />
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="ListViewItem">
+                <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
         </Style>
       </ListView.ItemContainerStyle>
     </ListView>
