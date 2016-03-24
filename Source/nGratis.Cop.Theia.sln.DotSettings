@@ -71,6 +71,28 @@
 // &lt;author&gt;Cahya Ong - cahya.ong@gmail.com&lt;/author&gt;&#xD;
 // &lt;creation_timestamp&gt;$CREATION_TIMESTAMP$ UTC&lt;/creation_timestamp&gt;&#xD;
 // --------------------------------------------------------------------------------------------------------------------</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Description/@EntryValue">Insert a dependency property getter and setter.</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Field/=CLASS/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Field/=PROPERTY/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Field/=PROPERTY/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Field/=TYPE/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Field/=TYPE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Shortcut/@EntryValue">dp</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=306FE3101A78224D80E0E39F65365CBA/Text/@EntryValue">public $TYPE$ $PROPERTY$&#xD;
+{&#xD;
+    get { return ($TYPE$)this.GetValue($CLASS$.$PROPERTY$Property); }&#xD;
+    set { this.SetValue($CLASS$.$PROPERTY$Property, value); } &#xD;
+}&#xD;
+&#xD;
+$END$</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BBD532A59B80C34682493971915C2A37/Description/@EntryValue">Insert a unit test method with default Arrange-Act-Assert sections.</s:String>
