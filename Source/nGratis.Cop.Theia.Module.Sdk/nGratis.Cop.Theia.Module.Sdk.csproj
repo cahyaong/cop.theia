@@ -106,6 +106,7 @@
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProgressIndicatorViewModel.cs" />
+    <Compile Include="ScrollViewerViewModel.cs" />
     <Compile Include="SdkModule.cs" />
     <Compile Include="LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
@@ -115,6 +116,9 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <Compile Include="ScrollViewerView.xaml.cs">
+      <DependentUpon>ScrollViewerView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="ButtonView.xaml">
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProgressIndicatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScrollViewerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

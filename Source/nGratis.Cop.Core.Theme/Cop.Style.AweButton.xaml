@@ -31,13 +31,14 @@
               Fill="{DynamicResource Cop.Brush.Button.Icon}"
               Stretch="Uniform" />
           </Grid>
+          <!--  TODO: Replace triggers with visual state manager.  -->
           <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
               <Setter TargetName="PART_Border" Property="Stroke" Value="{DynamicResource Cop.Brush.Button.Border.OnHovered}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter TargetName="PART_Border" Property="Stroke" Value="{DynamicResource Cop.Brush.Button.Border.OnDisabled}" />
-              <Setter TargetName="PART_Icon" Property="Stroke" Value="{DynamicResource Cop.Brush.Button.Icon.OnDisabled}" />
+              <Setter TargetName="PART_Icon" Property="Fill" Value="{DynamicResource Cop.Brush.Button.Icon.OnDisabled}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
               <Setter TargetName="PART_Border" Property="Stroke" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
@@ -51,6 +52,9 @@
             </Trigger>
             <Trigger Property="IsFocused" Value="True">
               <Setter TargetName="PART_Border" Property="Stroke" Value="{Binding AccentColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Cop.Converter.ColorToSolidBrushConverter}}" />
+            </Trigger>
+            <Trigger Property="IsBorderHidden" Value="True">
+              <Setter TargetName="PART_Border" Property="Visibility" Value="Collapsed" />
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>

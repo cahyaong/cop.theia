@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SdkModule.cs" company="nGratis">
+// <copyright file="ScrollViewerViewModel.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,45 +23,31 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Tuesday, 29 March 2016 9:22:10 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
+    using System.Linq;
+    using ReactiveUI;
 
-    [Export(typeof(IModule))]
-    public class SdkModule : IModule
+    [Export]
+    public class ScrollViewerViewModel : ReactiveObject
     {
-        public SdkModule()
+        private IEnumerable<int> numbers;
+
+        [ImportingConstructor]
+        public ScrollViewerViewModel()
         {
-            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
-
-            var diagnosticFeature = new Feature(
-                "SDK",
-                int.MaxValue,
-                new Page("Button", "/nGratis.Cop.Theia.Module.Sdk;component/ButtonView.xaml"),
-                new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
-                new Page("Map", "/nGratis.Cop.Theia.Module.Sdk;component/MapView.xaml"),
-                new Page("Progress Indicator", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressIndicatorView.xaml"),
-                new Page("Scroll Viewer", "/nGratis.Cop.Theia.Module.Sdk;component/ScrollViewerView.xaml"));
-
-            this.Features = new List<Feature> { diagnosticFeature };
+            this.Numbers = Enumerable.Range(0, 100);
         }
 
-        public Guid Id
+        public IEnumerable<int> Numbers
         {
-            get;
-            private set;
-        }
-
-        public IEnumerable<IFeature> Features
-        {
-            get;
-            private set;
+            get { return this.numbers; }
+            set { this.RaiseAndSetIfChanged(ref this.numbers, value); }
         }
     }
 }

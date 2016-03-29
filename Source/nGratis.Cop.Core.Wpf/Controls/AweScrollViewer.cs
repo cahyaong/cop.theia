@@ -28,9 +28,73 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
+    using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
+    using System.Windows.Input;
 
     public class AweScrollViewer : ScrollViewer
     {
+        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
+            "Orientation",
+            typeof(Orientation),
+            typeof(AweScrollViewer),
+            new PropertyMetadata(Orientation.Vertical, AweScrollViewer.OnOrientationChanged));
+
+        public Orientation Orientation
+        {
+            get { return (Orientation)this.GetValue(AweScrollViewer.OrientationProperty); }
+            set { this.SetValue(AweScrollViewer.OrientationProperty, value); }
+        }
+
+        protected override void OnMouseEnter(MouseEventArgs args)
+        {
+            base.OnMouseEnter(args);
+
+            if (!this.IsFocused)
+            {
+                this.Focus();
+            }
+        }
+
+        protected override void OnMouseWheel(MouseWheelEventArgs args)
+        {
+            base.OnMouseWheel(args);
+
+            if (this.Orientation == Orientation.Horizontal)
+            {
+                if (args.Delta > 0)
+                {
+                    ScrollBar.PageLeftCommand.Execute(null, null);
+                }
+                else
+                {
+                    ScrollBar.PageRightCommand.Execute(null, null);
+                }
+            }
+
+            args.Handled = true;
+        }
+
+        private static void OnOrientationChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
+        {
+            var scrollViewer = container as AweScrollViewer;
+
+            if (scrollViewer == null)
+            {
+                return;
+            }
+
+            if ((Orientation)args.NewValue == Orientation.Vertical)
+            {
+                scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            }
+            else
+            {
+                scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+            }
+        }
     }
 }

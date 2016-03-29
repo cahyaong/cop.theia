@@ -1,0 +1,39 @@
+﻿<UserControl
+  x:Class="nGratis.Cop.Theia.Module.Sdk.ScrollViewerView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:core="http://schemas.ngratis.com/2014/core"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:sdk="clr-namespace:nGratis.Cop.Theia.Module.Sdk"
+  d:DataContext="{d:DesignInstance {x:Type sdk:ScrollViewerViewModel}}"
+  mc:Ignorable="d">
+  <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+    <core:AweScrollViewer Height="100" Orientation="Horizontal">
+      <ItemsControl ItemsSource="{Binding Numbers, Mode=OneWay}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Border
+              Width="100"
+              Height="100"
+              Margin="5,0"
+              BorderBrush="{DynamicResource Cop.Brush.Shade3}"
+              BorderThickness="1">
+              <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="48"
+                Foreground="{DynamicResource Cop.Brush.Shade4}"
+                Text="{Binding}" />
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </core:AweScrollViewer>
+  </Grid>
+</UserControl>

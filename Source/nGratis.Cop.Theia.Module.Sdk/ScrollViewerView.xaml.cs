@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SdkModule.cs" company="nGratis">
+// <copyright file="ScrollViewerView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2015 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,45 +23,16 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Tuesday, 29 March 2016 9:19:30 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
-
-    [Export(typeof(IModule))]
-    public class SdkModule : IModule
+    public partial class ScrollViewerView
     {
-        public SdkModule()
+        public ScrollViewerView()
         {
-            this.Id = new Guid("959B7271-DCF4-4A66-A9C4-68A2617CC525");
-
-            var diagnosticFeature = new Feature(
-                "SDK",
-                int.MaxValue,
-                new Page("Button", "/nGratis.Cop.Theia.Module.Sdk;component/ButtonView.xaml"),
-                new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
-                new Page("Map", "/nGratis.Cop.Theia.Module.Sdk;component/MapView.xaml"),
-                new Page("Progress Indicator", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressIndicatorView.xaml"),
-                new Page("Scroll Viewer", "/nGratis.Cop.Theia.Module.Sdk;component/ScrollViewerView.xaml"));
-
-            this.Features = new List<Feature> { diagnosticFeature };
-        }
-
-        public Guid Id
-        {
-            get;
-            private set;
-        }
-
-        public IEnumerable<IFeature> Features
-        {
-            get;
-            private set;
+            this.InitializeComponent();
         }
     }
 }

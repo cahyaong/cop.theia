@@ -82,9 +82,7 @@ namespace nGratis.Cop.Core.Wpf
             get { return (IList<LogEntry>)this.GetValue(AweLogViewer.LogEntriesProperty); }
         }
 
-        private static void OnLoggerPropertyChanged(
-            DependencyObject container,
-            DependencyPropertyChangedEventArgs args)
+        private static void OnLoggerPropertyChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
         {
             var logViewer = container as AweLogViewer;
 

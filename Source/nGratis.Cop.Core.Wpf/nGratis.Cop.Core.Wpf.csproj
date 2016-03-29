@@ -122,6 +122,7 @@
     <Compile Include="CallbackResult.cs" />
     <Compile Include="Chart\ChartConfiguration.cs" />
     <Compile Include="Chart\ChartConfigurationToPlotModelConverter.cs" />
+    <Compile Include="Controls\AweScrollBar.cs" />
     <Compile Include="Controls\AweScrollViewer.cs" />
     <Compile Include="Converters\AnyToTitleCaseCoverter.cs" />
     <Compile Include="Converters\ColorToSolidBrushConverter.cs" />

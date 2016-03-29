@@ -53,16 +53,16 @@
         VerticalAlignment="Bottom"
         Orientation="Horizontal">
         <core:AweButton
-          Margin="5,0"
-          AccentColor="{DynamicResource Cop.Color.Accent}"
-          Command="{Binding IncrementCountCommand, Mode=OneWay}"
-          IconGeometry="{StaticResource Cop.Icon.Add}"
-          IsRepeated="True"
-          Measurement="S" />
-        <core:AweButton
           AccentColor="{DynamicResource Cop.Color.Accent}"
           Command="{Binding DecrementCountCommand, Mode=OneWay}"
           IconGeometry="{StaticResource Cop.Icon.Minus}"
+          IsRepeated="True"
+          Measurement="S" />
+        <core:AweButton
+          Margin="3,0"
+          AccentColor="{DynamicResource Cop.Color.Accent}"
+          Command="{Binding IncrementCountCommand, Mode=OneWay}"
+          IconGeometry="{StaticResource Cop.Icon.Add}"
           IsRepeated="True"
           Measurement="S" />
       </StackPanel>

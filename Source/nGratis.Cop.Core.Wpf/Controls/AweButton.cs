@@ -34,8 +34,11 @@ namespace nGratis.Cop.Core.Wpf
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Media;
+    using System.Windows.Shapes;
     using System.Windows.Threading;
 
+    [TemplatePart(Name = "PART_Border", Type = typeof(Ellipse))]
+    [TemplatePart(Name = "PART_Icon", Type = typeof(Path))]
     public class AweButton : ButtonBase
     {
         public static readonly DependencyProperty IconGeometryProperty = DependencyProperty.Register(
@@ -54,7 +57,9 @@ namespace nGratis.Cop.Core.Wpf
             "Measurement",
             typeof(Measurement),
             typeof(AweButton),
-            new PropertyMetadata(Measurement.M, AweButton.OnMeasurementChanged));
+            new PropertyMetadata(
+                Measurement.M,
+                (container, _) => (container as AweButton)?.UpdateMeasurement()));
 
         public static readonly DependencyProperty EllipseDiameterProperty = DependencyProperty.Register(
             "EllipseDiameter",
@@ -78,10 +83,18 @@ namespace nGratis.Cop.Core.Wpf
             "RepeatingInterval",
             typeof(TimeSpan),
             typeof(AweButton),
-            new PropertyMetadata(TimeSpan.FromMilliseconds(100), AweButton.OnRepeatingIntervalChanged));
+            new PropertyMetadata(
+                TimeSpan.FromMilliseconds(100),
+                (container, args) => (container as AweButton)?.UpdateRepeatingTimer((TimeSpan)args.NewValue)));
 
         public static readonly DependencyProperty IsMousePressedProperty = DependencyProperty.Register(
             "IsMousePressed",
+            typeof(bool),
+            typeof(AweButton),
+            new PropertyMetadata(false));
+
+        public static readonly DependencyProperty IsBorderHiddenProperty = DependencyProperty.Register(
+            "IsBorderHidden",
             typeof(bool),
             typeof(AweButton),
             new PropertyMetadata(false));
@@ -93,7 +106,7 @@ namespace nGratis.Cop.Core.Wpf
             this.repeatingTimer.Tick += this.OnRepeatingTimerTicked;
             this.repeatingTimer.Interval = this.RepeatingInterval;
 
-            this.RecalculateMeasurement();
+            this.UpdateMeasurement();
         }
 
         public Geometry IconGeometry
@@ -144,16 +157,10 @@ namespace nGratis.Cop.Core.Wpf
             private set { this.SetValue(AweButton.IsMousePressedProperty, value); }
         }
 
-        private static void OnMeasurementChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
+        public bool IsBorderHidden
         {
-            var button = container as AweButton;
-
-            if (button == null)
-            {
-                return;
-            }
-
-            button.RecalculateMeasurement();
+            get { return (bool)this.GetValue(AweButton.IsBorderHiddenProperty); }
+            set { this.SetValue(AweButton.IsBorderHiddenProperty, value); }
         }
 
         private static void OnRepeatingIntervalChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
@@ -244,7 +251,7 @@ namespace nGratis.Cop.Core.Wpf
             }
         }
 
-        private void RecalculateMeasurement()
+        private void UpdateMeasurement()
         {
             switch (this.Measurement)
             {
@@ -284,6 +291,16 @@ namespace nGratis.Cop.Core.Wpf
                     this.BorderThickness = new Thickness(1);
                     break;
             }
+        }
+
+        private void UpdateRepeatingTimer(TimeSpan interval)
+        {
+            if (interval < TimeSpan.FromMilliseconds(50))
+            {
+                interval = TimeSpan.FromMilliseconds(50);
+            }
+
+            this.repeatingTimer.Interval = interval;
         }
     }
 }
