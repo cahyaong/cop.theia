@@ -6,7 +6,7 @@
   <ResourceDictionary.MergedDictionaries>
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Palette.Generic.xaml" />
     <core:SharedResourceDictionary Source="/nGratis.Cop.Core.Theme;component/Cop.Style.TextBlock.xaml" />
-    <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernProgressRing.xaml" />
+    <core:SharedResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernProgressRingStyles.xaml" />
   </ResourceDictionary.MergedDictionaries>
   <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
   <Style x:Key="{x:Type core:AweProgressIndicator}" TargetType="core:AweProgressIndicator">
