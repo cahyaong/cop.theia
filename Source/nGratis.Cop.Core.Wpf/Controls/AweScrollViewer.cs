@@ -65,11 +65,11 @@ namespace nGratis.Cop.Core.Wpf
             {
                 if (args.Delta > 0)
                 {
-                    ScrollBar.PageLeftCommand.Execute(null, null);
+                    ScrollBar.LineLeftCommand.Execute(null, null);
                 }
                 else
                 {
-                    ScrollBar.PageRightCommand.Execute(null, null);
+                    ScrollBar.LineRightCommand.Execute(null, null);
                 }
             }
 
