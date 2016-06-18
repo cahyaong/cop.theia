@@ -2,7 +2,7 @@
 // <copyright file="Guard.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,152 +23,223 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Tuesday, 5 May 2015 2:19:52 PM UTC</creation_timestamp>
+// <creation_timestamp>Tuesday, 14 June 2016 9:35:08 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq.Expressions;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using JetBrains.Annotations;
 
     public static class Guard
     {
-        [DebuggerStepThrough]
-        public static void AgainstNullArgument<T>(
-            [NotNull][InstantHandle] Expression<Func<T>> argumentExpression,
-            Func<string> getReason = null)
-            where T : class
+        [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+        public static class Require
         {
-            if (argumentExpression.Compile()() == null)
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            public static void IsNotNull(object argument)
             {
-                var argument = argumentExpression.FindName();
-                var reason = getReason != null ? getReason() : null;
+                if (argument != null)
+                {
+                    return;
+                }
 
-                var message = "{0}{1}".WithCurrentFormat(
-                    Localization.Messages.Guard_Exception_NullArgument.WithCurrentFormat(argument),
-                    !string.IsNullOrWhiteSpace(reason)
-                        ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                        : string.Empty);
+                Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+            }
 
-                Throw.ArgumentNullException(argument, message);
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            public static void IsNotEqualTo(object argument, object value)
+            {
+                if (!object.Equals(argument, value))
+                {
+                    return;
+                }
+
+                Fire.PreconditionException($"Argument cannot be equal to [{ value }].");
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+            public static void IsEqualTo<T>(Type argument)
+            {
+                if (argument == null)
+                {
+                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                }
+
+                if (!typeof(T).IsAssignableFrom(argument))
+                {
+                    Fire.PreconditionException($"Argument must be assignable to [{ typeof(T).FullName }].");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            public static void IsNotDefault<T>(T argument)
+            {
+                if (!object.Equals(argument, default(T)))
+                {
+                    return;
+                }
+
+                Fire.PreconditionException($"Argument cannot be { Constants.Values.Default }.");
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            public static void IsNotEmpty(string argument)
+            {
+                if (argument == null)
+                {
+                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                }
+
+                if (string.IsNullOrWhiteSpace(argument))
+                {
+                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Empty }.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            public static void IsNotEmpty<T>(IEnumerable<T> argument)
+            {
+                if (argument == null)
+                {
+                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                }
+
+                if (!argument.Any())
+                {
+                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Empty }.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("argument:null => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+            public static void IsTypeOf<T>(object argument)
+            {
+                if (argument == null)
+                {
+                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }. ");
+                }
+
+                if (!(argument is T))
+                {
+                    Fire.PreconditionException(
+                        $"Argument of type [{ argument.GetType().FullName }] must be assignable to " +
+                        $"[{ typeof(T).FullName }].");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("isSatisfied:false => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsSatisfied(bool isSatisfied, string reason = null)
+            {
+                if (isSatisfied)
+                {
+                    return;
+                }
+
+                Fire.PreconditionException(
+                    @"Precondition is not satisfied. " +
+                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
             }
         }
 
-        [DebuggerStepThrough]
-        public static void AgainstDefaultArgument<T>(
-            [NotNull][InstantHandle] Expression<Func<T>> argumentExpression,
-            Func<string> getReason = null)
+        [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+        public static class Ensure
         {
-            if (argumentExpression.Compile()().Equals(default(T)))
+            [DebuggerStepThrough]
+            [ContractAnnotation("value:null => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsNotNull(object value, string reason = null)
             {
-                var argument = argumentExpression.FindName();
-                var reason = getReason != null ? getReason() : null;
+                if (value != null)
+                {
+                    return;
+                }
 
-                var message = "{0}{1}".WithCurrentFormat(
-                    Localization.Messages.Guard_Exception_DefaultArgument.WithCurrentFormat(argument),
-                    !string.IsNullOrWhiteSpace(reason)
-                        ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                        : string.Empty);
-
-                Throw.ArgumentException(argument, message);
+                Fire.PostconditionException(
+                    $"Value cannot be { Constants.Values.Null }. " +
+                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
             }
-        }
 
-        [DebuggerStepThrough]
-        public static void AgainstNullOrWhitespaceArgument(
-            [NotNull][InstantHandle] Expression<Func<string>> argumentExpression,
-            Func<string> getReason = null)
-        {
-            var value = argumentExpression.Compile()();
-
-            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+            [DebuggerStepThrough]
+            [ContractAnnotation("value:null => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsNotEmpty<T>(IEnumerable<T> value, string reason = null)
             {
-                var argument = argumentExpression.FindName();
-                var reason = getReason != null ? getReason() : null;
+                if (value == null)
+                {
+                    Fire.PostconditionException(
+                        $"Value cannot be { Constants.Values.Null }. " +
+                        $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                }
 
-                var message = "{0}{1}".WithCurrentFormat(
-                    Localization.Messages.Guard_Exception_StringNullOrWhitespace.WithCurrentFormat(argument),
-                    !string.IsNullOrWhiteSpace(reason)
-                        ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                        : string.Empty);
-
-                Throw.ArgumentException(argument, message);
+                if (!value.Any())
+                {
+                    Fire.PostconditionException(
+                        $"Value cannot be { Constants.Values.Empty }. " +
+                        $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                }
             }
-        }
 
-        [DebuggerStepThrough]
-        [ContractAnnotation("isInvalid:true => halt")]
-        public static void AgainstInvalidArgument<T>(
-            bool isInvalid,
-            [NotNull][InstantHandle] Expression<Func<T>> argumentExpression,
-            Func<string> getReason = null)
-        {
-            if (isInvalid)
+            [DebuggerStepThrough]
+            [ContractAnnotation("value:null => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsTypeOf<T>(object value, string reason = null)
             {
-                var argument = argumentExpression.FindName();
-                var reason = getReason != null ? getReason() : null;
+                if (value == null)
+                {
+                    Fire.PostconditionException(
+                        $"Value cannot be { Constants.Values.Null }. " +
+                        $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                }
 
-                var message = "{0}{1}".WithCurrentFormat(
-                    Localization.Messages.Guard_Exception_InvalidArgument.WithCurrentFormat(argument),
-                    !string.IsNullOrWhiteSpace(reason)
-                        ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                        : string.Empty);
-
-                Throw.ArgumentException(argument, message);
+                if (!(value is T))
+                {
+                    Fire.PostconditionException(
+                        $"Value must be assignable to [{ typeof(T).FullName }]. " +
+                        $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                }
             }
-        }
 
-        [DebuggerStepThrough]
-        [ContractAnnotation(" => halt")]
-        public static void AgainstInvalidOperation(Func<string> getReason = null)
-        {
-            var reason = getReason != null ? getReason() : null;
-
-            var message = "{0}{1}".WithCurrentFormat(
-                Localization.Messages.Guard_Exception_InvalidOperation,
-                !string.IsNullOrWhiteSpace(reason)
-                    ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                    : string.Empty);
-
-            Throw.InvalidOperationException(message);
-        }
-
-        [DebuggerStepThrough]
-        [ContractAnnotation("isInvalid:true => halt")]
-        public static void AgainstInvalidOperation(bool isInvalid, Func<string> getReason = null)
-        {
-            if (isInvalid)
+            [DebuggerStepThrough]
+            [ContractAnnotation(" => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsEnumerationSupported(object value, string reason = null)
             {
-                var reason = getReason != null ? getReason() : null;
-
-                var message = "{0}{1}".WithCurrentFormat(
-                    Localization.Messages.Guard_Exception_InvalidOperation,
-                    !string.IsNullOrWhiteSpace(reason)
-                        ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                        : string.Empty);
-
-                Throw.InvalidOperationException(message);
+                Fire.PostconditionException(
+                    $"Enumeration [{ value }] is not supported. " +
+                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
             }
-        }
 
-        [DebuggerStepThrough]
-        [ContractAnnotation("value:null => halt")]
-        public static void AgainstUnexpectedNullValue<T>(T value, Func<string> getReason = null)
-            where T : class
-        {
-            if (value == null)
+            [DebuggerStepThrough]
+            [ContractAnnotation("isSatisfied:false => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsSatisfied(bool isSatisfied, string reason = null)
             {
-                var reason = getReason != null ? getReason() : null;
+                if (isSatisfied)
+                {
+                    return;
+                }
 
-                var message = "{0}{1}".WithCurrentFormat(
-                    Localization.Messages.Guard_Exception_UnexpectedNullValue,
-                    !string.IsNullOrWhiteSpace(reason)
-                        ? Environment.NewLine + Localization.Messages.Guard_Label_Reason.WithCurrentFormat(reason)
-                        : string.Empty);
-
-                Throw.InvalidOperationException(message);
+                Fire.PostconditionException(
+                    @"Postcondition is not satisfied. " +
+                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
             }
         }
     }

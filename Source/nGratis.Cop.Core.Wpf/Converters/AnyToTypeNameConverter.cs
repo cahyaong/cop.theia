@@ -37,7 +37,7 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            Guard.AgainstInvalidArgument(type != typeof(string), () => type);
+            Guard.Require.IsEqualTo<string>(type);
 
             return value != null ? value.GetType().FullName : "<NULL>";
         }

@@ -48,11 +48,11 @@ namespace nGratis.Cop.Core.Wpf
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var control = (FrameworkElement)container;
-            var context = (FieldViewModel)item;
+            var context = item as FieldViewModel;
 
-            Guard.AgainstUnexpectedNullValue(context);
+            Guard.Require.IsNotNull(context);
 
-            var key = "Cop.AweField.{0}.{1}".WithInvariantFormat(
+            var key = "Cop.AweField.{0}.{1}".Bake(
                 context.Mode,
                 context.Type == FieldType.Auto
                     ? context.ValueType.IsEnum ? "Enumeration" : context.ValueType.GetGenericName()

@@ -72,8 +72,8 @@ namespace nGratis.Cop.Core
 
         private Mime(string uniqueId, int rfcId, int isoId, params string[] names)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => uniqueId);
-            Guard.AgainstInvalidArgument(!names.Any(), () => names);
+            Guard.Require.IsNotEmpty(uniqueId);
+            Guard.Require.IsNotEmpty(names);
 
             this.UniqueId = uniqueId;
             this.RfcId = rfcId;
@@ -95,18 +95,18 @@ namespace nGratis.Cop.Core
 
         public static Mime ParseByUniqueId(string uniqueId)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => uniqueId);
-            Guard.AgainstInvalidOperation(!Mime.UniqueIdToMimeMapping.ContainsKey(uniqueId));
+            Guard.Require.IsNotEmpty(uniqueId);
+            Guard.Require.IsSatisfied(Mime.UniqueIdToMimeMapping.ContainsKey(uniqueId));
 
             return Mime.UniqueIdToMimeMapping[uniqueId];
         }
 
         public static Mime ParseByName(string name)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => name);
+            Guard.Require.IsNotEmpty(name);
 
             name = name.Replace(".", string.Empty);
-            Guard.AgainstInvalidOperation(!Mime.NameToMimeMapping.ContainsKey(name));
+            Guard.Require.IsSatisfied(Mime.NameToMimeMapping.ContainsKey(name));
 
             return Mime.NameToMimeMapping[name];
         }

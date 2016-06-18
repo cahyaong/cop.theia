@@ -34,6 +34,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
+    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
     using OxyPlot;
     using OxyPlot.Axes;
@@ -51,6 +52,7 @@ namespace nGratis.Cop.Core.Wpf
             typeof(ChartConfigurationToPlotModelConverter),
             new PropertyMetadata(null));
 
+        [UsedImplicitly(ImplicitUseKindFlags.Access)]
         public IThemeManager ThemeManager
         {
             get { return (IThemeManager)this.GetValue(ChartConfigurationToPlotModelConverter.ThemeManagerProperty); }
@@ -67,7 +69,7 @@ namespace nGratis.Cop.Core.Wpf
             }
 
             var themeManager = this.ThemeManager;
-            Guard.AgainstUnexpectedNullValue(themeManager);
+            Guard.Require.IsNotNull(themeManager);
 
             var subcharts = chartConfiguration
                 .SeriesConfigurations
@@ -75,7 +77,7 @@ namespace nGratis.Cop.Core.Wpf
                 .Distinct()
                 .ToList();
 
-            Guard.AgainstInvalidOperation(subcharts.Count() > 1);
+            Guard.Ensure.IsNotEmpty(subcharts);
 
             var subchart = subcharts.Single();
 
@@ -92,46 +94,46 @@ namespace nGratis.Cop.Core.Wpf
                 .ToOxyColor();
 
             var plotModel = new PlotModel
-                {
-                    Title = chartConfiguration.Title,
-                    TitleColor = textColor,
-                    SubtitleColor = textColor,
-                    LegendTextColor = textColor,
-                    IsLegendVisible = false,
-                    PlotAreaBorderColor = borderColor
-                };
+            {
+                Title = chartConfiguration.Title,
+                TitleColor = textColor,
+                SubtitleColor = textColor,
+                LegendTextColor = textColor,
+                IsLegendVisible = false,
+                PlotAreaBorderColor = borderColor
+            };
 
             // TODO: Add axis configuration concept.
 
             var horizontalAxis = new LinearAxis()
-                {
-                    TicklineColor = ticklineColor,
-                    Position = AxisPosition.Bottom,
-                    IsZoomEnabled = false,
-                    IsPanEnabled = false,
-                    TextColor = textColor,
-                    Title = subchart.Category,
-                    TitleColor = textColor,
-                    TitleFontSize = 14,
-                    AxisTitleDistance = 20,
-                    Minimum = 2002,
-                    Maximum = 2016
-                };
+            {
+                TicklineColor = ticklineColor,
+                Position = AxisPosition.Bottom,
+                IsZoomEnabled = false,
+                IsPanEnabled = false,
+                TextColor = textColor,
+                Title = subchart.Category,
+                TitleColor = textColor,
+                TitleFontSize = 14,
+                AxisTitleDistance = 20,
+                Minimum = 2002,
+                Maximum = 2016
+            };
 
             var verticalAxis = new LogarithmicAxis()
-                {
-                    TicklineColor = ticklineColor,
-                    Position = AxisPosition.Left,
-                    IsZoomEnabled = false,
-                    IsPanEnabled = false,
-                    TextColor = textColor,
-                    Title = subchart.Value,
-                    TitleColor = textColor,
-                    TitleFontSize = 14,
-                    AxisTitleDistance = 20,
-                    Minimum = 0,
-                    Maximum = 100000
-                };
+            {
+                TicklineColor = ticklineColor,
+                Position = AxisPosition.Left,
+                IsZoomEnabled = false,
+                IsPanEnabled = false,
+                TextColor = textColor,
+                Title = subchart.Value,
+                TitleColor = textColor,
+                TitleFontSize = 14,
+                AxisTitleDistance = 20,
+                Minimum = 0,
+                Maximum = 100000
+            };
 
             plotModel.Axes.Add(horizontalAxis);
             plotModel.Axes.Add(verticalAxis);
@@ -139,13 +141,13 @@ namespace nGratis.Cop.Core.Wpf
             chartConfiguration
                 .SeriesConfigurations
                 .Select(configuration => new LineSeries()
-                    {
-                        Title = configuration.Title,
-                        ItemsSource = configuration.Points,
-                        DataFieldX = configuration.Category,
-                        DataFieldY = configuration.Value,
-                        Smooth = true
-                    })
+                {
+                    Title = configuration.Title,
+                    ItemsSource = configuration.Points,
+                    DataFieldX = configuration.Category,
+                    DataFieldY = configuration.Value,
+                    Smooth = true
+                })
                 .ForEach(series => plotModel.Series.Add(series));
 
             return plotModel;

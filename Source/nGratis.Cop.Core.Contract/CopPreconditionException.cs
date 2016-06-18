@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExpressionExtensions.cs" company="nGratis">
+// <copyright file="CopPreconditionException.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,25 +23,36 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Saturday, 4 June 2016 11:59:24 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
-namespace System.Linq.Expressions
-
-// ReSharper restore CheckNamespace
+namespace nGratis.Cop.Core.Contract
 {
     using System;
-    using nGratis.Cop.Core.Contract;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
 
-    public static class ExpressionExtensions
+    [Serializable]
+    public sealed class CopPreconditionException : CopException
     {
-        public static string FindName<TProperty>(this Expression<Func<TProperty>> expression)
+        public CopPreconditionException()
         {
-            Guard.AgainstNullArgument(() => expression);
+        }
 
-            var bodyExpression = expression.Body as MemberExpression ?? (MemberExpression)((UnaryExpression)expression.Body).Operand;
+        public CopPreconditionException(string message)
+            : base(message)
+        {
+        }
 
-            return bodyExpression.Member.Name;
+        public CopPreconditionException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
+
+        private CopPreconditionException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
     }
 }

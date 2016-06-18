@@ -43,7 +43,7 @@ namespace nGratis.Cop.Core
 
         public override void LogWith(Verbosity verbosity, string message)
         {
-            var line = "{0} | {1} | {2}".WithInvariantFormat(
+            var line = "{0} | {1} | {2}".Bake(
                 DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
                 verbosity.ToConsoleString(),
                 message);

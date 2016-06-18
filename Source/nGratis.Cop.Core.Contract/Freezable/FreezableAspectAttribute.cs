@@ -29,28 +29,25 @@
 namespace nGratis.Cop.Core.Contract
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using PostSharp.Aspects;
 
     [Serializable]
     [LinesOfCodeAvoided(4)]
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class FreezableAspectAttribute : LocationInterceptionAspect
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class FreezableAspectAttribute : LocationInterceptionAspect
     {
         public override void OnSetValue(LocationInterceptionArgs args)
         {
-            var freezable = args.Instance as IFreezable;
+            Guard.Require.IsTypeOf<IFreezable>(args.Instance);
 
-            Guard.AgainstUnexpectedNullValue(
-                freezable,
-                () => Localization.Messages
-                    .FreezableAspect_Exception_NonFreezableInstance
-                    .WithCurrentFormat(args.Instance.GetType().Name, typeof(IFreezable).Name));
+            var freezable = (IFreezable)args.Instance;
 
-            Guard.AgainstInvalidOperation(
-                freezable.IsFrozen,
-                () => Localization.Messages
-                    .FreezableAspect_Exception_FrozenInstanceManipulation
-                    .WithCurrentFormat(args.LocationName, args.Instance.GetType().Name));
+            Guard.Ensure.IsSatisfied(
+                !freezable.IsFrozen,
+                $"Setting property [{ args.LocationName }] on frozen instance of type " +
+                $"[{ args.Instance.GetType().FullName }] is not allowed.");
 
             base.OnSetValue(args);
         }

@@ -47,8 +47,8 @@ namespace nGratis.Cop.Theia.Module.Sdk
 
         public LoggingSource(IInfrastructureManager infrastructureManager, string name)
         {
-            Guard.AgainstNullArgument(() => infrastructureManager);
-            Guard.AgainstNullOrWhitespaceArgument(() => name);
+            Guard.Require.IsNotNull(infrastructureManager);
+            Guard.Require.IsNotEmpty(name);
 
             this.Name = name;
             this.Logger = infrastructureManager.LoggingProvider.GetLoggerFor("<SDK>");

@@ -31,8 +31,10 @@ namespace nGratis.Cop.Core.Contract
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using JetBrains.Annotations;
 
     [FreezableAspect]
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class LogEntry : BaseFreezable
     {
         public LogEntry()

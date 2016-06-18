@@ -26,6 +26,7 @@
 // <creation_timestamp>Sunday, 28 December 2014 12:32:45 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -34,3 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("d7381189-cf6a-45f3-9664-d5a983d016d6")]
+[assembly: CLSCompliant(true)]

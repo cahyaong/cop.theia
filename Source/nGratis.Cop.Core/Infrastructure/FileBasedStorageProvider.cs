@@ -34,26 +34,25 @@ namespace nGratis.Cop.Core
     using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
 
-    [UsedImplicitly]
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class FileBasedStorageProvider : IStorageProvider
     {
         public FileBasedStorageProvider(Uri rootFolderUri)
         {
-            Guard.AgainstNullArgument(() => rootFolderUri);
-            Guard.AgainstInvalidArgument(!rootFolderUri.IsFile, () => rootFolderUri);
+            Guard.Require.IsNotNull(rootFolderUri);
+            Guard.Require.IsSatisfied(rootFolderUri.IsFile, "Folder URI must be a file system.");
 
             var rootFolderPath = Path.GetDirectoryName(rootFolderUri.AbsolutePath);
-            Guard.AgainstUnexpectedNullValue(rootFolderPath);
+            Guard.Ensure.IsNotNull(rootFolderPath);
 
             this.RootUri = new Uri(rootFolderPath, UriKind.Absolute);
         }
 
-        [UsedImplicitly]
         public Uri RootUri { get; private set; }
 
         public Stream LoadData(IDataSpecification dataSpecification)
         {
-            Guard.AgainstNullArgument(() => dataSpecification);
+            Guard.Require.IsNotNull(dataSpecification);
 
             return File.Open(
                 Path.Combine(this.RootUri.LocalPath, dataSpecification.FullName),
@@ -62,14 +61,11 @@ namespace nGratis.Cop.Core
 
         public void SaveData(IDataSpecification dataSpecification, Stream dataStream)
         {
-            Guard.AgainstNullArgument(() => dataSpecification);
-            Guard.AgainstNullArgument(() => dataStream);
+            Guard.Require.IsNotNull(dataSpecification);
+            Guard.Require.IsNotNull(dataStream);
 
             var filePath = Path.Combine(this.RootUri.LocalPath, dataSpecification.FullName);
-
-            Guard.AgainstInvalidOperation(
-                File.Exists(filePath),
-                () => "Failed to save data".WithMessageDetails(MessageDetail.New("Path", filePath)));
+            Guard.Ensure.IsSatisfied(!File.Exists(filePath), $"Failed to save data. Path: [{ filePath }]");
 
             dataStream.Position = 0;
 

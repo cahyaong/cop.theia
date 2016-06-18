@@ -50,7 +50,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public Feature(string name, int order, IEnumerable<Page> pages)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => name);
+            Guard.Require.IsNotEmpty(name);
 
             this.Name = name;
             this.Order = order;

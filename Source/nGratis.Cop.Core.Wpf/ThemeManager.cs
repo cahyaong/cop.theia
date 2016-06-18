@@ -32,6 +32,7 @@ namespace nGratis.Cop.Core.Wpf
     using System.Linq;
     using System.Windows;
     using System.Windows.Media;
+    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
 
     public class ThemeManager : IThemeManager
@@ -41,6 +42,7 @@ namespace nGratis.Cop.Core.Wpf
             this.ResourceDictionaries = new Collection<ResourceDictionary>();
         }
 
+        [UsedImplicitly(ImplicitUseKindFlags.Access)]
         public Collection<ResourceDictionary> ResourceDictionaries
         {
             get;
@@ -59,7 +61,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public TResource FindResource<TResource>(string key)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => key);
+            Guard.Require.IsNotEmpty(key);
 
             return (TResource)this
                 .ResourceDictionaries

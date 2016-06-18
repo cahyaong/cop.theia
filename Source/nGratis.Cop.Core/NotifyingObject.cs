@@ -48,7 +48,7 @@ namespace nGratis.Cop.Core
                 return;
             }
 
-            Guard.AgainstNullArgument(() => propertyName);
+            Guard.Require.IsNotNull(propertyName);
 
             if (this.PropertyChanging != null)
             {

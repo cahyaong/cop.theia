@@ -53,8 +53,8 @@ namespace nGratis.Cop.Core.Wpf
 
         internal FieldViewModel(Type valueType, AsFieldAttribute asFieldAttribute)
         {
-            Guard.AgainstNullArgument(() => valueType);
-            Guard.AgainstNullArgument(() => asFieldAttribute);
+            Guard.Require.IsNotNull(valueType);
+            Guard.Require.IsNotNull(asFieldAttribute);
 
             this.ValueType = valueType;
 

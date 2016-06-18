@@ -40,15 +40,28 @@ namespace nGratis.Cop.Theia.Client
     using nGratis.Cop.Core.Contract;
     using nGratis.Cop.Core.Vision.Imaging;
 
-    internal class AppBootstrapper : BootstrapperBase
+    internal sealed class AppBootstrapper : BootstrapperBase, IDisposable
     {
         private readonly IModuleProvider moduleProvider = new CopModuleProvider();
 
         private CompositionContainer mefContainer;
 
+        private bool isDisposed;
+
         public AppBootstrapper()
         {
             this.Initialize();
+        }
+
+        ~AppBootstrapper()
+        {
+            this.Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected override IEnumerable<Assembly> SelectAssemblies()
@@ -102,6 +115,22 @@ namespace nGratis.Cop.Theia.Client
         protected override void OnStartup(object sender, StartupEventArgs args)
         {
             this.DisplayRootViewFor<AppViewModel>();
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (this.isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                this.mefContainer.Dispose();
+                this.mefContainer = null;
+            }
+
+            this.isDisposed = true;
         }
     }
 }

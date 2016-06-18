@@ -32,148 +32,150 @@ namespace nGratis.Cop.Core.Testing
     using System.Data;
     using System.Globalization;
     using System.Windows;
+    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Testing.Properties;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class ScenarioExtensions
     {
-        public static Guid AsGuid(this DataRow dataRow, string columnName)
+        public static Guid AsGuid(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
+            Guard.Require.IsNotNull(row);
 
             var value = Guid.Empty;
+            var isValid = Guid.TryParse(row.AsString(column), out value);
 
-            Guard.AgainstInvalidOperation(
-                !Guid.TryParse(dataRow.AsString(columnName), out value),
-                () => Messages
-                    .Error_Scenario_InvalidFormat
-                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "GUID"));
+            Guard.Ensure.IsSatisfied(
+                isValid,
+                $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                $"[{ typeof(Guid).FullName }].");
 
             return value;
         }
 
-        public static short AsInt16(this DataRow dataRow, string columnName)
+        public static short AsInt16(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
+            Guard.Require.IsNotNull(row);
 
             var value = (short)0;
 
-            Guard.AgainstInvalidOperation(
-                !short.TryParse(
-                    dataRow.AsString(columnName),
-                    NumberStyles.Integer,
-                    CultureInfo.InvariantCulture,
-                    out value),
-                () => Messages
-                    .Error_Scenario_InvalidFormat
-                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "INT16"));
+            var isValid = short.TryParse(
+                row.AsString(column),
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out value);
+
+            Guard.Ensure.IsSatisfied(
+                isValid,
+                $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                $"[{ typeof(short).FullName }].");
 
             return value;
         }
 
-        public static int AsInt32(this DataRow dataRow, string columnName)
+        public static int AsInt32(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
+            Guard.Require.IsNotNull(row);
 
             var value = 0;
 
-            Guard.AgainstInvalidOperation(
-                !int.TryParse(
-                    dataRow.AsString(columnName),
-                    NumberStyles.Integer,
-                    CultureInfo.InvariantCulture,
-                    out value),
-                () => Messages
-                    .Error_Scenario_InvalidFormat
-                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "INT32"));
+            var isValid = int.TryParse(
+                row.AsString(column),
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out value);
+
+            Guard.Ensure.IsSatisfied(
+                isValid,
+                $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                $"[{ typeof(int).FullName }].");
 
             return value;
         }
 
-        public static DateTime AsDateTime(this DataRow dataRow, string columnName)
+        public static DateTime AsDateTime(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
+            Guard.Require.IsNotNull(row);
 
             var value = DateTime.MinValue;
 
-            Guard.AgainstInvalidOperation(
-                !DateTime.TryParseExact(
-                    dataRow.AsString(columnName),
-                    "O",
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal,
-                    out value),
-                () => Messages
-                    .Error_Scenario_InvalidFormat
-                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIME"));
+            var isValid = DateTime.TryParseExact(
+                row.AsString(column),
+                "O",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal,
+                out value);
+
+            Guard.Ensure.IsSatisfied(
+                isValid,
+                $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                $"[{ typeof(DateTime).FullName }].");
 
             return value;
         }
 
-        public static DateTimeOffset AsDateTimeOffset(this DataRow dataRow, string columnName)
+        public static DateTimeOffset AsDateTimeOffset(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
+            Guard.Require.IsNotNull(row);
 
             var value = DateTimeOffset.MinValue;
 
-            Guard.AgainstInvalidOperation(
-                !DateTimeOffset.TryParseExact(
-                    dataRow.AsString(columnName),
-                    "O",
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal,
-                    out value),
-                () => Messages
-                    .Error_Scenario_InvalidFormat
-                    .WithInvariantFormat(columnName, dataRow.Table.TableName, "DATETIMEOFFSET"));
+            var isValid = DateTimeOffset.TryParseExact(
+                row.AsString(column),
+                "O",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal,
+                out value);
+
+            Guard.Ensure.IsSatisfied(
+                isValid,
+                $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                $"[{ typeof(DateTimeOffset).FullName }].");
 
             return value;
         }
 
-        public static Size AsSize(this DataRow dataRow, string columnName)
+        public static Size AsSize(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
+            Guard.Require.IsNotNull(row);
 
             var value = default(Size);
 
             try
             {
-                value = Size.Parse(dataRow.AsString(columnName));
+                value = Size.Parse(row.AsString(column));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Guard.AgainstInvalidOperation(
-                    () => Messages
-                        .Error_Scenario_InvalidFormat
-                        .WithInvariantFormat(columnName, dataRow.Table.TableName, "SIZE"));
+                Fire.InvalidOperationException(
+                    $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                    $"[{ typeof(Size).FullName }].",
+                    exception);
             }
 
             return value;
         }
 
-        public static string AsString(this DataRow dataRow, string columnName)
+        public static string AsString(this DataRow row, string column)
         {
-            Guard.AgainstNullArgument(() => dataRow);
-            Guard.AgainstNullOrWhitespaceArgument(() => columnName);
+            Guard.Require.IsNotNull(row);
+            Guard.Require.IsNotEmpty(column);
 
             var value = string.Empty;
 
             try
             {
-                value = dataRow[columnName] as string;
+                value = row[column] as string;
 
-                Guard.AgainstInvalidOperation(
-                    value == null,
-                    () => Messages
-                        .Error_Scenario_InvalidFormat
-                        .WithInvariantFormat(columnName, dataRow.Table.TableName, "STRING"));
+                Guard.Ensure.IsNotNull(
+                    value,
+                    $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
+                    $"[{ typeof(string).FullName }].");
             }
-            catch (ArgumentException)
+            catch (ArgumentException exception)
             {
-                Guard.AgainstInvalidOperation(
-                    () => Messages
-                        .Error_Scenario_UndefinedVariable
-                        .WithInvariantFormat(columnName, dataRow.Table.TableName));
+                var message = $"Variable [{ column }] does not exist in scenario [{ row.Table.TableName }].";
+                Fire.InvalidOperationException(message, exception);
             }
 
             return value.Trim();

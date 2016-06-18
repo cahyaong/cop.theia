@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MessageDetail.cs" company="nGratis">
+// <copyright file="CopPostconditionException.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +23,36 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Friday, 3 April 2015 12:41:31 AM UTC</creation_timestamp>
+// <creation_timestamp>Saturday, 4 June 2016 12:09:46 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Core
+namespace nGratis.Cop.Core.Contract
 {
     using System;
-    using nGratis.Cop.Core.Contract;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
 
-    public struct MessageDetail
+    [Serializable]
+    public sealed class CopPostconditionException : CopException
     {
-        public string Content { get; private set; }
-
-        public string Header { get; private set; }
-
-        public static MessageDetail New(string header, string content)
+        public CopPostconditionException()
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => header);
-            Guard.AgainstNullArgument(() => content);
-
-            return new MessageDetail
-            {
-                Header = header,
-                Content = content
-            };
         }
 
-        public override string ToString()
+        public CopPostconditionException(string message)
+            : base(message)
         {
-            return "{0}: '{1}'".WithCurrentFormat(this.Header, this.Content);
+        }
+
+        public CopPostconditionException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
+
+        private CopPostconditionException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
     }
 }

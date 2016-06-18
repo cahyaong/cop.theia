@@ -36,7 +36,6 @@ namespace nGratis.Cop.Core.Testing
     using System.Runtime.CompilerServices;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Testing.Properties;
 
     public static class TestContextExtensions
     {
@@ -55,17 +54,18 @@ namespace nGratis.Cop.Core.Testing
                 .ToDictionary(annon => annon.Method.ReturnType, annon => annon.Method);
         }
 
-        public static TValue FindScenarioVariableAs<TValue>(this TestContext testContext, string variableName)
+        public static TValue FindScenarioVariableAs<TValue>(this TestContext context, string name)
         {
-            Guard.AgainstNullArgument(() => testContext);
+            Guard.Require.IsNotNull(context);
 
-            var parsingMethod = default(MethodInfo);
+            var method = default(MethodInfo);
+            var isSupported = TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out method);
 
-            Guard.AgainstInvalidOperation(
-                !TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out parsingMethod),
-                () => Messages.Error_TestContext_UnsupporedParser.WithInvariantFormat(typeof(TValue).FullName));
+            Guard.Require.IsSatisfied(
+                isSupported,
+                $"Parser for type [{ typeof(TValue).FullName }] is not supported.");
 
-            return (TValue)parsingMethod.Invoke(null, new object[] { testContext.DataRow, variableName });
+            return (TValue)method.Invoke(null, new object[] { context.DataRow, name });
         }
     }
 }

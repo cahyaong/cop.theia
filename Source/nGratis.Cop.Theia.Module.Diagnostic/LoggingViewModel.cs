@@ -40,7 +40,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
         [ImportingConstructor]
         public LoggingViewModel(IInfrastructureManager infrastructureManager)
         {
-            Guard.AgainstNullArgument(() => infrastructureManager);
+            Guard.Require.IsNotNull(infrastructureManager);
 
             this.Logger = infrastructureManager
                 .LoggingProvider

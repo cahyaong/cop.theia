@@ -37,14 +37,14 @@ namespace System
         public static Stream LoadEmbeddedResource<T>(this T instance, string resourcePath)
             where T : class
         {
-            Guard.AgainstNullArgument(() => instance);
-            Guard.AgainstNullOrWhitespaceArgument(() => resourcePath);
+            Guard.Require.IsNotNull(instance);
+            Guard.Require.IsNotEmpty(resourcePath);
 
             var assembly = typeof(T).Assembly;
-            resourcePath = "{0}.{1}".WithInvariantFormat(assembly.GetName().Name, resourcePath.Replace("\\", "."));
+            resourcePath = "{0}.{1}".Bake(assembly.GetName().Name, resourcePath.Replace("\\", "."));
             var stream = assembly.GetManifestResourceStream(resourcePath);
 
-            Guard.AgainstInvalidOperation(stream == null);
+            Guard.Ensure.IsNotNull(stream);
 
             return stream;
         }

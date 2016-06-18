@@ -35,7 +35,7 @@ namespace nGratis.Cop.Core.Vision.Imaging
     {
         public IImage LoadImage(IDataSpecification imageSpecification)
         {
-            Guard.AgainstNullArgument(() => imageSpecification);
+            Guard.Require.IsNotNull(imageSpecification);
 
             using (var imageStream = imageSpecification.LoadData())
             {

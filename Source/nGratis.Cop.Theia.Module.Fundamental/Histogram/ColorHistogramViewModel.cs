@@ -46,7 +46,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
         [ImportingConstructor]
         public ColorHistogramViewModel(IImageProvider imageProvider)
         {
-            Guard.AgainstNullArgument(() => imageProvider);
+            Guard.Require.IsNotNull(imageProvider);
 
             this.imageProvider = imageProvider;
         }

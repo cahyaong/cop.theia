@@ -77,10 +77,10 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             static CsvConfiguration()
             {
                 CsvConfiguration.Instance = new CsvConfiguration()
-                    {
-                        BufferSize = 1 << 24,
-                        HasHeaderRecord = true,
-                    };
+                {
+                    BufferSize = 1 << 24,
+                    HasHeaderRecord = true,
+                };
 
                 CsvConfiguration.Instance.RegisterClassMap(CsvMap.Instance);
             }

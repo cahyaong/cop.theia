@@ -38,7 +38,7 @@ namespace nGratis.Cop.Core
     {
         protected BaseLogger(string id, IList<string> components = null)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => id);
+            Guard.Require.IsNotEmpty(id);
 
             this.Id = id;
 

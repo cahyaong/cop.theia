@@ -37,7 +37,7 @@ namespace nGratis.Cop.Core
 
         public DelegateEqualityComparer(Func<TItem, TItem, bool> isEqual)
         {
-            Guard.AgainstNullArgument(() => isEqual);
+            Guard.Require.IsNotNull(isEqual);
 
             this.isEqual = isEqual;
         }

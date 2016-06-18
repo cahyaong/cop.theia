@@ -34,8 +34,8 @@ namespace nGratis.Cop.Core.Wpf
     {
         public Page(string name, string source)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => name);
-            Guard.AgainstNullOrWhitespaceArgument(() => source);
+            Guard.Require.IsNotEmpty(name);
+            Guard.Require.IsNotEmpty(source);
 
             this.Name = name;
             this.SourceUri = new Uri(source, UriKind.Relative);

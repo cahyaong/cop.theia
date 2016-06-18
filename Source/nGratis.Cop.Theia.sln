@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D62434F9-BA31-472F-9CD7-0B0A5474CF7C}"
 	ProjectSection(SolutionItems) = preProject
@@ -67,6 +67,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{06153FE4-A566-40FC-9647-A70BCF7CDA58}"
 	ProjectSection(SolutionItems) = preProject
 		nGratis.Cop.Theia.Common\GlobalAssemblyInfo.tt = nGratis.Cop.Theia.Common\GlobalAssemblyInfo.tt
+		nGratis.Cop.Theia.Common\nGratis.Cop.ruleset = nGratis.Cop.Theia.Common\nGratis.Cop.ruleset
 		nGratis.Cop.Theia.Common\nGratis.Cop.Theia.Module.targets = nGratis.Cop.Theia.Common\nGratis.Cop.Theia.Module.targets
 	EndProjectSection
 EndProject

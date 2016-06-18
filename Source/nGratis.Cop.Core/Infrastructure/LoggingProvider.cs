@@ -45,7 +45,7 @@ namespace nGratis.Cop.Core
 
         public LoggingProvider(LoggingModes loggingModes)
         {
-            Guard.AgainstDefaultArgument(() => loggingModes);
+            Guard.Require.IsNotDefault(loggingModes);
 
             this.loggingModes = loggingModes;
         }
@@ -57,11 +57,11 @@ namespace nGratis.Cop.Core
 
         public ILogger GetLoggerFor(Type type)
         {
-            Guard.AgainstNullArgument(() => type);
+            Guard.Require.IsNotNull(type);
 
             var logger = this
                 .loggerLookup
-                .GetOrAdd("TYP.{0}".WithInvariantFormat(type.FullName), key => this.CreateLogger(key));
+                .GetOrAdd("TYP.{0}".Bake(type.FullName), key => this.CreateLogger(key));
 
             this.aggregatingLogger.RegisterLoggers(logger);
 
@@ -70,7 +70,7 @@ namespace nGratis.Cop.Core
 
         public ILogger GetLoggerFor(string component)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => component);
+            Guard.Require.IsNotEmpty(component);
 
             if (component == "*")
             {
@@ -79,7 +79,7 @@ namespace nGratis.Cop.Core
 
             var logger = this
                 .loggerLookup
-                .GetOrAdd("COM.{0}".WithInvariantFormat(component), key => this.CreateLogger(key, component));
+                .GetOrAdd("COM.{0}".Bake(component), key => this.CreateLogger(key, component));
 
             this.aggregatingLogger.RegisterLoggers(logger);
 

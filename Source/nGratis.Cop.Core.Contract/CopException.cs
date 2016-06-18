@@ -29,9 +29,13 @@
 namespace nGratis.Cop.Core.Contract
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.Serialization;
+    using JetBrains.Annotations;
 
     [Serializable]
+    [UsedImplicitly]
     public class CopException : Exception
     {
         public CopException()
@@ -43,8 +47,8 @@ namespace nGratis.Cop.Core.Contract
         {
         }
 
-        public CopException(string message, Exception innerException)
-            : base(message, innerException)
+        public CopException(string message, Exception exception)
+            : base(message, exception)
         {
         }
 

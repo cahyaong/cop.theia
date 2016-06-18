@@ -40,9 +40,9 @@ namespace nGratis.Cop.Core.Wpf
 
         public AsFieldAttribute(FieldMode mode, FieldType type, string label)
         {
-            Guard.AgainstInvalidArgument(mode == FieldMode.Unknown, () => label);
-            Guard.AgainstInvalidArgument(type == FieldType.Unknown, () => type);
-            Guard.AgainstNullOrWhitespaceArgument(() => label);
+            Guard.Require.IsNotDefault(mode);
+            Guard.Require.IsNotDefault(type);
+            Guard.Require.IsNotEmpty(label);
 
             this.Mode = mode;
             this.Type = type;

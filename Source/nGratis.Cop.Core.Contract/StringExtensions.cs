@@ -2,7 +2,7 @@
 // <copyright file="StringExtensions.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,30 +26,36 @@
 // <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
+// ReSharper disable once CheckNamespace
 namespace System
-
-// ReSharper restore CheckNamespace
 {
     using System.Globalization;
+    using System.Linq;
     using JetBrains.Annotations;
 
     public static class StringExtensions
     {
         [StringFormatMethod("format")]
-        public static string WithCurrentFormat(this string format, params object[] args)
+        public static string Bake(this string format, IFormatProvider provider, params object[] args)
         {
             return string.IsNullOrWhiteSpace(format)
                 ? format
-                : string.Format(CultureInfo.CurrentCulture, format, args);
+                : string.Format(provider, format, args);
         }
 
         [StringFormatMethod("format")]
-        public static string WithInvariantFormat(this string format, params object[] args)
+        public static string Bake(this string format, params object[] args)
         {
             return string.IsNullOrWhiteSpace(format)
                 ? format
                 : string.Format(CultureInfo.InvariantCulture, format, args);
+        }
+
+        public static string Coalesce(this string value, params string[] alternatives)
+        {
+            return string.IsNullOrWhiteSpace(value)
+                ? alternatives.FirstOrDefault(alternative => !string.IsNullOrWhiteSpace(alternative))
+                : value;
         }
     }
 }

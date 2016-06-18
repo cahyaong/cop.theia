@@ -28,14 +28,11 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using nGratis.Cop.Core.Contract;
-
     public class CallbackResult
     {
         private CallbackResult()
         {
         }
-
 
         public bool HasError
         {
@@ -51,9 +48,9 @@ namespace nGratis.Cop.Core.Wpf
         public static CallbackResult OnFailure()
         {
             return new CallbackResult()
-                {
-                    HasError = true
-                };
+            {
+                HasError = true
+            };
         }
     }
 }

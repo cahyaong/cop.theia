@@ -36,7 +36,7 @@ namespace nGratis.Cop.Core
     {
         public LoggingAttribute(string category)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => category);
+            Guard.Require.IsNotEmpty(category);
 
             this.Category = category;
         }

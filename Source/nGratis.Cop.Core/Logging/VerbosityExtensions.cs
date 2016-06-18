@@ -36,7 +36,7 @@ namespace nGratis.Cop.Core
     {
         public static LogLevel ToLogLevel(this Verbosity verbosity)
         {
-            Guard.AgainstDefaultArgument(() => verbosity);
+            Guard.Require.IsNotDefault(verbosity);
 
             switch (verbosity)
             {
@@ -57,14 +57,18 @@ namespace nGratis.Cop.Core
 
                 case Verbosity.Fatal:
                     return LogLevel.Fatal;
+
+                default:
+                    Guard.Ensure.IsEnumerationSupported(verbosity);
+                    break;
             }
 
-            throw new NotSupportedException();
+            return LogLevel.Off;
         }
 
         public static string ToConsoleString(this Verbosity verbosity)
         {
-            Guard.AgainstDefaultArgument(() => verbosity);
+            Guard.Require.IsNotDefault(verbosity);
 
             switch (verbosity)
             {
@@ -85,9 +89,13 @@ namespace nGratis.Cop.Core
 
                 case Verbosity.Fatal:
                     return "FTL";
+
+                default:
+                    Guard.Ensure.IsEnumerationSupported(verbosity);
+                    break;
             }
 
-            throw new NotSupportedException();
+            return "UNK";
         }
     }
 }

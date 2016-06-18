@@ -37,7 +37,7 @@ namespace System
     {
         public static IDataSpecification ToDataSpecification(this Uri uri)
         {
-            Guard.AgainstNullArgument(() => uri);
+            Guard.Require.IsNotNull(uri);
 
             if (uri.IsFile)
             {

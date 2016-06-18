@@ -37,8 +37,8 @@ namespace System.Collections.Generic
     {
         public static IEnumerable<T> Append<T>(this IEnumerable<T> lefts, IEnumerable<T> rights)
         {
-            Guard.AgainstNullArgument(() => lefts);
-            Guard.AgainstNullArgument(() => rights);
+            Guard.Require.IsNotNull(lefts);
+            Guard.Require.IsNotNull(rights);
 
             foreach (var left in lefts)
             {
@@ -53,8 +53,8 @@ namespace System.Collections.Generic
 
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lefts, IEnumerable<T> rights)
         {
-            Guard.AgainstNullArgument(() => lefts);
-            Guard.AgainstNullArgument(() => rights);
+            Guard.Require.IsNotNull(lefts);
+            Guard.Require.IsNotNull(rights);
 
             foreach (var right in rights)
             {
@@ -69,7 +69,7 @@ namespace System.Collections.Generic
 
         public static IEnumerable<T> Append<T>(this IEnumerable<T> lefts, T right)
         {
-            Guard.AgainstNullArgument(() => lefts);
+            Guard.Require.IsNotNull(lefts);
 
             foreach (var left in lefts)
             {
@@ -81,7 +81,7 @@ namespace System.Collections.Generic
 
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lefts, T right)
         {
-            Guard.AgainstNullArgument(() => lefts);
+            Guard.Require.IsNotNull(lefts);
 
             yield return right;
 
@@ -93,17 +93,17 @@ namespace System.Collections.Generic
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> lefts, IEnumerable<T> rights, Func<T, T, bool> isEqual)
         {
-            Guard.AgainstNullArgument(() => lefts);
-            Guard.AgainstNullArgument(() => rights);
-            Guard.AgainstNullArgument(() => isEqual);
+            Guard.Require.IsNotNull(lefts);
+            Guard.Require.IsNotNull(rights);
+            Guard.Require.IsNotNull(isEqual);
 
             return lefts.Except(rights, new DelegateEqualityComparer<T>(isEqual));
         }
 
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> perform)
         {
-            Guard.AgainstNullArgument(() => items);
-            Guard.AgainstNullArgument(() => perform);
+            Guard.Require.IsNotNull(items);
+            Guard.Require.IsNotNull(perform);
 
             foreach (var item in items)
             {
@@ -113,8 +113,8 @@ namespace System.Collections.Generic
 
         public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> apply)
         {
-            Guard.AgainstNullArgument(() => items);
-            Guard.AgainstNullArgument(() => apply);
+            Guard.Require.IsNotNull(items);
+            Guard.Require.IsNotNull(apply);
 
             var index = 0;
 

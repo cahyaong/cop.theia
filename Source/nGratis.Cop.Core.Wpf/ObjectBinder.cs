@@ -70,10 +70,10 @@ namespace nGratis.Cop.Core.Wpf
             PropertyInfo targetProperty,
             bool isCallbackInvokedBothWays = true)
         {
-            Guard.AgainstNullArgument(() => source);
-            Guard.AgainstNullArgument(() => sourceProperty);
-            Guard.AgainstNullArgument(() => target);
-            Guard.AgainstNullArgument(() => targetProperty);
+            Guard.Require.IsNotNull(source);
+            Guard.Require.IsNotNull(sourceProperty);
+            Guard.Require.IsNotNull(target);
+            Guard.Require.IsNotNull(targetProperty);
 
             this.source = source;
             this.target = target;
@@ -90,7 +90,7 @@ namespace nGratis.Cop.Core.Wpf
             Action onValueUpdated = null,
             Action onErrorEncountered = null)
         {
-            var methodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
+            var methodName = "On{0}Changed".Bake(this.sourceProperty.Name);
 
             this.sourceCallbackMethod = this
                 .source
@@ -110,7 +110,7 @@ namespace nGratis.Cop.Core.Wpf
             Action onValueUpdated = null,
             Action onErrorEncountered = null)
         {
-            var methodName = "On{0}Changed".WithInvariantFormat(this.sourceProperty.Name);
+            var methodName = "On{0}Changed".Bake(this.sourceProperty.Name);
 
             this.targetCallbackMethod = this
                 .target

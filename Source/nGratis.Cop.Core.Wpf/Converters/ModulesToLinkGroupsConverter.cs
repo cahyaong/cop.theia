@@ -40,10 +40,9 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            var modules = value as IEnumerable<IModule>;
+            Guard.Require.IsTypeOf<IEnumerable<IModule>>(value);
 
-            Guard.AgainstInvalidArgument(modules == null, () => value);
-
+            var modules = (IEnumerable<IModule>)value;
             var linkGroups = new LinkGroupCollection();
 
             // TODO: Need a proper grouping of multiple features based their name.

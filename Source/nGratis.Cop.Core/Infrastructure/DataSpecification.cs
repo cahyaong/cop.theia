@@ -44,10 +44,10 @@ namespace nGratis.Cop.Core
 
         public DataSpecification(IStorageProvider storageProvider, string name, Mime contentMime)
         {
-            Guard.AgainstNullArgument(() => storageProvider);
-            Guard.AgainstNullOrWhitespaceArgument(() => name);
-            Guard.AgainstNullArgument(() => contentMime);
-            Guard.AgainstInvalidArgument(contentMime == Mime.Unknown, () => contentMime);
+            Guard.Require.IsNotNull(storageProvider);
+            Guard.Require.IsNotEmpty(name);
+            Guard.Require.IsNotNull(contentMime);
+            Guard.Require.IsNotEqualTo(contentMime, Mime.Unknown);
 
             this.ContentMime = contentMime;
             this.Name = name;
@@ -60,7 +60,7 @@ namespace nGratis.Cop.Core
 
         public string FullName
         {
-            get { return "{0}.{1}".WithInvariantFormat(this.Name, this.ContentMime.Names.First()); }
+            get { return "{0}.{1}".Bake(this.Name, this.ContentMime.Names.First()); }
         }
 
         public IStorageProvider StorageProvider { get; private set; }
@@ -77,7 +77,7 @@ namespace nGratis.Cop.Core
 
         public override string ToString()
         {
-            return "ngds://./{0}{1}".WithInvariantFormat(this.Name, this.ContentMime.Names.First());
+            return "ngds://./{0}{1}".Bake(this.Name, this.ContentMime.Names.First());
         }
     }
 }

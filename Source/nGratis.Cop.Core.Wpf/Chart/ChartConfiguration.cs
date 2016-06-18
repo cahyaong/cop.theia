@@ -36,12 +36,10 @@ namespace nGratis.Cop.Core.Wpf
     {
         public ChartConfiguration(string title, ICollection<SeriesConfiguration> seriesConfigurations)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => title);
-            Guard.AgainstNullArgument(() => seriesConfigurations);
-            Guard.AgainstInvalidArgument(!seriesConfigurations.Any(), () => seriesConfigurations);
+            Guard.Require.IsNotEmpty(title);
+            Guard.Require.IsNotEmpty(seriesConfigurations);
 
             this.Title = title;
-
             this.SeriesConfigurations = seriesConfigurations;
         }
 

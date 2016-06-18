@@ -54,7 +54,7 @@ namespace nGratis.Cop.Core
 
         public Guid CreateGuid(string content)
         {
-            Guard.AgainstNullOrWhitespaceArgument(() => content);
+            Guard.Require.IsNotEmpty(content);
 
             var md5 = MD5.Create();
             return new Guid(md5.ComputeHash(Encoding.UTF8.GetBytes(content)));

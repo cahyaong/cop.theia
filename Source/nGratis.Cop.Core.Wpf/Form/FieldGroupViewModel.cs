@@ -46,13 +46,10 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldGroupViewModel(object instance, FieldMode mode)
         {
-            Guard.AgainstNullArgument(() => instance);
-            Guard.AgainstInvalidArgument(mode == FieldMode.Unknown, () => mode);
+            Guard.Require.IsTypeOf<INotifyPropertyChanged>(instance);
+            Guard.Require.IsNotDefault(mode);
 
-            var notifyingInstance = instance as INotifyPropertyChanged;
-
-            Guard.AgainstInvalidArgument(notifyingInstance == null, () => instance);
-
+            var notifyingInstance = (INotifyPropertyChanged)instance;
             this.fieldBinders = new List<ObjectBinder>();
 
             this.Mode = mode;
@@ -62,10 +59,10 @@ namespace nGratis.Cop.Core.Wpf
                 .GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Select(property => new
-                    {
-                        Property = property,
-                        FieldAttribute = property.GetCustomAttribute<AsFieldAttribute>()
-                    })
+                {
+                    Property = property,
+                    FieldAttribute = property.GetCustomAttribute<AsFieldAttribute>()
+                })
                 .Where(annon => annon.FieldAttribute != null && annon.FieldAttribute.Mode == mode)
                 .ToList()
                 .ForEach(annon =>

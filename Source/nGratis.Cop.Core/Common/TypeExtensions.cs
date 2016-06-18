@@ -53,9 +53,9 @@ namespace System
             where TInstance : class
             where TArgs : EventArgs
         {
-            Guard.AgainstNullArgument(() => instance);
-            Guard.AgainstNullOrWhitespaceArgument(() => eventName);
-            Guard.AgainstNullArgument(() => handler);
+            Guard.Require.IsNotNull(instance);
+            Guard.Require.IsNotEmpty(eventName);
+            Guard.Require.IsNotNull(handler);
 
             WeakEventManager<TInstance, TArgs>.AddHandler(instance, eventName, handler);
         }
@@ -67,9 +67,9 @@ namespace System
             where TInstance : class
             where TArgs : EventArgs
         {
-            Guard.AgainstNullArgument(() => instance);
-            Guard.AgainstNullOrWhitespaceArgument(() => eventName);
-            Guard.AgainstNullArgument(() => handler);
+            Guard.Require.IsNotNull(instance);
+            Guard.Require.IsNotEmpty(eventName);
+            Guard.Require.IsNotNull(handler);
 
             WeakEventManager<TInstance, TArgs>.RemoveHandler(instance, eventName, handler);
         }

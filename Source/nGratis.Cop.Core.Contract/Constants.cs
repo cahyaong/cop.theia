@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Throw.cs" company="nGratis">
+// <copyright file="Constants.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,51 +23,28 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Tuesday, 5 May 2015 2:20:18 PM UTC</creation_timestamp>
+// <creation_timestamp>Saturday, 18 June 2016 5:50:20 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Contract
 {
     using System;
-    using JetBrains.Annotations;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
-    public static class Throw
+    public static class Constants
     {
-        [ContractAnnotation(" => halt")]
-        public static void NotSupportedException(string message)
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+        public static class Values
         {
-            throw new NotSupportedException(message ?? Values.Empty);
-        }
-
-        [ContractAnnotation(" => halt")]
-        public static void CopException(string message, Exception innerException)
-        {
-            throw new CopException(message ?? Values.Empty, innerException);
-        }
-
-        [ContractAnnotation(" => halt")]
-        public static void ArgumentNullException(string parameter, string message)
-        {
-            throw new ArgumentNullException(parameter ?? Values.Unknown, message ?? Values.Empty);
-        }
-
-        [ContractAnnotation(" => halt")]
-        public static void ArgumentException(string parameter, string message)
-        {
-            throw new ArgumentException(parameter ?? Values.Unknown, message ?? Values.Empty);
-        }
-
-        [ContractAnnotation(" => halt")]
-        public static void InvalidOperationException(string message)
-        {
-            throw new InvalidOperationException(message ?? Values.Empty);
-        }
-
-        private static class Values
-        {
-            public const string Unknown = "<unknown>";
+            public const string Default = "<default>";
 
             public const string Empty = "<empty>";
+
+            public const string Null = "<null>";
+
+            public const string Unknown = "<unknown>";
         }
     }
 }

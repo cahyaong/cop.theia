@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="nGratis">
+// <copyright file="Fire.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,29 +23,37 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Sunday, 29 March 2015 6:39:08 AM UTC</creation_timestamp>
+// <creation_timestamp>Tuesday, 5 May 2015 2:20:18 PM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
-namespace System
+namespace nGratis.Cop.Core.Contract
 {
-    using System.Linq;
-    using nGratis.Cop.Core;
+    using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using JetBrains.Annotations;
 
-    public static class StringExtensions
+    public static class Fire
     {
-        public static string WithMessageDetails(this string input, params MessageDetail[] details)
+        [DebuggerStepThrough]
+        [ContractAnnotation(" => halt")]
+        public static void InvalidOperationException([Localizable(false)] string message, Exception exception)
         {
-            return string.IsNullOrWhiteSpace(input) || details == null || !details.Any()
-                ? input
-                : "{0} [{1}]".WithCurrentFormat(input, string.Join(", ", details.Select(detail => detail.ToString())));
+            throw new InvalidOperationException(message.Coalesce(Constants.Values.Empty), exception);
         }
 
-        public static string WithLowerCaseAtBeginning(this string input)
+        [DebuggerStepThrough]
+        [ContractAnnotation(" => halt")]
+        internal static void PreconditionException([Localizable(false)] string message)
         {
-            return string.IsNullOrWhiteSpace(input)
-                ? input
-                : "{0}{1}".WithCurrentFormat(char.ToLower(input.First()), input.Substring(1, input.Length - 1));
+            throw new CopPreconditionException(message.Coalesce(Constants.Values.Empty));
+        }
+
+        [DebuggerStepThrough]
+        [ContractAnnotation(" => halt")]
+        internal static void PostconditionException([Localizable(false)] string message)
+        {
+            throw new CopPostconditionException(message.Coalesce(Constants.Values.Empty));
         }
     }
 }
