@@ -29,7 +29,8 @@
     <language>en-US</language>
     <copyright>Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong</copyright>
     <dependencies>
-      <dependency id="NLog" version="[4.2.2]" />
+      <dependency id="JetBrains.Annotations" version="[10.1.5]" />
+      <dependency id="NLog" version="[4.3.5]" />
       <dependency id="Rx-Main" version="[2.2.5]" />
     </dependencies>
   </metadata>
