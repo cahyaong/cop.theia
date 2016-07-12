@@ -96,7 +96,7 @@ namespace nGratis.Cop.Core
         public static Mime ParseByUniqueId(string uniqueId)
         {
             Guard.Require.IsNotEmpty(uniqueId);
-            Guard.Require.IsSatisfied(Mime.UniqueIdToMimeMapping.ContainsKey(uniqueId));
+            Guard.Require.IsTrue(Mime.UniqueIdToMimeMapping.ContainsKey(uniqueId));
 
             return Mime.UniqueIdToMimeMapping[uniqueId];
         }
@@ -106,7 +106,7 @@ namespace nGratis.Cop.Core
             Guard.Require.IsNotEmpty(name);
 
             name = name.Replace(".", string.Empty);
-            Guard.Require.IsSatisfied(Mime.NameToMimeMapping.ContainsKey(name));
+            Guard.Require.IsTrue(Mime.NameToMimeMapping.ContainsKey(name));
 
             return Mime.NameToMimeMapping[name];
         }

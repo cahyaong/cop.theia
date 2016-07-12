@@ -59,7 +59,7 @@ namespace nGratis.Cop.Core
                     return LogLevel.Fatal;
 
                 default:
-                    Guard.Ensure.IsEnumerationSupported(verbosity);
+                    Fire.EnumerationNotSupportedException(verbosity);
                     break;
             }
 
@@ -91,7 +91,7 @@ namespace nGratis.Cop.Core
                     return "FTL";
 
                 default:
-                    Guard.Ensure.IsEnumerationSupported(verbosity);
+                    Fire.EnumerationNotSupportedException(verbosity);
                     break;
             }
 

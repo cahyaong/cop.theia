@@ -59,11 +59,7 @@ namespace nGratis.Cop.Core.Testing
             Guard.Require.IsNotNull(context);
 
             var method = default(MethodInfo);
-            var isSupported = TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out method);
-
-            Guard.Require.IsSatisfied(
-                isSupported,
-                $"Parser for type [{ typeof(TValue).FullName }] is not supported.");
+            Guard.Require.IsTrue(TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out method));
 
             return (TValue)method.Invoke(null, new object[] { context.DataRow, name });
         }

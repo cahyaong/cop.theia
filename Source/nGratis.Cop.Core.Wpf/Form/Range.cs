@@ -33,7 +33,7 @@ namespace nGratis.Cop.Core.Wpf
     using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
-    [UsedImplicitly]
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class Range : ReactiveObject
     {
         private double currentValue;
@@ -52,7 +52,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public Range(double minimumValue, double maximumValue, double interval)
         {
-            Guard.Require.IsSatisfied(minimumValue < maximumValue, "Minimum must be less than maximum value.");
+            Guard.Require.IsLessThan(minimumValue, maximumValue);
 
             this.MinimumValue = minimumValue;
             this.MaximumValue = maximumValue;

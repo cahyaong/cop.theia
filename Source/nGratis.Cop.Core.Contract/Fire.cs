@@ -31,15 +31,32 @@ namespace nGratis.Cop.Core.Contract
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class Fire
     {
         [DebuggerStepThrough]
         [ContractAnnotation(" => halt")]
-        public static void InvalidOperationException([Localizable(false)] string message, Exception exception)
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        public static void InvalidOperationException([Localizable(false)] string message, Exception exception = null)
         {
             throw new InvalidOperationException(message.Coalesce(Constants.Values.Empty), exception);
+        }
+
+        [DebuggerStepThrough]
+        [ContractAnnotation(" => halt")]
+        public static void EnumerationNotSupportedException(object value)
+        {
+            throw new NotSupportedException($"Enumeration value [{ value }] is not supported.");
+        }
+
+        [DebuggerStepThrough]
+        [ContractAnnotation(" => halt")]
+        public static void NotSupportedException()
+        {
+            throw new NotSupportedException();
         }
 
         [DebuggerStepThrough]

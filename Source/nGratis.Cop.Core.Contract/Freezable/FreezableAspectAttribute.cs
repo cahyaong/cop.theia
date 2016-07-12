@@ -44,7 +44,7 @@ namespace nGratis.Cop.Core.Contract
 
             var freezable = (IFreezable)args.Instance;
 
-            Guard.Ensure.IsSatisfied(
+            Guard.Ensure.IsTrue(
                 !freezable.IsFrozen,
                 $"Setting property [{ args.LocationName }] on frozen instance of type " +
                 $"[{ args.Instance.GetType().FullName }] is not allowed.");

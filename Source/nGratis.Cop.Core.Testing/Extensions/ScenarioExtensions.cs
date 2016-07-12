@@ -45,7 +45,7 @@ namespace nGratis.Cop.Core.Testing
             var value = Guid.Empty;
             var isValid = Guid.TryParse(row.AsString(column), out value);
 
-            Guard.Ensure.IsSatisfied(
+            Guard.Ensure.IsTrue(
                 isValid,
                 $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
                 $"[{ typeof(Guid).FullName }].");
@@ -65,7 +65,7 @@ namespace nGratis.Cop.Core.Testing
                 CultureInfo.InvariantCulture,
                 out value);
 
-            Guard.Ensure.IsSatisfied(
+            Guard.Ensure.IsTrue(
                 isValid,
                 $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
                 $"[{ typeof(short).FullName }].");
@@ -85,7 +85,7 @@ namespace nGratis.Cop.Core.Testing
                 CultureInfo.InvariantCulture,
                 out value);
 
-            Guard.Ensure.IsSatisfied(
+            Guard.Ensure.IsTrue(
                 isValid,
                 $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
                 $"[{ typeof(int).FullName }].");
@@ -106,7 +106,7 @@ namespace nGratis.Cop.Core.Testing
                 DateTimeStyles.AssumeUniversal,
                 out value);
 
-            Guard.Ensure.IsSatisfied(
+            Guard.Ensure.IsTrue(
                 isValid,
                 $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
                 $"[{ typeof(DateTime).FullName }].");
@@ -127,7 +127,7 @@ namespace nGratis.Cop.Core.Testing
                 DateTimeStyles.AssumeUniversal,
                 out value);
 
-            Guard.Ensure.IsSatisfied(
+            Guard.Ensure.IsTrue(
                 isValid,
                 $"Variable [{ column }] in scenario [{ row.Table.TableName }] cannot be parsed to type " +
                 $"[{ typeof(DateTimeOffset).FullName }].");

@@ -30,8 +30,10 @@ namespace nGratis.Cop.Core.Contract
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Linq;
     using JetBrains.Annotations;
 
@@ -42,118 +44,193 @@ namespace nGratis.Cop.Core.Contract
         public static class Require
         {
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
-            public static void IsNotNull(object argument)
+            [ContractAnnotation("value:null => halt")]
+            public static void IsNotNull(object value)
             {
-                if (argument != null)
+                if (value != null)
                 {
                     return;
                 }
 
-                Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                Fire.PreconditionException($"Value cannot be { Constants.Values.Null }.");
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
-            public static void IsNotEqualTo(object argument, object value)
+            [ContractAnnotation("value:null => halt")]
+            public static void IsNotEqualTo(object value, object anotherValue)
             {
-                if (!object.Equals(argument, value))
+                if (!object.Equals(value, anotherValue))
                 {
                     return;
                 }
 
-                Fire.PreconditionException($"Argument cannot be equal to [{ value }].");
+                Fire.PreconditionException($"Value cannot be equal to [{ anotherValue }].");
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
+            [ContractAnnotation("type:null => halt")]
             [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-            public static void IsEqualTo<T>(Type argument)
+            public static void IsEqualTo<T>(Type type)
             {
-                if (argument == null)
+                if (type == null)
                 {
-                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                    Fire.PreconditionException($"Type cannot be { Constants.Values.Null }.");
                 }
 
-                if (!typeof(T).IsAssignableFrom(argument))
+                if (!typeof(T).IsAssignableFrom(type))
                 {
-                    Fire.PreconditionException($"Argument must be assignable to [{ typeof(T).FullName }].");
+                    Fire.PreconditionException($"Type must be assignable to [{ typeof(T).FullName }].");
                 }
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
-            public static void IsNotDefault<T>(T argument)
+            [ContractAnnotation("value:null => halt")]
+            public static void IsNotDefault<T>(T value)
             {
-                if (!object.Equals(argument, default(T)))
+                if (!object.Equals(value, default(T)))
                 {
                     return;
                 }
 
-                Fire.PreconditionException($"Argument cannot be { Constants.Values.Default }.");
+                Fire.PreconditionException($"Value cannot be { Constants.Values.Default }.");
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
-            public static void IsNotEmpty(string argument)
+            [ContractAnnotation("value:null => halt")]
+            public static void IsNotEmpty(string value)
             {
-                if (argument == null)
+                if (value == null)
                 {
-                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                    Fire.PreconditionException($"String cannot be { Constants.Values.Null }.");
                 }
 
-                if (string.IsNullOrWhiteSpace(argument))
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Empty }.");
+                    Fire.PreconditionException($"String cannot be { Constants.Values.Empty }.");
                 }
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
-            public static void IsNotEmpty<T>(IEnumerable<T> argument)
+            [ContractAnnotation("enumerable:null => halt")]
+            public static void IsNotEmpty<T>(IEnumerable<T> enumerable)
             {
-                if (argument == null)
+                if (enumerable == null)
                 {
-                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }.");
+                    Fire.PreconditionException($"Enumerable cannot be { Constants.Values.Null }.");
                 }
 
-                if (!argument.Any())
+                if (!enumerable.Any())
                 {
-                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Empty }.");
+                    Fire.PreconditionException($"Enumerable cannot be { Constants.Values.Empty }.");
                 }
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("argument:null => halt")]
+            [ContractAnnotation("stream:null => halt")]
+            public static void IsNotEmpty(Stream stream)
+            {
+                if (stream == null)
+                {
+                    Fire.PreconditionException($"Stream cannot be { Constants.Values.Null }.");
+                }
+
+                if (stream.Length == 0)
+                {
+                    Fire.PreconditionException($"Stream cannot be { Constants.Values.Empty }.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("table:null => halt")]
+            public static void IsNotEmpty(DataTable table)
+            {
+                if (table == null)
+                {
+                    Fire.PreconditionException($"Table cannot be { Constants.Values.Null }.");
+                }
+
+                if (table.Columns.Count == 0 || table.Rows.Count == 0)
+                {
+                    Fire.PreconditionException($"Table cannot be { Constants.Values.Empty }.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("value:null => halt")]
             [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-            public static void IsTypeOf<T>(object argument)
+            public static void IsTypeOf<T>(object value)
             {
-                if (argument == null)
+                if (value == null)
                 {
-                    Fire.PreconditionException($"Argument cannot be { Constants.Values.Null }. ");
+                    Fire.PreconditionException($"Value cannot be { Constants.Values.Null }.");
                 }
 
-                if (!(argument is T))
+                if (!(value is T))
                 {
-                    Fire.PreconditionException(
-                        $"Argument of type [{ argument.GetType().FullName }] must be assignable to " +
-                        $"[{ typeof(T).FullName }].");
+                    Fire.PreconditionException($"Value must be assignable to [{ typeof(T).FullName }].");
                 }
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation("isSatisfied:false => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsSatisfied(bool isSatisfied, string reason = null)
+            [ContractAnnotation("value:false => halt")]
+            public static void IsTrue(bool value)
             {
-                if (isSatisfied)
+                if (value)
                 {
                     return;
                 }
 
-                Fire.PreconditionException(
-                    @"Precondition is not satisfied. " +
-                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                Fire.PreconditionException("Value cannot be false.");
+            }
+
+            [DebuggerStepThrough]
+            public static void IsFile(Uri uri)
+            {
+                if (uri == null)
+                {
+                    Fire.PreconditionException($"Value cannot be { Constants.Values.Null }.");
+                }
+
+                if (!uri.IsFile)
+                {
+                    Fire.PreconditionException($"URI must be a file. Path: [{ uri }].");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsFileNotExist(string path)
+            {
+                if (!File.Exists(path))
+                {
+                    return;
+                }
+
+                Fire.PreconditionException($"File cannot exist. Path: [{ path }].");
+            }
+
+            // TODO: Add reason argument for all methods <Require> class!
+            // TODO: Create a template for handling numerical type check!
+
+            [DebuggerStepThrough]
+            public static void IsLessThan(double value, double anotherValue)
+            {
+                if (value < anotherValue)
+                {
+                    return;
+                }
+
+                Fire.PreconditionException($"Value cannot be greater than or equal to [{ anotherValue }].");
+            }
+
+            [DebuggerStepThrough]
+            public static void IsNotNegative(int value)
+            {
+                if (value >= 0)
+                {
+                    return;
+                }
+
+                Fire.PreconditionException("Value cannot be negative.");
             }
         }
 
@@ -179,7 +256,7 @@ namespace nGratis.Cop.Core.Contract
             [DebuggerStepThrough]
             [ContractAnnotation("value:null => halt")]
             [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsNotEmpty<T>(IEnumerable<T> value, string reason = null)
+            public static void IsNotEmpty(string value, string reason = null)
             {
                 if (value == null)
                 {
@@ -188,10 +265,30 @@ namespace nGratis.Cop.Core.Contract
                         $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
                 }
 
-                if (!value.Any())
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     Fire.PostconditionException(
                         $"Value cannot be { Constants.Values.Empty }. " +
+                        $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                }
+            }
+
+            [DebuggerStepThrough]
+            [ContractAnnotation("enumerable:null => halt")]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsNotEmpty<T>(IEnumerable<T> enumerable, string reason = null)
+            {
+                if (enumerable == null)
+                {
+                    Fire.PostconditionException(
+                        $"Enumerable cannot be { Constants.Values.Null }. " +
+                        $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+                }
+
+                if (!enumerable.Any())
+                {
+                    Fire.PostconditionException(
+                        $"Enumerable cannot be { Constants.Values.Empty }. " +
                         $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
                 }
             }
@@ -218,27 +315,31 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            [ContractAnnotation(" => halt")]
+            [ContractAnnotation("value:false => halt")]
             [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsEnumerationSupported(object value, string reason = null)
+            public static void IsTrue(bool value, string reason = null)
             {
-                Fire.PostconditionException(
-                    $"Enumeration [{ value }] is not supported. " +
-                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
-            }
-
-            [DebuggerStepThrough]
-            [ContractAnnotation("isSatisfied:false => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsSatisfied(bool isSatisfied, string reason = null)
-            {
-                if (isSatisfied)
+                if (value)
                 {
                     return;
                 }
 
                 Fire.PostconditionException(
-                    @"Postcondition is not satisfied. " +
+                    @"Value cannot be false. " +
+                    $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
+            }
+
+            [DebuggerStepThrough]
+            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+            public static void IsNotNegative(int value, string reason = null)
+            {
+                if (value >= 0)
+                {
+                    return;
+                }
+
+                Fire.PostconditionException(
+                    @"Value cannot be negative. " +
                     $"Reason: { reason.Coalesce(Constants.Values.Unknown) }");
             }
         }

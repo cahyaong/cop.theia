@@ -40,7 +40,7 @@ namespace nGratis.Cop.Core
         public FileBasedStorageProvider(Uri rootFolderUri)
         {
             Guard.Require.IsNotNull(rootFolderUri);
-            Guard.Require.IsSatisfied(rootFolderUri.IsFile, "Folder URI must be a file system.");
+            Guard.Require.IsFile(rootFolderUri);
 
             var rootFolderPath = Path.GetDirectoryName(rootFolderUri.AbsolutePath);
             Guard.Ensure.IsNotNull(rootFolderPath);
@@ -65,7 +65,7 @@ namespace nGratis.Cop.Core
             Guard.Require.IsNotNull(dataStream);
 
             var filePath = Path.Combine(this.RootUri.LocalPath, dataSpecification.FullName);
-            Guard.Ensure.IsSatisfied(!File.Exists(filePath), $"Failed to save data. Path: [{ filePath }]");
+            Guard.Require.IsFileNotExist(filePath);
 
             dataStream.Position = 0;
 
