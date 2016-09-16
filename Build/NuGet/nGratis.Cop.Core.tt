@@ -29,15 +29,15 @@
     <language>en-US</language>
     <copyright>Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong</copyright>
     <dependencies>
-      <dependency id="JetBrains.Annotations" version="[10.1.5]" />
-      <dependency id="NLog" version="[4.3.5]" />
-      <dependency id="Rx-Main" version="[2.2.5]" />
+      <dependency id="JetBrains.Annotations" version="[10.1.5,)" />
+      <dependency id="NLog" version="[4.3.8,)" />
+      <dependency id="Rx-Main" version="[2.2.5,)" />
     </dependencies>
   </metadata>
   <files>
-    <file src="nGratis.Cop.Core.dll" target="lib\net45\nGratis.Cop.Core.dll" />
-    <file src="nGratis.Cop.Core.pdb" target="lib\net45\nGratis.Cop.Core.pdb" />
-    <file src="nGratis.Cop.Core.Contract.dll" target="lib\net45\nGratis.Cop.Core.Contract.dll" />
-    <file src="nGratis.Cop.Core.Contract.pdb" target="lib\net45\nGratis.Cop.Core.Contract.pdb" />
+    <file src="nGratis.Cop.Core.dll" target="lib\net461\nGratis.Cop.Core.dll" />
+    <file src="nGratis.Cop.Core.pdb" target="lib\net461\nGratis.Cop.Core.pdb" />
+    <file src="nGratis.Cop.Core.Contract.dll" target="lib\net461\nGratis.Cop.Core.Contract.dll" />
+    <file src="nGratis.Cop.Core.Contract.pdb" target="lib\net461\nGratis.Cop.Core.Contract.pdb" />
   </files>
 </package>
