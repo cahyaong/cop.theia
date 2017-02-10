@@ -29,7 +29,6 @@
 namespace nGratis.Cop.Core.Vision.UnitTest
 {
     using System;
-    using System.Globalization;
     using System.Linq;
     using System.Windows;
     using System.Windows.Media;
@@ -38,61 +37,58 @@ namespace nGratis.Cop.Core.Vision.UnitTest
     using nGratis.Cop.Core.Testing;
     using nGratis.Cop.Core.Vision.Imaging;
 
+    [TestClass]
     [DeploymentItem(@"Imaging\WritableImage_Scenarios.xml", "Imaging")]
     public class WritableImage_Test
     {
-        [TestClass]
-        public class LoadDataMethod
+        public TestContext TestContext { get; set; }
+
+        [TestMethod]
+        [DataSource(DataDriven.XmlTool, DataDriven.RootFolderPath + @"Imaging\WritableImage_Scenarios.xml", "LoadData_Valid", DataAccessMethod.Sequential)]
+        public void LoadData_WhenLoadingValidData_ShouldGetCorrectPixelCount()
         {
-            public TestContext TestContext { get; set; }
+            // Arrange.
 
-            [TestMethod]
-            [DataSource(DataDriven.XmlTool, DataDriven.RootFolderPath + @"Imaging\WritableImage_Scenarios.xml", "LoadData_Valid", DataAccessMethod.Sequential)]
-            public void WhenLoadingValidData_ShouldGetCorrectPixelCount()
+            var imagePath = $@"Resources\{this.TestContext.FindScenarioVariableAs<string>("In_FileName")}";
+            var writableImage = new WriteableImage();
+
+            using (var imageStream = this.LoadEmbeddedResource(imagePath))
             {
-                // Arrange.
+                // Act.
 
-                var imagePath = $@"Resources\{this.TestContext.FindScenarioVariableAs<string>("In_FileName")}";
-                var writableImage = new WriteableImage();
+                writableImage.LoadData(imageStream);
 
-                using (var imageStream = this.LoadEmbeddedResource(imagePath))
-                {
-                    // Act.
+                // Assert.
 
-                    writableImage.LoadData(imageStream);
+                var pixels = writableImage.ToPixels().ToList();
 
-                    // Assert.
+                var dimension = this.TestContext.FindScenarioVariableAs<Size>("Out_Dimension");
+                var width = (int)dimension.Width;
+                var height = (int)dimension.Height;
 
-                    var pixels = writableImage.ToPixels().ToList();
+                writableImage
+                    .Width
+                    .Should().Be(width);
 
-                    var dimension = this.TestContext.FindScenarioVariableAs<Size>("Out_Dimension");
-                    var width = (int)dimension.Width;
-                    var height = (int)dimension.Height;
+                writableImage
+                    .Height
+                    .Should().Be(height);
 
-                    writableImage
-                        .Width
-                        .Should().Be(width);
+                pixels
+                    .Count()
+                    .Should().Be(width * height);
 
-                    writableImage
-                        .Height
-                        .Should().Be(height);
+                pixels
+                    .Count(pixel => pixel == Colors.White)
+                    .Should().Be(this.TestContext.FindScenarioVariableAs<int>("Out_NumOfWhitePixels"));
 
-                    pixels
-                        .Count()
-                        .Should().Be(width * height);
+                pixels
+                    .Count(pixel => pixel != Colors.White && pixel != Colors.Black)
+                    .Should().Be(this.TestContext.FindScenarioVariableAs<int>("Out_NumOfGreyPixels"));
 
-                    pixels
-                        .Count(pixel => pixel == Colors.White)
-                        .Should().Be(this.TestContext.FindScenarioVariableAs<int>("Out_NumOfWhitePixels"));
-
-                    pixels
-                        .Count(pixel => pixel != Colors.White && pixel != Colors.Black)
-                        .Should().Be(this.TestContext.FindScenarioVariableAs<int>("Out_NumOfGreyPixels"));
-
-                    pixels
-                        .Count(pixel => pixel == Colors.Black)
-                        .Should().Be(this.TestContext.FindScenarioVariableAs<int>("Out_NumOfBlackPixels"));
-                }
+                pixels
+                    .Count(pixel => pixel == Colors.Black)
+                    .Should().Be(this.TestContext.FindScenarioVariableAs<int>("Out_NumOfBlackPixels"));
             }
         }
     }
