@@ -1,0 +1,7 @@
+version: 0.1.{build}
+image: Visual Studio 2015
+configuration: Release
+platform: Any CPU
+build:
+  project: Source
+  verbosity: minimal
