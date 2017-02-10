@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <WritableImages_Scenarios>
   <!-- ===== READ DATA (+) ================================================================================================================================ -->
-  
   <LoadData_Valid_Template>
     <Id>[_GUID_]</Id>
     <In_FileName>[_STRING_]</In_FileName>
@@ -10,7 +9,6 @@
     <Out_NumOfGreyPixels>[_INT32_]</Out_NumOfGreyPixels>
     <Out_NumOfBlackPixels>[_INT32_]</Out_NumOfBlackPixels>
   </LoadData_Valid_Template>
-  
   <LoadData_Valid>
     <Id>4D08CEF8-518C-4476-88AD-E0301230D438</Id>
     <In_FileName>input.add.16x16.png</In_FileName>
