@@ -2,7 +2,7 @@
 // <copyright file="GlobalAssemblyInfo.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 - 2015 Cahya Ong
+//  Copyright (c) 2014 - 2016 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,17 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp>Saturday, 15 August 2015 01:33:17 AM UTC</creation_timestamp>
+// <creation_timestamp>Saturday, 10 September 2016 12:57:13 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
 
 [assembly: AssemblyCompany("nGratis")]
 [assembly: AssemblyProduct("CommunityOfPractice.Theia")]
-[assembly: AssemblyCopyright("Copyright © 2014 - 2015 Cahya Ong")]
+[assembly: AssemblyCopyright("Copyright © 2014 - 2016 Cahya Ong")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.226.133")]
+[assembly: AssemblyFileVersion("0.1.618.57")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
