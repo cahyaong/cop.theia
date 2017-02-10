@@ -33,9 +33,8 @@ namespace nGratis.Cop.Core.Contract
     using System.Linq;
     using JetBrains.Annotations;
 
-    [FreezableAspect]
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public class LogEntry : BaseFreezable
+    public class LogEntry
     {
         public LogEntry()
         {
@@ -55,10 +54,5 @@ namespace nGratis.Cop.Core.Contract
         public Exception Exception { get; set; }
 
         public string Message { get; set; }
-
-        public override void Thaw()
-        {
-            throw new NotSupportedException();
-        }
     }
 }

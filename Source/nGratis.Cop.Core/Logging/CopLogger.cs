@@ -54,8 +54,6 @@ namespace nGratis.Cop.Core
                 Message = message
             };
 
-            logEntry.Freeze();
-
             this.loggingSubject.OnNext(logEntry);
         }
 
@@ -68,8 +66,6 @@ namespace nGratis.Cop.Core
                 Exception = exception,
                 Message = message
             };
-
-            logEntry.Freeze();
 
             this.loggingSubject.OnNext(logEntry);
         }
