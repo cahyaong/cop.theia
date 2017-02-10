@@ -1,5 +1,7 @@
 version: 0.2.{build}
 image: Visual Studio 2015
+before_build:
+- cmd: nuget restore Source\nGratis.Cop.Theia.sln
 build:
   project: Source
   verbosity: minimal
