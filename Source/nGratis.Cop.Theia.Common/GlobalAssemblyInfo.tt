@@ -6,13 +6,15 @@
 <#@ import namespace="System.Globalization" #>
 <#@ import namespace="System.Linq" #>
 <#
-	var Version = new Version(this.Host.ResolveParameterValue(string.Empty, string.Empty, "Version"));
+    var Version = new Version(this.Host.ResolveParameterValue(string.Empty, string.Empty, "Version"));
 
-	var BuildTimestamp = DateTimeOffset.ParseExact(
-		this.Host.ResolveParameterValue(string.Empty, string.Empty, "BuildTimestamp"), 
-		"O",
-		CultureInfo.InvariantCulture, 
-		DateTimeStyles.AdjustToUniversal);
+    var BuildTimestamp = DateTimeOffset.ParseExact(
+        this.Host.ResolveParameterValue(string.Empty, string.Empty, "BuildTimestamp"), 
+        "O",
+        CultureInfo.InvariantCulture, 
+        DateTimeStyles.AdjustToUniversal);
+
+    var CreationTimestamp = BuildTimestamp.ToString("dddd, d MMMM yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
 #>
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GlobalAssemblyInfo.cs" company="nGratis">
@@ -39,7 +41,7 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
-// <creation_timestamp><#= BuildTimestamp.ToString("dddd, d MMMM yyyy hh:mm:ss tt", CultureInfo.InvariantCulture) #> UTC</creation_timestamp>
+// <creation_timestamp><#= CreationTimestamp #> UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
