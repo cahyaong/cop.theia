@@ -51,7 +51,7 @@ namespace nGratis.Cop.Core.Vision.UnitTest
             {
                 // Arrange.
 
-                var imagePath = $@"Resources\{this.TestContext.FindScenarioVariableAs<string>("In_FileName")}";
+                var imagePath = $"Resources\\{this.TestContext.FindScenarioVariableAs<string>("In_FileName")}";
                 var writableImage = new WriteableImage();
 
                 using (var imageStream = this.LoadEmbeddedResource(imagePath))
