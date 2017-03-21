@@ -10,5 +10,4 @@
   <Color x:Key="Cop.Color.Shade8">#FF000000</Color>
 
   <!--  TODO Update this resource dictionary to match up with the 'Dark' version.  -->
-
 </ResourceDictionary>
