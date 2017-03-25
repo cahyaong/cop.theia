@@ -69,7 +69,15 @@ namespace nGratis.Cop.Core
                     Logger = logger
                 })
                 .Where(annon => !this.loggerLookup.ContainsKey(annon.Key))
-                .ForEach(annon => this.loggerLookup.TryAdd(annon.Key, annon.Logger));
+                .ForEach(annon =>
+                {
+                    this.loggerLookup.TryAdd(annon.Key, annon.Logger);
+
+                    if (!(annon.Logger is CompositeLogger))
+                    {
+                        annon.Logger.LogAsDebug("Registered to composite logger.");
+                    }
+                });
         }
 
         public void UnregisterLoggers(params ILogger[] loggers)
@@ -84,9 +92,15 @@ namespace nGratis.Cop.Core
                     Logger = logger
                 })
                 .Where(annon => this.loggerLookup.ContainsKey(annon.Key))
-#pragma warning disable 168
-                .ForEach(annon => this.loggerLookup.TryRemove(annon.Key, out ILogger logger));
-#pragma warning restore 168
+                .ForEach(annon =>
+                {
+                    this.loggerLookup.TryRemove(annon.Key, out ILogger logger);
+
+                    if (!(logger is CompositeLogger))
+                    {
+                        logger.LogAsDebug("Unregistered from composite logger.");
+                    }
+                });
         }
 
         public override void LogWith(Verbosity verbosity, string message)
