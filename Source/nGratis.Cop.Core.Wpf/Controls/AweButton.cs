@@ -163,43 +163,35 @@ namespace nGratis.Cop.Core.Wpf
             set { this.SetValue(AweButton.IsBorderHiddenProperty, value); }
         }
 
-        private static void OnRepeatingIntervalChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
-        {
-            var button = container as AweButton;
-
-            if (button == null)
-            {
-                return;
-            }
-
-            button.repeatingTimer.Interval = (TimeSpan)args.NewValue;
-        }
-
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs args)
         {
             base.OnMouseLeftButtonDown(args);
 
-            if (this.IsRepeated && this.ClickMode != ClickMode.Hover)
+            if (!this.IsRepeated || this.ClickMode == ClickMode.Hover)
             {
-                if (Mouse.LeftButton == MouseButtonState.Pressed)
-                {
-                    this.IsMousePressed = true;
-                    this.Focus();
-                }
-
-                this.repeatingTimer.Start();
+                return;
             }
+
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                this.IsMousePressed = true;
+                this.Focus();
+            }
+
+            this.repeatingTimer.Start();
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs args)
         {
             base.OnMouseLeftButtonUp(args);
 
-            if (this.IsRepeated && this.ClickMode != ClickMode.Hover)
+            if (!this.IsRepeated || this.ClickMode == ClickMode.Hover)
             {
-                this.repeatingTimer.Stop();
-                this.IsMousePressed = false;
+                return;
             }
+
+            this.repeatingTimer.Stop();
+            this.IsMousePressed = false;
         }
 
         protected override void OnLostMouseCapture(MouseEventArgs args)

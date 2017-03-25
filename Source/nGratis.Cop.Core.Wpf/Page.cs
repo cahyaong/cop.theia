@@ -41,8 +41,14 @@ namespace nGratis.Cop.Core.Wpf
             this.SourceUri = new Uri(source, UriKind.Relative);
         }
 
-        public string Name { get; private set; }
+        public string Name
+        {
+            get;
+        }
 
-        public Uri SourceUri { get; private set; }
+        public Uri SourceUri
+        {
+            get;
+        }
     }
 }

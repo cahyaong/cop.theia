@@ -6,7 +6,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ output extension=".cs" #>
 <#
-    var NumericalLookup = new Dictionary<string, NumericalInfo>
+    var numericalLookup = new Dictionary<string, NumericalInfo>
     {
         ["int"] = new NumericalInfo(false, "0"),
         ["long"] = new NumericalInfo(false, "0"),
@@ -65,13 +65,13 @@ namespace nGratis.Cop.Core.Contract
 <#
     var index = 0;
 
-    foreach (var numerical in NumericalLookup.Keys)
+    foreach (var numerical in numericalLookup.Keys)
     {
-        var isFloatingPoint = NumericalLookup[numerical].IsFloatingPoint;
+        var isFloatingPoint = numericalLookup[numerical].IsFloatingPoint;
 
         var epsilonValue = isFloatingPoint
             ? $"{numerical}.Epsilon"
-            : NumericalLookup[numerical].ZeroValue;
+            : numericalLookup[numerical].ZeroValue;
 
         var zeroComparison = isFloatingPoint
             ? $"value >= -{epsilonValue} && value <= {epsilonValue}"
@@ -101,7 +101,7 @@ namespace nGratis.Cop.Core.Contract
             [DebuggerStepThrough]
             public static void IsPositive(<#= numerical #> value)
             {
-                if (value <= <#= NumericalLookup[numerical].ZeroValue #>)
+                if (value <= <#= numericalLookup[numerical].ZeroValue #>)
                 {
                     Fire.PreconditionException($"Value [{value}] must be positive.");
                 }
@@ -110,7 +110,7 @@ namespace nGratis.Cop.Core.Contract
             [DebuggerStepThrough]
             public static void IsNegative(<#= numerical #> value)
             {
-                if (value >= <#= NumericalLookup[numerical].ZeroValue #>)
+                if (value >= <#= numericalLookup[numerical].ZeroValue #>)
                 {
                     Fire.PreconditionException($"Value [{value}] must be negative.");
                 }
@@ -152,7 +152,7 @@ namespace nGratis.Cop.Core.Contract
                 }
             }
 <#
-        if (index < NumericalLookup.Count() - 1)
+        if (index < numericalLookup.Count() - 1)
         {
 #>
 

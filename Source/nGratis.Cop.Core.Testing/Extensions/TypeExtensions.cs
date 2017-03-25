@@ -26,7 +26,7 @@
 // <creation_timestamp>Saturday, 18 April 2015 5:06:16 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
+// ReSharper disable once CheckNamespace
 namespace System
 {
     using System.IO;
@@ -41,7 +41,7 @@ namespace System
             Guard.Require.IsNotEmpty(resourcePath);
 
             var assembly = typeof(T).Assembly;
-            resourcePath = "{0}.{1}".Bake(assembly.GetName().Name, resourcePath.Replace("\\", "."));
+            resourcePath = $"{assembly.GetName().Name}.{resourcePath.Replace("\\", ".")}";
             var stream = assembly.GetManifestResourceStream(resourcePath);
 
             Guard.Ensure.IsNotNull(stream);

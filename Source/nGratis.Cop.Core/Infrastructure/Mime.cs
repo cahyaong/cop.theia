@@ -31,7 +31,6 @@ namespace nGratis.Cop.Core
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
 
     public sealed class Mime
@@ -81,17 +80,27 @@ namespace nGratis.Cop.Core
             this.Names = names;
         }
 
-        [UsedImplicitly]
-        public string UniqueId { get; private set; }
+        public string UniqueId
+        {
+            get;
+        }
 
-        [UsedImplicitly]
-        public int RfcId { get; private set; }
+        public int RfcId
+        {
+            get;
+            private set;
+        }
 
-        [UsedImplicitly]
-        public int IsoId { get; private set; }
+        public int IsoId
+        {
+            get;
+            private set;
+        }
 
-        [UsedImplicitly]
-        public IEnumerable<string> Names { get; private set; }
+        public IEnumerable<string> Names
+        {
+            get;
+        }
 
         public static Mime ParseByUniqueId(string uniqueId)
         {
@@ -111,7 +120,6 @@ namespace nGratis.Cop.Core
             return Mime.NameToMimeMapping[name];
         }
 
-        [UsedImplicitly]
         public bool IsTextDocument()
         {
             return this.UniqueId.Split('/').First() == "text";

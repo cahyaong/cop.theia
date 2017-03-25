@@ -49,8 +49,14 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
             this.Features = new List<Feature> { diagnosticFeature };
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id
+        {
+            get;
+        }
 
-        public IEnumerable<IFeature> Features { get; private set; }
+        public IEnumerable<IFeature> Features
+        {
+            get;
+        }
     }
 }

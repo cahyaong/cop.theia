@@ -50,17 +50,11 @@ namespace nGratis.Cop.Core
 
             Guard.Require.IsNotNull(propertyName);
 
-            if (this.PropertyChanging != null)
-            {
-                this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
-            }
+            this.PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
 
             oldValue = newValue;
 
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

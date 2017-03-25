@@ -34,7 +34,9 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     using System.Text.RegularExpressions;
     using CsvHelper.Configuration;
     using CsvHelper.TypeConversion;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly]
     public class SanFranciscoCrime
     {
         public DateTime OffenceDate
@@ -49,10 +51,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             set;
         }
 
-        public DayOfWeek DayOfWeek
-        {
-            get { return this.OffenceDate.DayOfWeek; }
-        }
+        public DayOfWeek DayOfWeek => this.OffenceDate.DayOfWeek;
 
         public PoliceDepartment PoliceDepartment
         {
@@ -174,8 +173,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
 
             public object ConvertFromString(TypeConverterOptions options, string text)
             {
-                var category = default(Category);
-                if (CategoryConverter.Lookup.TryGetValue(text, out category))
+                if (CategoryConverter.Lookup.TryGetValue(text, out Category category))
                 {
                     return category;
                 }

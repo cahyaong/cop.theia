@@ -43,8 +43,7 @@ namespace nGratis.Cop.Core.Contract
         {
             [DebuggerStepThrough]
             [ContractAnnotation("value:null => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsNotNull<T>(T value, string reason = null)
+            public static void IsNotNull<T>(T value, string reason)
                 where T : class
             {
                 if (value == null)
@@ -57,8 +56,7 @@ namespace nGratis.Cop.Core.Contract
 
             [DebuggerStepThrough]
             [ContractAnnotation("value:null => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsNotEmpty(string value, string reason = null)
+            public static void IsNotEmpty(string value, string reason)
             {
                 if (value == null)
                 {
@@ -77,8 +75,7 @@ namespace nGratis.Cop.Core.Contract
 
             [DebuggerStepThrough]
             [ContractAnnotation("enumerable:null => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsNotEmpty<T>(IEnumerable<T> enumerable, string reason = null)
+            public static void IsNotEmpty<T>(IEnumerable<T> enumerable, string reason)
             {
                 if (enumerable == null)
                 {
@@ -98,8 +95,7 @@ namespace nGratis.Cop.Core.Contract
             [DebuggerStepThrough]
             [ContractAnnotation("value:null => halt")]
             [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsTypeOf<T>(object value, string reason = null)
+            public static void IsTypeOf<T>(object value, string reason)
             {
                 if (value == null)
                 {
@@ -118,8 +114,7 @@ namespace nGratis.Cop.Core.Contract
 
             [DebuggerStepThrough]
             [ContractAnnotation("value:true => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsFalse(bool value, string reason = null)
+            public static void IsFalse(bool value, string reason)
             {
                 if (value)
                 {
@@ -131,8 +126,7 @@ namespace nGratis.Cop.Core.Contract
 
             [DebuggerStepThrough]
             [ContractAnnotation("value:false => halt")]
-            [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-            public static void IsTrue(bool value, string reason = null)
+            public static void IsTrue(bool value, string reason)
             {
                 if (!value)
                 {
@@ -142,7 +136,8 @@ namespace nGratis.Cop.Core.Contract
                 }
             }
 
-            public static void IsEqualTo(object value, object anotherValue, string reason = null)
+            [DebuggerStepThrough]
+            public static void IsEqualTo(object value, object anotherValue, string reason)
             {
                 if (!object.Equals(value, anotherValue))
                 {
@@ -152,7 +147,8 @@ namespace nGratis.Cop.Core.Contract
                 }
             }
 
-            public static void IsNotEqualTo(object value, object anotherValue, string reason = null)
+            [DebuggerStepThrough]
+            public static void IsNotEqualTo(object value, object anotherValue, string reason)
             {
                 if (object.Equals(value, anotherValue))
                 {

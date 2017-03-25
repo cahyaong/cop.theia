@@ -33,7 +33,7 @@ namespace nGratis.Cop.Core.Wpf
 
     public class AweChart : ItemsControl
     {
-        public static DependencyProperty ConfigurationProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty ConfigurationProperty = DependencyProperty.Register(
             "Configuration",
             typeof(ChartConfiguration),
             typeof(AweChart),

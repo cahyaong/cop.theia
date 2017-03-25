@@ -59,7 +59,7 @@ namespace nGratis.Cop.Theia.Client
                         .FirstOrDefault();
                 });
 
-            this.ContentSource = page != null ? page.SourceUri : null;
+            this.ContentSource = page?.SourceUri;
         }
     }
 }

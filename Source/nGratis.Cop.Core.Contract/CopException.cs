@@ -32,10 +32,8 @@ namespace nGratis.Cop.Core.Contract
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.Serialization;
-    using JetBrains.Annotations;
 
     [Serializable]
-    [UsedImplicitly]
     public class CopException : Exception
     {
         public CopException()

@@ -44,9 +44,6 @@ namespace nGratis.Cop.Core
 
         public static ITemporalProvider Instance { get; private set; }
 
-        public DateTimeOffset UtcNow
-        {
-            get { return DateTimeOffset.UtcNow; }
-        }
+        public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
     }
 }

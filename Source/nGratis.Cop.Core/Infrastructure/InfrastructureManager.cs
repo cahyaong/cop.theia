@@ -28,10 +28,13 @@
 
 namespace nGratis.Cop.Core
 {
+    using System;
     using nGratis.Cop.Core.Contract;
 
-    public class InfrastructureManager : IInfrastructureManager
+    public sealed class InfrastructureManager : IInfrastructureManager, IDisposable
     {
+        private bool isDisposed;
+
         static InfrastructureManager()
         {
             InfrastructureManager.Instance = new InfrastructureManager(LoggingModes.All);
@@ -44,12 +47,54 @@ namespace nGratis.Cop.Core
             this.TemporalProvider = Core.TemporalProvider.Instance;
         }
 
-        public static IInfrastructureManager Instance { get; private set; }
+        ~InfrastructureManager()
+        {
+            this.Dispose(false);
+        }
 
-        public IIdentityProvider IdentityProvider { get; private set; }
+        public static IInfrastructureManager Instance
+        {
+            get;
+            private set;
+        }
 
-        public ILoggingProvider LoggingProvider { get; private set; }
+        public IIdentityProvider IdentityProvider
+        {
+            get;
+        }
 
-        public ITemporalProvider TemporalProvider { get; private set; }
+        public ILoggingProvider LoggingProvider
+        {
+            get;
+
+            // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+            private set;
+        }
+
+        public ITemporalProvider TemporalProvider
+        {
+            get;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (this.isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                this.LoggingProvider.Dispose();
+            }
+
+            this.isDisposed = true;
+        }
     }
 }

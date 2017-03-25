@@ -61,10 +61,7 @@ namespace nGratis.Cop.Core.Wpf
 
             set
             {
-                if (this.loggingSubscription != null)
-                {
-                    this.loggingSubscription.Dispose();
-                }
+                this.loggingSubscription?.Dispose();
 
                 this.LogEntries.Clear();
 
@@ -77,21 +74,13 @@ namespace nGratis.Cop.Core.Wpf
             }
         }
 
-        public IList<LogEntry> LogEntries
+        public IList<LogEntry> LogEntries => (IList<LogEntry>)this.GetValue(AweLogViewer.LogEntriesProperty);
+
+        private static void OnLoggerPropertyChanged(
+            DependencyObject container,
+            DependencyPropertyChangedEventArgs args)
         {
-            get { return (IList<LogEntry>)this.GetValue(AweLogViewer.LogEntriesProperty); }
-        }
-
-        private static void OnLoggerPropertyChanged(DependencyObject container, DependencyPropertyChangedEventArgs args)
-        {
-            var logViewer = container as AweLogViewer;
-
-            if (logViewer == null)
-            {
-                return;
-            }
-
-            if (args.NewValue != null)
+            if (container is AweLogViewer logViewer && args.NewValue != null)
             {
                 logViewer.Logger = (ILogger)args.NewValue;
             }

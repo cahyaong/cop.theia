@@ -86,19 +86,17 @@ namespace nGratis.Cop.Core.Wpf
             {
                 if (this.value != value)
                 {
-                    var oldNotifier = this.value as INotifyPropertyChanged;
-                    if (oldNotifier != null)
+                    if (this.value is INotifyPropertyChanged oldNotifier)
                     {
-                        oldNotifier.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
-                            "PropertyChanged",
+                        oldNotifier?.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
+                            nameof(this.PropertyChanged),
                             this.OnInnerPropertyChanged);
                     }
 
-                    var newNotifier = value as INotifyPropertyChanged;
-                    if (newNotifier != null)
+                    if (value is INotifyPropertyChanged newNotifier)
                     {
                         newNotifier.AddEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
-                            "PropertyChanged",
+                            nameof(this.PropertyChanged),
                             this.OnInnerPropertyChanged);
                     }
                 }
@@ -133,7 +131,7 @@ namespace nGratis.Cop.Core.Wpf
 
         private void OnInnerPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            this.RaisePropertyChanged("Value");
+            this.RaisePropertyChanged();
         }
     }
 }

@@ -32,14 +32,11 @@ namespace nGratis.Cop.Core.Wpf
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
-    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
     public class FieldGroupViewModel : ReactiveObject
     {
-        private readonly List<ObjectBinder> fieldBinders;
-
         private FieldMode mode;
 
         private ICollection<FieldViewModel> fields;
@@ -50,7 +47,6 @@ namespace nGratis.Cop.Core.Wpf
             Guard.Require.IsNotDefault(mode);
 
             var notifyingInstance = (INotifyPropertyChanged)instance;
-            this.fieldBinders = new List<ObjectBinder>();
 
             this.Mode = mode;
             this.Fields = new ObservableCollection<FieldViewModel>();
@@ -90,19 +86,15 @@ namespace nGratis.Cop.Core.Wpf
                                     field.HasError = true;
                                     field.IsValueUpdating = false;
                                 });
-
-                        this.fieldBinders.Add(binder);
                     });
         }
 
-        [UsedImplicitly]
         public FieldMode Mode
         {
             get { return this.mode; }
             private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
         }
 
-        [UsedImplicitly]
         public ICollection<FieldViewModel> Fields
         {
             get { return this.fields; }

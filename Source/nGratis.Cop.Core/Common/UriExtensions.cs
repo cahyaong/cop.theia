@@ -26,7 +26,7 @@
 // <creation_timestamp>Friday, 3 April 2015 9:35:37 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
+// ReSharper disable once CheckNamespace
 namespace System
 {
     using System.IO;

@@ -76,11 +76,20 @@ namespace nGratis.Cop.Theia.Module.Sdk
             private set { this.RaiseAndSetIfChanged(ref this.name, value); }
         }
 
-        public ICommand GenerateFatalCommand { get; private set; }
+        public ICommand GenerateFatalCommand
+        {
+            get;
+        }
 
-        public ICommand GenerateTracesCommand { get; private set; }
+        public ICommand GenerateTracesCommand
+        {
+            get;
+        }
 
-        protected ILogger Logger { get; private set; }
+        protected ILogger Logger
+        {
+            get;
+        }
 
         private void GenerateFatal()
         {

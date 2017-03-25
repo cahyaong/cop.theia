@@ -38,12 +38,12 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return new SolidColorBrush((Color)value);
+            return new SolidColorBrush((Color)(value ?? Colors.Gray));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((SolidColorBrush)value).Color;
+            return (value as SolidColorBrush)?.Color ?? Colors.Gray;
         }
     }
 }

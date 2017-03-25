@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;JETBRAINS_ANNOTATIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -33,7 +33,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CODE_ANALYSIS;JETBRAINS_ANNOTATIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -71,6 +71,11 @@
     <Compile Include="CopPreconditionException.cs" />
     <Compile Include="Freezable\BaseFreezable.cs" />
     <Compile Include="Freezable\IFreezable.cs" />
+    <Compile Include="Guard.Ensure.Optional.cs">
+      <DependentUpon>Guard.Ensure.Optional.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="Guard.Require.cs">
       <DependentUpon>Guard.cs</DependentUpon>
     </Compile>
@@ -99,6 +104,14 @@
       <LastGenOutput>Guard.All.Numerical.cs</LastGenOutput>
       <DependentUpon>Guard.cs</DependentUpon>
     </Content>
+    <Content Include="Guard.Ensure.Optional.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Guard.Ensure.Optional.cs</LastGenOutput>
+      <DependentUpon>Guard.cs</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

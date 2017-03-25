@@ -27,7 +27,6 @@
 
 namespace nGratis.Cop.Core.Wpf
 {
-    using JetBrains.Annotations;
     using ReactiveUI;
 
     public abstract class BaseFormViewModel : BasePageViewModel
@@ -42,14 +41,12 @@ namespace nGratis.Cop.Core.Wpf
             this.OutputFieldGroup = new FieldGroupViewModel(this, FieldMode.Output);
         }
 
-        [UsedImplicitly]
         public FieldGroupViewModel InputFieldGroup
         {
             get { return this.inputFieldGroup; }
             private set { this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value); }
         }
 
-        [UsedImplicitly]
         public FieldGroupViewModel OutputFieldGroup
         {
             get { return this.outputFieldGroup; }

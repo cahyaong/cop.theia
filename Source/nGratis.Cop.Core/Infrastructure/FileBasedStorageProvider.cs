@@ -29,12 +29,10 @@
 namespace nGratis.Cop.Core
 {
     using System;
+    using nGratis.Cop.Core.Contract;
     using System.IO;
     using System.Text;
-    using JetBrains.Annotations;
-    using nGratis.Cop.Core.Contract;
 
-    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class FileBasedStorageProvider : IStorageProvider
     {
         public FileBasedStorageProvider(Uri rootFolderUri)
@@ -48,7 +46,10 @@ namespace nGratis.Cop.Core
             this.RootUri = new Uri(rootFolderPath, UriKind.Absolute);
         }
 
-        public Uri RootUri { get; private set; }
+        public Uri RootUri
+        {
+            get;
+        }
 
         public Stream LoadData(IDataSpecification dataSpecification)
         {

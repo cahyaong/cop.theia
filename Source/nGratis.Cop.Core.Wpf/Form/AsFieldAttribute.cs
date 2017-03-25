@@ -30,7 +30,7 @@ namespace nGratis.Cop.Core.Wpf
     using System;
     using nGratis.Cop.Core.Contract;
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class AsFieldAttribute : Attribute
     {
         public AsFieldAttribute(FieldMode mode, string label)

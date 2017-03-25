@@ -140,24 +140,19 @@ namespace nGratis.Cop.Core.Wpf
             switch ((VisualizationMode)Enum.Parse(typeof(VisualizationMode), indicator.VisualizationMode.ToString()))
             {
                 case VisualizationMode.Ring:
-                    {
-                        indicator.BusyRingPart.Visibility = Visibility.Visible;
-                        indicator.BusyBarPart.Visibility = Visibility.Collapsed;
-                        break;
-                    }
+                    indicator.BusyRingPart.Visibility = Visibility.Visible;
+                    indicator.BusyBarPart.Visibility = Visibility.Collapsed;
+                    break;
+
                 case VisualizationMode.Bar:
-                    {
-                        indicator.BusyRingPart.Visibility = Visibility.Collapsed;
-                        indicator.BusyBarPart.Visibility = Visibility.Visible;
-                        break;
-                    }
-                case Wpf.VisualizationMode.None:
+                    indicator.BusyRingPart.Visibility = Visibility.Collapsed;
+                    indicator.BusyBarPart.Visibility = Visibility.Visible;
+                    break;
+
                 default:
-                    {
-                        indicator.BusyRingPart.Visibility = Visibility.Collapsed;
-                        indicator.BusyBarPart.Visibility = Visibility.Collapsed;
-                        break;
-                    }
+                    indicator.BusyRingPart.Visibility = Visibility.Collapsed;
+                    indicator.BusyBarPart.Visibility = Visibility.Collapsed;
+                    break;
             }
 
             indicator.MessagePart.Visibility = string.IsNullOrWhiteSpace(indicator.Message)

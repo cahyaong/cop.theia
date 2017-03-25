@@ -38,12 +38,7 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-            {
-                return null;
-            }
-
-            return value
+            return value?
                 .ToString()
                 .Humanize(LetterCasing.Title);
         }

@@ -30,8 +30,8 @@ namespace nGratis.Cop.Core.Wpf
     using System;
     using JetBrains.Annotations;
 
-    [UsedImplicitly]
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+    [MeansImplicitUse]
+    [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     public class AsFieldCallbackAttribute : Attribute
     {
     }

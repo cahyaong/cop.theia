@@ -42,8 +42,7 @@ namespace nGratis.Cop.Core.Testing
         {
             Guard.Require.IsNotNull(row);
 
-            var value = Guid.Empty;
-            var isValid = Guid.TryParse(row.AsString(column), out value);
+            var isValid = Guid.TryParse(row.AsString(column), out Guid value);
 
             Guard.Ensure.IsTrue(
                 isValid,
@@ -57,13 +56,11 @@ namespace nGratis.Cop.Core.Testing
         {
             Guard.Require.IsNotNull(row);
 
-            var value = (short)0;
-
             var isValid = short.TryParse(
                 row.AsString(column),
                 NumberStyles.Integer,
                 CultureInfo.InvariantCulture,
-                out value);
+                out short value);
 
             Guard.Ensure.IsTrue(
                 isValid,
@@ -77,13 +74,11 @@ namespace nGratis.Cop.Core.Testing
         {
             Guard.Require.IsNotNull(row);
 
-            var value = 0;
-
             var isValid = int.TryParse(
                 row.AsString(column),
                 NumberStyles.Integer,
                 CultureInfo.InvariantCulture,
-                out value);
+                out int value);
 
             Guard.Ensure.IsTrue(
                 isValid,
@@ -97,14 +92,12 @@ namespace nGratis.Cop.Core.Testing
         {
             Guard.Require.IsNotNull(row);
 
-            var value = DateTime.MinValue;
-
             var isValid = DateTime.TryParseExact(
                 row.AsString(column),
                 "O",
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.AssumeUniversal,
-                out value);
+                out DateTime value);
 
             Guard.Ensure.IsTrue(
                 isValid,
@@ -118,14 +111,12 @@ namespace nGratis.Cop.Core.Testing
         {
             Guard.Require.IsNotNull(row);
 
-            var value = DateTimeOffset.MinValue;
-
             var isValid = DateTimeOffset.TryParseExact(
                 row.AsString(column),
                 "O",
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.AssumeUniversal,
-                out value);
+                out DateTimeOffset value);
 
             Guard.Ensure.IsTrue(
                 isValid,

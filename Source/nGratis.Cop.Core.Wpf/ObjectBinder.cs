@@ -90,7 +90,7 @@ namespace nGratis.Cop.Core.Wpf
             Action onValueUpdated = null,
             Action onErrorEncountered = null)
         {
-            var methodName = "On{0}Changed".Bake(this.sourceProperty.Name);
+            var methodName = $"On{this.sourceProperty.Name}Changed";
 
             this.sourceCallbackMethod = this
                 .source
@@ -110,7 +110,7 @@ namespace nGratis.Cop.Core.Wpf
             Action onValueUpdated = null,
             Action onErrorEncountered = null)
         {
-            var methodName = "On{0}Changed".Bake(this.sourceProperty.Name);
+            var methodName = $"On{this.sourceProperty.Name}Changed";
 
             this.targetCallbackMethod = this
                 .target
@@ -137,10 +137,7 @@ namespace nGratis.Cop.Core.Wpf
                 var value = this.sourceProperty.GetValue(this.source);
                 this.targetProperty.SetValue(this.target, value);
 
-                if (this.onSourceValueUpdating != null)
-                {
-                    this.onSourceValueUpdating();
-                }
+                this.onSourceValueUpdating?.Invoke();
 
                 if (this.targetCallbackMethod != null)
                 {
@@ -150,11 +147,7 @@ namespace nGratis.Cop.Core.Wpf
 
                         if (result.HasError)
                         {
-                            if (this.onSourceErrorEncountered != null)
-                            {
-                                this.onSourceErrorEncountered();
-                            }
-
+                            this.onSourceErrorEncountered?.Invoke();
                             return;
                         }
                     }
@@ -168,10 +161,7 @@ namespace nGratis.Cop.Core.Wpf
                     }
                 }
 
-                if (this.onSourceValueUpdated != null)
-                {
-                    this.onSourceValueUpdated();
-                }
+                this.onSourceValueUpdated?.Invoke();
 
                 if (this.isCallbackInvokedBothWays)
                 {
@@ -180,10 +170,7 @@ namespace nGratis.Cop.Core.Wpf
             }
             catch (ValueUpdateException)
             {
-                if (this.onSourceErrorEncountered != null)
-                {
-                    this.onSourceErrorEncountered();
-                }
+                this.onSourceErrorEncountered?.Invoke();
             }
         }
 
@@ -199,10 +186,7 @@ namespace nGratis.Cop.Core.Wpf
                 var value = this.targetProperty.GetValue(this.target);
                 this.sourceProperty.SetValue(this.source, value);
 
-                if (this.onTargetValueUpdating != null)
-                {
-                    this.onTargetValueUpdating();
-                }
+                this.onTargetValueUpdating?.Invoke();
 
                 if (this.sourceCallbackMethod != null)
                 {
@@ -212,11 +196,7 @@ namespace nGratis.Cop.Core.Wpf
 
                         if (result.HasError)
                         {
-                            if (this.onTargetErrorEncountered != null)
-                            {
-                                this.onTargetErrorEncountered();
-                            }
-
+                            this.onTargetErrorEncountered?.Invoke();
                             return;
                         }
                     }
@@ -230,10 +210,7 @@ namespace nGratis.Cop.Core.Wpf
                     }
                 }
 
-                if (this.onTargetValueUpdated != null)
-                {
-                    this.onTargetValueUpdated();
-                }
+                this.onTargetValueUpdated?.Invoke();
 
                 if (this.isCallbackInvokedBothWays)
                 {
@@ -242,10 +219,7 @@ namespace nGratis.Cop.Core.Wpf
             }
             catch (ValueUpdateException)
             {
-                if (this.onTargetErrorEncountered != null)
-                {
-                    this.onTargetErrorEncountered();
-                }
+                this.onTargetErrorEncountered?.Invoke();
             }
         }
     }

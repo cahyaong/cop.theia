@@ -77,7 +77,7 @@ namespace nGratis.Cop.Core.Vision.UnitTest
                         .Should().Be(height);
 
                     pixels
-                        .Count()
+                        .Count
                         .Should().Be(width * height);
 
                     pixels

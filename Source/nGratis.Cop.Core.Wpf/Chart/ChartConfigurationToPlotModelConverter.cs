@@ -34,7 +34,6 @@ namespace nGratis.Cop.Core.Wpf
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
-    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
     using OxyPlot;
     using OxyPlot.Axes;
@@ -52,7 +51,6 @@ namespace nGratis.Cop.Core.Wpf
             typeof(ChartConfigurationToPlotModelConverter),
             new PropertyMetadata(null));
 
-        [UsedImplicitly(ImplicitUseKindFlags.Access)]
         public IThemeManager ThemeManager
         {
             get { return (IThemeManager)this.GetValue(ChartConfigurationToPlotModelConverter.ThemeManagerProperty); }

@@ -39,9 +39,9 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            var enumerable = value as IEnumerable;
-
-            return enumerable == null ? 0 : enumerable.Cast<object>().Count();
+            return (value as IEnumerable)?
+                .Cast<object>()
+                .Count() ?? 0;
         }
 
         public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)

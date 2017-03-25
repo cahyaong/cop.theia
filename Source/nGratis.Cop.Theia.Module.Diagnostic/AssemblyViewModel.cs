@@ -31,15 +31,11 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
     using System.IO;
     using System.Reflection;
     using System.Text.RegularExpressions;
-
+    using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
     public class AssemblyViewModel : ReactiveObject
     {
-        private static readonly Regex TitleRegex = new Regex(
-            @"^nGratis\.Cop\.Theia\.Module\.(?<name>\w+)$",
-            RegexOptions.Singleline);
-
         private string name;
 
         private string version;
@@ -52,25 +48,27 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public AssemblyViewModel(Assembly assembly)
         {
-            if (assembly == null)
-            {
-                throw new ArgumentNullException();
-            }
+            Guard.Require.IsNotNull(assembly);
+            Guard.Require.IsNotEmpty(assembly.Location);
 
-            var titleMatch = AssemblyViewModel
-                .TitleRegex
+            var titleMatch = AssemblyViewModel.Regexes
+                .Title
                 .Match(assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title);
 
             if (!titleMatch.Success)
             {
-                throw new InvalidOperationException("Unable to match assembly name for a module");
+                Fire.InvalidOperationException("Unable to match assembly name for a module.");
             }
 
             this.Name = titleMatch.Groups["name"].Value;
             this.Version = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
-            this.ModifiedTimestamp = File.GetLastWriteTime(assembly.Location);
-            this.FileName = Path.GetFileName(assembly.Location);
             this.Configuration = assembly.GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
+
+            if (!string.IsNullOrEmpty(assembly.Location))
+            {
+                this.ModifiedTimestamp = File.GetLastWriteTime(assembly.Location);
+                this.FileName = Path.GetFileName(assembly.Location);
+            }
         }
 
         public string Name
@@ -101,6 +99,13 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
         {
             get { return this.configuration; }
             private set { this.RaiseAndSetIfChanged(ref this.configuration, value); }
+        }
+
+        private static class Regexes
+        {
+            public static readonly Regex Title = new Regex(
+                @"^nGratis\.Cop\.Theia\.Module\.(?<name>\w+)$",
+                RegexOptions.Singleline | RegexOptions.Compiled);
         }
     }
 }

@@ -31,10 +31,8 @@ namespace nGratis.Cop.Core
     using System;
     using System.IO;
     using System.Linq;
-    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
 
-    [UsedImplicitly]
     public class DataSpecification : IDataSpecification
     {
         public DataSpecification(string name, Mime contentMime)
@@ -54,16 +52,22 @@ namespace nGratis.Cop.Core
             this.StorageProvider = storageProvider;
         }
 
-        public Mime ContentMime { get; private set; }
-
-        public string Name { get; private set; }
-
-        public string FullName
+        public Mime ContentMime
         {
-            get { return "{0}.{1}".Bake(this.Name, this.ContentMime.Names.First()); }
+            get;
         }
 
-        public IStorageProvider StorageProvider { get; private set; }
+        public string Name
+        {
+            get;
+        }
+
+        public string FullName => $"{this.Name}.{this.ContentMime.Names.First()}";
+
+        public IStorageProvider StorageProvider
+        {
+            get;
+        }
 
         public Stream LoadData()
         {
@@ -77,7 +81,7 @@ namespace nGratis.Cop.Core
 
         public override string ToString()
         {
-            return "ngds://./{0}{1}".Bake(this.Name, this.ContentMime.Names.First());
+            return $"ngds://./{this.Name}{this.ContentMime.Names.First()}";
         }
     }
 }

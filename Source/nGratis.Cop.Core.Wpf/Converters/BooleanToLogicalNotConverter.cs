@@ -37,12 +37,12 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            return !(bool)value;
+            return value != null && !(bool)value;
         }
 
         public object ConvertBack(object value, Type type, object parameter, CultureInfo culture)
         {
-            return !(bool)value;
+            return value != null && !(bool)value;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace nGratis.Cop.Core.Testing
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(method => method.IsDefined(typeof(ExtensionAttribute), false))
                 .Select(method => new { Method = method, Parameters = method.GetParameters() })
-                .Where(annon => annon.Parameters.Count() == 2)
+                .Where(annon => annon.Parameters.Length == 2)
                 .Where(annon =>
                     annon.Parameters[0].ParameterType == typeof(DataRow) &&
                     annon.Parameters[1].ParameterType == typeof(string))
@@ -58,8 +58,8 @@ namespace nGratis.Cop.Core.Testing
         {
             Guard.Require.IsNotNull(context);
 
-            var method = default(MethodInfo);
-            Guard.Require.IsTrue(TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out method));
+            var isFound = TestContextExtensions.ParsingMethodLookup.TryGetValue(typeof(TValue), out MethodInfo method);
+            Guard.Require.IsTrue(isFound);
 
             return (TValue)method.Invoke(null, new object[] { context.DataRow, name });
         }

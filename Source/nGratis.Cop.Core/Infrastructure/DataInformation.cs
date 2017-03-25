@@ -29,7 +29,6 @@
 namespace nGratis.Cop.Core
 {
     using System;
-    using JetBrains.Annotations;
 
     public class DataInformation : DataSpecification, IDataInformation
     {
@@ -38,7 +37,10 @@ namespace nGratis.Cop.Core
         {
         }
 
-        [UsedImplicitly]
-        public DateTimeOffset CreatedTimestamp { get; internal set; }
+        public DateTimeOffset CreatedTimestamp
+        {
+            get;
+            internal set;
+        }
     }
 }

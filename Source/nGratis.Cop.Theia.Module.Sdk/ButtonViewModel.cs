@@ -61,13 +61,11 @@ namespace nGratis.Cop.Theia.Module.Sdk
         public ICommand IncrementCountCommand
         {
             get;
-            set;
         }
 
         public ICommand DecrementCountCommand
         {
             get;
-            set;
         }
     }
 }

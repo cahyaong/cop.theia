@@ -29,11 +29,9 @@
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
-    using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
     using ReactiveUI;
 
-    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class Range : ReactiveObject
     {
         private double currentValue;

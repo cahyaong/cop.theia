@@ -37,7 +37,10 @@ namespace nGratis.Cop.Core.Wpf
     public class AweFileDialogButton : Button
     {
         public static readonly DependencyProperty SelectedFilePathProperty = DependencyProperty.Register(
-            "SelectedFilePath", typeof(string), typeof(AweFileDialogButton), new PropertyMetadata(null));
+            "SelectedFilePath",
+            typeof(string),
+            typeof(AweFileDialogButton),
+            new PropertyMetadata(null));
 
         public AweFileDialogButton()
         {
@@ -46,8 +49,8 @@ namespace nGratis.Cop.Core.Wpf
 
         public string SelectedFilePath
         {
-            get { return (string)this.GetValue(SelectedFilePathProperty); }
-            set { this.SetValue(SelectedFilePathProperty, value); }
+            get { return (string)this.GetValue(AweFileDialogButton.SelectedFilePathProperty); }
+            set { this.SetValue(AweFileDialogButton.SelectedFilePathProperty, value); }
         }
 
         private void OnMouseClicked(object parameter)
@@ -55,8 +58,8 @@ namespace nGratis.Cop.Core.Wpf
             var fileDialog = new OpenFileDialog
             {
                 InitialDirectory = File.Exists(this.SelectedFilePath)
-                        ? Path.GetDirectoryName(this.SelectedFilePath)
-                        : Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+                    ? Path.GetDirectoryName(this.SelectedFilePath)
+                    : Environment.GetFolderPath(Environment.SpecialFolder.Personal)
             };
 
             var isOkSelected = fileDialog.ShowDialog();

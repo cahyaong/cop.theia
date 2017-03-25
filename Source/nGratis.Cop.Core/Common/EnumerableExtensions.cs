@@ -25,7 +25,7 @@
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable CheckNamespace
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Generic
 {
     using System;

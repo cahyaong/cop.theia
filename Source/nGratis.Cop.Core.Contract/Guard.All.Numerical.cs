@@ -40,7 +40,6 @@ namespace nGratis.Cop.Core.Contract
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using JetBrains.Annotations;
 
     public static partial class Guard
     {

@@ -65,7 +65,7 @@ namespace nGratis.Cop.Core
             loggers
                 .Select(logger => new
                 {
-                    Key = "{0}.{1}".Bake(logger.Id, logger.GetType().Name),
+                    Key = $"{logger.Id}.{logger.GetType().Name}",
                     Logger = logger
                 })
                 .Where(annon => !this.loggerLookup.ContainsKey(annon.Key))
@@ -80,15 +80,13 @@ namespace nGratis.Cop.Core
             loggers
                 .Select(logger => new
                 {
-                    Key = "{0}.{1}".Bake(logger.Id, logger.GetType().Name),
+                    Key = $"{logger.Id}.{logger.GetType().Name}",
                     Logger = logger
                 })
                 .Where(annon => this.loggerLookup.ContainsKey(annon.Key))
-                .ForEach(annon =>
-                    {
-                        var logger = default(ILogger);
-                        this.loggerLookup.TryRemove(annon.Key, out logger);
-                    });
+#pragma warning disable 168
+                .ForEach(annon => this.loggerLookup.TryRemove(annon.Key, out ILogger logger));
+#pragma warning restore 168
         }
 
         public override void LogWith(Verbosity verbosity, string message)

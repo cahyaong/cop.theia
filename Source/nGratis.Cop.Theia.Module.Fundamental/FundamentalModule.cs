@@ -40,7 +40,7 @@ namespace nGratis.Cop.Theia.Module.Fundamental
         {
             this.Id = new Guid("484BF7AD-9B9A-43E0-9BF0-C84C30AC7C38");
 
-            // FIXME: Use custom attribute to generate features and their pages.
+            // TODO: Use custom attribute to generate features and their pages.
 
             var fundamentalFeature = new Feature(
                 "Fundamental",
@@ -49,8 +49,14 @@ namespace nGratis.Cop.Theia.Module.Fundamental
             this.Features = new List<Feature> { fundamentalFeature };
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id
+        {
+            get;
+        }
 
-        public IEnumerable<IFeature> Features { get; private set; }
+        public IEnumerable<IFeature> Features
+        {
+            get;
+        }
     }
 }

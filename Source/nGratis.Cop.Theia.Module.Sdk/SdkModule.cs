@@ -27,11 +27,11 @@
 
 namespace nGratis.Cop.Theia.Module.Sdk
 {
+    using nGratis.Cop.Core.Contract;
+    using nGratis.Cop.Core.Wpf;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Wpf;
 
     [Export(typeof(IModule))]
     public class SdkModule : IModule
@@ -55,13 +55,11 @@ namespace nGratis.Cop.Theia.Module.Sdk
         public Guid Id
         {
             get;
-            private set;
         }
 
         public IEnumerable<IFeature> Features
         {
             get;
-            private set;
         }
     }
 }

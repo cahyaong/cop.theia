@@ -36,12 +36,7 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            if (value == null)
-            {
-                return null;
-            }
-
-            return value
+            return value?
                 .ToString()
                 .ToUpper(culture);
         }
