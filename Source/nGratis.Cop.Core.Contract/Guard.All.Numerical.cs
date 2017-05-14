@@ -40,6 +40,7 @@ namespace nGratis.Cop.Core.Contract
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using JetBrains.Annotations;
 
     public static partial class Guard
     {
@@ -55,11 +56,39 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            public static void IsPositive(int value)
+            public static void IsGreaterThan(int value, int anotherValue)
+            {
+                if (value <= anotherValue)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be greater than [{anotherValue}].");
+                }
+            }
+
+            
+            [DebuggerStepThrough]
+            public static void IsZeroOrPositive(int value)
             {
                 if (value <= 0)
                 {
+                    Fire.PreconditionException($"Value [{value}] must be zero or positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsPositive(int value)
+            {
+                if (value < 0)
+                {
                     Fire.PreconditionException($"Value [{value}] must be positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsZeroNegative(int value)
+            {
+                if (value > 0)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be zero or negative.");
                 }
             }
 
@@ -118,11 +147,39 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            public static void IsPositive(long value)
+            public static void IsGreaterThan(long value, long anotherValue)
+            {
+                if (value <= anotherValue)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be greater than [{anotherValue}].");
+                }
+            }
+
+            
+            [DebuggerStepThrough]
+            public static void IsZeroOrPositive(long value)
             {
                 if (value <= 0)
                 {
+                    Fire.PreconditionException($"Value [{value}] must be zero or positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsPositive(long value)
+            {
+                if (value < 0)
+                {
                     Fire.PreconditionException($"Value [{value}] must be positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsZeroNegative(long value)
+            {
+                if (value > 0)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be zero or negative.");
                 }
             }
 
@@ -181,11 +238,39 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            public static void IsPositive(float value)
+            public static void IsGreaterThan(float value, float anotherValue)
+            {
+                if (value <= anotherValue)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be greater than [{anotherValue}].");
+                }
+            }
+
+            
+            [DebuggerStepThrough]
+            public static void IsZeroOrPositive(float value)
             {
                 if (value <= 0.0F)
                 {
+                    Fire.PreconditionException($"Value [{value}] must be zero or positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsPositive(float value)
+            {
+                if (value < 0.0F)
+                {
                     Fire.PreconditionException($"Value [{value}] must be positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsZeroNegative(float value)
+            {
+                if (value > 0.0F)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be zero or negative.");
                 }
             }
 
@@ -244,11 +329,39 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            public static void IsPositive(double value)
+            public static void IsGreaterThan(double value, double anotherValue)
+            {
+                if (value <= anotherValue)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be greater than [{anotherValue}].");
+                }
+            }
+
+            
+            [DebuggerStepThrough]
+            public static void IsZeroOrPositive(double value)
             {
                 if (value <= 0.0)
                 {
+                    Fire.PreconditionException($"Value [{value}] must be zero or positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsPositive(double value)
+            {
+                if (value < 0.0)
+                {
                     Fire.PreconditionException($"Value [{value}] must be positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsZeroNegative(double value)
+            {
+                if (value > 0.0)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be zero or negative.");
                 }
             }
 

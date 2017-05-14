@@ -99,11 +99,39 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            public static void IsPositive(<#= numerical #> value)
+            public static void IsGreaterThan(<#= numerical #> value, <#= numerical #> anotherValue)
+            {
+                if (value <= anotherValue)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be greater than [{anotherValue}].");
+                }
+            }
+
+            
+            [DebuggerStepThrough]
+            public static void IsZeroOrPositive(<#= numerical #> value)
             {
                 if (value <= <#= numericalLookup[numerical].ZeroValue #>)
                 {
+                    Fire.PreconditionException($"Value [{value}] must be zero or positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsPositive(<#= numerical #> value)
+            {
+                if (value < <#= numericalLookup[numerical].ZeroValue #>)
+                {
                     Fire.PreconditionException($"Value [{value}] must be positive.");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsZeroNegative(<#= numerical #> value)
+            {
+                if (value > <#= numericalLookup[numerical].ZeroValue #>)
+                {
+                    Fire.PreconditionException($"Value [{value}] must be zero or negative.");
                 }
             }
 

@@ -210,11 +210,29 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
+            public static void IsFileExist(string path)
+            {
+                if (!File.Exists(path))
+                {
+                    Fire.PreconditionException($"File must exist. Path: [{path}].");
+                }
+            }
+
+            [DebuggerStepThrough]
             public static void IsFileNotExist(string path)
             {
                 if (File.Exists(path))
                 {
                     Fire.PreconditionException($"File cannot exist. Path: [{path}].");
+                }
+            }
+
+            [DebuggerStepThrough]
+            public static void IsDirectoryExist(string path)
+            {
+                if (!Directory.Exists(path))
+                {
+                    Fire.PreconditionException($"Directory must exist. Path: [{path}].");
                 }
             }
 
