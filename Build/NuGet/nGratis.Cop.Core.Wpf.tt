@@ -29,10 +29,12 @@
     <language>en-US</language>
     <copyright>Copyright © 2014 - <#= BuildTimestamp.Year #> Cahya Ong</copyright>
     <dependencies>
-      <dependency id="Caliburn.Micro" version="[3.0.1,)" />
+      <dependency id="Caliburn.Micro" version="[3.0.3,)" />
       <dependency id="Humanizer.Core" version="[2.1.0,)" />
+      <dependency id="JetBrains.Annotations" version="[10.4.0,)" />
       <dependency id="MahApps.Metro" version="[1.5.0,)" />
       <dependency id="ModernUI.WPF" version="[1.0.9,)" />
+      <dependency id="OxyPlot.Wpf" version="[1.0.0,)" />
       <dependency id="nGratis.Cop.Core" version="[<#= Version.Major #>.<#= Version.Minor #>.<#= Version.Build #>,)" />
       <dependency id="reactiveui" version="[6.5.2,)" />
       <dependency id="Splat" version="[1.6.2,)" />
