@@ -41,25 +41,31 @@ namespace nGratis.Cop.Theia.Module.Sdk
 
         public ProgressIndicatorViewModel()
         {
-            this.StartWorkCommand = ReactiveCommand.CreateAsyncTask(
+            this.StartWorkCommand = ReactiveCommand.CreateFromTask(
+                () => Task.Run(() => this.IsBusy = true),
                 this.WhenAnyValue(vm => vm.IsBusy, isBusy => !isBusy)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                async _ => await Task.Run(() => this.IsBusy = true));
+                    .ObserveOn(RxApp.MainThreadScheduler));
 
-            this.StopWorkCommand = ReactiveCommand.CreateAsyncTask(
+            this.StopWorkCommand = ReactiveCommand.CreateFromTask(
+                () => Task.Run(() => this.IsBusy = false),
                 this.WhenAnyValue(vm => vm.IsBusy)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                async _ => await Task.Run(() => this.IsBusy = false));
+                    .ObserveOn(RxApp.MainThreadScheduler));
         }
 
         public bool IsBusy
         {
-            get { return this.isBusy; }
-            private set { this.RaiseAndSetIfChanged(ref this.isBusy, value); }
+            get => this.isBusy;
+            private set => this.RaiseAndSetIfChanged(ref this.isBusy, value);
         }
 
-        public ICommand StartWorkCommand { get; private set; }
+        public ICommand StartWorkCommand
+        {
+            get;
+        }
 
-        public ICommand StopWorkCommand { get; private set; }
+        public ICommand StopWorkCommand
+        {
+            get;
+        }
     }
 }

@@ -36,8 +36,7 @@
       <dependency id="ModernUI.WPF" version="[1.0.9,)" />
       <dependency id="OxyPlot.Wpf" version="[1.0.0,)" />
       <dependency id="nGratis.Cop.Core" version="[<#= Version.Major #>.<#= Version.Minor #>.<#= Version.Build #>,)" />
-      <dependency id="reactiveui" version="[6.5.2,)" />
-      <dependency id="Splat" version="[1.6.2,)" />
+      <dependency id="reactiveui" version="[7.3.0,)" />
     </dependencies>
   </metadata>
   <files>

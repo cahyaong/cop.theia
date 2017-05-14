@@ -41,15 +41,15 @@ namespace nGratis.Cop.Theia.Module.Sdk
 
         public ButtonViewModel()
         {
-            this.IncrementCountCommand = ReactiveCommand.CreateAsyncTask(
+            this.IncrementCountCommand = ReactiveCommand.CreateFromTask(
+                () => Task.Run(() => this.Count++),
                 this.WhenAny(it => it.Count, observation => observation.Value < 10)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                async _ => await Task.Run(() => this.Count++));
+                    .ObserveOn(RxApp.MainThreadScheduler));
 
-            this.DecrementCountCommand = ReactiveCommand.CreateAsyncTask(
+            this.DecrementCountCommand = ReactiveCommand.CreateFromTask(
+                () => Task.Run(() => this.Count--),
                 this.WhenAny(it => it.Count, observation => observation.Value > 0)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                async _ => await Task.Run(() => this.Count--));
+                    .ObserveOn(RxApp.MainThreadScheduler));
         }
 
         public int Count

@@ -53,27 +53,27 @@ namespace nGratis.Cop.Theia.Module.Sdk
             this.Name = name;
             this.Logger = infrastructureManager.LoggingProvider.GetLoggerFor("<SDK>");
 
-            this.GenerateFatalCommand = ReactiveCommand.CreateAsyncTask(
+            this.GenerateFatalCommand = ReactiveCommand.CreateFromTask(
+                () => Task.Run(() => this.GenerateFatal()),
                 this.WhenAnyValue(vm => vm.IsExecuting, isExecuting => !isExecuting)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                _ => Task.Run(() => this.GenerateFatal()));
+                    .ObserveOn(RxApp.MainThreadScheduler));
 
-            this.GenerateTracesCommand = ReactiveCommand.CreateAsyncTask(
+            this.GenerateTracesCommand = ReactiveCommand.CreateFromTask(
+                () => Task.Run(() => this.GenerateTraces()),
                 this.WhenAnyValue(vm => vm.IsExecuting, isExecuting => !isExecuting)
-                    .ObserveOn(RxApp.MainThreadScheduler),
-                _ => Task.Run(() => this.GenerateTraces()));
+                    .ObserveOn(RxApp.MainThreadScheduler));
         }
 
         public bool IsExecuting
         {
-            get { return this.isExecuting; }
-            private set { this.RaiseAndSetIfChanged(ref this.isExecuting, value); }
+            get => this.isExecuting;
+            private set => this.RaiseAndSetIfChanged(ref this.isExecuting, value);
         }
 
         public string Name
         {
-            get { return this.name; }
-            private set { this.RaiseAndSetIfChanged(ref this.name, value); }
+            get => this.name;
+            private set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
         public ICommand GenerateFatalCommand
