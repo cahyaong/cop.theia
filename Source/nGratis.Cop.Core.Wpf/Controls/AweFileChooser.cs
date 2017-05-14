@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AweFileDialogButton.cs" company="nGratis">
+// <copyright file="AweFileChooser.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2017 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,51 +23,54 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Sunday, 9 April 2017 2:25:09 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace nGratis.Cop.Core.Wpf
 {
     using System;
-    using System.IO;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using FirstFloor.ModernUI.Presentation;
-    using Microsoft.Win32;
+    using System.Windows.Input;
 
-    public class AweFileDialogButton : Button
+    public class AweFileChooser : ContentControl
     {
         public static readonly DependencyProperty SelectedFilePathProperty = DependencyProperty.Register(
-            "SelectedFilePath",
+            nameof(AweFileChooser.SelectedFilePath),
             typeof(string),
-            typeof(AweFileDialogButton),
+            typeof(AweFileChooser),
             new PropertyMetadata(null));
 
-        public AweFileDialogButton()
-        {
-            this.Command = new RelayCommand(this.OnMouseClicked, _ => true);
-        }
+        public static readonly DependencyProperty AuxiliaryTextProperty = DependencyProperty.Register(
+            nameof(AweFileChooser.AuxiliaryText),
+            typeof(string),
+            typeof(AweFileChooser),
+            new PropertyMetadata("<AUX>"));
+
+        public static readonly DependencyProperty AuxiliaryCommandProperty = DependencyProperty.Register(
+            nameof(AweFileChooser.AuxiliaryCommand),
+            typeof(ICommand),
+            typeof(AweFileChooser),
+            new PropertyMetadata(null));
 
         public string SelectedFilePath
         {
-            get { return (string)this.GetValue(AweFileDialogButton.SelectedFilePathProperty); }
-            set { this.SetValue(AweFileDialogButton.SelectedFilePathProperty, value); }
+            get => (string)this.GetValue(AweFileChooser.SelectedFilePathProperty);
+            set => this.SetValue(AweFileChooser.SelectedFilePathProperty, value);
         }
 
-        private void OnMouseClicked(object parameter)
+        public string AuxiliaryText
         {
-            var fileDialog = new OpenFileDialog
-            {
-                InitialDirectory = File.Exists(this.SelectedFilePath)
-                    ? Path.GetDirectoryName(this.SelectedFilePath)
-                    : Environment.GetFolderPath(Environment.SpecialFolder.Personal)
-            };
+            get => (string)this.GetValue(AweFileChooser.AuxiliaryTextProperty);
+            set => this.SetValue(AweFileChooser.AuxiliaryTextProperty, value);
+        }
 
-            var isOkSelected = fileDialog.ShowDialog();
-
-            if (isOkSelected.HasValue && isOkSelected.Value)
-            {
-                this.SelectedFilePath = fileDialog.FileName;
-            }
+        public ICommand AuxiliaryCommand
+        {
+            get => (ICommand)this.GetValue(AweFileChooser.AuxiliaryCommandProperty);
+            set => this.SetValue(AweFileChooser.AuxiliaryCommandProperty, value);
         }
     }
 }

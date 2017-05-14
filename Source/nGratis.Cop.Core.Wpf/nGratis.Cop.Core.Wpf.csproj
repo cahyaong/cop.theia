@@ -58,6 +58,9 @@
     <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
@@ -88,8 +91,9 @@
     <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +118,7 @@
     <Compile Include="CallbackResult.cs" />
     <Compile Include="Chart\ChartConfiguration.cs" />
     <Compile Include="Chart\ChartConfigurationToPlotModelConverter.cs" />
+    <Compile Include="Controls\AweFileChooser.cs" />
     <Compile Include="Controls\AweScrollBar.cs" />
     <Compile Include="Controls\AweScrollViewer.cs" />
     <Compile Include="Converters\AnyToTitleCaseCoverter.cs" />
@@ -144,7 +149,7 @@
     <Compile Include="Form\AweField.cs" />
     <Compile Include="Form\Range.cs" />
     <Compile Include="ObjectBinder.cs" />
-    <Compile Include="Controls\AweFileDialogButton.cs" />
+    <Compile Include="Controls\AweSystemBrowserButton.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="ThemeManager.cs" />
     <Compile Include="VisualizationMode.cs" />

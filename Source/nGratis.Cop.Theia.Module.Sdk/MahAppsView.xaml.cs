@@ -1,8 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="App.xaml.cs" company="nGratis">
+// <copyright file="MahAppsView.xaml.cs" company="nGratis">
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Cahya Ong
+//  Copyright (c) 2014 - 2017 Cahya Ong
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,29 +23,20 @@
 //  SOFTWARE.
 // </copyright>
 // <author>Cahya Ong - cahya.ong@gmail.com</author>
+// <creation_timestamp>Tuesday, 25 April 2017 1:47:10 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace nGratis.Cop.Theia.Client
+namespace nGratis.Cop.Theia.Module.Sdk
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Windows;
-    using System.Windows.Media;
-    using FirstFloor.ModernUI.Presentation;
-    using nGratis.Cop.Core.Wpf;
 
-    public partial class App
+    public partial class MahAppsView
     {
-        protected override void OnStartup(StartupEventArgs args)
+        public MahAppsView()
         {
-            var expectedTheme = MahApps.Metro.ThemeManager.GetAppTheme("BaseDark");
-            var expectedAccent = MahApps.Metro.ThemeManager.Accents.First(accent => accent.Name == "Green");
-            MahApps.Metro.ThemeManager.ChangeAppStyle(Application.Current, expectedAccent, expectedTheme);
-
-            var accentColor = (Color)this.Resources["AccentColor"];
-            AppearanceManager.Current.AccentColor = accentColor;
-            this.AdjustAccentColor(accentColor);
-
-            base.OnStartup(args);
+            this.InitializeComponent();
         }
     }
 }

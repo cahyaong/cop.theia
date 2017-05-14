@@ -43,8 +43,8 @@ namespace nGratis.Cop.Core.Vision.Imaging
 
         public Color this[int x, int y]
         {
-            get { return this.writeableBitmap.GetPixel(x, y); }
-            set { this.writeableBitmap.SetPixel(x, y, value); }
+            get => this.writeableBitmap.GetPixel(x, y);
+            set => this.writeableBitmap.SetPixel(x, y, value);
         }
 
         public void LoadData(Stream dataSteam)

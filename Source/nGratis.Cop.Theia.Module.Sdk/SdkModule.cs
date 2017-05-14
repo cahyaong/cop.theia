@@ -47,7 +47,8 @@ namespace nGratis.Cop.Theia.Module.Sdk
                 new Page("Logging", "/nGratis.Cop.Theia.Module.Sdk;component/LoggingView.xaml"),
                 new Page("Map", "/nGratis.Cop.Theia.Module.Sdk;component/MapView.xaml"),
                 new Page("Progress Indicator", "/nGratis.Cop.Theia.Module.Sdk;component/ProgressIndicatorView.xaml"),
-                new Page("Scroll Viewer", "/nGratis.Cop.Theia.Module.Sdk;component/ScrollViewerView.xaml"));
+                new Page("Scroll Viewer", "/nGratis.Cop.Theia.Module.Sdk;component/ScrollViewerView.xaml"),
+                new Page("MahApps.Metro", "/nGratis.Cop.Theia.Module.Sdk;component/MahAppsView.xaml"));
 
             this.Features = new List<Feature> { diagnosticFeature };
         }
