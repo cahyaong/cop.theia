@@ -35,17 +35,25 @@ namespace nGratis.Cop.Core
 
     public sealed class Mime
     {
-        public static readonly Mime Unknown = new Mime("unknown", 0, 0, "unknown");
+        public static readonly Mime Unknown = new Mime("unknown", 0, 0, string.Empty);
+
+        public static readonly Mime Csv = new Mime("text/csv", 4180, 0, "csv");
+
+        public static readonly Mime Html = new Mime("text/html", 2854, 0, "html");
 
         public static readonly Mime Json = new Mime("application/json", 4627, 0, "json");
 
         public static readonly Mime Jpeg = new Mime("image/jpeg", 1341, 10918, "jpeg", "jpg");
 
+        public static readonly Mime Mpeg4 = new Mime("video/mp4", 4337, 0, "mp4");
+
+        public static readonly Mime Saz = new Mime("application/x-fiddler-session-archive", 0, 0, "saz");
+
         public static readonly Mime Png = new Mime("image/png", 2083, 15948, "png");
 
-        public static readonly Mime Csv = new Mime("text/csv", 4180, 0, "csv");
+        public static readonly Mime Warc = new Mime("application/warc", 0, 28500, "warc");
 
-        public static readonly Mime Html = new Mime("text/html", 2854, 0, "html");
+        public static readonly Mime WebForm = new Mime("application/x-www-form-urlencoded", 0, 0, string.Empty);
 
         public static readonly Mime Xml = new Mime("text/xml", 3023, 0, "xml");
 
@@ -65,8 +73,11 @@ namespace nGratis.Cop.Core
                 .ToDictionary(mime => mime.UniqueId, mime => mime);
 
             Mime.NameToMimeMapping = mimes
-                 .SelectMany(mime => mime.Names.Select(name => new { Name = name, Mime = mime }))
-                 .ToDictionary(annon => annon.Name, annon => annon.Mime);
+                .SelectMany(mime => mime
+                    .Names
+                    .Where(name => !string.IsNullOrEmpty(name))
+                    .Select(name => new { Name = name, Mime = mime }))
+                .ToDictionary(annon => annon.Name, annon => annon.Mime);
         }
 
         private Mime(string uniqueId, int rfcId, int isoId, params string[] names)
@@ -88,13 +99,11 @@ namespace nGratis.Cop.Core
         public int RfcId
         {
             get;
-            private set;
         }
 
         public int IsoId
         {
             get;
-            private set;
         }
 
         public IEnumerable<string> Names
