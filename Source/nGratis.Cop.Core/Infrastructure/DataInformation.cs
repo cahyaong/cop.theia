@@ -37,10 +37,6 @@ namespace nGratis.Cop.Core
         {
         }
 
-        public DateTimeOffset CreatedTimestamp
-        {
-            get;
-            internal set;
-        }
+        public DateTimeOffset CreatedTimestamp { get; internal set; }
     }
 }

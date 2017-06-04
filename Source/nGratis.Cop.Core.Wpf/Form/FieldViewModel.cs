@@ -65,22 +65,19 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldType Type
         {
-            get { return this.type; }
-            private set { this.RaiseAndSetIfChanged(ref this.type, value); }
+            get => this.type;
+            private set => this.RaiseAndSetIfChanged(ref this.type, value);
         }
 
         public string Label
         {
-            get { return this.label; }
-            private set { this.RaiseAndSetIfChanged(ref this.label, value); }
+            get => this.label;
+            private set => this.RaiseAndSetIfChanged(ref this.label, value);
         }
 
         public object Value
         {
-            get
-            {
-                return this.value;
-            }
+            get => this.value;
 
             set
             {
@@ -88,7 +85,7 @@ namespace nGratis.Cop.Core.Wpf
                 {
                     if (this.value is INotifyPropertyChanged oldNotifier)
                     {
-                        oldNotifier?.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
+                        oldNotifier.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
                             nameof(this.PropertyChanged),
                             this.OnInnerPropertyChanged);
                     }
@@ -107,26 +104,25 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldMode Mode
         {
-            get { return this.mode; }
-            private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
+            get => this.mode;
+            private set => this.RaiseAndSetIfChanged(ref this.mode, value);
         }
 
         public Type ValueType
         {
             get;
-            private set;
         }
 
         public bool IsValueUpdating
         {
-            get { return this.isValueUpdating; }
-            set { this.RaiseAndSetIfChanged(ref this.isValueUpdating, value); }
+            get => this.isValueUpdating;
+            set => this.RaiseAndSetIfChanged(ref this.isValueUpdating, value);
         }
 
         public bool HasError
         {
-            get { return this.hasError; }
-            set { this.RaiseAndSetIfChanged(ref this.hasError, value); }
+            get => this.hasError;
+            set => this.RaiseAndSetIfChanged(ref this.hasError, value);
         }
 
         private void OnInnerPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -57,20 +57,20 @@ namespace nGratis.Cop.Core.Wpf
             this.Interval = Math.Max(interval, 1.0);
         }
 
-        public double MinimumValue { get; private set; }
+        public double MinimumValue { get; }
 
-        public double MaximumValue { get; private set; }
+        public double MaximumValue { get; }
 
         public double CurrentValue
         {
-            get { return this.currentValue; }
-            set { this.RaiseAndSetIfChanged(ref this.currentValue, value); }
+            get => this.currentValue;
+            set => this.RaiseAndSetIfChanged(ref this.currentValue, value);
         }
 
         public double Interval
         {
-            get { return this.interval; }
-            private set { this.RaiseAndSetIfChanged(ref this.interval, value); }
+            get => this.interval;
+            private set => this.RaiseAndSetIfChanged(ref this.interval, value);
         }
     }
 }

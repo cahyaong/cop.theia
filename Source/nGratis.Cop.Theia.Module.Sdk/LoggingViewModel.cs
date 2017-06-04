@@ -47,18 +47,18 @@ namespace nGratis.Cop.Theia.Module.Sdk
 
             // This logging source is used to simulate external components writing message to the logger.
             this.LoggingSources = new List<LoggingSource>
-                {
-                    new LoggingSource(infrastructureManager, "Alpha"),
-                    new LoggingSource(infrastructureManager, "Omega")
-                };
+            {
+                new LoggingSource(infrastructureManager, "Alpha"),
+                new LoggingSource(infrastructureManager, "Omega")
+            };
         }
 
         public ILogger Logger
         {
-            get { return this.logger; }
-            private set { this.RaiseAndSetIfChanged(ref this.logger, value); }
+            get => this.logger;
+            private set => this.RaiseAndSetIfChanged(ref this.logger, value);
         }
 
-        public IEnumerable<LoggingSource> LoggingSources { get; private set; }
+        public IEnumerable<LoggingSource> LoggingSources { get; }
     }
 }

@@ -228,7 +228,7 @@ namespace nGratis.Cop.Core.Contract
             }
 
             [DebuggerStepThrough]
-            public static void IsDirectoryExist(string path)
+            public static void IsFolderExist(string path)
             {
                 if (!Directory.Exists(path))
                 {

@@ -54,29 +54,25 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
         }
 
         [AsField(FieldMode.Input, FieldType.File, "Data file path:")]
-        public string DataFilePath
-        {
-            get;
-            set;
-        }
+        public string DataFilePath { get; set; }
 
         [AsField(FieldMode.Input, FieldType.Auto, "Category:")]
         public Category Category
         {
-            get { return this.category; }
-            set { this.RaiseAndSetIfChanged(ref this.category, value); }
+            get => this.category;
+            set => this.RaiseAndSetIfChanged(ref this.category, value);
         }
 
         public IEnumerable<SanFranciscoCrime> Crimes
         {
-            get { return this.crimes; }
-            private set { this.RaiseAndSetIfChanged(ref this.crimes, value); }
+            get => this.crimes;
+            private set => this.RaiseAndSetIfChanged(ref this.crimes, value);
         }
 
         public ChartConfiguration ChartConfiguration
         {
-            get { return this.chartConfiguration; }
-            private set { this.RaiseAndSetIfChanged(ref this.chartConfiguration, value); }
+            get => this.chartConfiguration;
+            private set => this.RaiseAndSetIfChanged(ref this.chartConfiguration, value);
         }
 
         [AsFieldCallback]
@@ -88,25 +84,25 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             }
 
             await Task.Run(() =>
+            {
+                using (var stream = File.OpenRead(this.DataFilePath))
+                using (var reader = new StreamReader(stream))
+                using (var parser = new CsvReader(reader, SanFranciscoCrime.CsvConfiguration.Instance))
                 {
-                    using (var stream = File.OpenRead(this.DataFilePath))
-                    using (var reader = new StreamReader(stream))
-                    using (var parser = new CsvReader(reader, SanFranciscoCrime.CsvConfiguration.Instance))
+                    try
                     {
-                        try
-                        {
-                            this.Crimes = parser
-                                .GetRecords<SanFranciscoCrime>()
-                                .ToList();
-                        }
-                        catch (FormatException exception)
-                        {
-                            throw new ValueUpdateException(
-                                "CSV file does not contain San Francisco crime data",
-                                exception);
-                        }
+                        this.Crimes = parser
+                            .GetRecords<SanFranciscoCrime>()
+                            .ToList();
                     }
-                });
+                    catch (FormatException exception)
+                    {
+                        throw new ValueUpdateException(
+                            "CSV file does not contain San Francisco crime data",
+                            exception);
+                    }
+                }
+            });
 
             this.Category = Category.Arson;
 
@@ -122,22 +118,22 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             }
 
             var configurations = await Task.Run(() =>
-                {
-                    return this
-                       .Crimes
-                       .AsParallel()
-                       .Where(crime => crime.Category == this.Category)
-                       .GroupBy(crime => new { crime.Category, crime.OffenceDate.Year }, crime => crime)
-                       .Select(group => new { group.Key.Category, group.Key.Year, Occurrence = group.Count() })
-                       .GroupBy(annon => annon.Category, annon => annon)
-                       .Select(group => new
-                       {
-                           Title = group.Key.ToString().Humanize(LetterCasing.Title),
-                           Points = group.OrderBy(annon => annon.Year).ToList()
-                       })
-                       .Select(annon => new SeriesConfiguration(annon.Title, annon.Points, "Year", "Occurrence"))
-                       .ToList();
-                });
+            {
+                return this
+                    .Crimes
+                    .AsParallel()
+                    .Where(crime => crime.Category == this.Category)
+                    .GroupBy(crime => new { crime.Category, crime.OffenceDate.Year }, crime => crime)
+                    .Select(group => new { group.Key.Category, group.Key.Year, Occurrence = group.Count() })
+                    .GroupBy(annon => annon.Category, annon => annon)
+                    .Select(group => new
+                    {
+                        Title = group.Key.ToString().Humanize(LetterCasing.Title),
+                        Points = group.OrderBy(annon => annon.Year).ToList()
+                    })
+                    .Select(annon => new SeriesConfiguration(annon.Title, annon.Points, "Year", "Occurrence"))
+                    .ToList();
+            });
 
             this.ChartConfiguration = new ChartConfiguration("Occurrence by Category", configurations);
 

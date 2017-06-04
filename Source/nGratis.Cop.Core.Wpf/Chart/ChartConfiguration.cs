@@ -43,16 +43,8 @@ namespace nGratis.Cop.Core.Wpf
             this.SeriesConfigurations = seriesConfigurations;
         }
 
-        public string Title
-        {
-            get;
-            private set;
-        }
+        public string Title { get; }
 
-        public IEnumerable<SeriesConfiguration> SeriesConfigurations
-        {
-            get;
-            private set;
-        }
+        public IEnumerable<SeriesConfiguration> SeriesConfigurations { get; }
     }
 }

@@ -48,14 +48,8 @@ namespace nGratis.Cop.Theia.Module.Application
             this.Features = new List<Feature> { applicationFeature };
         }
 
-        public Guid Id
-        {
-            get;
-        }
+        public Guid Id { get; }
 
-        public IEnumerable<IFeature> Features
-        {
-            get;
-        }
+        public IEnumerable<IFeature> Features { get; }
     }
 }

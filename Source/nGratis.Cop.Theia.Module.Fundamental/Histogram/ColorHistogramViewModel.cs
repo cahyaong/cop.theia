@@ -57,8 +57,8 @@ namespace nGratis.Cop.Theia.Module.Fundamental
         [AsField(FieldMode.Output, FieldType.Image, "Raw image:")]
         public ImageSource RawImage
         {
-            get { return this.rawImage; }
-            private set { this.RaiseAndSetIfChanged(ref this.rawImage, value); }
+            get => this.rawImage;
+            private set => this.RaiseAndSetIfChanged(ref this.rawImage, value);
         }
 
         [AsFieldCallback]

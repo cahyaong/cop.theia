@@ -42,10 +42,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
         [ImportingConstructor]
         public ModuleSummaryViewModel(IModuleProvider moduleProvider)
         {
-            if (moduleProvider == null)
-            {
-                throw new ArgumentNullException();
-            }
+            Guard.Require.IsNotNull(moduleProvider);
 
             this.Assemblies = moduleProvider
                 .FindModuleAssemblies()
@@ -56,8 +53,8 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public IEnumerable<AssemblyViewModel> Assemblies
         {
-            get { return this.assemblies; }
-            set { this.RaiseAndSetIfChanged(ref this.assemblies, value); }
+            get => this.assemblies;
+            set => this.RaiseAndSetIfChanged(ref this.assemblies, value);
         }
     }
 }

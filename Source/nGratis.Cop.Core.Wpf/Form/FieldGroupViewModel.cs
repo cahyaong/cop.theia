@@ -91,14 +91,14 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldMode Mode
         {
-            get { return this.mode; }
-            private set { this.RaiseAndSetIfChanged(ref this.mode, value); }
+            get => this.mode;
+            private set => this.RaiseAndSetIfChanged(ref this.mode, value);
         }
 
         public ICollection<FieldViewModel> Fields
         {
-            get { return this.fields; }
-            private set { this.RaiseAndSetIfChanged(ref this.fields, value); }
+            get => this.fields;
+            private set => this.RaiseAndSetIfChanged(ref this.fields, value);
         }
     }
 }

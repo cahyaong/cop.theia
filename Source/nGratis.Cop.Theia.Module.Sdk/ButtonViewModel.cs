@@ -58,14 +58,8 @@ namespace nGratis.Cop.Theia.Module.Sdk
             set => this.RaiseAndSetIfChanged(ref this.count, value);
         }
 
-        public ICommand IncrementCountCommand
-        {
-            get;
-        }
+        public ICommand IncrementCountCommand { get; }
 
-        public ICommand DecrementCountCommand
-        {
-            get;
-        }
+        public ICommand DecrementCountCommand { get; }
     }
 }

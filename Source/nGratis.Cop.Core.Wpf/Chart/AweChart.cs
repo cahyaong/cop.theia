@@ -41,8 +41,8 @@ namespace nGratis.Cop.Core.Wpf
 
         public ChartConfiguration Configuration
         {
-            get { return (ChartConfiguration)this.GetValue(AweChart.ConfigurationProperty); }
-            set { this.SetValue(AweChart.ConfigurationProperty, value); }
+            get => (ChartConfiguration)this.GetValue(AweChart.ConfigurationProperty);
+            set => this.SetValue(AweChart.ConfigurationProperty, value);
         }
     }
 }

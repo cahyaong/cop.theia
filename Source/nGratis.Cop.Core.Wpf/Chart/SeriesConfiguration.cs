@@ -46,28 +46,12 @@ namespace nGratis.Cop.Core.Wpf
             this.Value = value;
         }
 
-        public string Title
-        {
-            get;
-            private set;
-        }
+        public string Title { get; }
 
-        public ICollection Points
-        {
-            get;
-            private set;
-        }
+        public ICollection Points { get; }
 
-        public string Category
-        {
-            get;
-            private set;
-        }
+        public string Category { get; }
 
-        public string Value
-        {
-            get;
-            private set;
-        }
+        public string Value { get; }
     }
 }

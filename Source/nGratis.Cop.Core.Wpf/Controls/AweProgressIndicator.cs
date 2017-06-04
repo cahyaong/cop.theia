@@ -65,39 +65,27 @@ namespace nGratis.Cop.Core.Wpf
 
         public bool IsActive
         {
-            get { return (bool)this.GetValue(AweProgressIndicator.IsActiveProperty); }
-            set { this.SetValue(AweProgressIndicator.IsActiveProperty, value); }
+            get => (bool)this.GetValue(AweProgressIndicator.IsActiveProperty);
+            set => this.SetValue(AweProgressIndicator.IsActiveProperty, value);
         }
 
         public string Message
         {
-            get { return (string)this.GetValue(AweProgressIndicator.MessageProperty); }
-            set { this.SetValue(AweProgressIndicator.MessageProperty, value); }
+            get => (string)this.GetValue(AweProgressIndicator.MessageProperty);
+            set => this.SetValue(AweProgressIndicator.MessageProperty, value);
         }
 
         public VisualizationMode VisualizationMode
         {
-            get { return (VisualizationMode)this.GetValue(AweProgressIndicator.VisualizationModeProperty); }
-            set { this.SetValue(AweProgressIndicator.VisualizationModeProperty, value); }
+            get => (VisualizationMode)this.GetValue(AweProgressIndicator.VisualizationModeProperty);
+            set => this.SetValue(AweProgressIndicator.VisualizationModeProperty, value);
         }
 
-        protected FrameworkElement BusyRingPart
-        {
-            get;
-            private set;
-        }
+        protected FrameworkElement BusyRingPart { get; private set; }
 
-        protected FrameworkElement BusyBarPart
-        {
-            get;
-            private set;
-        }
+        protected FrameworkElement BusyBarPart { get; private set; }
 
-        protected FrameworkElement MessagePart
-        {
-            get;
-            private set;
-        }
+        protected FrameworkElement MessagePart { get; private set; }
 
         public override void OnApplyTemplate()
         {

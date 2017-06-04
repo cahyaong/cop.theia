@@ -76,20 +76,11 @@ namespace nGratis.Cop.Theia.Module.Sdk
             private set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
-        public ICommand GenerateFatalCommand
-        {
-            get;
-        }
+        public ICommand GenerateFatalCommand { get; }
 
-        public ICommand GenerateTracesCommand
-        {
-            get;
-        }
+        public ICommand GenerateTracesCommand { get; }
 
-        protected ILogger Logger
-        {
-            get;
-        }
+        protected ILogger Logger { get; }
 
         private void GenerateFatal()
         {
@@ -108,10 +99,10 @@ namespace nGratis.Cop.Theia.Module.Sdk
             Enumerable
                 .Range(0, numberItems)
                 .ForEach(index =>
-                    {
-                        this.Logger.LogAsTrace("Processing item {0} of {1}.", index + 1, numberItems);
-                        Thread.Sleep((int)(random.NextDouble() * 1000));
-                    });
+                {
+                    this.Logger.LogAsTrace("Processing item {0} of {1}.", index + 1, numberItems);
+                    Thread.Sleep((int)(random.NextDouble() * 1000));
+                });
 
             this.IsExecuting = false;
         }

@@ -39,8 +39,6 @@ namespace nGratis.Cop.Core.Wpf
     {
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
         {
-            type = value as Type;
-
             if (type == null || !type.IsEnum)
             {
                 return Enumerable.Empty<object>();

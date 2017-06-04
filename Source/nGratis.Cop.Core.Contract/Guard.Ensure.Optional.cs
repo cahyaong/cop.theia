@@ -34,6 +34,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable RedundantTypeArgumentsOfMethod
+
 namespace nGratis.Cop.Core.Contract
 {
     using System;
@@ -106,3 +107,5 @@ namespace nGratis.Cop.Core.Contract
         }
     }
 }
+
+// ReSharper restore RedundantTypeArgumentsOfMethod

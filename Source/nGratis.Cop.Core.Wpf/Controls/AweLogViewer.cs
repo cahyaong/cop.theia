@@ -54,10 +54,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public ILogger Logger
         {
-            get
-            {
-                return (ILogger)this.GetValue(AweLogViewer.LoggerProperty);
-            }
+            get => (ILogger)this.GetValue(AweLogViewer.LoggerProperty);
 
             set
             {

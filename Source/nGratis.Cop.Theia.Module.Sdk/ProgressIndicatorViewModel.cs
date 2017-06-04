@@ -58,14 +58,8 @@ namespace nGratis.Cop.Theia.Module.Sdk
             private set => this.RaiseAndSetIfChanged(ref this.isBusy, value);
         }
 
-        public ICommand StartWorkCommand
-        {
-            get;
-        }
+        public ICommand StartWorkCommand { get; }
 
-        public ICommand StopWorkCommand
-        {
-            get;
-        }
+        public ICommand StopWorkCommand { get; }
     }
 }

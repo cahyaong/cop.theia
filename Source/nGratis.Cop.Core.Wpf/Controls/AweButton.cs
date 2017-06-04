@@ -111,56 +111,56 @@ namespace nGratis.Cop.Core.Wpf
 
         public Geometry IconGeometry
         {
-            get { return (Geometry)this.GetValue(AweButton.IconGeometryProperty); }
-            set { this.SetValue(AweButton.IconGeometryProperty, value); }
+            get => (Geometry)this.GetValue(AweButton.IconGeometryProperty);
+            set => this.SetValue(AweButton.IconGeometryProperty, value);
         }
 
         public Color AccentColor
         {
-            get { return (Color)this.GetValue(AweButton.AccentColorProperty); }
-            set { this.SetValue(AweButton.AccentColorProperty, value); }
+            get => (Color)this.GetValue(AweButton.AccentColorProperty);
+            set => this.SetValue(AweButton.AccentColorProperty, value);
         }
 
         public Measurement Measurement
         {
-            get { return (Measurement)this.GetValue(AweButton.MeasurementProperty); }
-            set { this.SetValue(AweButton.MeasurementProperty, value); }
+            get => (Measurement)this.GetValue(AweButton.MeasurementProperty);
+            set => this.SetValue(AweButton.MeasurementProperty, value);
         }
 
         public double EllipseDiameter
         {
-            get { return (double)this.GetValue(AweButton.EllipseDiameterProperty); }
-            private set { this.SetValue(AweButton.EllipseDiameterProperty, value); }
+            get => (double)this.GetValue(AweButton.EllipseDiameterProperty);
+            private set => this.SetValue(AweButton.EllipseDiameterProperty, value);
         }
 
         public double IconLength
         {
-            get { return (double)this.GetValue(AweButton.IconLengthProperty); }
-            private set { this.SetValue(AweButton.IconLengthProperty, value); }
+            get => (double)this.GetValue(AweButton.IconLengthProperty);
+            private set => this.SetValue(AweButton.IconLengthProperty, value);
         }
 
         public bool IsRepeated
         {
-            get { return (bool)this.GetValue(AweButton.IsRepeatedProperty); }
-            set { this.SetValue(AweButton.IsRepeatedProperty, value); }
+            get => (bool)this.GetValue(AweButton.IsRepeatedProperty);
+            set => this.SetValue(AweButton.IsRepeatedProperty, value);
         }
 
         public TimeSpan RepeatingInterval
         {
-            get { return (TimeSpan)this.GetValue(AweButton.RepeatingIntervalProperty); }
-            set { this.SetValue(AweButton.RepeatingIntervalProperty, value); }
+            get => (TimeSpan)this.GetValue(AweButton.RepeatingIntervalProperty);
+            set => this.SetValue(AweButton.RepeatingIntervalProperty, value);
         }
 
         public bool IsMousePressed
         {
-            get { return (bool)this.GetValue(AweButton.IsMousePressedProperty); }
-            private set { this.SetValue(AweButton.IsMousePressedProperty, value); }
+            get => (bool)this.GetValue(AweButton.IsMousePressedProperty);
+            private set => this.SetValue(AweButton.IsMousePressedProperty, value);
         }
 
         public bool IsBorderHidden
         {
-            get { return (bool)this.GetValue(AweButton.IsBorderHiddenProperty); }
-            set { this.SetValue(AweButton.IsBorderHiddenProperty, value); }
+            get => (bool)this.GetValue(AweButton.IsBorderHiddenProperty);
+            set => this.SetValue(AweButton.IsBorderHiddenProperty, value);
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs args)

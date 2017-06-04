@@ -30,7 +30,7 @@ namespace nGratis.Cop.Core.Contract
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class XmlNamespaceAttribute : Attribute
     {
         public XmlNamespaceAttribute(string prefix, string uri)

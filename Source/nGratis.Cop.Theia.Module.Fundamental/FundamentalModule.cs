@@ -49,14 +49,8 @@ namespace nGratis.Cop.Theia.Module.Fundamental
             this.Features = new List<Feature> { fundamentalFeature };
         }
 
-        public Guid Id
-        {
-            get;
-        }
+        public Guid Id { get; }
 
-        public IEnumerable<IFeature> Features
-        {
-            get;
-        }
+        public IEnumerable<IFeature> Features { get; }
     }
 }

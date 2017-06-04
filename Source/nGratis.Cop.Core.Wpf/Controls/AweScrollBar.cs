@@ -61,14 +61,14 @@ namespace nGratis.Cop.Core.Wpf
 
         public double ContentWidth
         {
-            get { return (double)this.GetValue(AweScrollBar.ContentWidthProperty); }
-            set { this.SetValue(AweScrollBar.ContentWidthProperty, value); }
+            get => (double)this.GetValue(AweScrollBar.ContentWidthProperty);
+            set => this.SetValue(AweScrollBar.ContentWidthProperty, value);
         }
 
         public double ContentHeight
         {
-            get { return (double)this.GetValue(AweScrollBar.ContentHeightProperty); }
-            set { this.SetValue(AweScrollBar.ContentHeightProperty, value); }
+            get => (double)this.GetValue(AweScrollBar.ContentHeightProperty);
+            set => this.SetValue(AweScrollBar.ContentHeightProperty, value);
         }
 
         public override void OnApplyTemplate()

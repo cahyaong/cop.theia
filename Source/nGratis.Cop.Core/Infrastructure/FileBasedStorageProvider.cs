@@ -46,10 +46,7 @@ namespace nGratis.Cop.Core
             this.RootUri = new Uri(rootFolderPath, UriKind.Absolute);
         }
 
-        public Uri RootUri
-        {
-            get;
-        }
+        public Uri RootUri { get; }
 
         public Stream LoadData(IDataSpecification dataSpecification)
         {

@@ -53,7 +53,7 @@
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Input.Range" DataType="core:FieldViewModel">
-    <Grid d:DataContext="{d:DesignInstance core:Range}" DataContext="{Binding Value, Mode=OneWay}">
+    <Grid d:DataContext="{d:DesignInstance core:Range}" DataContext="{Binding CurrentValue, Mode=OneWay}">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="25" />

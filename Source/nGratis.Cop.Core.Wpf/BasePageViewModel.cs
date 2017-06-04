@@ -36,8 +36,8 @@ namespace nGratis.Cop.Core.Wpf
 
         public bool IsActive
         {
-            get { return this.isActive; }
-            protected set { this.RaiseAndSetIfChanged(ref this.isActive, value); }
+            get => this.isActive;
+            protected set => this.RaiseAndSetIfChanged(ref this.isActive, value);
         }
 
         public void Activate()

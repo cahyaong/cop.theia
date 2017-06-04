@@ -33,16 +33,11 @@ namespace nGratis.Cop.Core
 
     public class VoidStorageProvider : IStorageProvider
     {
-        static VoidStorageProvider()
-        {
-            VoidStorageProvider.Default = new VoidStorageProvider();
-        }
-
         private VoidStorageProvider()
         {
         }
 
-        public static VoidStorageProvider Default { get; private set; }
+        public static VoidStorageProvider Default { get; } = new VoidStorageProvider();
 
         public Stream LoadData(IDataSpecification dataSpecification)
         {

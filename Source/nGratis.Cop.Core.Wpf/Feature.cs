@@ -57,19 +57,10 @@ namespace nGratis.Cop.Core.Wpf
             this.Pages = pages ?? Enumerable.Empty<Page>();
         }
 
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
-        public int Order
-        {
-            get;
-        }
+        public int Order { get; }
 
-        public IEnumerable<IPage> Pages
-        {
-            get;
-        }
+        public IEnumerable<IPage> Pages { get; }
     }
 }

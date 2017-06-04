@@ -49,8 +49,8 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public ILogger Logger
         {
-            get { return this.logger; }
-            private set { this.RaiseAndSetIfChanged(ref this.logger, value); }
+            get => this.logger;
+            private set => this.RaiseAndSetIfChanged(ref this.logger, value);
         }
     }
 }

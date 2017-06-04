@@ -34,11 +34,7 @@ namespace nGratis.Cop.Core.Wpf
         {
         }
 
-        public bool HasError
-        {
-            get;
-            private set;
-        }
+        public bool HasError { get; private set; }
 
         public static CallbackResult OnSuccessful()
         {
@@ -47,7 +43,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public static CallbackResult OnFailure()
         {
-            return new CallbackResult()
+            return new CallbackResult
             {
                 HasError = true
             };

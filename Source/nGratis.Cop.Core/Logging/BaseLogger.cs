@@ -52,15 +52,9 @@ namespace nGratis.Cop.Core
             this.Dispose(false);
         }
 
-        public string Id
-        {
-            get;
-        }
+        public string Id { get; }
 
-        public virtual IEnumerable<string> Components
-        {
-            get;
-        }
+        public virtual IEnumerable<string> Components { get; }
 
         public abstract void LogWith(Verbosity verbosity, string message);
 

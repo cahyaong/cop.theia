@@ -34,8 +34,8 @@ namespace nGratis.Cop.Core
     using System.IO;
     using System.Linq;
     using System.Text;
-    using nGratis.Cop.Core.Contract;
     using Newtonsoft.Json;
+    using nGratis.Cop.Core.Contract;
 
     public static class SerializationExtensions
     {

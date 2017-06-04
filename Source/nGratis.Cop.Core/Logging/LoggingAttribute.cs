@@ -41,6 +41,6 @@ namespace nGratis.Cop.Core
             this.Category = category;
         }
 
-        public string Category { get; private set; }
+        public string Category { get; }
     }
 }

@@ -43,8 +43,8 @@ namespace nGratis.Cop.Core.Wpf
 
         public Orientation Orientation
         {
-            get { return (Orientation)this.GetValue(AweScrollViewer.OrientationProperty); }
-            set { this.SetValue(AweScrollViewer.OrientationProperty, value); }
+            get => (Orientation)this.GetValue(AweScrollViewer.OrientationProperty);
+            set => this.SetValue(AweScrollViewer.OrientationProperty, value);
         }
 
         protected override void OnMouseEnter(MouseEventArgs args)

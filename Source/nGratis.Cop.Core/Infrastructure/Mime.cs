@@ -91,25 +91,13 @@ namespace nGratis.Cop.Core
             this.Names = names;
         }
 
-        public string UniqueId
-        {
-            get;
-        }
+        public string UniqueId { get; }
 
-        public int RfcId
-        {
-            get;
-        }
+        public int RfcId { get; }
 
-        public int IsoId
-        {
-            get;
-        }
+        public int IsoId { get; }
 
-        public IEnumerable<string> Names
-        {
-            get;
-        }
+        public IEnumerable<string> Names { get; }
 
         public static Mime ParseByUniqueId(string uniqueId)
         {

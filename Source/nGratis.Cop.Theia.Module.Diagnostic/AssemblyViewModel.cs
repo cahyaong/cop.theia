@@ -73,32 +73,32 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public string Name
         {
-            get { return this.name; }
-            private set { this.RaiseAndSetIfChanged(ref this.name, value); }
+            get => this.name;
+            private set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
         public string Version
         {
-            get { return this.version; }
-            private set { this.RaiseAndSetIfChanged(ref this.version, value); }
+            get => this.version;
+            private set => this.RaiseAndSetIfChanged(ref this.version, value);
         }
 
         public DateTime ModifiedTimestamp
         {
-            get { return this.modifiedTimestamp; }
-            private set { this.RaiseAndSetIfChanged(ref this.modifiedTimestamp, value); }
+            get => this.modifiedTimestamp;
+            private set => this.RaiseAndSetIfChanged(ref this.modifiedTimestamp, value);
         }
 
         public string FileName
         {
-            get { return this.fileName; }
-            private set { this.RaiseAndSetIfChanged(ref this.fileName, value); }
+            get => this.fileName;
+            private set => this.RaiseAndSetIfChanged(ref this.fileName, value);
         }
 
         public string Configuration
         {
-            get { return this.configuration; }
-            private set { this.RaiseAndSetIfChanged(ref this.configuration, value); }
+            get => this.configuration;
+            private set => this.RaiseAndSetIfChanged(ref this.configuration, value);
         }
 
         private static class Regexes

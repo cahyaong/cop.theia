@@ -41,11 +41,7 @@ namespace nGratis.Cop.Core.Wpf
             this.ResourceDictionaries = new Collection<ResourceDictionary>();
         }
 
-        public Collection<ResourceDictionary> ResourceDictionaries
-        {
-            get;
-            set;
-        }
+        public Collection<ResourceDictionary> ResourceDictionaries { get; set; }
 
         public Color FindColor(string key)
         {

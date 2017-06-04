@@ -41,10 +41,7 @@ namespace nGratis.Cop.Core.Wpf
 
         public new Uri Source
         {
-            get
-            {
-                return this.source;
-            }
+            get => this.source;
 
             set
             {

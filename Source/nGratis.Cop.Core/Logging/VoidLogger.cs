@@ -34,21 +34,12 @@ namespace nGratis.Cop.Core
 
     public sealed class VoidLogger : BaseLogger
     {
-        static VoidLogger()
-        {
-            VoidLogger.Instance = new VoidLogger();
-        }
-
         private VoidLogger()
             : base("<void>", new List<string>())
         {
         }
 
-        public static ILogger Instance
-        {
-            get;
-            private set;
-        }
+        public static ILogger Instance { get; } = new VoidLogger();
 
         public override void LogWith(Verbosity verbosity, string message)
         {

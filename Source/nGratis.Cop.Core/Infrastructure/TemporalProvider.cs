@@ -33,16 +33,11 @@ namespace nGratis.Cop.Core
 
     internal class TemporalProvider : ITemporalProvider
     {
-        static TemporalProvider()
-        {
-            TemporalProvider.Instance = new TemporalProvider();
-        }
-
         private TemporalProvider()
         {
         }
 
-        public static ITemporalProvider Instance { get; private set; }
+        public static ITemporalProvider Instance { get; } = new TemporalProvider();
 
         public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
     }

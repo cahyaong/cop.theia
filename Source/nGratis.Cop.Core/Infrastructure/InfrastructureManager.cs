@@ -35,11 +35,6 @@ namespace nGratis.Cop.Core
     {
         private bool isDisposed;
 
-        static InfrastructureManager()
-        {
-            InfrastructureManager.Instance = new InfrastructureManager(LoggingModes.All);
-        }
-
         public InfrastructureManager(LoggingModes loggingModes)
         {
             this.IdentityProvider = Core.IdentityProvider.Instance;
@@ -52,29 +47,14 @@ namespace nGratis.Cop.Core
             this.Dispose(false);
         }
 
-        public static IInfrastructureManager Instance
-        {
-            get;
-            private set;
-        }
+        public static IInfrastructureManager Instance { get; } = new InfrastructureManager(LoggingModes.All);
 
-        public IIdentityProvider IdentityProvider
-        {
-            get;
-        }
+        public IIdentityProvider IdentityProvider { get; }
 
-        public ILoggingProvider LoggingProvider
-        {
-            get;
+        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+        public ILoggingProvider LoggingProvider { get; private set; }
 
-            // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
-            private set;
-        }
-
-        public ITemporalProvider TemporalProvider
-        {
-            get;
-        }
+        public ITemporalProvider TemporalProvider { get; }
 
         public void Dispose()
         {

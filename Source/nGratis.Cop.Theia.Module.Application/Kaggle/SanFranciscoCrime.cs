@@ -39,43 +39,23 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
     [UsedImplicitly]
     public class SanFranciscoCrime
     {
-        public DateTime OffenceDate
-        {
-            get;
-            set;
-        }
+        public DateTime OffenceDate { get; set; }
 
-        public Category Category
-        {
-            get;
-            set;
-        }
+        public Category Category { get; set; }
 
         public DayOfWeek DayOfWeek => this.OffenceDate.DayOfWeek;
 
-        public PoliceDepartment PoliceDepartment
-        {
-            get;
-            set;
-        }
+        public PoliceDepartment PoliceDepartment { get; set; }
 
-        public double Longitude
-        {
-            get;
-            set;
-        }
+        public double Longitude { get; set; }
 
-        public double Latitude
-        {
-            get;
-            set;
-        }
+        public double Latitude { get; set; }
 
         public class CsvConfiguration : CsvHelper.Configuration.CsvConfiguration
         {
             static CsvConfiguration()
             {
-                CsvConfiguration.Instance = new CsvConfiguration()
+                CsvConfiguration.Instance = new CsvConfiguration
                 {
                     BufferSize = 1 << 24,
                     HasHeaderRecord = true,
@@ -88,14 +68,10 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             {
             }
 
-            public static CsvConfiguration Instance
-            {
-                get;
-                private set;
-            }
+            public static CsvConfiguration Instance { get; private set; }
         }
 
-        private class CsvMap : CsvClassMap<SanFranciscoCrime>
+        private sealed class CsvMap : CsvClassMap<SanFranciscoCrime>
         {
             static CsvMap()
             {
@@ -136,14 +112,10 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             {
             }
 
-            public static CsvMap Instance
-            {
-                get;
-                private set;
-            }
+            public static CsvMap Instance { get; private set; }
         }
 
-        private class CategoryConverter : ITypeConverter
+        private sealed class CategoryConverter : ITypeConverter
         {
             private static readonly IDictionary<string, Category> Lookup = new Dictionary<string, Category>()
                 {
@@ -151,20 +123,11 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
                     { "TREA", Category.Trespass }
                 };
 
-            static CategoryConverter()
-            {
-                CategoryConverter.Instance = new CategoryConverter();
-            }
-
             private CategoryConverter()
             {
             }
 
-            public static CategoryConverter Instance
-            {
-                get;
-                private set;
-            }
+            public static CategoryConverter Instance { get; } = new CategoryConverter();
 
             public string ConvertToString(TypeConverterOptions options, object value)
             {
@@ -200,7 +163,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             }
         }
 
-        private class PoliceDepartmentConverter : ITypeConverter
+        private sealed class PoliceDepartmentConverter : ITypeConverter
         {
             static PoliceDepartmentConverter()
             {
@@ -211,11 +174,7 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
             {
             }
 
-            public static PoliceDepartmentConverter Instance
-            {
-                get;
-                private set;
-            }
+            public static PoliceDepartmentConverter Instance { get; private set; }
 
             public string ConvertToString(TypeConverterOptions options, object value)
             {

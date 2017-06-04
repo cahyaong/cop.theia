@@ -46,8 +46,8 @@ namespace nGratis.Cop.Theia.Module.Sdk
 
         public IEnumerable<int> Numbers
         {
-            get { return this.numbers; }
-            set { this.RaiseAndSetIfChanged(ref this.numbers, value); }
+            get => this.numbers;
+            set => this.RaiseAndSetIfChanged(ref this.numbers, value);
         }
     }
 }

@@ -44,8 +44,8 @@ namespace nGratis.Cop.Core.Wpf
 
         public double StableValue
         {
-            get { return (double)this.GetValue(AweSlider.StableValueProperty); }
-            set { this.SetValue(AweSlider.StableValueProperty, value); }
+            get => (double)this.GetValue(AweSlider.StableValueProperty);
+            set => this.SetValue(AweSlider.StableValueProperty, value);
         }
 
         public bool IsMouseDragging { get; private set; }

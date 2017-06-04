@@ -49,10 +49,10 @@ namespace nGratis.Cop.Core.Wpf
             this.Label = label;
         }
 
-        public FieldMode Mode { get; private set; }
+        public FieldMode Mode { get; }
 
-        public FieldType Type { get; private set; }
+        public FieldType Type { get; }
 
-        public string Label { get; private set; }
+        public string Label { get; }
     }
 }

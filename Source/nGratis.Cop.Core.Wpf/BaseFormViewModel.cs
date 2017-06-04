@@ -43,14 +43,14 @@ namespace nGratis.Cop.Core.Wpf
 
         public FieldGroupViewModel InputFieldGroup
         {
-            get { return this.inputFieldGroup; }
-            private set { this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value); }
+            get => this.inputFieldGroup;
+            private set => this.RaiseAndSetIfChanged(ref this.inputFieldGroup, value);
         }
 
         public FieldGroupViewModel OutputFieldGroup
         {
-            get { return this.outputFieldGroup; }
-            private set { this.RaiseAndSetIfChanged(ref this.outputFieldGroup, value); }
+            get => this.outputFieldGroup;
+            private set => this.RaiseAndSetIfChanged(ref this.outputFieldGroup, value);
         }
     }
 }

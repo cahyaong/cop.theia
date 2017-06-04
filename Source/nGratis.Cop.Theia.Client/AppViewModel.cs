@@ -48,6 +48,6 @@ namespace nGratis.Cop.Theia.Client
             this.Modules = modules;
         }
 
-        public IEnumerable<IModule> Modules { get; private set; }
+        public IEnumerable<IModule> Modules { get; }
     }
 }

@@ -53,8 +53,8 @@ namespace nGratis.Cop.Core.Wpf
 
         public IThemeManager ThemeManager
         {
-            get { return (IThemeManager)this.GetValue(ChartConfigurationToPlotModelConverter.ThemeManagerProperty); }
-            set { this.SetValue(ChartConfigurationToPlotModelConverter.ThemeManagerProperty, value); }
+            get => (IThemeManager)this.GetValue(ChartConfigurationToPlotModelConverter.ThemeManagerProperty);
+            set => this.SetValue(ChartConfigurationToPlotModelConverter.ThemeManagerProperty, value);
         }
 
         public object Convert(object value, Type type, object parameter, CultureInfo culture)
@@ -103,7 +103,7 @@ namespace nGratis.Cop.Core.Wpf
 
             // TODO: Add axis configuration concept.
 
-            var horizontalAxis = new LinearAxis()
+            var horizontalAxis = new LinearAxis
             {
                 TicklineColor = ticklineColor,
                 Position = AxisPosition.Bottom,
@@ -118,7 +118,7 @@ namespace nGratis.Cop.Core.Wpf
                 Maximum = 2016
             };
 
-            var verticalAxis = new LogarithmicAxis()
+            var verticalAxis = new LogarithmicAxis
             {
                 TicklineColor = ticklineColor,
                 Position = AxisPosition.Left,
@@ -138,7 +138,7 @@ namespace nGratis.Cop.Core.Wpf
 
             chartConfiguration
                 .SeriesConfigurations
-                .Select(configuration => new LineSeries()
+                .Select(configuration => new LineSeries
                 {
                     Title = configuration.Title,
                     ItemsSource = configuration.Points,

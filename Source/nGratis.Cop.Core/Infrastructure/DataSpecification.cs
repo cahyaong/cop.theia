@@ -52,22 +52,13 @@ namespace nGratis.Cop.Core
             this.StorageProvider = storageProvider;
         }
 
-        public Mime ContentMime
-        {
-            get;
-        }
+        public Mime ContentMime { get; }
 
-        public string Name
-        {
-            get;
-        }
+        public string Name { get; }
 
         public string FullName => $"{this.Name}.{this.ContentMime.Names.First()}";
 
-        public IStorageProvider StorageProvider
-        {
-            get;
-        }
+        public IStorageProvider StorageProvider { get; }
 
         public Stream LoadData()
         {
