@@ -32,11 +32,11 @@ namespace nGratis.Cop.Core
 
     public class DataInformation : DataSpecification, IDataInformation
     {
-        internal DataInformation(IStorageProvider storageProvider, string name, Mime contentMime)
+        public DataInformation(IStorageProvider storageProvider, string name, Mime contentMime)
             : base(storageProvider, name, contentMime)
         {
         }
 
-        public DateTimeOffset CreatedTimestamp { get; internal set; }
+        public DateTimeOffset CreatedTimestamp { get; protected set; }
     }
 }

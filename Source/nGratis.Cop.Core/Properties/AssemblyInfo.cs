@@ -26,6 +26,7 @@
 // <creation_timestamp>Sunday, 28 December 2014 12:32:15 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Markup;
@@ -35,4 +36,5 @@ using System.Windows.Markup;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("aad5b1cf-5af1-4011-a396-493e640ab914")]
+[assembly: CLSCompliant(true)]
 [assembly: XmlnsDefinition("http://schemas.ngratis.com/2014/core", "nGratis.Cop.Core")]

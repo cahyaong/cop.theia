@@ -35,8 +35,8 @@ namespace nGratis.Cop.Core.Wpf
 
     public class FieldViewModel : ReactiveObject
     {
-        public static readonly PropertyInfo ValueProperty = typeof(FieldViewModel).GetProperty(
-            "Value",
+        public static readonly PropertyInfo UserValueProperty = typeof(FieldViewModel).GetProperty(
+            "UserValue",
             BindingFlags.Instance | BindingFlags.Public);
 
         private FieldMode mode;
@@ -45,7 +45,7 @@ namespace nGratis.Cop.Core.Wpf
 
         private string label;
 
-        private object value;
+        private object userValue;
 
         private bool isValueUpdating;
 
@@ -75,15 +75,15 @@ namespace nGratis.Cop.Core.Wpf
             private set => this.RaiseAndSetIfChanged(ref this.label, value);
         }
 
-        public object Value
+        public object UserValue
         {
-            get => this.value;
+            get => this.userValue;
 
             set
             {
-                if (this.value != value)
+                if (this.userValue != value)
                 {
-                    if (this.value is INotifyPropertyChanged oldNotifier)
+                    if (this.userValue is INotifyPropertyChanged oldNotifier)
                     {
                         oldNotifier.RemoveEventHandler<INotifyPropertyChanged, PropertyChangedEventArgs>(
                             nameof(this.PropertyChanged),
@@ -98,7 +98,7 @@ namespace nGratis.Cop.Core.Wpf
                     }
                 }
 
-                this.RaiseAndSetIfChanged(ref this.value, value);
+                this.RaiseAndSetIfChanged(ref this.userValue, value);
             }
         }
 

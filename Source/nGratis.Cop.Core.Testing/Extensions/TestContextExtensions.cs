@@ -47,11 +47,11 @@ namespace nGratis.Cop.Core.Testing
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(method => method.IsDefined(typeof(ExtensionAttribute), false))
                 .Select(method => new { Method = method, Parameters = method.GetParameters() })
-                .Where(annon => annon.Parameters.Length == 2)
-                .Where(annon =>
-                    annon.Parameters[0].ParameterType == typeof(DataRow) &&
-                    annon.Parameters[1].ParameterType == typeof(string))
-                .ToDictionary(annon => annon.Method.ReturnType, annon => annon.Method);
+                .Where(anon => anon.Parameters.Length == 2)
+                .Where(anon =>
+                    anon.Parameters[0].ParameterType == typeof(DataRow) &&
+                    anon.Parameters[1].ParameterType == typeof(string))
+                .ToDictionary(anon => anon.Method.ReturnType, anon => anon.Method);
         }
 
         public static TValue FindScenarioVariableAs<TValue>(this TestContext context, string name)

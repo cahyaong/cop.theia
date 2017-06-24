@@ -29,6 +29,7 @@
 namespace nGratis.Cop.Core
 {
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
     using nGratis.Cop.Core.Contract;
 
@@ -38,11 +39,14 @@ namespace nGratis.Cop.Core
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaiseAndSetIfChanged<TValue>(
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        protected void SetAndNotifyIfChanged<TValue>(
             ref TValue oldValue,
             TValue newValue,
             [CallerMemberName] string propertyName = null)
         {
+            Guard.Require.IsNotEmpty(propertyName);
+
             if (object.Equals(oldValue, newValue))
             {
                 return;

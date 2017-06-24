@@ -59,18 +59,18 @@ namespace nGratis.Cop.Core.Wpf
                     Property = property,
                     FieldAttribute = property.GetCustomAttribute<AsFieldAttribute>()
                 })
-                .Where(annon => annon.FieldAttribute != null && annon.FieldAttribute.Mode == mode)
+                .Where(anon => anon.FieldAttribute != null && anon.FieldAttribute.Mode == mode)
                 .ToList()
-                .ForEach(annon =>
+                .ForEach(anon =>
                     {
-                        var field = new FieldViewModel(annon.Property.PropertyType, annon.FieldAttribute);
+                        var field = new FieldViewModel(anon.Property.PropertyType, anon.FieldAttribute);
                         this.Fields.Add(field);
 
                         var binder = new ObjectBinder(
                             notifyingInstance,
-                            annon.Property,
+                            anon.Property,
                             field,
-                            FieldViewModel.ValueProperty);
+                            FieldViewModel.UserValueProperty);
 
                         binder.BindSourceCallback();
 

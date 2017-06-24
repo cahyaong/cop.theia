@@ -125,13 +125,13 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
                     .Where(crime => crime.Category == this.Category)
                     .GroupBy(crime => new { crime.Category, crime.OffenceDate.Year }, crime => crime)
                     .Select(group => new { group.Key.Category, group.Key.Year, Occurrence = group.Count() })
-                    .GroupBy(annon => annon.Category, annon => annon)
+                    .GroupBy(anon => anon.Category, anon => anon)
                     .Select(group => new
                     {
                         Title = group.Key.ToString().Humanize(LetterCasing.Title),
-                        Points = group.OrderBy(annon => annon.Year).ToList()
+                        Points = group.OrderBy(anon => anon.Year).ToList()
                     })
-                    .Select(annon => new SeriesConfiguration(annon.Title, annon.Points, "Year", "Occurrence"))
+                    .Select(anon => new SeriesConfiguration(anon.Title, anon.Points, "Year", "Occurrence"))
                     .ToList();
             });
 

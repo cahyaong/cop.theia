@@ -29,6 +29,7 @@
 namespace nGratis.Cop.Core
 {
     using System;
+    using System.ComponentModel;
     using System.Globalization;
     using JetBrains.Annotations;
     using nGratis.Cop.Core.Contract;
@@ -50,7 +51,7 @@ namespace nGratis.Cop.Core
             logger.LogWith(Verbosity.Trace, string.Format(CultureInfo.CurrentUICulture, format, args));
         }
 
-        public static void LogAsDebug(this ILogger logger, string message)
+        public static void LogAsDebug(this ILogger logger, [Localizable(false)] string message)
         {
             Guard.Require.IsNotNull(logger);
 
@@ -58,7 +59,7 @@ namespace nGratis.Cop.Core
         }
 
         [StringFormatMethod("format")]
-        public static void LogAsDebug(this ILogger logger, string format, params object[] args)
+        public static void LogAsDebug(this ILogger logger, [Localizable(false)] string format, params object[] args)
         {
             Guard.Require.IsNotNull(logger);
 

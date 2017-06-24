@@ -36,15 +36,22 @@ namespace nGratis.Cop.Core
 
     public abstract class BaseLogger : ILogger
     {
-        protected BaseLogger(string id, IList<string> components = null)
+        protected BaseLogger(string id)
+            : this(id, Enumerable.Empty<string>())
+        {
+        }
+
+        protected BaseLogger(string id, IEnumerable<string> components)
         {
             Guard.Require.IsNotEmpty(id);
 
             this.Id = id;
 
-            this.Components = components != null && components.Any()
-                ? components
-                : new List<string> { "<undefined>" };
+            var materializedComponents = components?.ToArray();
+
+            this.Components = materializedComponents?.Any() == true
+                ? materializedComponents
+                : new[] { "<undefined>" };
         }
 
         ~BaseLogger()

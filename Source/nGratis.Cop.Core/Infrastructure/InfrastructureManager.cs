@@ -29,6 +29,7 @@
 namespace nGratis.Cop.Core
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using nGratis.Cop.Core.Contract;
 
     public sealed class InfrastructureManager : IInfrastructureManager, IDisposable
@@ -51,8 +52,7 @@ namespace nGratis.Cop.Core
 
         public IIdentityProvider IdentityProvider { get; }
 
-        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
-        public ILoggingProvider LoggingProvider { get; private set; }
+        public ILoggingProvider LoggingProvider { get; }
 
         public ITemporalProvider TemporalProvider { get; }
 
@@ -62,6 +62,7 @@ namespace nGratis.Cop.Core
             GC.SuppressFinalize(this);
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]
         private void Dispose(bool isDisposing)
         {
             if (this.isDisposed)

@@ -24,7 +24,7 @@
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Input.Text" DataType="core:FieldViewModel">
-    <TextBox Style="{StaticResource Cop.TextBox.Normal}" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+    <TextBox Style="{StaticResource Cop.TextBox.Normal}" Text="{Binding UserValue, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Input.File" DataType="core:FieldViewModel">
@@ -36,7 +36,7 @@
       <TextBox
         Grid.Column="0"
         Style="{StaticResource Cop.TextBox.Normal}"
-        Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+        Text="{Binding UserValue, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
       <Border
         Grid.Column="0"
         BorderBrush="{StaticResource Cop.Brush.Error}"
@@ -47,7 +47,7 @@
         Margin="5,0,0,0"
         Content="Browse"
         Mode="File"
-        SelectedPath="{Binding Value, Mode=TwoWay}"
+        SelectedPath="{Binding UserValue, Mode=TwoWay}"
         Style="{StaticResource Cop.AweSystemBrowserButton.Normal}" />
     </Grid>
   </DataTemplate>
@@ -75,7 +75,7 @@
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Input.Enumeration" DataType="core:FieldViewModel">
-    <ComboBox ItemsSource="{Binding ValueType, Mode=OneWay, Converter={StaticResource Cop.Converter.EnumerationToPossibleValuesConverter}}" SelectedValue="{Binding Value, Mode=TwoWay}">
+    <ComboBox ItemsSource="{Binding ValueType, Mode=OneWay, Converter={StaticResource Cop.Converter.EnumerationToPossibleValuesConverter}}" SelectedValue="{Binding UserValue, Mode=TwoWay}">
       <ComboBox.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource Cop.Converter.AnyToTitleCaseCoverter}}" />
@@ -85,11 +85,11 @@
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Output.ReadOnlyText" DataType="core:FieldViewModel">
-    <TextBlock Style="{StaticResource Cop.TextBlock.Body}" Text="{Binding Value, Mode=OneWay}" />
+    <TextBlock Style="{StaticResource Cop.TextBlock.Body}" Text="{Binding UserValue, Mode=OneWay}" />
   </DataTemplate>
 
   <DataTemplate x:Key="Cop.AweField.Output.Image" DataType="core:FieldViewModel">
-    <Image Source="{Binding Value, Mode=OneWay}" Stretch="UniformToFill" />
+    <Image Source="{Binding UserValue, Mode=OneWay}" Stretch="UniformToFill" />
   </DataTemplate>
 
   <Style x:Key="{x:Type core:AweField}" TargetType="core:AweField">

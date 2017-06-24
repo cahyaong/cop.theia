@@ -32,7 +32,7 @@ namespace nGratis.Cop.Core
     using nGratis.Cop.Core.Contract;
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class LoggingAttribute : Attribute
+    public sealed class LoggingAttribute : Attribute
     {
         public LoggingAttribute(string category)
         {

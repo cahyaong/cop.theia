@@ -68,14 +68,14 @@ namespace nGratis.Cop.Core
                     Key = $"{logger.Id}.{logger.GetType().Name}",
                     Logger = logger
                 })
-                .Where(annon => !this.loggerLookup.ContainsKey(annon.Key))
-                .ForEach(annon =>
+                .Where(anon => !this.loggerLookup.ContainsKey(anon.Key))
+                .ForEach(anon =>
                 {
-                    this.loggerLookup.TryAdd(annon.Key, annon.Logger);
+                    this.loggerLookup.TryAdd(anon.Key, anon.Logger);
 
-                    if (!(annon.Logger is CompositeLogger))
+                    if (!(anon.Logger is CompositeLogger))
                     {
-                        annon.Logger.LogAsDebug("Registered to composite logger.");
+                        anon.Logger.LogAsDebug("Registered to composite logger.");
                     }
                 });
         }
@@ -91,10 +91,10 @@ namespace nGratis.Cop.Core
                     Key = $"{logger.Id}.{logger.GetType().Name}",
                     Logger = logger
                 })
-                .Where(annon => this.loggerLookup.ContainsKey(annon.Key))
-                .ForEach(annon =>
+                .Where(anon => this.loggerLookup.ContainsKey(anon.Key))
+                .ForEach(anon =>
                 {
-                    this.loggerLookup.TryRemove(annon.Key, out ILogger logger);
+                    this.loggerLookup.TryRemove(anon.Key, out ILogger logger);
 
                     if (!(logger is CompositeLogger))
                     {

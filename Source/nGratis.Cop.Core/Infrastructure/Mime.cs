@@ -29,38 +29,40 @@
 namespace nGratis.Cop.Core
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
     using nGratis.Cop.Core.Contract;
 
     public sealed class Mime
     {
-        public static readonly Mime Unknown = new Mime("unknown", 0, 0, string.Empty);
+        public static Mime Unknown { get; } = new Mime("unknown", 0, 0, string.Empty);
 
-        public static readonly Mime Csv = new Mime("text/csv", 4180, 0, "csv");
+        public static Mime Csv { get; } = new Mime("text/csv", 4180, 0, "csv");
 
-        public static readonly Mime Html = new Mime("text/html", 2854, 0, "html");
+        public static Mime Html { get; } = new Mime("text/html", 2854, 0, "html");
 
-        public static readonly Mime Json = new Mime("application/json", 4627, 0, "json");
+        public static Mime Json { get; } = new Mime("application/json", 4627, 0, "json");
 
-        public static readonly Mime Jpeg = new Mime("image/jpeg", 1341, 10918, "jpeg", "jpg");
+        public static Mime Jpeg { get; } = new Mime("image/jpeg", 1341, 10918, "jpeg", "jpg");
 
-        public static readonly Mime Mpeg4 = new Mime("video/mp4", 4337, 0, "mp4");
+        public static Mime Mpeg4 { get; } = new Mime("video/mp4", 4337, 0, "mp4");
 
-        public static readonly Mime Saz = new Mime("application/x-fiddler-session-archive", 0, 0, "saz");
+        public static Mime Saz { get; } = new Mime("application/x-fiddler-session-archive", 0, 0, "saz");
 
-        public static readonly Mime Png = new Mime("image/png", 2083, 15948, "png");
+        public static Mime Png { get; } = new Mime("image/png", 2083, 15948, "png");
 
-        public static readonly Mime Warc = new Mime("application/warc", 0, 28500, "warc");
+        public static Mime Warc { get; } = new Mime("application/warc", 0, 28500, "warc");
 
-        public static readonly Mime WebForm = new Mime("application/x-www-form-urlencoded", 0, 0, string.Empty);
+        public static Mime WebForm { get; } = new Mime("application/x-www-form-urlencoded", 0, 0, string.Empty);
 
-        public static readonly Mime Xml = new Mime("text/xml", 3023, 0, "xml");
+        public static Mime Xml { get; } = new Mime("text/xml", 3023, 0, "xml");
 
         private static readonly IDictionary<string, Mime> UniqueIdToMimeMapping;
 
         private static readonly IDictionary<string, Mime> NameToMimeMapping;
 
+        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static Mime()
         {
             var mimes = typeof(Mime)
@@ -77,7 +79,7 @@ namespace nGratis.Cop.Core
                     .Names
                     .Where(name => !string.IsNullOrEmpty(name))
                     .Select(name => new { Name = name, Mime = mime }))
-                .ToDictionary(annon => annon.Name, annon => annon.Mime);
+                .ToDictionary(anon => anon.Name, anon => anon.Mime);
         }
 
         private Mime(string uniqueId, int rfcId, int isoId, params string[] names)

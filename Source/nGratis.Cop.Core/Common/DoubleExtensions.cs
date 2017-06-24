@@ -30,7 +30,12 @@ namespace System
 {
     public static class DoubleExtensions
     {
-        public static bool IsCloseTo(this double firstValue, double secondValue, double tolerance = 0.00001D)
+        public static bool IsCloseTo(this double firstValue, double secondValue)
+        {
+            return firstValue.IsCloseTo(secondValue, 0.00001);
+        }
+
+        public static bool IsCloseTo(this double firstValue, double secondValue, double tolerance)
         {
             return Math.Abs(firstValue - secondValue) <= tolerance;
         }
