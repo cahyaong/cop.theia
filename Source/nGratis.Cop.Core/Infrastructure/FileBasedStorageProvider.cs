@@ -29,9 +29,9 @@
 namespace nGratis.Cop.Core
 {
     using System;
-    using nGratis.Cop.Core.Contract;
     using System.IO;
     using System.Text;
+    using nGratis.Cop.Core.Contract;
 
     public class FileBasedStorageProvider : IStorageProvider
     {
