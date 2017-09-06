@@ -117,7 +117,8 @@ namespace nGratis.Cop.Theia.Module.Application.Kaggle
 
         private sealed class CategoryConverter : ITypeConverter
         {
-            private static readonly IDictionary<string, Category> Lookup = new Dictionary<string, Category>()
+            private static readonly IDictionary<string, Category> Lookup =
+                new Dictionary<string, Category>
                 {
                     { "SUSPICIOUS OCC", Category.SuspiciousOccurrence },
                     { "TREA", Category.Trespass }

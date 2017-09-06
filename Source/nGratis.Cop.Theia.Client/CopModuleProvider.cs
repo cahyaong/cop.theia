@@ -33,7 +33,6 @@ namespace nGratis.Cop.Theia.Client
     using System.IO;
     using System.Linq;
     using System.Reflection;
-
     using nGratis.Cop.Core.Contract;
 
     [Export(typeof(IModuleProvider))]

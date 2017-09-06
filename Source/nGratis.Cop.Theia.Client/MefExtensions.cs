@@ -32,12 +32,14 @@ namespace System.ComponentModel.Composition
     using System.Collections.Generic;
     using System.ComponentModel.Composition.Hosting;
     using System.ComponentModel.Composition.Primitives;
+    using nGratis.Cop.Core.Contract;
 
     public static class MefExtensions
     {
         public static void AddExport<TKey>(this CompositionBatch compositionBatch, Func<object> createInstance)
         {
             var typeName = typeof(TKey).FullName;
+            Guard.Ensure.IsNotEmpty(typeName);
 
             var export = new Export(
                 new ExportDefinition(typeName, new Dictionary<string, object> { { "ExportTypeIdentity", typeName } }),
