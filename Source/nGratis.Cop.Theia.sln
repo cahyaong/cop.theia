@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D62434F9-BA31-472F-9CD7-0B0A5474CF7C}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,47 +12,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D62434F9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43CF542D-7F72-444A-A1A2-1443CCD577FB}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\nuget.config
-		.nuget\NuGet.exe = .nuget\nuget.exe
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Fundamental", "nGratis.Cop.Theia.Module.Fundamental\nGratis.Cop.Theia.Module.Fundamental.csproj", "{ADEB3029-BA9D-419D-AA88-5802FD7C7B59}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B90C4C38-A600-44BB-840E-2A7D4B46618A} = {B90C4C38-A600-44BB-840E-2A7D4B46618A}
-		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {E727CA53-5288-4E7E-828C-011803B0BEDD}
-		{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8} = {2B8DE19C-BE3D-4516-AECB-01FC709F8ED8}
-		{199487EB-64E4-4D48-9E9A-3AFDDDADF041} = {199487EB-64E4-4D48-9E9A-3AFDDDADF041}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Diagnostic", "nGratis.Cop.Theia.Module.Diagnostic\nGratis.Cop.Theia.Module.Diagnostic.csproj", "{911703B2-4DB7-4FEC-8F7B-FAAA8A03E207}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B90C4C38-A600-44BB-840E-2A7D4B46618A} = {B90C4C38-A600-44BB-840E-2A7D4B46618A}
-		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {E727CA53-5288-4E7E-828C-011803B0BEDD}
-		{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8} = {2B8DE19C-BE3D-4516-AECB-01FC709F8ED8}
-		{199487EB-64E4-4D48-9E9A-3AFDDDADF041} = {199487EB-64E4-4D48-9E9A-3AFDDDADF041}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Client", "nGratis.Cop.Theia.Client\nGratis.Cop.Theia.Client.csproj", "{89857C8F-E254-4F96-8EE5-C0EB98609074}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20E6970D-22A0-43E2-91FD-133A4F0EC51D} = {20E6970D-22A0-43E2-91FD-133A4F0EC51D}
 		{ADEB3029-BA9D-419D-AA88-5802FD7C7B59} = {ADEB3029-BA9D-419D-AA88-5802FD7C7B59}
-		{B90C4C38-A600-44BB-840E-2A7D4B46618A} = {B90C4C38-A600-44BB-840E-2A7D4B46618A}
-		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {E727CA53-5288-4E7E-828C-011803B0BEDD}
-		{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8} = {2B8DE19C-BE3D-4516-AECB-01FC709F8ED8}
 		{911703B2-4DB7-4FEC-8F7B-FAAA8A03E207} = {911703B2-4DB7-4FEC-8F7B-FAAA8A03E207}
 		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E} = {EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}
-		{199487EB-64E4-4D48-9E9A-3AFDDDADF041} = {199487EB-64E4-4D48-9E9A-3AFDDDADF041}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core", "nGratis.Cop.Core\nGratis.Cop.Core.csproj", "{B90C4C38-A600-44BB-840E-2A7D4B46618A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Theme", "nGratis.Cop.Core.Theme\nGratis.Cop.Core.Theme.csproj", "{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Wpf", "nGratis.Cop.Core.Wpf\nGratis.Cop.Core.Wpf.csproj", "{199487EB-64E4-4D48-9E9A-3AFDDDADF041}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Contract", "nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj", "{E727CA53-5288-4E7E-828C-011803B0BEDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Application", "nGratis.Cop.Theia.Module.Application\nGratis.Cop.Theia.Module.Application.csproj", "{20E6970D-22A0-43E2-91FD-133A4F0EC51D}"
 EndProject
@@ -70,15 +46,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{06153F
 		nGratis.Cop.Theia.Common\nGratis.Cop.Theia.Module.targets = nGratis.Cop.Theia.Common\nGratis.Cop.Theia.Module.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Vision", "nGratis.Cop.Core.Vision\nGratis.Cop.Core.Vision.csproj", "{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{50040552-3855-4E7D-AC83-5FC68D01BB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Vision.UnitTest", "nGratis.Cop.Core.Vision.UnitTest\nGratis.Cop.Core.Vision.UnitTest.csproj", "{F40704BC-4DFC-43C3-85E8-120D0B30B43B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Testing", "nGratis.Cop.Core.Testing\nGratis.Cop.Core.Testing.csproj", "{B199217E-4103-44A9-AFB9-65287A52D06F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Sdk", "nGratis.Cop.Theia.Module.Sdk\nGratis.Cop.Theia.Module.Sdk.csproj", "{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Contract", "..\External\cop.core\Source\Core.Contract\nGratis.Cop.Core.Contract.csproj", "{E727CA53-5288-4E7E-828C-011803B0BEDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core", "..\External\cop.core\Source\Core\nGratis.Cop.Core.csproj", "{B90C4C38-A600-44BB-840E-2A7D4B46618A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Theme", "..\External\cop.core\Source\Core.Theme\nGratis.Cop.Core.Theme.csproj", "{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Wpf", "..\External\cop.core\Source\Core.Wpf\nGratis.Cop.Core.Wpf.csproj", "{199487EB-64E4-4D48-9E9A-3AFDDDADF041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Vision", "..\External\cop.core\Source\Core.Vision\nGratis.Cop.Core.Vision.csproj", "{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +77,17 @@ Global
 		{89857C8F-E254-4F96-8EE5-C0EB98609074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89857C8F-E254-4F96-8EE5-C0EB98609074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89857C8F-E254-4F96-8EE5-C0EB98609074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B90C4C38-A600-44BB-840E-2A7D4B46618A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B90C4C38-A600-44BB-840E-2A7D4B46618A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B90C4C38-A600-44BB-840E-2A7D4B46618A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,41 +100,23 @@ Global
 		{199487EB-64E4-4D48-9E9A-3AFDDDADF041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{199487EB-64E4-4D48-9E9A-3AFDDDADF041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{199487EB-64E4-4D48-9E9A-3AFDDDADF041}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E727CA53-5288-4E7E-828C-011803B0BEDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20E6970D-22A0-43E2-91FD-133A4F0EC51D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F40704BC-4DFC-43C3-85E8-120D0B30B43B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B199217E-4103-44A9-AFB9-65287A52D06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B199217E-4103-44A9-AFB9-65287A52D06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B199217E-4103-44A9-AFB9-65287A52D06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B199217E-4103-44A9-AFB9-65287A52D06F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{03488B47-6474-4B8C-9777-C3431627D12E} = {D62434F9-BA31-472F-9CD7-0B0A5474CF7C}
+		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
 		{B90C4C38-A600-44BB-840E-2A7D4B46618A} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
 		{2B8DE19C-BE3D-4516-AECB-01FC709F8ED8} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
 		{199487EB-64E4-4D48-9E9A-3AFDDDADF041} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
-		{E727CA53-5288-4E7E-828C-011803B0BEDD} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
-		{03488B47-6474-4B8C-9777-C3431627D12E} = {D62434F9-BA31-472F-9CD7-0B0A5474CF7C}
 		{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
-		{F40704BC-4DFC-43C3-85E8-120D0B30B43B} = {50040552-3855-4E7D-AC83-5FC68D01BB1A}
-		{B199217E-4103-44A9-AFB9-65287A52D06F} = {A2EFAB8D-FFD9-4FAA-B2BD-482969E32799}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F84C230-F0A7-48DA-8999-D10F48F7F1C9}
 	EndGlobalSection
 EndGlobal

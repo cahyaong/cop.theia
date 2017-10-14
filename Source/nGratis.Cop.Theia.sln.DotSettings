@@ -31,18 +31,21 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateInstanceFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateStaticFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateStaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=967477CB15A2164CB493E22606450197/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=967477CB15A2164CB493E22606450197/RelativePath/@EntryValue">..\nGratis.Cop.Core\nGratis.Cop.Core.csproj.DotSettings</s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=A80578957B7B694B9F60F24DA7288937/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=A80578957B7B694B9F60F24DA7288937/RelativePath/@EntryValue">..\nGratis.Cop.Core.Wpf\nGratis.Cop.Core.Wpf.csproj.DotSettings</s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=CB90A76EED2F614AA714F031C2A21281/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=CB90A76EED2F614AA714F031C2A21281/RelativePath/@EntryValue">..\nGratis.Cop.Core.Contract\nGratis.Cop.Core.Contract.csproj.DotSettings</s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File967477CB15A2164CB493E22606450197/@KeyIndexDefined">True</s:Boolean>
-	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File967477CB15A2164CB493E22606450197/RelativePriority/@EntryValue">3</s:Double>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileA80578957B7B694B9F60F24DA7288937/@KeyIndexDefined">True</s:Boolean>
-	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileA80578957B7B694B9F60F24DA7288937/RelativePriority/@EntryValue">4</s:Double>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileCB90A76EED2F614AA714F031C2A21281/@KeyIndexDefined">True</s:Boolean>
-	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileCB90A76EED2F614AA714F031C2A21281/RelativePriority/@EntryValue">2</s:Double>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=4B63D7CEE823BB42A86FF3715686642E/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=4B63D7CEE823BB42A86FF3715686642E/AbsolutePath/@EntryValue">E:\02_NerdWorkshop\51_nGratis_CopTheia_GIT\External\cop.core\Source\Core.Wpf\nGratis.Cop.Core.Wpf.csproj.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=4B63D7CEE823BB42A86FF3715686642E/RelativePath/@EntryValue">..\..\External\cop.core\Source\Core.Wpf\nGratis.Cop.Core.Wpf.csproj.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=6970124E0BCAC945B6A0F9706F5CA1BC/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=6970124E0BCAC945B6A0F9706F5CA1BC/AbsolutePath/@EntryValue">E:\02_NerdWorkshop\51_nGratis_CopTheia_GIT\External\cop.core\Source\Core\nGratis.Cop.Core.csproj.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=6970124E0BCAC945B6A0F9706F5CA1BC/RelativePath/@EntryValue">..\..\External\cop.core\Source\Core\nGratis.Cop.Core.csproj.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=EFAC2F10CB628C47B4D965867B44CA1B/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=EFAC2F10CB628C47B4D965867B44CA1B/AbsolutePath/@EntryValue">E:\02_NerdWorkshop\51_nGratis_CopTheia_GIT\External\cop.core\Source\Core.Contract\nGratis.Cop.Core.Contract.csproj.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=EFAC2F10CB628C47B4D965867B44CA1B/RelativePath/@EntryValue">..\..\External\cop.core\Source\Core.Contract\nGratis.Cop.Core.Contract.csproj.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File4B63D7CEE823BB42A86FF3715686642E/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File4B63D7CEE823BB42A86FF3715686642E/RelativePriority/@EntryValue">3</s:Double>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File6970124E0BCAC945B6A0F9706F5CA1BC/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File6970124E0BCAC945B6A0F9706F5CA1BC/RelativePriority/@EntryValue">1</s:Double>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileEFAC2F10CB628C47B4D965867B44CA1B/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileEFAC2F10CB628C47B4D965867B44CA1B/RelativePriority/@EntryValue">2</s:Double>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAddAccessorOwnerDeclarationBracesMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateThisQualifierSettings/@EntryIndexedValue">True</s:Boolean>
@@ -136,8 +139,7 @@ public void $CLASS_NAME$_When$CONDITION$_Should$EXPECTATION$()&#xD;
 	// Act.&#xD;
 &#xD;
 	// Assert.&#xD;
-}</s:String>
-	
+}</s:String>	
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=0A4664ADE151C349B62FB87D8470A5D9/Name/@EntryValue">Not Implemented</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=12D1BE1206354846AC086DE66FC958DE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=12D1BE1206354846AC086DE66FC958DE/Color/@EntryValue">Tomato</s:String>
