@@ -1,9 +1,11 @@
 version: 0.2.{build}
 image: Visual Studio 2015
 configuration: Release
-cache: Source\packages -> **\Source\repositories.config
+cache:
+  - Source\packages -> **\Source\repositories.config
+  - External\cop.core\Source\packages\ -> **\External\cop.core\Source\packages\repositories.config
 before_build:
-- cmd: appveyor_prebuild.cmd
+  - cmd: appveyor_prebuild.cmd
 build:
   project: Source
   parallel: true
