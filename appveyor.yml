@@ -3,7 +3,6 @@ image: Visual Studio 2017
 configuration: Release
 cache:
   - Source\packages -> **\Source\repositories.config
-  - External\cop.core\Source\packages\ -> **\External\cop.core\Source\packages\repositories.config
 before_build:
   - cmd: appveyor_prebuild.cmd
 build:
