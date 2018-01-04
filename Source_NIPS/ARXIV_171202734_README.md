@@ -15,10 +15,10 @@
 #### Data Preparation
 
 1. Generate molecular descriptors from a given SMILES string using *RDKit* library;
-*[[Jupyter]](./ARXIV_171202734_00_Development.ipynb)*
+  *[[Jupyter]](./ARXIV_171202734_00_Development.ipynb)*
 
 2. Preprocess all compounds on the ChEMBL database to generate the input and output datasets for the training process;
-*[[Jupyter]](./ARXIV_171202734_01_DataPreparation.ipynb)*
+  *[[Jupyter]](./ARXIV_171202734_01_DataPreparation.ipynb)*
 
 3. ...
 

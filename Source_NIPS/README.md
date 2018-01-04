@@ -4,4 +4,4 @@ This repository contains complete implementation of research papers from **Confe
 
 ## Selected Research Papers
 * **ChemNet:** A Transferable and Generalizable Deep Neural Network for Small-Molecule Property Prediction
-*[[arXiv]](https://arxiv.org/pdf/1712.02734.pdf)* *[[README]](./ARXIV_171202734_README.md)*
+  *[[arXiv]](https://arxiv.org/pdf/1712.02734.pdf)* *[[README]](./ARXIV_171202734_README.md)*
