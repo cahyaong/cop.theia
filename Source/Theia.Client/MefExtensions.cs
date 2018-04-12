@@ -39,7 +39,10 @@ namespace System.ComponentModel.Composition
         public static void AddExport<TKey>(this CompositionBatch compositionBatch, Func<object> createInstance)
         {
             var typeName = typeof(TKey).FullName;
-            Guard.Ensure.IsNotEmpty(typeName);
+
+            Guard
+                .Require(typeName, nameof(typeName))
+                .Is.Not.Empty();
 
             var export = new Export(
                 new ExportDefinition(typeName, new Dictionary<string, object> { { "ExportTypeIdentity", typeName } }),

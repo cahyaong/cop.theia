@@ -27,7 +27,6 @@
 
 namespace nGratis.Cop.Theia.Module.Diagnostic
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
@@ -42,12 +41,14 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
         [ImportingConstructor]
         public ModuleSummaryViewModel(IModuleProvider moduleProvider)
         {
-            Guard.Require.IsNotNull(moduleProvider);
+            Guard
+                .Require(moduleProvider, nameof(moduleProvider))
+                .Is.Not.Null();
 
             this.Assemblies = moduleProvider
                 .FindModuleAssemblies()
                 .Where(assembly => assembly.FullName.Contains("nGratis.Cop.Theia.Module"))
-                .Select(assmebly => new AssemblyViewModel(assmebly))
+                .Select(assembly => new AssemblyViewModel(assembly))
                 .ToList();
         }
 

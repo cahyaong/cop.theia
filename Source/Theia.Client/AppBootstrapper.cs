@@ -38,7 +38,6 @@ namespace nGratis.Cop.Theia.Client
     using Caliburn.Micro;
     using nGratis.Cop.Core;
     using nGratis.Cop.Core.Contract;
-    using nGratis.Cop.Core.Vision.Imaging;
 
     internal sealed class AppBootstrapper : BootstrapperBase, IDisposable
     {
@@ -84,10 +83,9 @@ namespace nGratis.Cop.Theia.Client
                 CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe);
 
             var caliburnBatch = new CompositionBatch();
-            caliburnBatch.AddExport<IWindowManager>(() => new WindowManager());
 
+            caliburnBatch.AddExport<IWindowManager>(() => new WindowManager());
             caliburnBatch.AddExport<IInfrastructureManager>(() => InfrastructureManager.Instance);
-            caliburnBatch.AddExport<IImageProvider>(() => new ImageProvider());
 
             this.mefContainer.Compose(caliburnBatch);
         }

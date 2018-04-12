@@ -31,6 +31,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Core.Vision", "..\External\cop.core\Source\Core.Vision\nGratis.Cop.Core.Vision.csproj", "{5D4FFBFB-372E-4FBB-B7DC-FE3BB5A7E00F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Client", "Theia.Client\nGratis.Cop.Theia.Client.csproj", "{89857C8F-E254-4F96-8EE5-C0EB98609074}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20E6970D-22A0-43E2-91FD-133A4F0EC51D} = {20E6970D-22A0-43E2-91FD-133A4F0EC51D}
+		{ADEB3029-BA9D-419D-AA88-5802FD7C7B59} = {ADEB3029-BA9D-419D-AA88-5802FD7C7B59}
+		{911703B2-4DB7-4FEC-8F7B-FAAA8A03E207} = {911703B2-4DB7-4FEC-8F7B-FAAA8A03E207}
+		{EE3317D0-25B2-476E-85B3-DCA04C5E6C1E} = {EE3317D0-25B2-476E-85B3-DCA04C5E6C1E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nGratis.Cop.Theia.Module.Application", "Theia.Module.Application\nGratis.Cop.Theia.Module.Application.csproj", "{20E6970D-22A0-43E2-91FD-133A4F0EC51D}"
 EndProject

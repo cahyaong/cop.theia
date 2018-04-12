@@ -8,13 +8,10 @@
   d:DesignHeight="720"
   d:DesignWidth="1280"
   mc:Ignorable="d">
-  <mui:ModernTab
-    Layout="Tab"
-    Padding="0,40,0,0"
-    SelectedSource="/nGratis.Cop.Theia.Module.Fundamental;component/Histogram/ColorHistogramView.xaml">
+  <mui:ModernTab Padding="0,40,0,0" Layout="Tab">
     <mui:ModernTab.Links>
-      <mui:Link DisplayName="Color Histogram" Source="/nGratis.Cop.Theia.Module.Fundamental;component/Histogram/ColorHistogramView.xaml" />
-      <mui:Link DisplayName="Image Histogram" Source="/nGratis.Cop.Theia.Module.Fundamental;component/Histogram/ImageHistogramView.xaml" />
+      <mui:Link DisplayName="Color Histogram" />
+      <mui:Link DisplayName="Image Histogram" />
     </mui:ModernTab.Links>
   </mui:ModernTab>
 </UserControl>

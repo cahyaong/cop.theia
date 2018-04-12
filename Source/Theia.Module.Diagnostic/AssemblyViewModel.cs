@@ -48,8 +48,9 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
         public AssemblyViewModel(Assembly assembly)
         {
-            Guard.Require.IsNotNull(assembly);
-            Guard.Require.IsNotEmpty(assembly.Location);
+            Guard
+                .Require(assembly, nameof(assembly))
+                .Is.Not.Null();
 
             var titleMatch = AssemblyViewModel.Regexes
                 .Title
@@ -57,7 +58,7 @@ namespace nGratis.Cop.Theia.Module.Diagnostic
 
             if (!titleMatch.Success)
             {
-                Fire.InvalidOperationException("Unable to match assembly name for a module.");
+                throw new ArgumentException($"Expecting COP Theia module! Assembly: [{assembly.FullName}].");
             }
 
             this.Name = titleMatch.Groups["name"].Value;

@@ -47,8 +47,13 @@ namespace nGratis.Cop.Theia.Module.Sdk
 
         public LoggingSource(IInfrastructureManager infrastructureManager, string name)
         {
-            Guard.Require.IsNotNull(infrastructureManager);
-            Guard.Require.IsNotEmpty(name);
+            Guard
+                .Require(infrastructureManager, nameof(infrastructureManager))
+                .Is.Not.Null();
+
+            Guard
+                .Require(name, nameof(name))
+                .Is.Not.Empty();
 
             this.Name = name;
             this.Logger = infrastructureManager.LoggingProvider.GetLoggerFor("<SDK>");
@@ -94,13 +99,13 @@ namespace nGratis.Cop.Theia.Module.Sdk
             this.IsExecuting = true;
 
             var random = new Random(Environment.TickCount);
-            var numberItems = random.Next(1, 25);
+            var itemCount = random.Next(1, 25);
 
             Enumerable
-                .Range(0, numberItems)
+                .Range(0, itemCount)
                 .ForEach(index =>
                 {
-                    this.Logger.LogAsTrace("Processing item {0} of {1}.", index + 1, numberItems);
+                    this.Logger.LogAsTrace($"Processing item {index + 1} of {itemCount}.");
                     Thread.Sleep((int)(random.NextDouble() * 1000));
                 });
 

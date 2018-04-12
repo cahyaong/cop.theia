@@ -41,7 +41,9 @@ namespace nGratis.Cop.Theia.Module.Sdk
         [ImportingConstructor]
         public LoggingViewModel(IInfrastructureManager infrastructureManager)
         {
-            Guard.Require.IsNotNull(infrastructureManager);
+            Guard
+                .Require(infrastructureManager, nameof(infrastructureManager))
+                .Is.Not.Null();
 
             this.Logger = infrastructureManager.LoggingProvider.GetLoggerFor("<SDK>");
 
